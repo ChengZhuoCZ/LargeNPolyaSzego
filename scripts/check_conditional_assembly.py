@@ -10,10 +10,12 @@ import re
 import sys
 
 
-ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "dag" / "proof-dag.json"
-MASTER = ROOT / "proof" / "conditional-proof.tex"
-PARTS = ROOT / "proof" / "parts"
+REPOSITORY = Path(__file__).resolve().parents[1]
+ROOT = REPOSITORY / "math-proof-output" / "large-n-polya-szego"
+ASSEMBLY = ROOT / "source" / "conditional-assembly"
+MANIFEST = ROOT / "source" / "revision-24-proof-dag.json"
+MASTER = ASSEMBLY / "conditional-proof.tex"
+PARTS = ASSEMBLY / "parts"
 
 MODULES = (
     ("F51", "01-f51-disk-hessian"),
@@ -61,7 +63,7 @@ def check_acyclic(edges: dict[str, list[str]]) -> None:
 
 def source_tree_sha256() -> str:
     digest = hashlib.sha256()
-    paths = [MASTER, ROOT / "proof" / "preamble.tex"]
+    paths = [MASTER, ASSEMBLY / "preamble.tex"]
     paths.extend(PARTS / f"{name}.tex" for _, name in MODULES)
     for path in paths:
         relative = path.relative_to(ROOT).as_posix().encode("utf-8")
@@ -110,10 +112,11 @@ def main() -> None:
             "conditional status warning is missing")
 
     required_docs = (
-        ROOT / "README.md",
-        ROOT / "MAINTENANCE.md",
-        ROOT / "docs" / "proof-audit.md",
-        ROOT / "docs" / "wrong-routes.md",
+        ROOT / "proof-blueprint.md",
+        ROOT / "definitions-and-notation.md",
+        ROOT / "literature-review.md",
+        ROOT / "audits" / "conditional-frontier-audit.md",
+        ROOT / "scratch" / "route-history.md",
     )
     for path in required_docs:
         require(path.exists(), f"missing maintenance document: {path.relative_to(ROOT)}")

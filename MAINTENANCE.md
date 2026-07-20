@@ -1,57 +1,64 @@
 # Maintenance workflow
 
-## Authoritative files
+## Authoritative ownership
 
-- `dag/proof-dag.json` owns node IDs, dependency edges, and statuses.
-- `proof/parts/*.tex` owns the mathematical text of each assembled module.
-- `proof/conditional-proof.tex` owns assembly order and the conditional main
-  theorem statement.
-- `docs/proof-audit.md` records the current build and integrity audit.
-- `docs/wrong-routes.md` records why discarded routes must not be reintroduced.
+- `math-proof-output/large-n-polya-szego/proof-blueprint.md` owns the frozen
+  theorem, current route screen, dependency edges, node risk/status/audit, and
+  certificate plan.
+- `definitions-and-notation.md` owns shared notation and the `PSF-*` failure
+  checklist.
+- Each current claim has one canonical Markdown file under `parts/`; its full
+  statement and proof text live there.
+- `literature-review.md` owns full citation records. The blueprint citation
+  table is only its route-active projection.
+- `source/conditional-assembly/` and `source/revision-24-proof-dag.json` are
+  retained migration evidence. They do not own current workflow status.
+- `scratch/route-history.md` records old failures. It cannot discharge a node.
 
-README prose and the PDF are projections of these sources; they are not status
-authorities.
+## Directory and naming rules
 
-## Naming
+- The proof workspace stays at `math-proof-output/large-n-polya-szego/`.
+- Canonical parts use `NN-short-name.md`; workflow IDs remain stable even when
+  prose labels improve.
+- Do not create `proof.tex`, `proof.pdf`, `proof.fls`, or `proof-audit.md` before
+  the math-proof workflow reaches the corresponding final stages.
+- Exploratory calculations belong under `experiments/` or `scratch/` and must
+  remain labeled heuristic unless promoted through the Certificate Plan.
+- Do not add a second authoritative DAG. The JSON file under `source/` checks
+  only the retained revision-24 TeX assembly.
 
-Proof modules use `NN-nodeid-description.tex`:
+## Updating a current node
 
-- `NN` is the two-digit topological reading order;
-- `nodeid` is the stable DAG/label namespace, in lowercase in filenames;
-- `description` is a short kebab-case mathematical role.
+1. Read the target part's `Local Summary` and `Local Context Packet` first.
+2. Change the full claim/proof in its Markdown part. Change an edge, status, or
+   route only through the matching blueprint transaction.
+3. Preserve the theorem freeze. A changed theorem requires an explicit
+   Statement Change Log entry and user permission.
+4. Run the math-proof checker after every structural edit. Use
+   `workflow_transition.py` for every transition it supports; do not hand-edit
+   a persisted intermediate state.
+5. If retained TeX is edited, update its JSON projection and conditional audit
+   in the same change, compile it, and run the repository-level conditional
+   assembly checker.
+6. A node becomes proved only after the required local audit receipt(s) bind
+   the current checker-generated packet. Checker success alone is not proof.
 
-Do not renumber a module unless the assembly order changes. Do not rename a DAG
-node merely for prose style: IDs are stable interfaces used by labels and audit
-records.
+## Standard validation
 
-## Updating a proof node
+```powershell
+$skillRoot = 'C:\Users\cheng\.codex\skills\math-proof'
+$workspace = 'math-proof-output\large-n-polya-szego'
+python "$skillRoot\scripts\workspace_doctor.py" check $workspace
+python "$skillRoot\scripts\check_blueprint.py" --stage auto `
+  "$workspace\proof-blueprint.md"
+python scripts\check_conditional_assembly.py
+```
 
-1. Edit one file under `proof/parts/` and keep its public statement and imported
-   dependency interfaces explicit.
-2. If an edge or status changes, update `dag/proof-dag.json` in the same commit.
-3. Update `docs/wrong-routes.md` only when a route is rigorously retracted,
-   disproved, or replaced; do not paste exploratory logs into it.
-4. Run `python scripts/check_repo.py`.
-5. Compile from `proof/`:
+Inspect any workspace certificate script before adding `--run-certificates`.
 
-   ```powershell
-   latexmk -pdf -no-shell-escape -recorder -file-line-error `
-     -interaction=nonstopmode -halt-on-error conditional-proof.tex
-   ```
+## Current status boundary
 
-6. Confirm that the log has no undefined references/citations, duplicate
-   labels, fatal errors, or pending rerun warning.
-7. Recompute SHA-256 for `conditional-proof.tex`, `conditional-proof.pdf`, and
-   `conditional-proof.fls`, then update `docs/proof-audit.md`.
-
-## Status boundary
-
-The repository currently proves a conditional theorem. `JC-PL` is open and
-`JP-JC`, `NR`, `J0`, `G0`, and `MAIN` remain dependent. Do not use
-“unconditional proof”, close a dependent node, or remove the assumption from
-the first theorem until `JC-PL` and its `JC-SP`/`JC-CL` subcontracts have been
-proved and independently re-audited.
-
-Numerical searches may guide future work but may not discharge a proof node.
-Only exact arguments or explicitly documented rigorous certificates may change
-a node from open/dependent to closed.
+`JC_PL` and `T` are `todo`. The revision-24 source proves only the conditional
+implication from `JC_PL` through the downstream assembly. Do not remove that
+assumption, mark a downstream theorem proved, or record a subagent PASS until
+the current semantic packets have received the required independent audits.
