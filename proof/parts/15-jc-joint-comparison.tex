@@ -1,0 +1,2948 @@
+\begingroup
+\section{Node JC: honest joint endpoint comparison}
+\label{module:JC}
+\noindent\textit{Audited source: \nolinkurl{JC_joint_comparison.tex}.}
+\subsection{Two honest scalars on one fixed fan}
+
+Fix a positive normal fan $\alpha$, let $h_\alpha\mathbf1$ be its
+area-$\pi$ tangential support vector, and work on the fixed affine
+scale/translation section $\mathsf X_\alpha$ of the JP node.  Put
+\begin{equation}\label{JC:eq:polygon-scalar}
+ \Phi_\alpha(h)=\frac{|P_\alpha(h)|}{\pi}
+                    \lambda_1(P_\alpha(h)).
+\end{equation}
+The closed JP--NS and disk-endpoint rows define
+\begin{equation}\label{JC:eq:disk-data}
+ B_\alpha=\Pi_{\rm ng}
+ \{h_\alpha\sec(\theta-\theta_i)-1\},\qquad
+ K_\alpha z=\Pi_{\rm ng}\mathcal I_\alpha z,
+\end{equation}
+and
+\begin{equation}\label{JC:eq:metric-forcing}
+ \Gjp_\alpha(z)=q_D(K_\alpha z),\qquad
+ p_\alpha[z]=2\langle B_\alpha,K_\alpha z\rangle_D.
+\end{equation}
+Let $\mathcal R_\alpha$ be the Riesz map of $\Gjp_\alpha$ and set
+\begin{equation}\label{JC:eq:disk-corrector}
+ z_\alpha^D=-\frac12\mathcal R_\alpha^{-1}p_\alpha.
+\end{equation}
+
+\begin{proposition}[Exact disk completion]\label{JC:prop:disk-completion}
+On $\mathsf X_\alpha$ one has
+\begin{align}
+ q_D(B_\alpha+K_\alpha z)
+ &=P_D^{\rm ns}(\alpha)
+   +\Gjp_\alpha(z-z_\alpha^D),\label{JC:eq:disk-completion}\\
+ P_D^{\rm ns}(\alpha)
+ &=q_D(B_\alpha)-\frac14
+       \|p_\alpha\|_{(\Gjp_\alpha)^*}^2,\label{JC:eq:disk-schur}\\
+ \Gjp_\alpha(z_\alpha^D)
+ &=\frac14\|p_\alpha\|_{(\Gjp_\alpha)^*}^2.
+ \label{JC:eq:corrector-size}
+\end{align}
+At the regular fan $\alpha_*$, cyclic symmetry gives
+$p_{\alpha_*}=0$ and $z_{\alpha_*}^D=0$.
+\end{proposition}
+
+\begin{proof}
+Expand the fixed quadratic form:
+\[
+ q_D(B_\alpha+K_\alpha z)
+ =q_D(B_\alpha)+p_\alpha[z]+\Gjp_\alpha(z).
+\]
+The definition \eqref{JC:eq:disk-corrector} is exactly
+$2\mathcal R_\alpha z_\alpha^D=-p_\alpha$.  Completing the Hilbert square
+proves all three identities.  The regular assertion follows because the
+regular source is cyclic while every vector in the quotient is orthogonal
+to the cyclic mode.
+\end{proof}
+
+Define the fixed-fan joint residual
+\begin{equation}\label{JC:eq:joint-residual}
+\boxed{
+ \mathscr R_\alpha(z):=
+ \Phi_\alpha(h_\alpha\mathbf1+z)
+ -\Phi_\alpha(h_\alpha\mathbf1)
+ -\{q_D(B_\alpha+K_\alpha z)-q_D(B_\alpha)\}.}
+\end{equation}
+Both terms in \eqref{JC:eq:joint-residual} are genuine scalar functions of
+$z$.  The disk term is the fixed Fourier--Bessel quadratic form; it is not
+the eigenvalue of a moving disk domain.
+
+\begin{proposition}[Exact integrated form]\label{JC:prop:integrated-form}
+Let $\ell_\alpha=D_h\Phi_\alpha(h_\alpha\mathbf1)$ and
+$e_\alpha=\ell_\alpha-p_\alpha$.  Whenever the fixed-normal support
+segment is active,
+\begin{equation}\label{JC:eq:integrated-form}
+ \mathscr R_\alpha(z)=e_\alpha[z]
+ +\int_0^1(1-t)
+ \{D_h^2\Phi_\alpha(h_\alpha\mathbf1+tz)[z,z]
+       -2\Gjp_\alpha(z)\}\,dt.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Apply the fundamental theorem of calculus twice to the polygonal scalar.
+For the disk scalar use
+$q_D(B+Kz)-q_D(B)=p[z]+\Gjp(z)$.  Subtraction gives
+\eqref{JC:eq:integrated-form} exactly.
+\end{proof}
+
+\subsection{Exact Schur reduction and support-time cancellation}
+
+Let $g_\alpha(\cdot,\cdot)$ be the bilinear form associated with
+$\Gjp_\alpha$, put $d_\alpha=z_\alpha^D$, and abbreviate
+\begin{equation}\label{JC:eq:Hessian-family}
+ H_{\alpha,y}=D_h^2\Phi_\alpha(h_\alpha\mathbf1+y).
+\end{equation}
+Equation~\eqref{JC:eq:disk-corrector} is equivalently
+\begin{equation}\label{JC:eq:p-d-relation}
+ p_\alpha[\xi]=-2g_\alpha(d_\alpha,\xi).
+\end{equation}
+Define the completed covector
+\begin{equation}\label{JC:eq:completed-covector}
+ b_\alpha[\xi]
+ :=\ell_\alpha[\xi]+g_\alpha(d_\alpha,\xi)
+ =\ell_\alpha[\xi]-\frac12p_\alpha[\xi]
+\end{equation}
+and the pathwise Schur action
+\begin{equation}\label{JC:eq:pathwise-action}
+ \mathscr A_\alpha(z):=
+ b_\alpha[z]
+ +\int_0^1(1-t)
+ \{H_{\alpha,tz}[z,z]-g_\alpha(z,z)\}\,dt
+ +\frac12g_\alpha(d_\alpha,d_\alpha)
+ +\frac\kappa2\Jfour(\alpha).
+\end{equation}
+
+\begin{proposition}[JC--ALG: exact completed-action equivalence]
+\label{JC:prop:JC-ALG}
+For every active fixed-fan segment,
+\begin{equation}\label{JC:eq:JC-equivalence}
+ \boxed{
+ \mathscr A_\alpha(z)
+ =\mathscr R_\alpha(z)
+  +\frac12\Gjp_\alpha(z-z_\alpha^D)
+  +\frac\kappa2\Jfour(\alpha).}
+\end{equation}
+Consequently the former JP--JC inequality is equivalent, without a loss
+of constants, to $\mathscr A_\alpha(z)\ge0$.
+\end{proposition}
+
+\begin{proof}
+Insert the integrated identity~\eqref{JC:eq:integrated-form} and expand
+\[
+ \frac12g_\alpha(z-d_\alpha,z-d_\alpha)
+ =\frac12g_\alpha(z,z)-g_\alpha(z,d_\alpha)
+   +\frac12g_\alpha(d_\alpha,d_\alpha).
+\]
+By~\eqref{JC:eq:p-d-relation},
+$-g_\alpha(z,d_\alpha)=p_\alpha[z]/2$.  Hence the linear row is
+$(\ell_\alpha-p_\alpha)[z]+p_\alpha[z]/2=b_\alpha[z]$.
+Moreover
+\[
+ \int_0^1(1-t)(-2g_\alpha(z,z))\,dt
+ +\frac12g_\alpha(z,z)=-\frac12g_\alpha(z,z),
+\]
+which is exactly the integral of $-g_\alpha(z,z)$ with weight $1-t$.
+The constant rows agree with~\eqref{JC:eq:pathwise-action}, proving
+\eqref{JC:eq:JC-equivalence}.
+\end{proof}
+
+The same identity has the following equivalent form, which displays the
+positive disk corrector square before any estimate:
+\begin{equation}\label{JC:eq:joint-Peano-block}
+ \boxed{
+ \mathscr A_\alpha(z)
+ =\frac12\Gjp_\alpha(z-d_\alpha)
+  +e_\alpha[z]
+  +\int_0^1(1-t)
+    \{H_{\alpha,tz}[z,z]-2\Gjp_\alpha(z)\}\,dt
+  +\frac\kappa2\Jfour(\alpha).}
+\end{equation}
+Indeed, $b_\alpha=e_\alpha-g_\alpha(d_\alpha,\cdot)$ and
+$\int_0^1(1-t)g_\alpha(z,z)\,dt=\Gjp_\alpha(z)/2$.
+Thus the period-three component of $e_\alpha$ is not to be bounded as an
+isolated covector: it must be paid jointly by the jump surplus in
+$H_{\alpha,tz}-2\Gjp_\alpha$ and the fan row.
+
+\begin{lemma}[JC--TL: support-time logarithm cancellation]
+\label{JC:lem:support-time-log}
+Let $\beta>0$, $0<r\le1$, and
+\begin{equation}\label{JC:eq:I-beta}
+ I_\beta(r):=\int_0^1(1-t)
+ \left\{1-\bigl((1-t)+tr\bigr)^{2\beta}\right\}\,dt.
+\end{equation}
+Then
+\begin{align}
+ 0\le I_\beta(r)
+ &\le\frac\beta3\log\frac1r,\label{JC:eq:log-bound}\\
+ I_\beta(r)
+ &\le\frac{\beta}{2(1+\beta)}\le\frac\beta2.\label{JC:eq:absolute-bound}
+\end{align}
+In particular,
+\begin{equation}\label{JC:eq:min-bound}
+ \boxed{I_\beta(r)\le\frac\beta3
+ \min\left\{\log\frac1r,\frac32\right\}.}
+\end{equation}
+All constants are independent of $r$.
+\end{lemma}
+
+\begin{proof}
+For $0<x\le1$, $1-x^{2\beta}\le2\beta(-\log x)$.
+Weighted arithmetic--geometric mean gives
+$(1-t)+tr\ge r^t$ and hence
+\[
+ -\log((1-t)+tr)\le t\log(1/r).
+\]
+Since $\int_0^1t(1-t)\,dt=1/6$, these two inequalities prove
+\eqref{JC:eq:log-bound}.  Also $(1-t)+tr\ge1-t$, so monotonicity of the
+power gives
+\[
+ I_\beta(r)\le I_\beta(0)
+ =\frac12-\frac1{2+2\beta}
+ =\frac\beta{2(1+\beta)}.
+\]
+This proves~\eqref{JC:eq:absolute-bound}; taking the smaller bound gives
+\eqref{JC:eq:min-bound}.
+\end{proof}
+
+\begin{lemma}[JC--TL$^{\min}$: switches of the shortest incident side]
+\label{JC:lem:support-time-min}
+Let $L_-$ and $L_+$ be positive affine functions on $[0,1]$, put
+$m(t):=\min\{L_-(t),L_+(t)\}$, and set $r:=m(1)/m(0)$.  Then, for every
+$\beta>0$,
+\begin{equation}\label{JC:eq:min-affine-payment}
+ \int_0^1(1-t)\left\{1-
+ \left(\frac{m(t)}{m(0)}\right)^{2\beta}\right\}\,dt
+ \le
+ \begin{cases}
+ I_\beta(r),&0<r\le1,\\
+ 0,&r\ge1.
+ \end{cases}
+\end{equation}
+Consequently every \emph{upper} bound in
+Lemma~\ref{JC:lem:support-time-log} remains valid for the positive part of the
+loss when a single affine length is replaced by the shortest of the two
+incident physical lengths.  No switch-point boundary term is present.
+\end{lemma}
+
+\begin{proof}
+The pointwise minimum of affine functions is concave.  If $r\le1$,
+concavity gives
+\[
+ \frac{m(t)}{m(0)}\ge(1-t)+tr.
+\]
+The function $x\mapsto1-x^{2\beta}$ is decreasing, so integration with
+the nonnegative weight $1-t$ proves the first line of
+\eqref{JC:eq:min-affine-payment}.  If $r\ge1$, the chord joining the endpoint
+values lies above $m(0)$, and concavity gives $m(t)\ge m(0)$ throughout;
+the integrand is therefore nonpositive.  The argument differentiates
+neither $m$ nor $m^{2\beta}$, hence a change of the minimizing affine side
+creates no distributional boundary contribution.
+\end{proof}
+
+\begin{remark}[Exact terminal normalization]
+For an actual physical side length with the affine form
+$L(t)=L_0\{(1-t)+tr\}$, the squared corner-flux power uses
+\begin{equation}\label{JC:eq:physical-corner-exponent}
+ \beta_i^{\rm ph}=\frac{\alpha_i}{\pi-\alpha_i},
+\end{equation}
+not $\alpha_i/\pi$.  Put
+$\Delta_i=a_i^--a_i^+=2\sin(\alpha_i/2)\tau_i$.  The integrated terminal
+amplitude loss obeys
+\begin{equation}\label{JC:eq:terminal-log-payment}
+ \alpha_i\tau_i^2 I_{\beta_i^{\rm ph}}(r)
+ \le |\Delta_i|^2\min\left\{
+ \frac{\alpha_i^2}{12(\pi-\alpha_i)\sin^2(\alpha_i/2)}
+       \log\frac1r,
+ \frac{\alpha_i^2}{8\pi\sin^2(\alpha_i/2)}\right\}.
+\end{equation}
+Thus the logarithmic coefficient is $1/(3\pi)+O(\alpha_i)$, while the
+exact absolute cap is
+\begin{equation}\label{JC:eq:terminal-absolute-payment}
+ \alpha_i\tau_i^2 I_{\beta_i^{\rm ph}}(r)
+ \le c_T(S)|\Delta_i|^2,
+ \qquad
+ c_T(S):=\sup_{0<\alpha\le S}
+ \frac{\alpha^2}{8\pi\sin^2(\alpha/2)},
+\end{equation}
+and $c_T(S)\to1/(2\pi)$ as $S\downarrow0$.  This is the sharp
+support-time cap for a terminal length tending to zero.  A growing
+terminal length has the favorable sign and is separated before the
+absolute estimate.
+The exponent $\alpha_i/\pi$ belongs instead to a conformal-prevertex
+power.  No retained node proves that a conformal prevertex interval is
+affine in support time, so that substitution is not allowed.  If the
+terminal cutoff is the smaller of two incident physical lengths,
+Lemma~\ref{JC:lem:support-time-min} applies globally: concavity of the
+minimum dominates the affine endpoint chord, so neither subdivision nor a
+switch correction is needed.  (Restarting the Taylor weight after a
+subdivision would in fact change the ledger and is not the argument used
+here.)
+The right side is the descendant-annulus/terminal-cap jump charge on the
+same physical scale.  Thus taking a side-ratio supremum before the
+support-time integral destroys a real cancellation and is inadmissible.
+\end{remark}
+
+Formula \eqref{JC:eq:integrated-form} is the reason the two old obligations
+must not be estimated independently.  In the three-periodic obstruction
+$e_\alpha$ has a non-vanishing normalized leading term; the surplus in the
+integrated Hessian is available in \eqref{JC:eq:integrated-form} to complete
+the corresponding Schur square.
+
+\begin{proposition}[JC--RS: exact quadratic root certificate]
+\label{JC:prop:JC-RS}
+Put
+\begin{equation}\label{JC:eq:root-form}
+ Q_\alpha[\xi,\xi]
+ :=H_{\alpha,0}[\xi,\xi]-g_\alpha(\xi,\xi).
+\end{equation}
+Define the frozen quadratic root model
+\begin{equation}\label{JC:eq:quadratic-root-model}
+ \mathscr A_\alpha^{(2)}(\xi)
+ :=\frac12g_\alpha(d_\alpha,d_\alpha)
+   +\frac\kappa2\Jfour(\alpha)
+   +b_\alpha[\xi]+\frac12Q_\alpha[\xi,\xi].
+\end{equation}
+Then $\mathscr A_\alpha^{(2)}(\xi)\ge0$ for every $\xi$ if and only if
+\begin{equation}\label{JC:eq:root-Schur-necessary}
+ \boxed{
+ Q_\alpha\ge0,
+ \qquad
+ \|b_\alpha\|_{Q_\alpha^*}^2
+ \le g_\alpha(d_\alpha,d_\alpha)
+       +\kappa\Jfour(\alpha).}
+\end{equation}
+For a semidefinite $Q_\alpha$, the second statement includes that
+$b_\alpha$ annihilates its kernel and uses the quotient dual norm.
+\end{proposition}
+
+\begin{proof}
+This is Hilbert completion of the quadratic form
+\eqref{JC:eq:quadratic-root-model}.  If it is nonnegative on the whole vector
+space, its quadratic part is semidefinite and its linear part annihilates
+the kernel.  Its infimum is
+\[
+ \frac12g_\alpha(d_\alpha,d_\alpha)
+ +\frac\kappa2\Jfour(\alpha)
+ -\frac12\|b_\alpha\|_{Q_\alpha^*}^2,
+\]
+which is nonnegative exactly under~\eqref{JC:eq:root-Schur-necessary}.  The
+reverse implication follows from the same completed square.
+\end{proof}
+
+Proposition~\ref{JC:prop:JC-RS} is an exact certificate for the frozen
+quadratic root model, not a necessary consequence of local nonnegativity
+of the full action: its positive constant term prevents that inference.
+To use it for JC--PL one must additionally compare the full integrated
+Hessian to this frozen model on the whole admissible amplitude range.  The
+closed JP--DE estimates control $p_\alpha$ and hence $d_\alpha$, but do not
+prove either that comparison or the displayed sharp dual bound for
+$b_\alpha=\ell_\alpha-p_\alpha/2$.  The period-three computation passes
+the quadratic certificate with a sizeable numerical margin; a uniform
+no-ratio proof over all profiles is still required.
+
+\begin{proposition}[JC--RC: exact root/path sufficient reduction]
+\label{JC:prop:JC-RC}
+Suppose a positive semidefinite form $L_\alpha$ satisfies, throughout the
+radial/metric path chart,
+\begin{equation}\label{JC:eq:path-loss-form}
+ \int_0^1(1-t)
+ \{H_{\alpha,tz}-H_{\alpha,0}\}[z,z]\,dt
+ \ge-L_\alpha[z,z].
+\end{equation}
+Define
+\begin{equation}\label{JC:eq:root-after-path-loss}
+ \widehat Q_\alpha:=H_{\alpha,0}-g_\alpha-2L_\alpha.
+\end{equation}
+If
+\begin{equation}\label{JC:eq:root-path-Schur}
+ \widehat Q_\alpha\ge0,
+ \qquad
+ \|b_\alpha\|_{\widehat Q_\alpha^*}^2
+ \le g_\alpha(d_\alpha,d_\alpha)+\kappa\Jfour(\alpha),
+\end{equation}
+then JC--PL holds.
+\end{proposition}
+
+\begin{proof}
+Split the Hessian integral in~\eqref{JC:eq:pathwise-action} at
+$H_{\alpha,0}$.  The Bregman weight has mass $1/2$, so
+\eqref{JC:eq:path-loss-form} gives
+\[
+ \mathscr A_\alpha(z)
+ \ge\frac12\{g_\alpha(d_\alpha,d_\alpha)
+                 +\kappa\Jfour(\alpha)\}
+     +b_\alpha[z]
+     +\frac12\widehat Q_\alpha[z,z].
+\]
+The right side is nonnegative by the same Hilbert completion as
+Proposition~\ref{JC:prop:JC-RS}.
+\end{proof}
+
+This reduction records the required slack correctly.  Terminal and
+nonterminal estimates must first be assembled into a genuine form
+$L_\alpha$; one may not subtract their scalar upper bounds twice or
+replace~\eqref{JC:eq:path-loss-form} by a pointwise support-time supremum.
+
+\begin{remark}[Why the tempting exact Gram shortcut does not close the root]
+Let $\mathcal H_D$ be the disk boundary Hilbert space, let $K$ be the
+fan-normal sine trace, $T$ the genuine material/kinematic trace at the
+tangential endpoint, and $B$ the fan source.  Put
+\[
+ G=K^*K,\qquad p=2K^*B,\qquad
+ d=-G^{-1}p/2,\qquad c=-Kd=P_{K\mathsf X_\alpha}B,
+ \qquad E=T-K.
+\]
+For the pure quadratic disk principal block, where
+$\ell=2T^*B$ and $H_0=2T^*T$, direct expansion gives, with $V=2T-K$,
+\begin{align}
+ b[z]&=\langle c,Vz\rangle_D
+       +2\langle B-c,Ez\rangle_D,
+ \label{JC:eq:Gram-linear-defect}\\
+ H_0-G&=V^*V-2E^*E,
+ \label{JC:eq:Gram-quadratic-defect}\\
+ \frac12G(d)+b[z]+\frac12(H_0-G)[z,z]
+ &=\frac12\|c+Kz+2Ez\|_D^2-
+   \|Ez\|_D^2+2\langle B-c,Ez\rangle_D.
+ \label{JC:eq:Gram-failed-square}
+\end{align}
+Thus choosing $U=c$ and $V=2T-K$ leaves the negative form $-2E^*E$
+and an orthogonal-source cross term; they do not vanish merely because
+$c$ is the projection of $B$ onto $K\mathsf X_\alpha$.
+
+For the genuine polygonal block write
+$\Gamma=H_{\alpha,0}-2T^*T$ and let $r$ be the difference between
+$b_\alpha$ and the first pairing in~\eqref{JC:eq:Gram-linear-defect}.  A
+valid Gram repair must, at minimum, pay the block
+\[
+ \begin{pmatrix}
+  \kappa\Jfour(\alpha) & r^*\\ r & \Gamma-2E^*E
+ \end{pmatrix}
+ \ge0
+\]
+after adding any explicitly retained fan square and path-loss slack.
+No closed TR or JP--DE row proves this block.  Equations
+\eqref{JC:eq:Gram-linear-defect}--\eqref{JC:eq:Gram-failed-square} explain why
+the numerically favorable root ratio cannot be promoted by a bare
+Cauchy--Schwarz citation.
+\end{remark}
+
+\begin{remark}[Audited physical-trace branch: exact algebra, failed chart]
+There is an algebraically cleaner inactive branch.  Let
+$\mathbf q_D=2j_{0,1}^2q_D^0$ be the physical disk half-Hessian, put
+\[
+ \widetilde K_\alpha z=\Pi_{\rm ng}\widetilde T_\alpha z,
+ \qquad
+ \widetilde G_\alpha(z)=\mathbf q_D(\widetilde K_\alpha z),
+ \qquad
+ \widetilde p_\alpha[z]
+ =2\langle B_\alpha,\widetilde K_\alpha z\rangle_D,
+\]
+and let
+$\widetilde d_\alpha=-\tfrac12\widetilde{\mathcal R}_\alpha^{-1}
+\widetilde p_\alpha$.  The normalized TR endpoint gives the exact square
+\[
+ \mathbf q_D(B_\alpha+\widetilde K_\alpha z)
+ =\widetilde P_D(\alpha)
+  +\widetilde G_\alpha(z-\widetilde d_\alpha).
+\]
+The corresponding physical residual and action satisfy the same exact
+Schur identity as Proposition~\ref{JC:prop:JC-ALG}; in its pure disk block
+the root is exactly
+\[
+ \frac12\widetilde G_\alpha(z-\widetilde d_\alpha)
+ +\frac\kappa2\Jfour(\alpha)\ge0.
+\]
+Thus the $E=T-K$ defect in~\eqref{JC:eq:Gram-quadratic-defect} disappears
+from the disk block.
+
+This does not close the polygonal action.  The large component of
+$\widetilde T_\alpha$ produced by a short angle is a tangential slide of a
+straight side viewed in the disk radial frame; it can be nonzero even
+when the true side-normal speed is zero.  It is cancelled at the same
+order by the nonlinear reparametrization remainder $\mathcal N$:
+\[
+ D_z^2\widetilde{\mathscr R}_\alpha(0)[\xi,\xi]
+ =H_{\alpha,0}[\xi,\xi]-2\widetilde G_\alpha(\xi).
+\]
+By the exact value split in TR, the difference on the right is precisely
+the full second $z$-derivative of $\mathcal N(W_{\alpha,z})$ at $z=0$;
+this formulation includes all chain-rule terms at the vector-field base
+point $W_{\alpha,0}$.
+The cancellation cannot be estimated from the radial image alone.  For
+example, if
+$X(\theta)=e_r(\theta+\delta\sin2\theta)$ and $W=X-e_r$, the boundary
+image is the unit circle, so $\mathcal L(W)=\mathcal L(0)$, whereas
+\[
+ f=W\cdot e_r=\cos(\delta\sin2\theta)-1,
+ \qquad
+ \mathcal N(W)=-\mathbf q_D(\Pi_{\rm ng}f).
+\]
+Hence no image-small argument can yield
+$\mathcal N(W)\ge-\vartheta\mathbf q_D(\Pi_{\rm ng}f)$ with a universal
+$\vartheta<1$.  The radial-not-affine example in JP further shows that
+the full material $W^{1,\infty}$ norm can diverge on the radial chart.
+Consequently the old physical CF+CM$\to$NR support-tail argument cannot
+be reactivated.  The physical branch replaces JC--PL by an equivalent
+open full-radial-chart action; it is recorded as an inactive alternative,
+not as a second proof of J0.
+\end{remark}
+
+\begin{remark}[Audited Minkowski shortcut: two concavities do not order the ratio]
+For a fixed positive normal fan, support interpolation is Minkowski
+interpolation.  Consequently
+\[
+ U(h)=|P(h)|^{1/2},
+ \qquad V(h)=\lambda_1(P(h))^{-1/2}
+\]
+are positive, one-homogeneous concave functions, while
+$\Phi=(U/V)^2$.  At a stationary point,
+\[
+ \frac{D^2\Phi}{\Phi}
+ =2\left(\frac{D^2U}{U}-\frac{D^2V}{V}\right)
+\]
+on a nonradial direction.  Both displayed curvatures are nonpositive,
+but their difference has no determined sign.
+
+This is a genuine logical obstruction, not only a missing inequality.
+On the Lorentz cone $\{(x,y):x>|y|\}$ put, with $c=11/20$,
+\[
+ U(x,y)=\sqrt{x^2-y^2},
+ \qquad V(x,y)=x-c\frac{y^2}{x}.
+\]
+Both functions are positive, one-homogeneous and concave, since
+\[
+ D^2U=-\frac1{(x^2-y^2)^{3/2}}
+ \begin{pmatrix}y^2&-xy\\-xy&x^2\end{pmatrix},
+ \quad
+ D^2V=-\frac{2c}{x^3}
+ \begin{pmatrix}y^2&-xy\\-xy&x^2\end{pmatrix}.
+\]
+Moreover $U^2=x^2-y^2$ is exactly quadratic.  At $(1,0)$ the ratio
+$(U/V)^2$ is stationary and has second derivative $1/5>0$ in the
+$y$ direction.  Nevertheless the same-area point $(5/3,4/3)$ satisfies
+\[
+ U(5/3,4/3)=1,
+ \qquad
+ \left(\frac UV\right)^2(5/3,4/3)=\frac{625}{729}<1.
+\]
+Thus area and eigenvalue Brunn--Minkowski concavity, even with exact
+quadratic area and strict local support minimality, do not give a global
+support comparison.  The missing relative curvature comparison is again
+part of JC--PL.
+\end{remark}
+
+\begin{remark}[Audited stationary-endpoint bypass: why it is insufficient]
+The independent stationary O--H endpoint theorem cannot by itself replace
+JC--PL.  Indeed, put the regular polygon and a hypothetical active global
+minimizer in one fixed-area joint chart at $0$ and $x$.  Since both are
+stationary, the exact identity is
+\begin{equation}\label{JC:eq:stationary-gradient-chord}
+ 0=\langle\nabla\Phi_N(x)-\nabla\Phi_N(0),x\rangle
+ =\int_0^1D^2\Phi_N(tx)[x,x]\,dt.
+\end{equation}
+The interior points $tx$ are not stationary, so a Hessian theorem whose
+hypothesis is stationarity does not control this integral.
+
+Endpoint coercivity alone is logically insufficient even at the relevant
+super-near scale.  For $a>0$ and $0<c<1/3$ consider
+\[
+ F_{a,c}(t,y)=a t^2(a-t)^2
+ -ca^5\{3(t/a)^2-2(t/a)^3\}+|y|^2,
+ \qquad E_a(u,v)=a^3u^2+|v|^2.
+\]
+The points $(0,0)$ and $(a,0)$ are stationary, while
+$F_{a,c}(a,0)=-ca^5<F_{a,c}(0,0)=0$.  Both endpoint Hessians are strictly
+positive: their $t$-eigenvalues are respectively
+\[
+ (2-6c)a^3,\qquad (2+6c)a^3,
+\]
+and the $y$-block is $2I$.  Moreover, with $u=t/a$,
+\[
+ \frac{F_{a,c}(t,0)}{a^5}+c
+ =(1-u)^2\{(u+c)^2+c-c^2\}\ge0,
+\]
+so $(a,0)$ is the global minimum.  Nevertheless
+$D_{tt}^2F_{a,c}(a/2,0)=-a^3$ and, for $x=(a,0)$,
+\[
+ \int_0^1D^2F_{a,c}(sx)[x,x]\,ds=0,
+ \qquad E_a(x)=a^5.
+\]
+Thus positive endpoint spectra, including uniform spectra in the naturally
+scaled norm, do not prove the path monotonicity needed in
+\eqref{JC:eq:stationary-gradient-chord}.
+
+The minimal stationary-route replacement is a super-near joint statement,
+not an endpoint citation.  After gauges, it would have to prove uniformly
+\begin{equation}\label{JC:eq:stationary-super-near-cut}
+ \int_0^1D^2\Phi_N(tx)[x,x]\,dt
+ \ge\mu\left\{6a^2\sum_i d_i^2
+ +\Gjp_{\alpha_*}(z-Z_Nd)\right\}
+\end{equation}
+for nonzero $x=(d,z)$ with
+$\Jfour(\alpha_*+d)+\Gjp_{\alpha_*}(z)\lesssim a^5$.
+At the regular polygon this requires the full cyclic fan/support Schur
+symbol, including its nonzero period-three mixed block; it must then be
+propagated diagonally along the super-near path.  No retained node proves
+either the regular Schur complement or this relative path stability.
+Consequently the stationary route only narrows JC--PL; it does not close
+the main theorem.
+\end{remark}
+
+\subsection{The unique open pathwise payment}
+
+The closed disk endpoint and value rows provide universal
+$S_D,\kappa,C_p>0$ and a modulus $\varepsilon_V(S)\to0$ such that, for
+$S\le S_D$,
+\begin{align}
+ P_D^{\rm ns}(\alpha)-P_D^{\rm ns}(\alpha_*)
+ &\ge2\kappa\Jfour(\alpha),\label{JC:eq:D0}\\
+ \|p_\alpha\|_{(\Gjp_\alpha)^*}
+ &\le C_p\Jfour(\alpha)^{1/2},\label{JC:eq:P}\\
+ \left|\Phi_\alpha(h_\alpha\mathbf1)
+ -\Phi_{\alpha_*}(h_*\mathbf1)
+ -\{q_D(B_\alpha)-q_D(B_{\alpha_*})\}\right|
+ &\le\varepsilon_V(S)\Jfour(\alpha).
+ \label{JC:eq:V}
+\end{align}
+
+\begin{proposition}[Regular disk-joint Schur symbol]
+\label{JC:prop:regular-disk-joint}
+Let $\alpha_*=a\mathbf1$ with $2a<S_D$.  Choose the canonical analytic
+scale/translation trivialization constructed in
+Proposition~\ref{JC:prop:super-near-bridge-active},
+\[
+ J_\alpha:\mathsf X_{\alpha_*}\longrightarrow\mathsf X_\alpha,
+ \qquad J_{\alpha_*}=I,
+\]
+and put
+\[
+ F_D^\sharp(\alpha,z):=
+ q_D(B_\alpha+K_\alpha J_\alpha z),\qquad
+ \bar z_\alpha^D:=J_\alpha^{-1}z_\alpha^D,\qquad
+ Z_N\delta:=
+ D_\alpha\bar z_\alpha^D\big|_{\alpha_*}[\delta].
+\]
+For every $\sum_i\delta_i=0$ and every regular-quotient support vector
+$\zeta$,
+\begin{align}
+ \mathcal D_N(\delta,\zeta)
+ &:=
+ \frac12D^2F_D^\sharp(\alpha_*,0)
+ [(\delta,\zeta),(\delta,\zeta)]
+ \label{JC:eq:regular-disk-joint-identity}\\
+ &=
+ \frac12D^2P_D^{\rm ns}(\alpha_*)[\delta,\delta]
+ +\Gjp_{\alpha_*}(\zeta-Z_N\delta)
+ \notag\\
+ &\ge
+ 12\kappa a^2\sum_i\delta_i^2
+ +\Gjp_{\alpha_*}(\zeta-Z_N\delta).
+ \label{JC:eq:regular-disk-joint-gap}
+\end{align}
+Thus every cyclic Fourier block of the regular
+\emph{normal-sine disk-joint} symbol has a uniform completed Schur gap.
+This statement concerns the fixed disk scalar; it is not a lower bound
+for the polygonal joint Hessian.
+\end{proposition}
+
+\begin{proof}
+The endpoint data and $J_\alpha$ are analytic in the fixed quotient
+chart.  If
+$\bar\Gjp_\alpha(w):=\Gjp_\alpha(J_\alpha w)$, exact disk completion gives
+\[
+ F_D^\sharp(\alpha,z)
+ =P_D^{\rm ns}(\alpha)
+  +\bar\Gjp_\alpha(z-\bar z_\alpha^D),
+\qquad \bar z_{\alpha_*}^D=0.
+\]
+Along $\alpha(t)=\alpha_*+t\delta$, $z(t)=t\zeta$, one has
+$\bar z_{\alpha(t)}^D=tZ_N\delta+O(t^2)$, while variation of
+$\bar\Gjp_{\alpha(t)}$ contributes only from order $t^3$ onward.  Taking
+the coefficient of $t^2$ proves
+\eqref{JC:eq:regular-disk-joint-identity}.  Moreover
+\[
+ \Jfour(\alpha_*+t\delta)
+ =6a^2t^2\sum_i\delta_i^2
+  +4at^3\sum_i\delta_i^3+t^4\sum_i\delta_i^4.
+\]
+Apply the closed estimate
+$P_D^{\rm ns}(\alpha)-P_D^{\rm ns}(\alpha_*)
+\ge2\kappa\Jfour(\alpha)$.  For fixed $\delta$, both signs of sufficiently
+small $t$ keep $\alpha_*+t\delta$ in the positive-fan region
+$S\le S_D$.  Dividing the two signed inequalities first by $t$ shows
+$DP_D^{\rm ns}(\alpha_*)[\delta]=0$; subtracting that linear term and
+then dividing by $t^2$ gives
+$\frac12D^2P_D^{\rm ns}(\alpha_*)[\delta,\delta]
+\ge12\kappa a^2\sum_i\delta_i^2$, proving
+\eqref{JC:eq:regular-disk-joint-gap}.
+\end{proof}
+
+\begin{contract}[JC--AR: regular completed-action Schur block]
+\label{JC:con:JC-AR}
+In the trivialization of Proposition~\ref{JC:prop:regular-disk-joint}, put
+\[
+ F_P^\sharp(\alpha,z)
+ :=\Phi_\alpha(h_\alpha\mathbf1+J_\alpha z),
+ \qquad
+ \mathcal E_N(d,\zeta)
+ :=\frac12D^2(F_P^\sharp-F_D^\sharp)(\alpha_*,0)
+ [(d,\zeta),(d,\zeta)].
+\]
+Write \(\bar z_\alpha^D=J_\alpha^{-1}z_\alpha^D\), so that
+\(D\bar z_{\alpha_*}^D[d]=Z_Nd\), and use the exact completed coordinates
+\[
+ \mathbf A_N(d,w):=
+ \mathscr A_{\alpha_*+d}
+ \bigl(J_{\alpha_*+d}(\bar z_{\alpha_*+d}^D+w)\bigr).
+\]
+Then \(\mathbf A_N(0,0)=0\), \(D\mathbf A_N(0,0)=0\), and the exact
+regular quadratic root is
+\begin{equation}\label{JC:eq:regular-action-root}
+ \boxed{
+ \mathcal Q_N(d,w):=\frac12D^2\mathbf A_N(0,0)[(d,w),(d,w)]
+ =\mathcal E_N(d,w+Z_Nd)-\mathcal E_N(d,0)
+ +\frac12\Gjp_{\alpha_*}(w)
+ +3\kappa a^2\sum_i d_i^2.}
+\end{equation}
+The subtraction \(\mathcal E_N(d,0)\) and the coefficients
+\(1/2\) and \(3\kappa\) are forced respectively by the base-value
+subtraction in \(\mathscr R_\alpha\), the completed disk square, and
+\(\frac\kappa2\Jfour\).  They may not be replaced by the larger margins
+of the full disk-joint Hessian.
+
+Let
+\[
+ \mathcal P_N(d,\zeta):=
+ \frac12D^2F_P^\sharp(\alpha_*,0)
+ [(d,\zeta),(d,\zeta)]
+\]
+be the genuine polygonal joint half-Hessian.  Exact disk completion gives
+the following sharper algebraic reduction:
+\begin{equation}\label{JC:eq:regular-action-polygon-reduction}
+ \boxed{
+ \mathcal Q_N(d,w)=
+ \mathcal P_N(d,w+Z_Nd)-\mathcal P_N(d,0)
+ +\Gjp_{\alpha_*}(Z_Nd)-\frac12\Gjp_{\alpha_*}(w)
+ +3\kappa a^2\sum_i d_i^2.}
+\end{equation}
+Indeed Proposition~\ref{JC:prop:regular-disk-joint} yields
+\[
+ \frac12D^2F_D^\sharp(\alpha_*,0)[(d,\zeta)]^2
+ =\frac12D^2P_D^{\rm ns}(\alpha_*)[d,d]
+  +\Gjp_{\alpha_*}(\zeta-Z_Nd).
+\]
+Subtracting its values at $\zeta=w+Z_Nd$ and $\zeta=0$ gives
+$\Gjp(w)-\Gjp(Z_Nd)$, which proves
+\eqref{JC:eq:regular-action-polygon-reduction}.  In particular the pure
+polygonal fan block cancels exactly.  JC--AR therefore asks only for the
+polygonal support block and its fan--support coupling after the corrector
+is inserted; estimating the entire polygonal joint Hessian is unnecessary.
+
+For $d=0$, equation~\eqref{JC:eq:regular-action-polygon-reduction} becomes
+\begin{equation}\label{JC:eq:regular-action-pure-support-identity}
+ \mathcal Q_N(0,w)=
+ \frac12D_h^2\Phi_{\alpha_*}(h_*\mathbf1)[w,w]
+ -\frac12\Gjp_{\alpha_*}(w).
+\end{equation}
+Consequently the archived regular specialization of JP--S0,
+\[
+ D_h^2\Phi_{\alpha_*}(h_*\mathbf1)[w,w]
+ \ge(2-\omega_0(a))\Gjp_{\alpha_*}(w),
+ \qquad \omega_0(a)\to0,
+\]
+would close the pure-support row of JC--AR with any fixed
+$\mu_s<1/2$ for all sufficiently large $N$.  The remaining part is then
+the modewise Schur payment of the fan--support coupling in
+\eqref{JC:eq:regular-action-polygon-reduction}.
+
+The open regular action target is to prove constants
+\begin{equation}\label{JC:eq:regular-action-constants}
+ \mu_f>0,\qquad \mu_s>0,
+\end{equation}
+independent of $N$, such that
+\begin{equation}\label{JC:eq:regular-action-Schur}
+ \boxed{
+ \mathcal Q_N(d,w)
+ \ge \mu_fa^2\sum_i d_i^2+
+      \mu_s\Gjp_{\alpha_*}(w).}
+\end{equation}
+This is not a consequence of Proposition~\ref{JC:prop:regular-disk-joint},
+which controls the full disk scalar rather than the completed action.
+
+More explicitly, cyclic equivariance diagonalizes every surviving quotient
+mode $k$.  With the normalization
+\begin{align*}
+ \mathcal Q_{N,k}(d_k,w_k)
+ &=q^{ff}_{N,k}|d_k|^2
+   +2\operatorname {Re}(\overline{q^{fs}_{N,k}}d_k\overline{w_k})
+   +q^{ss}_{N,k}|w_k|^2,\\
+ \Gjp_{\alpha_*}(w_k)&=g_{N,k}|w_k|^2,
+ \qquad g_{N,k}>0,
+\end{align*}
+write the polygonal half-Hessian on the same character as
+\[
+ \mathcal P_{N,k}(d_k,\zeta_k)
+ =p^{ff}_{N,k}|d_k|^2
+  +2\operatorname {Re}
+    (\overline{p^{fs}_{N,k}}d_k\overline{\zeta_k})
+  +p^{ss}_{N,k}|\zeta_k|^2,
+ \qquad (Z_Nd)_k=Z_{N,k}d_k.
+\]
+Expanding the already proved polygonal reduction
+\eqref{JC:eq:regular-action-polygon-reduction} gives the exact coefficients
+\begin{equation}\label{JC:eq:regular-action-polygon-mode-coefficients}
+ \boxed{
+ \begin{aligned}
+ q^{ss}_{N,k}&=p^{ss}_{N,k}-\frac12g_{N,k},\\
+ q^{fs}_{N,k}&=p^{fs}_{N,k}+p^{ss}_{N,k}\overline{Z_{N,k}},\\
+ q^{ff}_{N,k}&=3\kappa a^2
+ {}+2\operatorname {Re}(p^{fs}_{N,k}Z_{N,k})
+ +(p^{ss}_{N,k}+g_{N,k})|Z_{N,k}|^2.
+ \end{aligned}}
+\end{equation}
+Thus the pure polygonal fan coefficient $p^{ff}_{N,k}$ cancels.  Before
+positive margins are inserted, the remaining Schur complement is
+\[
+ 3\kappa a^2+\frac12g_{N,k}|Z_{N,k}|^2
+ -\frac{|p^{fs}_{N,k}+\frac12g_{N,k}\overline{Z_{N,k}}|^2}
+ {p^{ss}_{N,k}-\frac12g_{N,k}}.
+\]
+This is an algebraic simplification, not a positivity assertion: the
+polygonal support coefficient and the fan--support covector remain to be
+estimated.
+
+The same cancellation remains exact after margins are inserted.  Put
+\[
+ A_{N,k}:=p^{fs}_{N,k}
+ +\frac12g_{N,k}\overline{Z_{N,k}},
+ \qquad
+ r_{N,k}:=p^{ss}_{N,k}
+ -\left(\frac12+\mu_s\right)g_{N,k}.
+\]
+Here $A_{N,k}$ is precisely the regular fan derivative of the completed
+covector $b_\alpha=\ell_\alpha-p_\alpha/2$ in the same orthonormal
+Fourier normalization.  When $r_{N,k}>0$, the full modal Schur row is
+equivalent to
+\begin{equation}\label{JC:eq:regular-action-reduced-Schur}
+ \boxed{
+ (3\kappa-\mu_f)a^2
+ +\left(\frac12-\mu_s\right)g_{N,k}|Z_{N,k}|^2
+ -\frac{|A_{N,k}+\mu_sg_{N,k}\overline{Z_{N,k}}|^2}
+ {r_{N,k}}\ge0.}
+\end{equation}
+Thus the mixed analytic blocker is a sharp all-character estimate for
+$D_\alpha(\ell_\alpha-p_\alpha/2)$, not for the discarded covector
+$\ell_\alpha-p_\alpha$.
+
+Equation~\eqref{JC:eq:regular-action-Schur} is equivalent, mode by mode, to
+\begin{equation}\label{JC:eq:regular-action-mode-matrix}
+ \boxed{
+ \begin{pmatrix}
+  q^{ff}_{N,k}-\mu_fa^2&q^{fs}_{N,k}\\
+  \overline{q^{fs}_{N,k}}&q^{ss}_{N,k}-\mu_sg_{N,k}
+ \end{pmatrix}\succeq0.}
+\end{equation}
+Equivalently, with the usual quotient interpretation when the lower-right
+entry vanishes,
+\begin{align}
+ q^{ss}_{N,k}-\mu_sg_{N,k}&\ge0,
+ \label{JC:eq:regular-action-support-row}\\
+ q^{ff}_{N,k}-\mu_fa^2
+ &\ge\frac{|q^{fs}_{N,k}|^2}
+ {q^{ss}_{N,k}-\mu_sg_{N,k}}.
+ \label{JC:eq:regular-action-fan-Schur-row}
+\end{align}
+In particular, the pure support specialization already asks for
+\begin{equation}\label{JC:eq:regular-action-support-gap}
+ D_h^2\Phi_{\alpha_*}(h_*\mathbf1)[z,z]
+ \ge(1+2\mu_s)\Gjp_{\alpha_*}(z).
+\end{equation}
+The exact fixed-fan support Hessian identifies the left side with the
+regular-polygon reduced Dirichlet-to-Neumann block plus its geometric
+area row.  More precisely, for the orthonormal character
+$z_i=N^{-1/2}e^{\mathrm i k a i}$ let
+$f_{N,k}=\mathcal I_{\alpha_*}z$,
+$g_{N,k}=q_D(f_{N,k})$, let $p_N=-\partial_\nu u_N$, and let
+$\psi_{N,k}$ be the character-$k$ reduced Helmholtz solution on the
+area-$\pi$ regular polygon with boundary value $z_ip_N$ on side $i$.
+Writing
+\[
+ \mathscr D_{N,k}=\int_{R_N}|\nabla\psi_{N,k}|^2
+ -\lambda_N\int_{R_N}|\psi_{N,k}|^2,
+\]
+the exact support Hessian and area symbol give
+\begin{equation}\label{JC:eq:regular-support-DtN-sector}
+ \boxed{
+ p^{ss}_{N,k}=\mathscr D_{N,k}
+ +\frac{\lambda_N}{\pi}
+   \frac{\cos(ka)-\cos a}{\sin a},
+ \qquad
+ q^{ss}_{N,k}=p^{ss}_{N,k}-\frac12g_{N,k}.}
+\end{equation}
+Hence the pure-support row is exactly the uniform sector inequality
+\[
+ \mathscr D_{N,k}
+ +\frac{\lambda_N}{\pi}
+   \frac{\cos(ka)-\cos a}{\sin a}
+ \ge\left(\frac12+\mu_s\right)g_{N,k},
+ \qquad 2\le k\le N-2.
+\]
+All terms except the regular-polygon reduced Helmholtz DtN energy are
+explicit.  No closed terminal/LCA theorem proves this inequality, even
+before the mixed Schur row
+\eqref{JC:eq:regular-action-fan-Schur-row} is considered.
+
+The exact Schwarz--Christoffel representation also shows why the DtN and
+area rows must be estimated together.  After a rotation,
+\[
+ F_N'(z)=c_N(1-z^N)^{-2/N},\qquad J_N=|F_N'|,
+\]
+and, for the unnormalized character $z_i=e^{ikai}$, let
+$\sigma_{N,k}$ be the step function on $\mathbb T$ which equals
+$e^{ikai}$ on the preimage arc of side $i$ (its endpoint values are
+irrelevant).  The pulled-back boundary trace is
+\[
+ h_{N,k}=\sigma_{N,k}c_N^{-1}
+ |1-e^{iN\theta}|^{2/N}q_N,
+ \qquad q_N=-\partial_r(u_N\circ F_N)|_{\mathbb T}.
+\]
+Uniform disk $W^{2,p}$ estimates give $q_N\to d_\circ$ uniformly,
+including at the prevertices.  Keeping only the cross-prevertex
+rectangles in the Gagliardo norm gives the harmonic-extension lower bound
+$H(h_{N,k})\ge cN^2\{1-\cos(ka)\}-C$.  To pass to the reduced Helmholtz
+energy, use the uniform boundary Friedrichs inequality
+\[
+ \|\phi\|_{L^2(R_N)}^2
+ \le\varepsilon\|\nabla\phi\|_{L^2(R_N)}^2
+ +C_\varepsilon\|h_{N,k}\|_{L^2(\partial R_N)}^2.
+\]
+Choose $\varepsilon<(2\sup_N\lambda_N)^{-1}$.  Rellich's identity gives
+$\|h_{N,k}\|_{L^2(\partial R_N)}^2
+=\int_{\partial R_N}p_N^2=2\lambda_N/h_N\le C$ in the unnormalized
+character.  Hence every admissible reduced competitor has energy at least
+$\frac12H(h_{N,k})-C$; the ground-state orthogonality only decreases the
+competitor set.  This proves the rigorous DtN-only lower bound
+\begin{equation}\label{JC:eq:corner-layer-DtN-lower}
+ \mathscr D^{\rm un}_{N,k}
+ \ge cN^2\{1-\cos(ka)\}-C.
+\end{equation}
+This does \emph{not} close the support row.  Formula
+\eqref{JC:eq:regular-support-DtN-sector} uses the orthonormal character;
+in the unnormalized convention its area term must also be multiplied by
+$N$ and is of order
+$-N^2\{1-\cos(ka)\}$.  The two leading corner-scale terms cancel in the
+disk limit.  More precisely, the uncancelled coefficient contains
+\[
+ \frac{2}{a^2}
+ \{\pi c_N^{-2}q_{N,*}^2-\lambda_N\}
+ \{1-\cos(ka)\},
+\]
+for the prevertex endpoint amplitude $q_{N,*}$.  Rate-free convergence
+alone does not control this coefficient after multiplication by $a^{-2}$.
+One must consequently estimate the jointly renormalized remainder,
+rather than combine
+\eqref{JC:eq:corner-layer-DtN-lower} with an area symbol written in the other
+normalization.  The next proposition supplies precisely that expansion,
+uniformly through the mesoscopic regime $ka\downarrow0$.
+\end{contract}
+
+\begin{lemma}[Fixed-character polygon--disk support limit]
+\label{JC:lem:fixed-character-support-limit}
+For every fixed integer $k\ge2$,
+\begin{equation}\label{JC:eq:fixed-character-support-limit}
+ \frac{p^{ss}_{N,k}}{g_{N,k}}\longrightarrow1
+ \qquad(N\to\infty).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Use the unnormalized support character $z_i=e^{\mathrm i kia}$; the
+normalization cancels from the quotient.  The material vertex velocity
+at the vertex with bisector angle $\varphi_i=(i+\tfrac12)a$ is exactly
+\[
+ e^{\mathrm i k\varphi_i}\left\{
+ \frac{\cos(ka/2)}{\cos(a/2)}e_r(\varphi_i)
+ +\mathrm i\frac{\sin(ka/2)}{\sin(a/2)}
+ e_\theta(\varphi_i)\right\}.
+\]
+For fixed $k$ its physical side-affine interpolant converges in
+$H^{1/2}(\mathbb T;\mathbb C^2)$ to the smooth disk field
+\[
+ V_k^\circ(\theta)=e^{\mathrm i k\theta}
+ \{e_r(\theta)+\mathrm i k e_\theta(\theta)\},
+ \qquad V_k^\circ\cdot e_r=e^{\mathrm i k\theta}.
+\]
+
+We record the fixed-slot Hessian passage rather than citing an
+unassembled stage.  Pull the area-normalized regular polygons to the
+disk by the normalized near-identity conformal charts.  Their stiffness
+forms and mass densities converge to the disk forms in every fixed
+$L^p$, their first eigenfunctions converge strongly in $H_0^1$, and
+the uniform convex-domain gradient bound makes
+$\nabla u_N\otimes\nabla u_N\to
+\nabla u_\circ\otimes\nabla u_\circ$ in $L^2$.
+Polarize the exact volume formula for the normalized eigenvalue
+Hessian with the fixed smooth extension of $V_k^\circ$ in both slots.
+Every direct stiffness, mass, area, and product-of-first-jets row then
+converges by the preceding strong coefficient convergence.
+
+For the Schur row, put the fixed first-variation functional into the
+reduced resolvent.  The spectral gap above the ground state is uniform,
+the functionals converge in $H^{-1}$, and the resolvent identity on the
+moving ground-state complements gives strong $H_0^1$ convergence of
+the reduced states.  Thus the Schur pairing converges as well.  This
+proves convergence of the complete polygonal normalized Hessian to the
+disk Hessian on $V_k^\circ$; no mesh-ratio estimate is used because the
+slot is fixed and smooth.
+
+At the disk, scale and translation modes have already been projected
+out and the normalized Hessian is
+\[
+ D^2\Phi_\circ[V_k^\circ,V_k^\circ]
+ =2q_D(e^{\mathrm i k\theta}).
+\]
+On the other hand, the exact normal-sine interpolant
+$f_{N,k}=\mathcal I_{\alpha_*}z$ converges to
+$e^{\mathrm i k\theta}$ in $H^{1/2}$, so
+$g_{N,k}\to q_D(e^{\mathrm i k\theta})$.
+Since $p^{ss}_{N,k}$ is the polygonal half-Hessian coefficient,
+\eqref{JC:eq:fixed-character-support-limit} follows.
+\end{proof}
+
+\begin{proposition}[Jointly renormalized regular support sector]
+\label{JC:prop:regular-support-renormalized}
+There is $N_s$ such that, for $N\ge N_s$ and every quotient character
+$2\le k\le N-2$,
+\begin{equation}\label{JC:eq:regular-support-closed-gap}
+ \boxed{
+ p^{ss}_{N,k}\ge\frac{11}{20}g_{N,k}
+ =\left(\frac12+\frac1{20}\right)g_{N,k}.}
+\end{equation}
+Consequently the pure-support row
+\eqref{JC:eq:regular-action-support-row} is closed with
+$\mu_s=1/20$.
+\end{proposition}
+
+\begin{proof}
+We keep one normalization until the last step.  By complex conjugation
+assume $2\le k\le N/2$, and put
+\[
+ \beta=\frac2N,\qquad a=\pi\beta,\qquad
+ x=\frac{k}{N}\in(0,\tfrac12],\qquad \xi=2\pi x.
+\]
+Use first the unnormalized complex character
+$z_i=e^{2\pi\mathrm i x i}$.
+Every quadratic value is then $N$ times its coefficient in the
+orthonormal complex character.  The orthonormal real vector
+$\sqrt{2/N}\operatorname{Re}z$ has the same modal coefficient.
+
+Let
+\[
+ w_\beta(t)=|2\sin(\pi t)|^\beta,\qquad0<t<1.
+\]
+For the constant disk flux $d_\circ$, the exact corner trace is
+$d_\circ\sigma_{N,k}w_\beta$.  Its only circular frequencies are
+$k+mN$, and the beta integral gives
+\begin{equation}\label{JC:eq:corner-Gamma-coefficient}
+ I_{\beta,m}(x):=\int_0^1w_\beta(t)e^{-2\pi\mathrm i(m+x)t}\,dt
+ =
+ e^{-\pi\mathrm i(m+x)}
+ \frac{\Gamma(1+\beta)}
+ {\Gamma(1+\beta/2+m+x)\Gamma(1+\beta/2-m-x)}.
+\end{equation}
+Since $\pi d_\circ^2=\lambda_\circ$ by Rellich's identity, harmonic
+energy and the area row, divided by $Nd_\circ^2$, combine into
+\begin{equation}\label{JC:eq:corner-joint-finite-N-symbol}
+ P_\beta(x):=
+ 2\pi\sum_{m\in\mathbb Z}|m+x||I_{\beta,m}(x)|^2
+ +\frac{\cos(2\pi x)-\cos(\pi\beta)}{\sin(\pi\beta)}.
+\end{equation}
+The two terms in this formula separately contain the same
+$\beta^{-1}$ pole with opposite signs.
+
+We extract the finite part before estimating.  For $0<y<1$, put
+\[
+ T_\beta(y):=\sum_{n\ge0}(n+y)
+ \left\{\frac{\Gamma(n+y-\beta/2)}
+ {\Gamma(n+y+1+\beta/2)}\right\}^2.
+\]
+Reflection in \eqref{JC:eq:corner-Gamma-coefficient} gives the positive
+identity
+\begin{align}
+ &\sum_m|m+x||I_{\beta,m}(x)|^2\notag\\
+ &\quad=
+ \frac{\Gamma(1+\beta)^2}{\pi^2}
+ \left\{\sin^2\!\pi(x-\beta/2)T_\beta(x)
+ +\sin^2\!\pi(x+\beta/2)T_\beta(1-x)\right\}.
+ \label{JC:eq:corner-reflected-positive-series}
+\end{align}
+Separate the $n=0$ term.  Taylor's formula for $\log\Gamma$, together
+with $|\psi_{\rm dg}^{(r)}(u)|\le C_r(1+u^{-r-1})$, gives, uniformly
+for $0<\beta\le x/2$ and $x\le1/2$,
+\begin{align*}
+ T_\beta(x)
+ &=\zeta(1+2\beta,x)
+ +O\left(\frac\beta{x^2}
+ +\frac{\beta|\log x|}{x}
+ +\frac{\beta^2}{x^3}+\beta\right),\\
+ T_\beta(1-x)&=\zeta(1+2\beta,1-x)+O(\beta),\\
+ \zeta(1+2\beta,x)
+ &=\frac1{2\beta}-\psi_{\rm dg}(x)
+ +O\left(\frac{\beta|\log x|}{x}
+ +\frac{\beta^2|\log x|^2}{x}+\beta\right),
+\end{align*}
+where $\psi_{\rm dg}=\Gamma'/\Gamma$.  Indeed, after comparison with
+$(n+y)^{-1-2\beta}$ the derivative of the logarithmic quotient is
+\[
+ -2\psi_{\rm dg}(n+y)-(n+y)^{-1}+2\log(n+y)
+ =O((n+y)^{-2}),
+\]
+so all $n\ge1$ remainders are absolutely summable; the singular powers
+come only from $n=0$.
+
+Expand the sine squares in
+\eqref{JC:eq:corner-reflected-positive-series}, retaining their opposite
+linear terms until cancellation, and use
+$\Gamma(1+\beta)^2=1-2\gamma\beta+O(\beta^2)$.  We obtain
+\begin{align}
+ P_\beta(x)&=P(x)+
+ O\left(\beta+\beta x|\log x|+\frac{\beta^2}{x}\right),
+ \label{JC:eq:corner-mesoscopic-remainder}\\
+ P(x)&:=-\frac{2\sin^2(\pi x)}{\pi}
+ \{\psi_{\rm dg}(x)+\psi_{\rm dg}(1-x)+2\gamma\}.
+ \label{JC:eq:corner-renormalized-symbol}
+\end{align}
+
+The high-character normal-sine disk symbol is
+\begin{equation}\label{JC:eq:corner-disk-symbol}
+ Q(x):=\frac{2\sin^4(\pi x)}{\pi^3}
+ \{\zeta(3,x)+\zeta(3,1-x)\}.
+\end{equation}
+It satisfies $Q(x)\asymp x$ on $(0,1/2]$.  We now prove a strict
+analytic gap.  Set
+\[
+ D(x):=-\{\psi_{\rm dg}(x)+\psi_{\rm dg}(1-x)+2\gamma\},
+ \qquad H_3(x):=\zeta(3,x)+\zeta(3,1-x).
+\]
+The digamma and paired Hurwitz series give
+\[
+ D(x)=\frac1x+2\sum_{r\ge1}\zeta(2r+1)x^{2r},
+\]
+and
+\[
+ H_3(x)=x^{-3}+\sum_{n\ge1}\{(n-x)^{-3}+(n+x)^{-3}\}
+ \le x^{-3}+14\zeta(3)-8.
+\]
+The tail increases with $x$ and the last constant is its value at
+$x=1/2$.  Using $\sin(\pi x)\le\pi x$ and the integral-tail bound
+$\zeta(3)<121/100$, we get
+\begin{align*}
+ D(x)-\frac35\frac{\sin^2(\pi x)}{\pi^2}H_3(x)
+ &\ge\frac{2}{5x}+\frac{24-32\zeta(3)}5x^2\\
+ &>\frac{2}{5x}-\frac{368}{125}x^2>0
+ \qquad(0<x\le\tfrac12).
+\end{align*}
+Therefore
+\begin{equation}\label{JC:eq:corner-three-fifths}
+ \boxed{P(x)>\frac35Q(x),\qquad0<x\le\frac12.}
+\end{equation}
+Dividing \eqref{JC:eq:corner-mesoscopic-remainder} by $Q(x)\asymp x$
+also shows
+\begin{equation}\label{JC:eq:corner-relative-mesoscopic}
+ P_\beta(x)=P(x)+o(Q(x))
+\end{equation}
+along every sequence for which $k=2x/\beta\to\infty$.
+
+It remains to replace the constant flux by the true polygonal flux.
+The exact area normalization of
+$F_N'(z)=c_N(1-z^N)^{-\beta}$ is
+\[
+ c_N^{-2}=\sum_{m\ge0}
+ \frac{(\beta)_m^2}{(m!)^2(mN+1)}.
+\]
+Since $(\beta)_m/m!\le C\beta m^{\beta-1}$ for $m\ge1$,
+$c_N=1+O(\beta^3)$.  Put
+$W_N=|F_N'|^2=c_N^2|1-z^N|^{-2\beta}$.  For every fixed $p>4$,
+the change of variables $t=r^N$ gives
+\begin{equation}\label{JC:eq:corner-weight-Lp-rate}
+ \|W_N-1\|_{L^p(\mathbb D)}
+ \le C_p\beta^{1+1/p}.
+\end{equation}
+Indeed, on $t\le1/2$ one has
+$|\log|1-te^{\mathrm i\phi}||\le Ct$, while on $t\ge1/2$ all fixed
+logarithmic moments remain uniformly integrable against
+$|1-te^{\mathrm i\phi}|^{-2p\beta}$.  Since
+$r\,dr=(\beta/2)t^{\beta-1}dt$, the $p$-th power of the norm is
+$O(\beta^{p+1})$.
+
+The pulled eigenfunction satisfies
+\[
+ -\Delta v_N=\lambda_NW_Nv_N,\qquad v_N|_{\mathbb T}=0,
+ \qquad\int_{\mathbb D}W_Nv_N^2=1.
+\]
+The disk spectral gap first gives an $H^1$ estimate with the rate in
+\eqref{JC:eq:corner-weight-Lp-rate}.  Apply a $W^{2,q}$ estimate with
+$q>1$ to obtain $L^\infty$ control, substitute it back into the
+difference equation, and then apply the $W^{2,p}$ estimate.  Thus
+\begin{equation}\label{JC:eq:corner-flux-holder-rate}
+ |\lambda_N-\lambda_\circ|
+ +\|v_N-u_\circ\|_{W^{2,p}(\mathbb D)}
+ \le C_p\beta^{1+1/p},
+ \qquad
+ \|q_N-d_\circ\|_{C^\alpha(\mathbb T)}
+ \le C_p\beta^{1+1/p},
+\end{equation}
+where $q_N=-\partial_rv_N|_{\mathbb T}$ and
+$\alpha=1-2/p>1/2$.
+
+For $r\in C^\alpha$ and $f\in H^{1/2}(\mathbb T)$, the Gagliardo
+double integral gives
+\[
+ [rf]_{H^{1/2}}^2
+ \le2\|r\|_\infty^2[f]_{H^{1/2}}^2
+ +C[r]_{C^\alpha}^2\|f\|_2^2.
+\]
+The positive Gamma series
+\eqref{JC:eq:corner-reflected-positive-series} and
+$T_\beta(y)\le C(\beta^{-1}+y^{-1})$ imply
+\begin{equation}\label{JC:eq:corner-trace-energy-upper}
+ H(\sigma_{N,k}w_\beta)\le Ck^2,
+ \qquad2\le k\le N/2.
+\end{equation}
+Consequently polarization and
+\eqref{JC:eq:corner-flux-holder-rate} give, with
+$\varepsilon_N=C_p\beta^{1+1/p}$,
+\begin{equation}\label{JC:eq:corner-true-flux-error}
+ \left|H(\sigma_{N,k}c_N^{-1}w_\beta q_N)
+ -d_\circ^2H(\sigma_{N,k}w_\beta)\right|
+ \le C\varepsilon_Nk^2=o(k)
+\end{equation}
+uniformly along every growing-character sequence, because
+$\varepsilon_Nk\le C\beta^{1/p}$.  The eigenvalue error in the area
+row has the same bound.
+
+The sector compatibility
+$\int_{\partial R_N}z_ip_N\partial_\nu u_N\,ds=0$
+follows from cyclic character orthogonality.  The uniform gap on
+$u_N^\perp$, the Poisson $L^2$ estimate, and
+$h_N\int_{\partial R_N}p_N^2\,ds=2\lambda_N$ show that reduced
+Helmholtz energy differs from harmonic extension by $O(1)$ in the
+unnormalized character.  This is also $o(k)$ when $k\to\infty$.
+It follows from
+\eqref{JC:eq:corner-relative-mesoscopic} and
+\eqref{JC:eq:corner-true-flux-error} that
+\begin{equation}\label{JC:eq:corner-polygon-symbol-limit}
+ \frac{p^{ss,\mathrm{un}}_{N,k}}{Nd_\circ^2}
+ =P(k/N)+o(Q(k/N))
+\end{equation}
+on every growing-character sequence.
+
+Finally, the exact Bessel alias formula for $g_{N,k}$, together with
+\[
+ \omega_n=|n|+1+O(|n|^{-1}),\qquad
+ (1-n^2)^{-2}=n^{-4}\{1+O(n^{-2})\},
+\]
+gives
+\begin{equation}\label{JC:eq:corner-disk-alias-limit}
+ \frac{g^{\mathrm{un}}_{N,k}}{Nd_\circ^2}
+ =Q(k/N)\{1+o(1)\}
+\end{equation}
+uniformly for $k\to\infty$.  Indeed every alias has
+$|k+mN|\ge k$, and replacing
+$\cos(ka)-\cos a$ by $\cos(ka)-1$ costs $O(k^{-2})$
+relatively.
+
+If \eqref{JC:eq:regular-support-closed-gap} failed along a sequence, choose
+a violating character and conjugate it into $2\le k_N\le N/2$.
+If $k_N$ is bounded, pass to a constant subsequence; the retained
+one-fixed-slot disk limit gives
+$p^{ss}_{N,k_N}/g_{N,k_N}\to1$.  If $k_N\to\infty$, then
+\eqref{JC:eq:corner-three-fifths},
+\eqref{JC:eq:corner-polygon-symbol-limit}, and
+\eqref{JC:eq:corner-disk-alias-limit} give
+\[
+ \liminf_N\frac{p^{ss}_{N,k_N}}{g_{N,k_N}}\ge\frac35.
+\]
+Both alternatives contradict a ratio below $11/20$.  This proves
+\eqref{JC:eq:regular-support-closed-gap}.
+\end{proof}
+
+\begin{lemma}[Polygonal mixed Schwarz--Christoffel finite part]
+\label{JC:lem:regular-polygonal-mixed-finite-part}
+Fix $0<x<1/2$, put
+\[
+ \theta=\pi x,\qquad \rho=e^{2\pi ix},\qquad
+ D(x)=-\{\psi(x)+\psi(1-x)+2\gamma\},
+ \qquad T(x)=\psi_1(x)-\psi_1(1-x)=-D'(x).
+\]
+For $\beta=2/N$, $a=\pi\beta$, and a regular fan character with
+$k/N\to x$, the constant-flux polygonal fan--support coefficient has the
+phase-realified limit
+\begin{equation}\label{JC:eq:regular-polygonal-mixed-finite-part}
+ \boxed{
+ L_{\rm poly}(x):=
+ \lim_{\beta\downarrow0}
+ \left[-e^{i\theta}\frac{p^{fs}_\beta}{d_\circ^2a}\right]
+ =\frac{\cos\theta}{2\pi}D(x)
+ -\frac{\sin\theta}{2\pi^2}T(x)
+ =\frac{\sin\theta}{2\pi^2}
+ \{D'(x)+\pi\cot\theta D(x)\}.}
+\end{equation}
+Let
+\[
+ F_p(y):=\sum_{n\ge0}\frac{(-1)^n}{(n+y)^p}
+ =2^{-p}\{\zeta(p,y/2)-\zeta(p,(y+1)/2)\}
+\]
+and define the exact disk-forcing symbol
+\begin{equation}\label{JC:eq:regular-disk-forcing-finite-part}
+ R_I(x)=-\frac{\sin\theta}{4\pi^3}
+ \{F_3(x)-F_3(1-x)\}
+ +\frac{\cos\theta}{4\pi^2}
+ \{F_2(x)+F_2(1-x)\}.
+\end{equation}
+Then the genuine polygonal completed-covector finite part exists and is
+\begin{equation}\label{JC:eq:regular-completed-covector-finite-part}
+ \boxed{
+ R_{b,{\rm poly}}(x)=
+ \frac{D'(x)+\pi\cot\theta D(x)}{2\pi^2}-R_I(x),
+ \qquad
+ \frac{A_{N,k}}{d_\circ^2a}
+ =-e^{-i\theta}\sin\theta R_{b,{\rm poly}}(x)+o_x(1).}
+\end{equation}
+The formulas extend continuously to $x=1/2$, where both
+$R_I$ and $R_{b,{\rm poly}}$ vanish.
+\end{lemma}
+
+\begin{proof}
+On one regular Schwarz--Christoffel side let
+\[
+ w_\beta(t)=|2\sin\pi t|^\beta,\qquad
+ J_\beta(t)=\int_{1/2}^t w_\beta(u)^{-1}\,du,\qquad 0<t<1.
+\]
+For the complex fan character $d_i=\rho^i$, differentiating the turning
+angles gives $\dot\theta_i=(\rho-1)^{-1}\rho^i$ and $\dot h=0$.
+Centred physical arclength satisfies
+$ds=c_Naw_\beta^{-1}dt$ and $s=c_NaJ_\beta(t)$, while the pulled-back
+flux is $p_N=c_N^{-1}w_\beta q_N$.  Hence the exact fan--flux datum is
+\[
+ -a(\rho-1)^{-1}\rho^i w_\beta(t)J_\beta(t)q_N(t).
+\]
+For $y=m+x$ put
+\[
+ I_\beta(y)=\int_0^1w_\beta(t)e^{-2\pi iyt}\,dt,\qquad
+ S_\beta(y)=\int_0^1w_\beta(t)J_\beta(t)e^{-2\pi iyt},dt,
+\]
+and $M_\beta(x)=\sum_m|m+x|S_\beta(m+x)\overline{I_\beta(m+x)}$.
+The harmonic mixed row is
+$-2\pi a(\rho-1)^{-1}M_\beta(x)$ after division by $d_\circ^2$; the area
+row is
+\[
+ \frac14h_N\sec^2(a/2)(1+\rho^{-1}),\qquad
+ h_N=\sqrt{\frac\pi{N\tan(a/2)}}.
+\]
+
+It remains to extract the joint finite part.  Set
+\[
+ C_\beta=\int_0^{1/2}w_\beta^{-1}
+ =2^{-\beta}\frac{\Gamma((1-\beta)/2)}
+ {2\sqrt\pi\,\Gamma(1-\beta/2)}.
+\]
+Then $C_0=1/2$, $C'_0=0$, and direct integration at the two endpoints
+gives
+\begin{align*}
+ w_\beta(t)J_\beta(t)
+ &=-C_\beta(2\pi t)^\beta+\frac{t}{1-\beta}
+   +O(t^{\beta+2}+t^3),\\
+ w_\beta(1-u)J_\beta(1-u)
+ &= C_\beta(2\pi u)^\beta-\frac{u}{1-\beta}
+   +O(u^{\beta+2}+u^3).
+\end{align*}
+The endpoint expansion can be used here with a summable differentiated
+remainder, as follows.  Choose smooth cutoffs at $0$ and $1$, subtract
+from $w_\beta$ its two endpoint models of type $t^\beta$, and subtract
+from $w_\beta J_\beta$ the four endpoint models displayed above.  The
+remainders and their first $\beta$--derivatives have two integrable
+derivatives; differentiating in $\beta$ merely inserts a logarithm.
+
+Here is the resulting coefficient ledger, which also fixes the two tail
+signs.  Put
+\[
+ a_\beta=\frac{\Gamma(1+\beta)}{2\pi},\qquad
+ \phi_\beta=\frac\pi2(1+\beta).
+\]
+For $\sigma=\operatorname{sgn}y$, the two endpoint models give
+\begin{align*}
+ A_+(\beta,x)&=a_\beta
+  \{e^{-i\phi_\beta}+e^{-2\pi ix}e^{i\phi_\beta}\},&
+ B_+(\beta,x)&=C_\beta a_\beta
+  \{-e^{-i\phi_\beta}+e^{-2\pi ix}e^{i\phi_\beta}\},\\
+ A_-(\beta,x)&=a_\beta
+  \{e^{i\phi_\beta}+e^{-2\pi ix}e^{-i\phi_\beta}\},&
+ B_-(\beta,x)&=C_\beta a_\beta
+  \{-e^{i\phi_\beta}+e^{-2\pi ix}e^{-i\phi_\beta}\}.
+\end{align*}
+Thus, for $j=0,1$, fixed $x\in(0,1/2]$, and
+$0\le\beta\le\beta_x<1$,
+\begin{align}
+ I_\beta(y)&=A_\sigma(\beta,x)|y|^{-1-\beta}
+             +E^I_\beta(y),\notag\\
+ S_\beta(y)&=B_\sigma(\beta,x)|y|^{-1-\beta}
+             +E^S_\beta(y),\notag\\
+ |\partial_\beta^jE^I_\beta(y)|
+ +|\partial_\beta^jE^S_\beta(y)|
+ &\le C_x\frac{\{1+\log(2+|y|)\}^{j}}{(1+|y|)^2}.
+ \label{JC:eq:regular-mixed-Fourier-remainders}
+\end{align}
+The linear endpoint models are included in $E^S$; their coefficients are
+$O(|y|^{-2})$.  The displayed estimate follows by two integrations by
+parts on the cutoff remainders.  It is uniform down to $\beta=0$ because
+$t^\beta\log t$ and the second derivatives of
+$t^{\beta+2}\log t$ are integrable uniformly on
+$0\le\beta\le\beta_x$.
+
+Direct multiplication gives
+\[
+ B_+(\beta,x)\overline{A_+(\beta,x)}
+ =2iC_\beta a_\beta^2\sin(2\pi x-\pi\beta),
+ \qquad
+ B_-(\beta,x)\overline{A_-(\beta,x)}
+ =2iC_\beta a_\beta^2\sin(2\pi x+\pi\beta).
+\]
+If $c_\pm(\beta,x)$ denote these two coefficients and
+\[
+ R_m(\beta,x):=|m+x|S_\beta(m+x)\overline{I_\beta(m+x)}
+ -c_{\operatorname{sgn}(m+x)}(\beta,x)|m+x|^{-1-2\beta},
+\]
+then~\eqref{JC:eq:regular-mixed-Fourier-remainders}, followed by the product
+rule, gives
+\begin{equation}\label{JC:eq:regular-mixed-endpoint-remainder}
+ |R_m(\beta,x)|+|\partial_\beta R_m(\beta,x)|
+ \le C_x\frac{1+\log(2+|m|)}{(1+|m|)^2}.
+\end{equation}
+Indeed the coefficients of every subtracted singular model follow from
+\[
+ \int_0^\infty t^\alpha e^{-2\pi iyt}\,dt
+ =\Gamma(1+\alpha)e^{-i\pi(1+\alpha)/2}
+  (2\pi y)^{-1-\alpha},\qquad y>0,
+\]
+first with an exponential cutoff and then by continuation.  This proves
+the displayed bound rather than assuming a formal asymptotic series.
+Its majorant is summable, so the subtracted series is $C^1$ at
+$\beta=0$ and termwise passage to the finite part is justified.  The
+only non-summable tail coefficients are
+\[
+ c_\pm(\beta,x)=2iC_\beta
+ \left\{\frac{\Gamma(1+\beta)}{2\pi}\right\}^{\!2}
+ \sin(2\pi x\mp\pi\beta),
+\]
+multiplying the corresponding $|m+x|^{-1-2\beta}$ tails.  The linear
+endpoint terms produce summable order $|m|^{-2-\beta}$ terms, so no
+additional $\beta\zeta(1+\beta)$ finite part is possible.
+
+More explicitly,
+\[
+ M_\beta(x)=c_+(\beta,x)\zeta(1+2\beta,x)
+ +c_-(\beta,x)\zeta(1+2\beta,1-x)
+ +\sum_{m\in\mathbb Z}R_m(\beta,x).
+\]
+At $\beta=0$ the exact formulas below give
+\[
+ R_m(0,x)=-\frac{i\sin^2\theta}{2\pi^3}
+ \frac{\operatorname{sgn}(m+x)}{|m+x|^2},
+ \qquad
+ \sum_mR_m(0,x)=-\frac{i\sin^2\theta}{2\pi^3}T(x).
+\]
+Also $C'_0=0$ and
+$\partial_\beta\Gamma(1+\beta)^2|_{\beta=0}=-2\gamma$; the opposite
+$\mp\pi\cos(2\theta)$ derivatives of the two sine coefficients cancel.
+These identities account for every finite term in the next display.
+
+At $\beta=0$ one has
+\[
+ I_0(y)=e^{-\pi iy}\frac{\sin\pi y}{\pi y},\qquad
+ S_0(y)=\frac i2I_0(y)
+ \left(\cot\theta-\frac1{\pi y}\right).
+\]
+Using
+$\zeta(1+2\beta,q)=(2\beta)^{-1}-\psi(q)+O(\beta)$ in the two tails and
+summing the $C^1$ remainder from
+\eqref{JC:eq:regular-mixed-endpoint-remainder} yields, locally uniformly in
+$x$,
+\[
+ M_\beta(x)=\frac{i\sin(2\theta)}{4\pi^2\beta}
+ +i\left\{\frac{\sin(2\theta)}{4\pi^2}D(x)
+ -\frac{\sin^2\theta}{2\pi^3}T(x)\right\}+O_x(\beta).
+\]
+Because $2i(\rho-1)^{-1}\sin(2\theta)=1+\rho^{-1}$ and
+$h_N\sec^2(a/2)=1+O(a^2)$, the pole cancels the area row.  Multiplication
+by $-e^{i\theta}$ proves~\eqref{JC:eq:regular-polygonal-mixed-finite-part}.
+The exact disk alias calculation gives
+\eqref{JC:eq:regular-disk-forcing-finite-part}; adding the corrector
+contribution $-\sin\theta R_I$ proves
+\eqref{JC:eq:regular-completed-covector-finite-part}.  Reflection about
+$x=1/2$ gives the stated continuous endpoint values.
+\end{proof}
+
+\begin{proposition}[Strict support--double-disk gap]
+\label{JC:prop:regular-support-double-disk-gap}
+For every $0<x\le1/2$ one has
+\begin{equation}\label{JC:eq:regular-support-double-disk-gap}
+ \boxed{P(x)>2Q_{\mathrm{mat}}(x)},\qquad
+ Q_{\mathrm{mat}}(x):=\frac{\sin^4(\pi x)}{\pi^3}
+ \{\zeta(3,x)+\zeta(3,1-x)\}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Write $H_3(x)=\zeta(3,x)+\zeta(3,1-x)$.  The alternating Taylor
+series for $\sin^2y$ on $0\le y\le\pi/2$ gives
+\[
+ \sin^2(\pi x)\le \pi^2x^2(1-2x^2).
+\]
+Indeed the alternating expansion gives
+$\sin^2y\le y^2-y^4/3+2y^6/45$.  Since $y\le\pi/2$ and
+$1/3-2/\pi^2-\pi^2/90>0$, its right side is at most
+$y^2-(2/\pi^2)y^4$.  The convergent series for $D$ gives
+\[
+ D(x)=\frac1x+2x^2\sum_{n\ge1}\frac1{n(n^2-x^2)}
+ \ge\frac1x+2\zeta(3)x^2.
+\]
+Moreover $H_3(x)-x^{-3}$ is increasing on $[0,1/2]$, term by term, and
+therefore
+\[
+ H_3(x)\le x^{-3}+H_3(1/2)-8
+ =x^{-3}+14\zeta(3)-8.
+\]
+Using the elementary bounds $6/5<\zeta(3)<121/100$ (sum the first ten
+terms and bound the decreasing tail between
+$\int_{11}^\infty t^{-3}dt$ and $\int_{10}^\infty t^{-3}dt$), it follows that
+\begin{align*}
+ D(x)-\frac{\sin^2(\pi x)}{\pi^2}H_3(x)
+ &\ge 2x+(8-12\zeta(3))x^2+(28\zeta(3)-16)x^4\\
+ &\ge x\left(2-\frac{163}{25}x+\frac{88}{5}x^3\right)>0.
+\end{align*}
+For the last inequality, the cubic bracket has its minimum at
+$x_0=\sqrt{163/1320}<44/125$, where it equals
+$2-(326/75)x_0>0$.  Since
+$P(x)>2Q_{\mathrm{mat}}(x)$ is exactly the last displayed strict
+inequality multiplied by $2\sin^2(\pi x)/\pi$, the proof is complete.
+\end{proof}
+
+\begin{remark}[Retraction of the old period-three completion]
+\label{JC:rem:period-three-completion-retracted}
+The revision-21 period-three completion used the material support constant
+$E_3$.  The jointly renormalized Schwarz--Christoffel calculation above
+shows instead that the true real-paired polygonal support finite part is
+\[
+ \frac12P(1/3)=\frac{9\log3}{4\pi}=0.786823093\ldots,
+\]
+whereas the material computation gives $E_3=0.77956467\ldots$.  The
+missing difference is a same-order corner finite part.  Therefore the old
+period-three proposition remains withdrawn.  The proofs below use only
+the genuine polygonal diagonal and mixed finite parts computed above; they
+do not reinstate the material transfer.
+\end{remark}
+
+\begin{proposition}[Certified completed-covector ratio]
+\label{JC:prop:regular-completed-covector-ratio}
+For $0<x<1/2$, put
+\[
+ J(x):=\frac{D'(x)+\pi\cot(\pi x)D(x)}{2\pi^2}.
+\]
+Then
+\begin{equation}\label{JC:eq:regular-completed-covector-ratio}
+ \boxed{2R_I(x)<J(x)<R_I(x)<0.}
+\end{equation}
+Consequently, for $0\le\mu\le1/4$ and
+$Q_{\rm mat}=Q/2$,
+put
+\[
+ D_{\rm poly}(x;\mu)
+ :=P(x)-(1+2\mu)Q_{\rm mat}(x).
+\]
+Then $D_{\rm poly}(x;\mu)>0$ and
+\begin{equation}\label{JC:eq:regular-completed-covector-determinant}
+ \begin{aligned}
+ \Delta_\mu(x):={}&(1-2\mu)R_I(x)^2
+ D_{\rm poly}(x;\mu)\\
+ &-Q_{\rm mat}(x)
+ \{R_{b,{\rm poly}}(x)-2\mu R_I(x)\}^2>0
+ \qquad(0<x<1/2).
+ \end{aligned}
+\end{equation}
+At $x=1/2$ both covectors vanish and $\Delta_\mu(1/2)=0$.
+\end{proposition}
+
+\begin{proof}
+Write $s=\sin(\pi x)$, $c=\cos(\pi x)$ and
+$A=F_2(x)+F_2(1-x)$.  Since
+$A'=-2\{F_3(x)-F_3(1-x)\}$, one has the exact identities
+\begin{equation}\label{JC:eq:regular-ratio-derivative-identities}
+ J=\frac{(sD)'}{2\pi^2s},\qquad
+ R_I=\frac{(s^2A)'}{8\pi^3s}.
+\end{equation}
+Thus it suffices to prove the three strict signs
+\[
+ -R_I>0,\qquad U:=R_I-J>0,\qquad V:=J-2R_I>0.
+\]
+We give the finite rational certificate, including the endpoint
+regularizations, so that no sampled floating-point value is used.
+
+At the left endpoint the convergent expansions are
+\begin{align*}
+ D&=x^{-1}+2\sum_{r\ge1}\zeta(2r+1)x^{2r},\\
+ \pi\cot(\pi x)&=x^{-1}-2\sum_{r\ge1}\zeta(2r)x^{2r-1},\\
+ F_3(x)-F_3(1-x)
+ &=x^{-3}-2\sum_{r\ge0}\binom{2r+2}{2}\eta(2r+3)x^{2r},\\
+ F_2(x)+F_2(1-x)
+ &=x^{-2}+4\sum_{r\ge0}(r+1)\eta(2r+3)x^{2r+1}.
+\end{align*}
+The singular terms cancel symbolically and give
+\[
+ J(0)=-\frac16,\qquad R_I(0)=-\frac1{12},\qquad
+ \lim_{x\downarrow0}\frac{V(x)}x
+ =\frac{3\zeta(3)}{4\pi^2}>0.
+\]
+Ten retained orders, $q=x^2$, and the elementary bounds
+$\zeta(r)<121/100$ for $r\ge3$ and $\zeta(r)<5/3$ for $r\ge2$
+bound the omitted $D,D',D/x,\cot$, and divided-cotangent tails by
+\begin{gather*}
+ \frac{121}{50}\frac{x^{22}}{1-q},\quad
+ \frac{121}{25}x^{21}\frac{11-10q}{(1-q)^2},\quad
+ \frac{121}{50}\frac{x^{21}}{1-q},\\
+ \frac{10}{3}\frac{x^{21}}{1-q},\qquad
+ \frac{10}{3}\frac{x^{20}}{1-q}.
+\end{gather*}
+The two alternating-$F$ tails are dominated by
+\[
+ \frac{8(12)^2q^{11}}{(1-q)^3},\qquad
+ \frac{4x(12)q^{11}}{(1-q)^2},
+\]
+with the divided second bound obtained by deleting $x$.  Directed rational
+evaluation on $0\le x\le1/8$ then gives
+\begin{equation}\label{JC:eq:regular-ratio-left-certificate}
+ R_I<-0.064086,\qquad U>0.035346,\qquad V/x>0.034494.
+\end{equation}
+
+For the right endpoint put $y=1/2-x$ and $C=\cos(\pi y)$.  Then
+\begin{align*}
+ D&=4\log2+2\sum_{n\ge1}(2^{2n+1}-1)\zeta(2n+1)y^{2n},\\
+ A&=\sum_{n\ge0}(2n+1)2^{2n+3}\beta_D(2n+2)y^{2n}.
+\end{align*}
+If $\mathcal A=(CD)_y$ and $\mathcal B=(C^2A)_y$, the endpoint zeros
+factor exactly as
+\[
+ -R_I/y=\frac{\mathcal B/y}{8\pi^3C},\quad
+ U/y=\frac{4\pi\mathcal A/y-\mathcal B/y}{8\pi^3C},\quad
+ V/y=\frac{\mathcal B/y-2\pi\mathcal A/y}{4\pi^3C}.
+\]
+With nine retained orders and $q=4y^2$, the positive tails for
+$D,D_y/y,A,A_y/y$ are bounded respectively by
+\[
+ \frac{121}{25}\frac{q^{10}}{1-q},\quad
+ \frac{968}{25}q^9\frac{10-9q}{(1-q)^2},\quad
+ \frac{8(21)q^{10}}{(1-q)^2},\quad
+ \frac{128(10)(21)q^9}{(1-q)^3}.
+\]
+Directed rational evaluation on $0\le y\le1/32$ gives
+\begin{equation}\label{JC:eq:regular-ratio-right-certificate}
+ -R_I/y>0.167528,\qquad U/y>0.105954,\qquad V/y>0.001213.
+\end{equation}
+
+It remains only the compact interval $[1/8,15/32]$.  The executable
+certificate
+\texttt{tests/check\_jc\_ar\_ratio\_symbol.py} partitions it into the
+11,264 exact rational cells
+\[
+ [i/32768,(i+1)/32768],\qquad4096\le i\le15359.
+\]
+On each cell it evaluates twelve terms of the positive $D,D'$ series and
+the alternating $F_2,F_3$ series.  Their omitted tails are bounded by
+\[
+ \frac{4x^2}{3\cdot12^2},\qquad
+ \frac{32x}{9\cdot12^2},\qquad (12+z)^{-p},
+\]
+respectively.  The rational enclosure
+\[
+ \frac{103993}{33102}<\pi<\frac{104348}{33215}
+\]
+comes from Machin's identity; sine and cosine use alternating Taylor
+series with their signed next terms.  Every arithmetic operation is
+rounded outwards at 64 decimal digits.  In particular, sign reversal is
+exact and integer powers use only directed interval multiplication.  The
+finite minima are
+\begin{equation}\label{JC:eq:regular-ratio-middle-certificate}
+ -R_I>0.0056578993130883869,\quad
+ U>0.0038837669640606282,\quad
+ V>0.0009703006655867654.
+\end{equation}
+Equations~\eqref{JC:eq:regular-ratio-left-certificate}--
+\eqref{JC:eq:regular-ratio-middle-certificate} prove
+\eqref{JC:eq:regular-completed-covector-ratio}.  The script was independently
+audited against exact rational arithmetic, including a hostile seven-digit
+ambient decimal context; the same 64-digit enclosures result.
+
+Finally Lemma~\ref{JC:lem:regular-polygonal-mixed-finite-part} gives
+$R_{b,{\rm poly}}=J-R_I$.  Hence
+$0<t:=R_{b,{\rm poly}}/R_I<1$.  For $0\le\mu\le1/4$,
+$|t-2\mu|\le1-2\mu$.  Therefore
+\[
+ \Delta_\mu\ge(1-2\mu)R_I^2\{P-2Q_{\rm mat}\}>0
+\]
+by Proposition~\ref{JC:prop:regular-support-double-disk-gap}.  This proves
+\eqref{JC:eq:regular-completed-covector-determinant}.
+\end{proof}
+
+\begin{lemma}[Uniform polygonal mixed bridge]
+\label{JC:lem:regular-mixed-uniform-bridge}
+Let $\beta=2/N$, $a=\pi\beta$, $x=k/N$, and
+$2\le k\le N/2$.  The constant-flux harmonic-plus-area mixed coefficient
+$p^{fs,0}_{\beta}$ satisfies
+\begin{equation}\label{JC:eq:regular-mixed-CF2P}
+ \left|-e^{i\pi x}\frac{p^{fs,0}_{\beta}}{d_\circ^2a}
+       -L_{\rm poly}(x)\right|
+ \le C\left(\beta+\frac{\beta^2}{x}\right).
+\end{equation}
+The actual reduced Helmholtz-minus-harmonic mixed modal row satisfies
+\begin{equation}\label{JC:eq:regular-mixed-RR-ABS}
+ \boxed{|E^{fs}_{N,k}|\le C_pa^2.}
+\end{equation}
+After replacing the constant flux by the true polygonal flux, the complete
+mixed and diagonal ledgers have the following consequence.  If $k_N\to
+\infty$, their Schur quotient differs from the limiting proxy determined
+by~\eqref{JC:eq:regular-completed-covector-determinant} by $o(a^2)$; if
+$k_N$ is bounded, the entire mixed Schur quotient is $o(a^2)$.
+\end{lemma}
+
+\begin{proof}
+For~\eqref{JC:eq:regular-mixed-CF2P}, keep the $m=0$ term of
+$M_\beta(x)$ exact.  Reflection gives $S_\beta(0)=0$, so that term is
+$x^2O_{C^2}(1)$.  On $|m|\ge1$, subtract the $t^\beta$ endpoint models
+from $I_{\beta,m}$ and the $t^\beta$ and linear endpoint models from
+$S_{\beta,m}$.  Two integrations by parts give, for
+$0\le\ell\le1$ and $0\le j\le2$,
+\begin{equation}\label{JC:eq:regular-mixed-joint-remainder}
+ |\partial_x^\ell\partial_\beta^jR_m(\beta,x)|
+ \le C\frac{1+\log^2(2+|m|)}{(1+|m|)^2}.
+\end{equation}
+The removed $|m+x|^{-1-2\beta}$ families are first summed as paired
+Hurwitz zeta functions.  After subtracting their common pole and finite
+part, their Laurent remainders are jointly $C^{1,2}$ for
+$0\le\beta\le x\le1/2$.  Reflection makes the first $\beta$ coefficient
+vanish at $x=0$.  Two-variable Taylor's formula therefore gives
+\[
+ \left|M_\beta(x)-\frac{i\sin(2\pi x)}{4\pi^2\beta}
+ -i\left\{\frac{\sin(2\pi x)}{4\pi^2}D(x)
+ -\frac{\sin^2(\pi x)}{2\pi^3}T(x)\right\}\right|
+ \le C(\beta x+\beta^2).
+\]
+The exact area pole cancellation proves~\eqref{JC:eq:regular-mixed-CF2P}.
+
+We prove~\eqref{JC:eq:regular-mixed-RR-ABS}, which is the reduced row omitted
+in the first bridge attempt.  Pull the regular polygon to the disk and
+write $V_N=\lambda_N|F_N'|^2$.  In a nontrivial character sector let
+$U_Nf$ solve $(-\Delta-V_N)U_Nf=0$ with boundary value $f$, and set
+\[
+ \mathcal K_N(f,g)=\langle(\Lambda_{V_N}-\Lambda_0)f,g\rangle.
+\]
+The ground state is invariant, so every retained sector is orthogonal to
+it.  The first/second spectral gap is uniform; hence, for fixed $p>4$ and
+$q=2p/(p-1)$,
+\begin{equation}\label{JC:eq:regular-sector-solution-bound}
+ \|U_Nf\|_{L^q}+\|Hf\|_{L^q}\le C_p\|f\|_\infty.
+\end{equation}
+The retained SC weight estimate gives
+$\|V_N-\lambda_\circ\|_{L^p}\le C_p\beta^{1+1/p}$.
+Alessandrini's identity and~\eqref{JC:eq:regular-sector-solution-bound} yield
+\begin{equation}\label{JC:eq:regular-sector-potential-perturbation}
+ |\mathcal K_N(f,g)-\mathcal K_\circ(f,g)|
+ \le C_p\beta^{1+1/p}\|f\|_\infty\|g\|_\infty.
+\end{equation}
+
+For the unnormalized constant-flux traces,
+\[
+ f^s=d_\circ\sigma_{N,k}w_\beta,\qquad
+ f^f=-d_\circ a(\rho-1)^{-1}\sigma_{N,k}w_\beta J_\beta.
+\]
+Their Fourier coefficients at $n=k+mN$ are, apart from the displayed
+fixed factors, $I_{\beta,m}$ and $S_{\beta,m}$.  Uniformly for
+$0<\beta\le x\le1/2$,
+\[
+ |I_{\beta,0}|\le C,\quad |S_{\beta,0}|\le Cx,\qquad
+ |I_{\beta,m}|\le\frac{Cx}{1+|m|},\quad
+ |S_{\beta,m}|\le\frac C{1+|m|}\quad(m\ne0).
+\]
+For the constant disk potential the reduced-minus-harmonic multiplier is
+\[
+ \varkappa_n=j_{0,1}\frac{J_{|n|}'(j_{0,1})}{J_{|n|}(j_{0,1})}-|n|
+ =-j_{0,1}\frac{J_{|n|+1}(j_{0,1})}{J_{|n|}(j_{0,1})},
+ \qquad |\varkappa_n|\le\frac C{1+|n|}.
+\]
+Here $|n|\ge2$, so there is no ground-state resonance.  It follows that
+\[
+ |\mathcal K_\circ(f^f,f^s)|
+ \le C\frac ax\left\{\frac{x}{1+Nx}
+ +\sum_{m\ne0}\frac{x}{N(1+|m|)^3}\right\}\le Ca.
+\]
+The true flux obeys
+$\|q_N-d_\circ\|_\infty\le C_pa^{1+1/p}$; the Green identity
+$\mathcal K_N(f,g)=-\int V_NU_Nf\,\overline{Hg}$ and
+\eqref{JC:eq:regular-sector-solution-bound} show that replacing either slot
+changes the preceding unnormalized form by $o(a)$.  Finally an
+unnormalized character is $\sqrt N$ times an orthonormal one in each
+mixed slot.  Division by $N=2\pi/a$ proves
+\eqref{JC:eq:regular-mixed-RR-ABS}.
+
+For completeness, define the positive side-mass normalization by
+\[
+ \bar q_N^2:=
+ \frac{\int_0^1w_\beta q_N^2}{\int_0^1w_\beta}.
+\]
+The regular-side stationarity identity
+$\int_{S_i}p_N^2\,ds=(\lambda_N/\pi)L_i$, together with
+$p_N=c_N^{-1}w_\beta q_N$ and
+$ds=c_Na w_\beta^{-1}dt$, gives exactly
+\[
+ \bar q_N^2=\frac{\lambda_N}{\pi}c_N^2
+ \frac{\int_0^1w_\beta^{-1}}{\int_0^1w_\beta}
+ =\frac{\lambda_N}{\pi}\{1+O(\beta^3)\}.
+\]
+Here $c_N=1+O(\beta^3)$ and the expansions of
+$\int w_\beta^{\pm1}$ have the same quadratic coefficient because
+$\int_0^1\log|2\sin\pi t|\,dt=0$.  Moreover $q_N$ is cell-periodic and
+$\bar q_N$ lies between its minimum and maximum on a cell.  Rescaling a
+cell of length $O(\beta)$ to $[0,1]$ in
+\eqref{JC:eq:corner-flux-holder-rate} therefore proves
+\[
+ \|q_N-\bar q_N\|_{C^\alpha_{\rm cell}}
+ \le C_p\beta^{2-1/p},\quad \alpha=1-2/p>1/2.
+\]
+The endpoint coefficient bounds used above also give
+\[
+ \sum_m|m+x||I_{\beta,m}|^2\le C\frac{x^2}{\beta},\qquad
+ \sum_m|m+x||S_{\beta,m}|^2\le\frac C\beta.
+\]
+Multiplication by a $C^\alpha_{\rm cell}$ function is bounded on this
+Bloch $H^{1/2}$ space; polarization and
+$a|\rho-1|^{-1}\le C\beta/x$ therefore show that replacing the constant
+flux by its cell oscillation changes the harmonic mixed row by at most
+$C_p\beta^{2-1/p}$.  The disk aliases give
+uniformly
+\begin{equation}\label{JC:eq:regular-mixed-alias-ledger}
+ cx\le g_{N,k}\le Cx,\qquad |Z_{N,k}|\le Ca,\qquad
+ |g_{N,k}Z_{N,k}|\le Cax.
+\end{equation}
+On every growing-character sequence,~\eqref{JC:eq:regular-mixed-CF2P},
+\eqref{JC:eq:regular-mixed-RR-ABS}, the support asymptotic, and the preceding
+true-flux estimate give, for the limiting proxies denoted by bars,
+\begin{align*}
+ |\bar A|&\le Cax,& r,\bar r&\ge cx,\\
+ |A-\bar A|&\le o(ax)+C_pa^{2-1/p}+Ca^2,&
+ |r-\bar r|&=o(x).
+\end{align*}
+Elementary perturbation of $|A+\mu_sg\overline Z|^2/r$ then costs
+\[
+ o(a^2x)+C_pa^{3-1/p}+C_pa^{4-2/p}/x+O(a^3+a^4/x)=o(a^2),
+\]
+because $x\ge\beta\asymp a$ and $p>4$.  If $k$ stays bounded, the
+fixed-slot limit and~\eqref{JC:eq:regular-mixed-alias-ledger} give
+$r\ge c_ka$, while the numerator is
+$O_k(a^2)+O_p(a^{2-1/p})$; its quotient is
+$O_p(a^{3-2/p})=o(a^2)$.  This proves the last assertion.
+\end{proof}
+
+\begin{proposition}[Closure of the regular completed-action Schur block]
+\label{JC:prop:regular-action-Schur-closed}
+For all sufficiently large $N$, Contract~\ref{JC:con:JC-AR} holds with
+\begin{equation}\label{JC:eq:regular-action-closed-constants}
+ \boxed{\mu_s=\frac1{40},\qquad \mu_f=\kappa.}
+\end{equation}
+In particular, the all-character matrix
+\eqref{JC:eq:regular-action-mode-matrix} is positive semidefinite.
+\end{proposition}
+
+\begin{proof}
+The connection between the certified determinant and the Schur row is
+division-free.  The limiting ledgers give
+\[
+ \bar g=2d_\circ^2Q_{\rm mat},\qquad
+ \bar g\,\overline{\bar Z}
+ =2d_\circ^2a e^{-i\pi x}\sin(\pi x)R_I,
+\]
+\[
+ \bar A=-d_\circ^2a e^{-i\pi x}\sin(\pi x)R_{b,{\rm poly}},
+ \qquad
+ \bar r=d_\circ^2D_{\rm poly}(x;\mu_s).
+\]
+Consequently the limiting part of
+\eqref{JC:eq:regular-action-reduced-Schur} after deletion of the fan reserve
+is exactly
+\begin{equation}\label{JC:eq:regular-proxy-Schur-determinant}
+ \left(\frac12-\mu_s\right)\bar g|\bar Z|^2
+ -\frac{|\bar A+\mu_s\bar g\,\overline{\bar Z}|^2}{\bar r}
+ =\frac{d_\circ^2a^2\sin^2(\pi x)}
+ {Q_{\rm mat}D_{\rm poly}(x;\mu_s)}\,\Delta_{\mu_s}(x).
+\end{equation}
+Both denominators are positive by
+Proposition~\ref{JC:prop:regular-support-double-disk-gap}.
+
+The support theorem gives
+$p^{ss}_{N,k}\ge(1/2+1/20)g_{N,k}$, hence the denominator in
+\eqref{JC:eq:regular-action-reduced-Schur}, with $\mu_s=1/40$, satisfies
+$r_{N,k}\ge g_{N,k}/40>0$.  Suppose the claimed Schur row failed along a
+sequence of characters.  After conjugation take $2\le k_N\le N/2$.
+If $k_N$ is bounded, Lemma~\ref{JC:lem:regular-mixed-uniform-bridge} makes
+the negative quotient and the corrector term $o(a^2)$; the untouched fan
+term is $(3\kappa-\mu_f)a^2=2\kappa a^2$, a contradiction.
+
+Otherwise pass to a subsequence with $k_N\to\infty$.  The same lemma
+compares the quotient, including its denominator and corrector, with the
+limiting proxy up to $o(a^2)$.  Proposition~\ref{JC:prop:regular-completed-covector-ratio}
+makes that proxy nonnegative for $\mu_s=1/40$, including sequences with
+$x_N\downarrow0$; at $x_N\to1/2$ its possible zero is again paid by the
+same $2\kappa a^2$ fan reserve.  Thus the actual row is
+$2\kappa a^2-o(a^2)>0$, another contradiction.  Every character sequence
+has one of these two alternatives, proving the assertion uniformly.
+\end{proof}
+
+\begin{remark}[Why stationary O--H does not prove JC--AR]
+On an even regular fan take the alternating support vector
+$z_i=(-1)^i$.  The exact polygonal reconstruction in the CT node gives
+\[
+ \|V_z\|_{H^{1/2}(\mathbb T;\mathbb R^2)}^2\asymp Na^{-2},
+ \qquad
+ \Gjp_{\alpha_*}(z)\asymp N.
+\]
+Thus the full-vector norm in stationary O--H is larger than the stable
+normal-sine metric by the sharp factor $a^{-2}$.  Its error can therefore
+be as large as
+\[
+ C\omega_{OH}(a)a^{-2}\Gjp_{\alpha_*}(z).
+\]
+The proved statement $\omega_{OH}(a)\to0$ supplies neither the rate
+$O(a^2)$ nor a sufficiently small leading constant.  Moreover its radial
+disk trace is not literally the normal-sine completed trace, and it
+controls the full Hessian rather than the base-subtracted action root
+\eqref{JC:eq:regular-action-root}.  Hence O--H cannot be used to assert either
+\eqref{JC:eq:regular-action-support-row} or
+\eqref{JC:eq:regular-action-mode-matrix}.
+\end{remark}
+
+\begin{contract}[JC--SP: remaining super-near completed-action modulus and output]
+\label{JC:con:JC-SP}
+Suppose the regular completed-action contract JC--AR holds.  Let
+\begin{equation}\label{JC:eq:super-near-energy}
+ \mathcal N_N(d,w):=
+ a^2\sum_i d_i^2+\Gjp_{\alpha_*}(w),
+ \qquad
+ \mathcal N_N(d,w)\le Ma^5.
+\end{equation}
+For the exact completed chart of JC--AR also put
+\begin{equation}\label{JC:eq:finite-completed-energy}
+ \mathfrak E_N(d,w):=
+ \Jfour(\alpha_*+d)+
+ \Gjp_{\alpha_*+d}(J_{\alpha_*+d}w).
+\end{equation}
+The finite-coordinate row needed here is closed by
+Proposition~\ref{JC:prop:super-near-bridge-active}: uniformly for fixed $M$,
+\begin{equation}\label{JC:eq:super-near-energy-bridge}
+ c_M\mathcal N_N(d,w)\le\mathfrak E_N(d,w)
+ \le C_M\mathcal N_N(d,w)
+\end{equation}
+whenever either side is at most a fixed multiple of $a^5$.  This row
+includes the moving metric, the $J_\alpha$ transport, the quotient gauges,
+and their uniform constants.  The exact finite corrector cancels here
+because $z-z_\alpha^D=J_\alpha w$; its nonlinear variation instead belongs
+to the completed chart and Hessian modulus below.
+
+The exact fourth-defect identity gives the fan part of this bridge and the
+radius
+\begin{equation}\label{JC:eq:super-near-radius}
+ \frac{\|d\|_{\ell^\infty}}a+
+ a^{-2}\Gjp_{\alpha_*}(w)^{1/2}
+ \le C_Ma^{1/2}.
+\end{equation}
+Indeed,
+\[
+ \Jfour(\alpha_*+d)
+ =\sum_i d_i^2(6a^2+4ad_i+d_i^2)
+ \ge3a^2\sum_i d_i^2
+\]
+for $d_i\ge-a$ and $\sum_i d_i=0$; the last coefficient is sharp at
+$d_i=-a$.  The support part of
+\eqref{JC:eq:super-near-energy-bridge} is the moving-low-mode transversality
+content of Proposition~\ref{JC:prop:super-near-bridge-active}; it is not
+inferred from a bare interchange of the two meshes.
+Moreover, applying the closed corrector estimate to
+$\alpha_*+td$, dividing by $t^2$, and letting $t\to0$ gives
+\begin{equation}\label{JC:eq:corrector-derivative-bound}
+ \Gjp_{\alpha_*}(Z_Nd)\le Ca^2\sum_i d_i^2.
+\end{equation}
+Thus the initial physical support velocity
+$\zeta=w+Z_Nd$ also satisfies
+$\Gjp_{\alpha_*}(\zeta)\le C_Ma^5$.
+
+Use the affine path in the exact completed coordinates
+\begin{equation}\label{JC:eq:completed-coordinate-path}
+ q_t=(td,tw),\qquad
+ \alpha_t=\alpha_*+td,\qquad
+ z_t=J_{\alpha_t}(\bar z_{\alpha_t}^D+tw),
+ \qquad0\le t\le1.
+\end{equation}
+Proposition~\ref{JC:prop:super-near-bridge-active} proves that this path
+remains in the active convex chart and that all chart maps above are
+defined uniformly.  Its Hessian is taken after
+composition with the exact scalar \(\mathbf A_N\); hence the moving fan,
+support, corrector, gauge, and coordinate-acceleration terms are all part
+of the Hessian.  The earlier proposed affine chord of physical vertices
+has zero vertex acceleration, but its initial chart tangent need not equal
+the endpoint difference $(d,w)$.  It is therefore not used here without a
+separate tangent-energy comparison.
+
+For later estimates the exact completed scalar has the following
+corrector-free normal form.  Put $c_\alpha=\bar z_\alpha^D$, so that
+$z_\alpha^D=J_\alpha c_\alpha$.  Then
+\begin{equation}\label{JC:eq:completed-action-corrector-normal-form}
+ \boxed{
+ \begin{aligned}
+ \mathbf A_N(d,w)={}&
+ \Phi_\alpha\!\left(h_\alpha\mathbf1
+       +J_\alpha(c_\alpha+w)\right)
+ -\Phi_\alpha(h_\alpha\mathbf1)\\
+ &+\Gjp_\alpha(J_\alpha c_\alpha)
+ -\frac12\Gjp_\alpha(J_\alpha w)
+ +\frac\kappa2\Jfour(\alpha),
+ \qquad \alpha=\alpha_*+d.
+ \end{aligned}}
+\end{equation}
+Indeed $p_\alpha[\xi]=-2g_\alpha(z_\alpha^D,\xi)$, so the forcing,
+metric, and completed square combine exactly into
+$\Gjp_\alpha(z_\alpha^D)-\frac12\Gjp_\alpha(J_\alpha w)$.
+Thus~\eqref{JC:eq:completed-action-corrector-normal-form} retains the moving
+fan, support chart, quotient gauge, corrector, base-value subtraction,
+moving metric, $1/2$ normalization, and fourth-defect row in one scalar.
+
+The only remaining analytic row of JC--SP is a relative modulus for the
+Hessian of the completed action itself.  For every fixed $M$ there must be
+$\varepsilon_M(a)\to0$ such that
+\begin{equation}\label{JC:eq:super-near-path-modulus}
+ \boxed{
+ \left|D^2\mathbf A_N(q_t)[(d,w),(d,w)]
+       -D^2\mathbf A_N(0)[(d,w),(d,w)]\right|
+ \le\varepsilon_M(a)\mathcal N_N(d,w)
+ \quad(0\le t\le1).}
+\end{equation}
+A bound $\varepsilon_M(a)=O_M(a^{1/2})$ would be sufficient.  The finite
+rank scale/translation gauge change, moving corrector, and base-value
+subtraction are part of the left side and must not be dropped.
+
+One stronger uniform operator formulation, sufficient for
+\eqref{JC:eq:super-near-path-modulus}, is the following.  Let $R_N$ be the Riesz operator of
+$\mathcal N_N$ on the fixed regular quotient and put
+$H_N(q)=D^2\mathbf A_N(q)$.  With
+\[
+ r_N(q)=\frac{\|d(q)\|_{\ell^\infty}}a
+ +a^{-2}\Gjp_{\alpha_*}(w(q))^{1/2},
+\]
+the natural operator statement is
+\begin{equation}\label{JC:eq:super-near-operator-modulus}
+ \boxed{
+ \Omega_N(r):=
+ \sup_{r_N(q)\le r}
+ \left\|R_N^{-1/2}
+ \{H_N(q)-H_N(0)\}R_N^{-1/2}\right\|_{\rm op}
+ \longrightarrow0}
+\end{equation}
+as $r\downarrow0$, uniformly in $N$.  A Lipschitz estimate
+$\Omega_N(r)\le Cr$, together with
+$r_N(q_t)\le C_Ma^{1/2}$ from the chart/energy bridge, would imply the
+stated $O_M(a^{1/2})$ rate.  This operator statement is stronger than the
+diagonal path estimate and is recorded only as a sufficient formulation.
+In block
+form it must simultaneously contain
+\begin{align*}
+ |\Delta H_{ff}[d_1,d_2]|
+ &\le Cr\,a^2\|d_1\|_2\|d_2\|_2,\\
+ |\Delta H_{fs}[d,u]|
+ &\le Cr\,a\|d\|_2\Gjp_{\alpha_*}(u)^{1/2},\\
+ |\Delta H_{ss}[u_1,u_2]|
+ &\le Cr\,
+ \Gjp_{\alpha_*}(u_1)^{1/2}
+ \Gjp_{\alpha_*}(u_2)^{1/2}.
+\end{align*}
+The nonzero period-three mixed row is therefore retained rather than
+estimated as a separate remainder.
+
+The absolute analytic CT estimate is not
+\eqref{JC:eq:super-near-path-modulus}.  On the alternating support mode it
+again loses $a^{-2}$, so a generic full-vector modulus gives only
+$a^{-2}\omega(C_Ma^{1/2})\mathcal N_N$.  Analytic Lipschitz continuity or
+$\omega(r)\to0$ does not make this quantity small.  The remaining part of
+JC--SP therefore is an open natural-operator statement.
+
+There is a scalar reduction which is weaker than proving the full operator
+modulus.  For $q=(d,w)$ define
+\[
+ f_q(\zeta):=\mathbf A_N(\zeta d,\zeta w),\qquad
+ r_N(q):=\frac{\|d\|_{\ell^\infty}}a
+ +a^{-2}\Gjp_{\alpha_*}(w)^{1/2}.
+\]
+Suppose there are absolute $c_0,C_0>0$ such that every exact completed
+coordinate in~\eqref{JC:eq:completed-action-corrector-normal-form} extends
+holomorphically to $|\zeta|r_N(q)\le c_0$ and
+\begin{equation}\label{JC:eq:super-near-complex-ray-bound}
+ \boxed{|f_q''(\zeta)|\le C_0\mathcal N_N(d,w)}
+\end{equation}
+there.  If $r_N(q)\le c_0/2$, Cauchy's estimate on the disk of radius
+$c_0/(2r_N(q))$ about $t\in[0,1]$ gives
+\[
+ |f_q'''(t)|\le\frac{2C_0}{c_0}r_N(q)\mathcal N_N(d,w).
+\]
+Since the completed-coordinate path is affine,
+$f_q''(t)=D^2\mathbf A_N(q_t)[q,q]$.  Integration therefore proves
+\begin{equation}\label{JC:eq:super-near-Cauchy-output}
+ \boxed{
+ |D^2\mathbf A_N(q_t)[q,q]-D^2\mathbf A_N(0)[q,q]|
+ \le\frac{2C_0}{c_0}r_N(q)\mathcal N_N(d,w).}
+\end{equation}
+The bridge gives $r_N(q)=O_M(a^{1/2})$, so
+\eqref{JC:eq:super-near-complex-ray-bound} would close the required path
+modulus with $\varepsilon_M(a)=O_M(a^{1/2})$.
+
+The precise analytic blocker behind
+\eqref{JC:eq:super-near-complex-ray-bound} is a nonstationary quasiuniform
+resummed completed-jet identity, abbreviated QRCI.  It must be obtained by
+differentiating the exact scalar
+\eqref{JC:eq:completed-action-corrector-normal-form}; the stage-130
+polygon-minus-disk longitudinal ledger is retracted and is not such a
+derivative.  Terminal two-ray reduced-DtN, its full-cell complement, the
+negative cotangent/area pole, and every endpoint-localized derivative of
+$h_\alpha,J_\alpha,c_\alpha$, the moving metric, and the base subtraction
+must be combined before absolute values are taken.  The existing
+full-vector Hessian estimate loses $a^{-2}$ on alternating support data,
+while the available mesh-free completed estimate is stationary and uses a
+degenerate radial comparison form.  Neither proves QRCI.
+
+\begin{remark}[The scalar radial-chart shortcut fails at the critical index]
+\label{JC:rem:super-near-radial-Hhalf-obstruction}
+One cannot obtain the missing bound by differentiating only the scalar
+radial graph.  If the fixed-normal support numbers move as
+$h_i(t)=h_i+tz_i$, then on side $i$
+$R_t(\varphi)=(h_i+tz_i)/\cos(\varphi-\theta_i)$.  At a regular vertex
+the two one-sided traces of the formal derivative differ by
+\begin{equation}\label{JC:eq:super-near-radial-Hhalf-jump}
+ J_i=\frac{z_{i+1}-z_i}{\cos(a/2)}.
+\end{equation}
+Every nonconstant cyclic character has a nonzero such jump.  A jump is
+not in $H^{1/2}(\mathbb T)$, because its Slobodetskii integral contains
+\[
+ \frac{|J_i|^2}{4}
+ \int_0^{\varepsilon/2}\!\int_0^{\varepsilon/2}
+ \frac{du\,dv}{(u+v)^2}=+\infty.
+\]
+Thus $t\mapsto R_t$ is not differentiable as an $H^{1/2}$-valued curve,
+so the scalar CT analytic-Hessian theorem cannot be invoked.  Freezing
+the vertices by a continuous physical affine-side field removes the jump
+but restores the already recorded $a^{-2}$ loss.  This leaves the
+endpoint-resummed NQCH cancellation as a genuine analytic input.
+\end{remark}
+
+\begin{remark}[Exact radius resummation, retraction of DAR, and the live completed third jet]
+\label{JC:rem:super-near-completed-third-jet}
+The artificial endpoint radius is not itself an obstruction.  If a
+homogeneous full-cell corner power has amplitude $A$, exponent $\beta$, and
+the terminal window has relative radius $\vartheta$, then in either the
+common or jump channel, with $U_\beta$ and $D_\beta$ denoting the exact
+two-ray common and jump coefficients,
+\[
+ A^2\vartheta^{2\beta}K_\beta
+ +A^2(1-\vartheta^{2\beta})K_\beta=A^2K_\beta,
+ \qquad K_\beta\in\{U_\beta,D_\beta\}.
+\]
+Hence the apparent $\beta\log\beta$ loss created by stopping at
+$\vartheta=\beta$ cancels exactly, including after differentiation along
+the completed ray.
+
+The former amplitude row DAR is retracted as an independent contract.  It
+was written, with
+\[
+ K_i(t)=\frac{D_{\beta_i(t)}}\pi j_i(q;t)^2,
+\]
+as $\sum_i(A_i^2)'K_i+(\sum_iC_i^{\rm end})'$.  But the exact endpoint
+jet is unchanged by the analytic reallocation
+\[
+ \widetilde A_i^2=A_i^2+\gamma_i,
+ \qquad
+ \widetilde C_i^{\rm end}=C_i^{\rm end}-\gamma_iK_i,
+\]
+whereas the displayed DAR expression changes by
+$-\sum_i\gamma_iK_i'$.  Choosing a sufficiently small constant nonzero
+$\gamma_i$ and a nonconstant $K_i$ makes this change nonzero while
+preserving $\widetilde A_i^2>0$ locally whenever $A_i^2>0$.  Thus the old
+row depends on how the full-cell amplitude is
+separated from its endpoint descendants; it is not a gauge-invariant
+statement about the scalar~\eqref{JC:eq:completed-action-corrector-normal-form}.
+
+The replacement live row is the third derivative of that scalar itself.
+For $q=(d,w)$ and $q_t=tq$, put
+$f_q(t)=\mathbf A_N(q_t)$.  The required real estimate is
+\begin{equation}\label{JC:eq:super-near-completed-third-jet}
+ \boxed{
+ |f_q'''(t)|
+ =|D^3\mathbf A_N(q_t)[q,q,q]|
+ \le C r_N(q)\mathcal N_N(q),\qquad0\le t\le1.}
+\end{equation}
+It is gauge invariant and includes the full-cell flux, both terminal
+channels, their exact complements, every endpoint and nonendpoint
+chain-rule descendant, the moving metric, the corrector, the quotient
+transport, and the base subtraction.
+
+For clarity, it is obtained directly from the normal form.  If
+\[
+ Y_t=h_{\alpha_t}\mathbf1+J_{\alpha_t}(c_{\alpha_t}+tw),\quad
+ B_t=h_{\alpha_t}\mathbf1,\quad
+ C_t=J_{\alpha_t}c_{\alpha_t},\quad
+ W_t=tJ_{\alpha_t}w,
+\]
+and $X_t=(\alpha_t,Y_t)$, then for every scalar family $F$
+\[
+ \frac{d^3}{dt^3}F(X_t)
+ =D^3F(X_t)[X_t',X_t',X_t']
+  +3D^2F(X_t)[X_t',X_t'']+DF(X_t)[X_t'''].
+\]
+Apply this identity to the two $\Phi$ terms and the two $\Gjp$ terms in
+\eqref{JC:eq:completed-action-corrector-normal-form}, with $Y_t,B_t,C_t,W_t$
+respectively, and add the exact fourth-defect derivative.  In particular
+\[
+ \frac\kappa2\frac{d^3}{dt^3}\Jfour(\alpha_*+td)
+ =12\kappa\left(a\sum_i d_i^3+t\sum_i d_i^4\right),
+\]
+whose absolute value is at most
+$Cr_N(q)a^2\sum_i d_i^2$.  No stage-130 ledger enters this chain rule.
+
+The complex-ray bound~\eqref{JC:eq:super-near-complex-ray-bound} implies
+\eqref{JC:eq:super-near-completed-third-jet} by the Cauchy estimate already
+displayed above.  Conversely,
+\eqref{JC:eq:super-near-completed-third-jet} directly implies the real path
+modulus~\eqref{JC:eq:super-near-path-modulus} by integration, but does not by
+itself assert a holomorphic-tube bound.  Either route would suffice for
+JC--SP.  Neither is proved here; renaming the missing estimate does not
+close QRCI or the main theorem.
+\end{remark}
+
+Its required output is nevertheless exact.  Put
+$\mu_0=\min\{\mu_f,\mu_s\}$.  Taylor's formula in the completed chart gives
+\[
+ \mathbf A_N(d,w)=
+ \int_0^1(1-t)D^2\mathbf A_N(q_t)[(d,w),(d,w)]\,dt.
+\]
+Thus JC--AR and~\eqref{JC:eq:super-near-path-modulus} imply, for sufficiently
+small $a$ depending only on $M$,
+\begin{equation}\label{JC:eq:JC-SP-output}
+ \boxed{
+ \mathbf A_N(d,w)\ge
+ \left(\mu_0-\frac12\varepsilon_M(a)\right)\mathcal N_N(d,w)
+ \ge0.}
+\end{equation}
+Together with the energy bridge~\eqref{JC:eq:super-near-energy-bridge}, this
+is precisely the super-near action statement
+\eqref{JC:eq:super-near-action-bound}; it is an output of JC--SP, not a
+fourth assumed row.
+\end{contract}
+
+\begin{proposition}[Canonical finite bridge and completed-path activity]
+\label{JC:prop:super-near-bridge-active}
+There is a canonical analytic choice of the scale/translation
+trivialization $J_\alpha$ near the regular fan for which
+\eqref{JC:eq:super-near-energy-bridge} holds, with constants independent of
+$N$, whenever either side is at most $Ma^5$.  For this choice the whole
+path~\eqref{JC:eq:completed-coordinate-path} remains in the active convex
+chart, and $J_{\alpha_t}$, its inverse, and the exact corrector are defined
+uniformly for $0\le t\le1$.
+\end{proposition}
+
+\begin{proof}
+Write $\alpha_i=a+d_i$, $\sum_i d_i=0$, and
+\(\varrho=\|d\|_{\ell^\infty}/a\).  Choose normal angles with
+$\theta_0=0$ and define the material map, for $0\le s\le a$, by
+\[
+ F_d(ia+s)=\theta_i+\frac{\alpha_i}{a}s .
+\]
+Thus
+\begin{equation}\label{JC:eq:material-map-small}
+ \|F_d'-1\|_{L^\infty}\le\varrho,
+ \qquad
+ \|F_d-\operatorname{id}\|_{L^\infty}\le2\pi\varrho .
+\end{equation}
+Composition by $F_d$ and $F_d^{-1}$ is consequently bounded on
+$H^{1/2}(\mathbb T)$ uniformly when $\varrho\le1/2$, as follows directly
+from the Gagliardo double-integral norm.
+
+Direct integration of the two sine basis functions gives
+\begin{equation}\label{JC:eq:exact-scale-functional}
+ L_\alpha z:=\sum_i\left\{
+ \tan\frac{\alpha_{i-1}}2+\tan\frac{\alpha_i}2\right\}z_i
+ =\int_{\mathbb T}\mathcal I_\alpha z .
+\end{equation}
+The side with normal $\theta_i$ in the tangential reference polygon has
+length $h_\alpha\{\tan(\alpha_{i-1}/2)+\tan(\alpha_i/2)\}$, so
+$L_\alpha z=0$ is exactly the affine scale row.  For $b\in\mathbb R^2$
+put $\tau_\alpha(b)_i=b\cdot e_r(\theta_i)$.  Since first harmonics solve
+$f''+f=0$ on each cell,
+\begin{equation}\label{JC:eq:exact-translation-interpolation}
+ \mathcal I_\alpha\tau_\alpha(b)=b\cdot e_r
+\end{equation}
+exactly.
+
+Let $\mathsf X_*$ be the regular nodal complement of characters
+$0,1,N-1$.  For $w\in\mathsf X_*$ define
+\[
+ c_\alpha(w)=\frac{L_\alpha w}{L_\alpha\mathbf1},
+ \qquad
+ f_\alpha(w)=\mathcal I_\alpha(w-c_\alpha(w)\mathbf1),
+\]
+let $\beta_\alpha(w)$ be the $L^2$ projection coefficient of $f_\alpha(w)$
+onto $\{\cos\theta,\sin\theta\}$, and set
+\begin{equation}\label{JC:eq:canonical-Jalpha}
+ J_\alpha w=w-c_\alpha(w)\mathbf1-\tau_\alpha(\beta_\alpha(w)).
+\end{equation}
+Equations~\eqref{JC:eq:exact-scale-functional} and
+\eqref{JC:eq:exact-translation-interpolation} show that $J_\alpha w$ lies
+in the moving scale/translation quotient and that $J_{\alpha_*}=I$.
+
+We prove uniform transversality.  On a material cell, with $r=s/a$, the
+two pulled-back basis functions are
+\[
+ B_0(\alpha_i,r)=\frac{\sin((1-r)\alpha_i)}{\sin\alpha_i},
+ \qquad
+ B_1(\alpha_i,r)=\frac{\sin(r\alpha_i)}{\sin\alpha_i}.
+\]
+Taylor expansion, cellwise integration, and real interpolation give, for
+$\|v\|_{\ell_a^2}^2=a\sum_i|v_i|^2$,
+\begin{align}
+ \|\mathcal I_\alpha v\circ F_d-\mathcal I_*v\|_{L^2}
+ &\le C\varrho a^2\|v\|_{\ell_a^2},\label{JC:eq:material-L2-error}\\
+ \|\mathcal I_\alpha v\circ F_d-\mathcal I_*v\|_{H^{1/2}}
+ &\le C\varrho a^{3/2}\|v\|_{\ell_a^2}.
+ \label{JC:eq:material-Hhalf-error}
+\end{align}
+Indeed the pointwise basis error is $O(\varrho a^2)$ and its physical
+derivative is $O(\varrho a)$.
+
+Cyclic equivariance implies that the continuous Fourier support of the
+regular sine interpolant of a nodal character $k$ lies in
+$k+N\mathbb Z$.  Hence $\mathcal I_*w$ is exactly orthogonal to
+$1,\cos\theta,\sin\theta$, not merely asymptotically so.  The regular
+mass matrix and the disk multiplier give
+\begin{equation}\label{JC:eq:regular-mass-G-control}
+ \|w\|_{\ell_a^2}\le C\Gjp_{\alpha_*}(w)^{1/2}.
+\end{equation}
+Since
+$|\tan(\alpha_i/2)-\tan(a/2)|\le C\varrho a$ and
+$L_\alpha\mathbf1\asymp1$, weighted Cauchy--Schwarz yields
+\begin{equation}\label{JC:eq:scale-coefficient-control}
+ |c_\alpha(w)|\le C\varrho\Gjp_{\alpha_*}(w)^{1/2}.
+\end{equation}
+Changing variables $\theta=F_d(s)$ in the first-harmonic coefficients,
+subtracting the exactly zero regular coefficient, and using
+\eqref{JC:eq:material-map-small}--\eqref{JC:eq:scale-coefficient-control} gives
+\begin{equation}\label{JC:eq:translation-coefficient-control}
+ |\beta_\alpha(w)|\le C\varrho\Gjp_{\alpha_*}(w)^{1/2}.
+\end{equation}
+No inverse estimate enters this step: the multiplier
+$e_r(F_d)F_d'-e_r$ is $O(\varrho)$ in $L^\infty$.
+
+Put $T_\alpha w=\mathcal I_\alpha J_\alpha w$.  The functions
+$(\mathcal I_\alpha\mathbf1)\circ F_d$ and $e_r\circ F_d$ have uniformly
+bounded $H^{1/2}$ norms.  Therefore
+\eqref{JC:eq:material-Hhalf-error},
+\eqref{JC:eq:scale-coefficient-control}, and
+\eqref{JC:eq:translation-coefficient-control} imply
+\begin{equation}\label{JC:eq:moving-low-mode-transversality}
+ \|T_\alpha w\circ F_d-\mathcal I_*w\|_{H^{1/2}}
+ \le C\varrho\Gjp_{\alpha_*}(w)^{1/2}.
+\end{equation}
+Now $T_\alpha w$ is exactly orthogonal to the three disk null modes, so
+$q_D(T_\alpha w)\asymp\|T_\alpha w\|_{H^{1/2}}^2$.  Absorbing the right
+side of~\eqref{JC:eq:moving-low-mode-transversality} for a universal
+$\varrho\le\varrho_0$ proves
+\begin{equation}\label{JC:eq:moving-metric-equivalence}
+ c\Gjp_{\alpha_*}(w)\le
+ \Gjp_\alpha(J_\alpha w)\le C\Gjp_{\alpha_*}(w).
+\end{equation}
+It also proves that $J_\alpha$ is injective.  The two quotient spaces
+have dimension $N-3$, hence it is onto and has a uniform inverse.
+
+The exact identity
+\[
+ \Jfour(\alpha_*+d)
+ =\sum_i d_i^2(6a^2+4ad_i+d_i^2)
+\]
+has coefficient at least $3a^2$ for every $d_i\ge-a$.  If either side of
+\eqref{JC:eq:super-near-energy-bridge} is at most $Ma^5$, it follows first
+that $\varrho\le C_Ma^{1/2}$, hence $\varrho\le\varrho_0$ for large $N$.
+The same coefficient is then bounded above by a universal multiple of
+$a^2$.  Combining this fact with
+\eqref{JC:eq:moving-metric-equivalence} proves
+\eqref{JC:eq:super-near-energy-bridge}.  The corrector does not occur in
+this comparison because $z-z_\alpha^D=J_\alpha w$ identically.
+
+It remains to prove activity.  If $\Lambda_{\alpha,i}(z)$ denotes the
+change of side $i$ under a support increment $z$, the exact support-line
+formula is
+\begin{equation}\label{JC:eq:exact-side-length-jump}
+ \Lambda_{\alpha,i}(z)=
+ \frac{z_{i+1}-z_i\cos\alpha_i}{\sin\alpha_i}
+ +\frac{z_{i-1}-z_i\cos\alpha_{i-1}}{\sin\alpha_{i-1}}
+ =f'(\theta_i+)-f'(\theta_i-),
+ \quad f=\mathcal I_\alpha z.
+\end{equation}
+After subtracting an exact translation, which changes no side length,
+the quasiuniform one-dimensional finite-element inverse estimates give
+\[
+ \|f\|_{H^1}\le Ca^{-1/2}\|f\|_{H^{1/2}},
+ \qquad
+ \|f'\|_{L^\infty}\le Ca^{-1/2}\|f'\|_{L^2}.
+\]
+Because $L_\alpha z=0$ removes the constant mode, the disk multiplier is
+equivalent to the remaining $H^{1/2}$ norm.  Thus
+\begin{equation}\label{JC:eq:side-length-inverse}
+ \max_i|\Lambda_{\alpha,i}(z)|
+ \le Ca^{-1}\Gjp_\alpha(z)^{1/2}.
+\end{equation}
+
+Along~\eqref{JC:eq:completed-coordinate-path}, exact linearity gives
+$z_t=z_{\alpha_t}^D+J_{\alpha_t}(tw)$.  The closed corrector estimate,
+the fourth-defect identity, and
+\eqref{JC:eq:moving-metric-equivalence} give
+\[
+ \Gjp_{\alpha_t}(z_{\alpha_t}^D)\le C_Ma^5,
+ \qquad
+ \Gjp_{\alpha_t}(J_{\alpha_t}(tw))\le C_Ma^5.
+\]
+Consequently $\Gjp_{\alpha_t}(z_t)^{1/2}\le C_Ma^{5/2}$.
+The reference side lengths are at least $ca$, whereas
+\eqref{JC:eq:side-length-inverse} bounds every change by
+$C_Ma^{3/2}=o(a)$.  Thus every side remains positive.  The companion
+nodal and derivative inverse bounds give normal and tangential vertex
+displacements $O_M(a^2)$ and $O_M(a^{3/2})$, respectively, so the whole
+path remains in a fixed smaller radial $W^{1,\infty}$ chart.  This proves
+all assertions.
+\end{proof}
+
+\begin{remark}[Scope of the regular/super-near split]
+JC--AR and JC--SP isolate the regular completed-action root, the finite
+energy bridge, and its diagonal propagation.  Their exact output is only
+the super-near action bound~\eqref{JC:eq:JC-SP-output}.  The full no-ratio
+Contract~\ref{JC:con:JC-PL} additionally requires JC--CL to absorb every
+endpoint outside~\eqref{JC:eq:super-near-energy}.  No far implication is
+assumed in JC--AR or JC--SP.
+\end{remark}
+
+\begin{contract}[JC--CL: coarse/far action localization]
+\label{JC:con:JC-CL}
+Write $d=d_\alpha=z_\alpha^D$ and $z=d+w$.  Exact disk completion first
+removes every disk covector from the coarse problem:
+\begin{equation}\label{JC:eq:coarse-action-normal-form}
+ \boxed{
+ \mathscr A_\alpha(d+w)=
+ \Phi_\alpha(h_\alpha\mathbf1+d+w)
+ -\Phi_\alpha(h_\alpha\mathbf1)
+ -\frac12\Gjp_\alpha(w)+\Gjp_\alpha(d)
+ +\frac\kappa2\Jfour(\alpha).}
+\end{equation}
+Indeed
+$q_D(B_\alpha+K_\alpha z)-q_D(B_\alpha)
+=\Gjp_\alpha(z-d)-\Gjp_\alpha(d)$, and
+Proposition~\ref{JC:prop:JC-ALG} gives the formula.  This identity also fixes
+the admissible path.  The active chart supplies only
+$h_\alpha\mathbf1+[0,1](d+w)$; it does not imply that
+$h_\alpha\mathbf1+d$ or
+$h_\alpha\mathbf1+d+[0,1]w$ is active.  In the presence of an arbitrarily
+short side, the energy bound $\Gjp_\alpha(d)\lesssim\Jfour(\alpha)$ has no
+ratio-free inverse side-length consequence.  Thus a coarse proof may not
+Taylor-expand about the disk corrector without a new activity lemma.
+
+Put
+\begin{equation}\label{JC:eq:coarse-action-energy}
+ E_\alpha(z):=\Jfour(\alpha)
+ +\Gjp_\alpha(z-d_\alpha).
+\end{equation}
+A sufficient coarse estimate is the existence of constants
+$c_F,C_F>0$ such that, on the whole active no-ratio chart,
+\begin{equation}\label{JC:eq:coarse-action-bound}
+ \boxed{
+ \mathscr A_\alpha(z)
+ \ge c_FE_\alpha(z)-C_Fa^5.}
+\end{equation}
+For $E_\alpha(z)\le Ma^5$, set
+$d=\alpha-\alpha_*$ and
+$w=J_\alpha^{-1}(z-d_\alpha)$.  The energy bridge and output required in
+JC--SP then give
+\begin{equation}\label{JC:eq:super-near-action-bound}
+ \mathscr A_\alpha(z)\ge0
+ \quad\hbox{whenever}\quad
+ E_\alpha(z)\le Ma^5
+\end{equation}
+for every fixed $M$.  Taking $M\ge C_F/c_F$, Contract~\ref{JC:con:JC-PL}
+follows.  Indeed,
+\eqref{JC:eq:super-near-action-bound} handles the first branch, while on
+$E_\alpha(z)>Ma^5$ equation~\eqref{JC:eq:coarse-action-bound} gives
+\[
+ \mathscr A_\alpha(z)
+ >(c_FM-C_F)a^5\ge0.
+\]
+
+No retained estimate proves~\eqref{JC:eq:coarse-action-bound}.  The existing
+two-regime estimates for $F_4$, the normal-sine/Bessel/secant transfers,
+and JE--V concern pure fan disk endpoints or scalar tails.  They do not
+control arbitrary support amplitudes.  In particular, at
+$\alpha=\alpha_*$ one may have
+$\Jfour=0$ and $\Gjp_{\alpha_*}(z)\gg a^5$ while remaining in the radial
+chart.  The fixed-fan Hessian identity JP--EH supplies no lower bound for
+that branch.  The nonzero physical-curvature mixed row also cannot be
+inserted as a vanishing error, by the CT mixed counterexample.
+
+This fixed-fan obstruction has an exact scalar form.  Cyclic symmetry at
+$\alpha_*$ gives $b_*=d_*=0$, so JC--ALG reduces to
+\[
+ \mathscr A_*(z)=
+ \Phi_*(h_*\mathbf1+z)-\Phi_*(h_*\mathbf1)
+ -\frac12\Gjp_*(z).
+\]
+Consequently the restriction of~\eqref{JC:eq:coarse-action-bound} to the
+regular fan requires the following regular-fan Bregman coercivity row,
+with $c_s=c_F$ and $C=C_F$:
+\begin{equation}\label{JC:eq:regular-fan-Bregman-coercivity}
+ \boxed{
+ \Phi_*(h_*\mathbf1+z)-\Phi_*(h_*\mathbf1)
+ \ge\left(\frac12+c_s\right)\Gjp_*(z)-Ca^5.}
+\end{equation}
+Equivalently, JP--EH rewrites its left side as the support-time integral
+of the exact regular-fan reduced Helmholtz DtN, area, and lower rows.  The
+two classical Minkowski concavities for $|P|^{1/2}$ and
+$\lambda_1(P)^{-1/2}$ do not order their ratio and hence do not prove this
+inequality.  Thus~\eqref{JC:eq:regular-fan-Bregman-coercivity}, followed by
+the genuinely nonregular coarse localization, is the smallest presently
+isolated content of JC--CL.
+
+At the regular fan cyclic symmetry gives $\ell_*=d_*=0$.  Define
+\begin{equation}\label{JC:eq:regular-fan-integrated-modulus}
+ \mathcal L_*(z):=\int_0^1(1-t)
+ \{H_{*,tz}-H_{*,0}\}[z,z],dt.
+\end{equation}
+
+\begin{proposition}[The fixed-reserve RF--IM target is false]
+\label{JC:prop:RF-IM-period-three-counterexample}
+Let \(N=3M\to\infty\), \(a=2\pi/N\), and, on the regular fan, put
+\[
+ d_i=\cos\frac{2\pi i}{3},\qquad
+ s_*=\frac{4h_*\sin^2(a/2)}{1+2\cos a},\qquad
+ z_N=(1-a^2)s_*d.
+\]
+The segment \(h_*\mathbf1+[0,1]z_N\) is strictly active and remains in
+the radial small chart.  Moreover
+\begin{align}
+ \Gjp_*(z_N)
+ &=\frac{13d_\circ^2\zeta(3)}{4\pi^2}a^3\{1+o(1)\},
+ \label{JC:eq:RF-counterexample-G}\\
+ \frac{\Phi_*(h_*\mathbf1+z_N)-\Phi_*(h_*\mathbf1)}
+ {\Gjp_*(z_N)}
+ &\longrightarrow\frac{10}{13},
+ \label{JC:eq:RF-counterexample-value}\\
+ \frac{\frac12H_{*,0}[z_N,z_N]}{\Gjp_*(z_N)}
+ &\longrightarrow\frac{2\pi^2\log3}{13\zeta(3)}.
+ \label{JC:eq:RF-counterexample-root}
+\end{align}
+Consequently
+\begin{equation}\label{JC:eq:regular-fan-integrated-modulus-disproved}
+ \frac{\mathcal L_*(z_N)}{\Gjp_*(z_N)}
+ \longrightarrow
+ \frac{10}{13}-\frac{2\pi^2\log3}{13\zeta(3)}
+ =-0.6185019068\ldots<-\frac1{20}.
+\end{equation}
+Thus no \(N\)-independent \(C\) and \(\eta<1/20\) can make the former
+RF--IM bound
+\(\mathcal L_*(z)\ge-\eta\Gjp_*(z)-Ca^5\) valid on every regular active
+radial path.  This does not disprove RF--BC: on the same family
+\begin{equation}\label{JC:eq:RF-counterexample-action}
+ \frac{\mathscr A_*(z_N)}{\Gjp_*(z_N)}
+ \longrightarrow\frac7{26}>0.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For a fixed normal fan,
+\[
+ L_i(h)=\frac{h_{i-1}+h_{i+1}-2h_i\cos a}{\sin a}.
+\]
+Since \(d_{3j}=1\) and \(d_{3j+1}=d_{3j+2}=-1/2\), exactly the
+\(3j\)-sides first vanish at \(s=s_*\), while all other sides grow.
+Taking \(s_N=(1-a^2)s_*\) makes the entire segment strictly active.
+Also \(s_*=a^2/3+O(a^4)\), so the support displacement is \(O(a^2)\)
+and its adjacent difference quotient is \(O(a)\).
+
+At \(s=s_*\), deletion of the zero sides leaves equal support numbers and
+alternating normal gaps \(a,2a\).  Denote the area-normalized disk sources
+of the regular and alternating fans by \(B_{\rm reg}\) and \(B_{\rm alt}\).
+In the Fourier normalization used here, their leading material profiles
+satisfy
+\[
+ F_{\rm reg}''=1-\sum_{j\in\mathbb Z}\delta_{j+1/2},
+\qquad
+ F_{\rm alt}''=1-\delta_{1/2}-2\delta_2
+\]
+with periods \(1\) and \(3\), respectively.  Hence
+\[
+ \|B_{\rm reg}\|_{\dot H^{1/2}}^2
+ =\frac{\zeta(3)}{4\pi^3}a^3+O(a^4).
+\]
+For \(\varkappa=2\pi/3\),
+\[
+ \widehat F_{{\rm alt},\ell}
+ =\frac{e^{-i\varkappa\ell/2}+2e^{-2i\varkappa\ell}}
+ {3(\varkappa\ell)^2}.
+\]
+The numerator has squared modulus \(9\) for even \(\ell\) and \(1\) for
+odd \(\ell\).  The even and odd \(\ell^{-3}\) sums are
+\(\zeta(3)/8\) and \(7\zeta(3)/8\), so
+\[
+ \|B_{\rm alt}\|_{\dot H^{1/2}}^2
+ =\frac{3\zeta(3)}{2\pi^3}a^3+O(a^4).
+\]
+The source-profile Taylor remainder is \(O(a^{7/2})\) in \(H^{1/2}\).
+Since the first nonconstant frequencies are of order \(a^{-1}\) and the
+disk multiplier is \(\omega_n=|n|+1+O(|n|^{-1})\),
+\begin{equation}\label{JC:eq:RF-counterexample-source}
+ q_D(B_{\rm alt})-q_D(B_{\rm reg})
+ =\frac{5d_\circ^2\zeta(3)}{2\pi^2}a^3+O(a^4).
+\end{equation}
+
+The closed disk-chart scalar expansion applies separately to both
+quasiuniform fans:
+\[
+ \Phi_\alpha(h_\alpha\mathbf1)
+ =\lambda_\circ+q_D(B_\alpha)+O(a^4).
+\]
+Indeed the complete cubic term is bounded by
+\(\|B\|_{W^{1,\infty}}\|B\|_{H^{1/2}}^2=O(a^4)\), and the tame
+fourth-and-higher remainder is \(O(a^5)\).  The support distance from
+\(s_N\) to the collapsed endpoint is \(O(a^4)\); two-sided parallel-body
+inclusions and Dirichlet monotonicity change \(\Phi\) by \(O(a^4)\).
+Thus~\eqref{JC:eq:RF-counterexample-source} gives the numerator in
+\eqref{JC:eq:RF-counterexample-value}.
+
+For the regular normal-sine metric,
+\[
+ Q(x)=\frac{2\sin^4(\pi x)}{\pi^3}
+ \{\zeta(3,x)+\zeta(3,1-x)\}.
+\]
+The real character \(d\) has half the energy of the unnormalized complex
+character.  Since
+\[
+ \zeta(3,1/3)+\zeta(3,2/3)=26\zeta(3),\qquad
+ Q(1/3)=\frac{117\zeta(3)}{4\pi^3},
+\]
+and \(s_N^2=a^4/9+O(a^6)\), the factor
+\((N/2)d_\circ^2Q(1/3)\) proves~\eqref{JC:eq:RF-counterexample-G}, and
+then~\eqref{JC:eq:RF-counterexample-value}.
+
+Finally the true polygonal support symbol gives
+\[
+ \frac{\frac12H_{*,0}[z_N,z_N]}{\Gjp_*(z_N)}
+ \longrightarrow\frac{P(1/3)}{Q(1/3)}.
+\]
+The digamma third-point formula yields
+\[
+ P(1/3)=\frac{9\log3}{2\pi},\qquad
+ \frac{P(1/3)}{Q(1/3)}
+ =\frac{2\pi^2\log3}{13\zeta(3)},
+\]
+which proves~\eqref{JC:eq:RF-counterexample-root}.  The exact Taylor identity
+\[
+ \mathcal L_*(z_N)
+ =\Phi_*(h_*\mathbf1+z_N)-\Phi_*(h_*\mathbf1)
+ -\frac12H_{*,0}[z_N,z_N]
+\]
+now proves~\eqref{JC:eq:regular-fan-integrated-modulus-disproved}.  The strict
+comparison with \(-1/20\) follows already from
+\(\pi^2>9\), \(\log3>1\), and \(\zeta(3)<5/4\).  Since
+\(\Gjp_*(z_N)\asymp a^3\), an \(Ca^5\) remainder cannot absorb it.
+Subtracting \(1/2\) from the value ratio gives~\eqref{JC:eq:RF-counterexample-action}.
+\end{proof}
+
+\begin{contract}[RF--REL: relative preservation of the full root reserve]
+\label{JC:con:RF-relative-root-reserve}
+There exist \(\delta>0\) and \(C\), independent of \(N\), such that every
+regular active radial path satisfies
+\begin{equation}\label{JC:eq:RF-relative-root-reserve}
+ \boxed{\mathcal L_*(z)\ge-\frac{1-\delta}{2}
+ \{H_{*,0}[z,z]-\Gjp_*(z)\}-Ca^5.}
+\end{equation}
+\end{contract}
+
+\begin{lemma}[RF--REL implies RF--BC]
+\label{JC:lem:RF-relative-implies-Bregman}
+Contract~\ref{JC:con:RF-relative-root-reserve} implies
+\[
+ \mathscr A_*(z)\ge\frac{\delta}{20}\Gjp_*(z)-Ca^5.
+\]
+\end{lemma}
+
+\begin{proof}
+Taylor's identity and the regular action give
+\[
+ \mathscr A_*(z)
+ =\frac12\{H_{*,0}[z,z]-\Gjp_*(z)\}+\mathcal L_*(z).
+\]
+RF--REL and
+\(H_{*,0}\ge(11/10)\Gjp_*\) imply
+\[
+ \mathscr A_*(z)
+ \ge\frac{\delta}{2}\{H_{*,0}[z,z]-\Gjp_*(z)\}-Ca^5
+ \ge\frac{\delta}{20}\Gjp_*(z)-Ca^5.
+\]
+\end{proof}
+
+Thus the regular coarse row remains open, but its current sufficient
+interface is RF--REL rather than the disproved fixed \(1/20\)-reserve
+target.
+
+\begin{remark}[Collapse-word audit and the exact JC--CL cut]
+\label{JC:rem:RF-collapse-word-audit}
+Every fixed periodic pattern of deleted regular-fan sides can be encoded
+by a positive integer gap word $(m_1,\ldots,m_r)$.  At its collapse
+endpoint the support profile on a gap of length $m$ is
+$u_j=j(m-j)/2$, and the disk-source, metric, and root-reserve
+coefficients reduce to finite Fourier/Hurwitz-zeta sums.  These formulas
+recover exactly the period-three ratios $10/13$ and $7/26$ above.
+The reproducible integer-word precheck
+\texttt{diagnostics/explore\_regular\_collapse\_words.py} enumerates all
+words of total period at most $16$ and several families through period
+$4096$.  It finds no negative action and no vanishing relative reserve;
+the smallest sampled ratios are approximately
+\[
+ \mathscr A_*/\Gjp_*=0.0912513,
+ \qquad \mathscr A_*/\mathcal R_0=0.181689,
+ \qquad \mathcal R_0=(H_{*,0}-\Gjp_*)/2.
+\]
+These numbers are not lower bounds on the full active microscopic class.
+For $z_i=a^2u_i$, the exact leading envelope is
+\[
+ B_u(x)=\min_i\left\{u_i+\frac{(x-i)^2}{2}\right\},
+ \quad s_i=i+\frac12+u_{i+1}-u_i,
+ \quad g_i=s_i-s_{i-1}\ge0.
+\]
+At fixed microscopic period, the complete \emph{leading} active class is
+the gap simplex
+$g_i\ge0$, $\sum_i g_i=p$, and along support time
+$g_i(t)=(1-t)+tg_i$.  If $S_p(t)$ is the resulting leading disk-source
+energy, its exact pair ledger is
+\[
+ S_p''(t)=\frac1{\pi p}\sum_{i,j}(v_i-v_j)^2
+ \log\left|2\sin\frac{\pi\{(i-j)+t(v_i-v_j)\}}p\right|,
+ \qquad v_i=u_{i+1}-u_i.
+\]
+Here the diagonal terms are defined by \(0^2\log0:=0\).  If distinct
+corner atoms collide at \(t=1\), this formula and the support-time Taylor
+integral are understood as improper identities; the resulting logarithmic
+singularity is integrable against \(1-t\).
+Put
+\[
+ \widehat u_k=\frac1p\sum_{j=0}^{p-1}u_j e^{-2\pi i k j/p},
+ \qquad
+ \mathcal Q_p[u]=2\pi\sum_{k=1}^{p-1}
+       |\widehat u_k|^2Q(k/p).
+\]
+Consequently the smallest leading regular target is the universal
+monotone-transport inequality
+\begin{equation}\label{JC:eq:RF-obstacle-BC}
+ 2\pi\{S_p(1)-S_p(0)\}
+ \ge\left(\frac12+c_0\right)\mathcal Q_p[u]
+\end{equation}
+for every period and every point of that simplex.  Continuous-simplex
+searches lower the sampled ratios to about $0.082293$ relative to
+$\mathcal Q_p$ and $0.163711$ relative to the root reserve at $p=384$;
+they find no negative value, but do not prove a uniform constant.
+Equation~\eqref{JC:eq:RF-obstacle-BC}, its finite-$N$ secant/cubic/tail
+transfer, and the nonregular original-path row all remain open.
+This is a floating-point necessary-family precheck, not a proof of
+RF--REL.  It also shows that the regular path loss is order one rather
+than an $o(1)\Gjp_*$ error.  Even a proof of RF--REL would leave the
+genuinely nonregular original-path inequality below as a second,
+independent input.
+\end{remark}
+
+For a genuinely nonregular fan the exact original-path form is, with
+$z=d+w$,
+\begin{equation}\label{JC:eq:nonregular-original-path-action}
+ \boxed{
+ \begin{aligned}
+ \mathscr A_\alpha(d+w)={}&\ell_\alpha[d+w]
+ +\int_0^1(1-t)
+ H_{\alpha,t(d+w)}[d+w,d+w],dt\\
+ &-\frac12\Gjp_\alpha(w)+\Gjp_\alpha(d)
+ +\frac\kappa2\Jfour(\alpha).
+ \end{aligned}}
+\end{equation}
+The nonregular part of JC--CL is precisely a lower bound for this one
+budget by $c_F\{\Jfour(\alpha)+\Gjp_\alpha(w)\}-C_Fa^5$, uniformly in
+all gap ratios.  Separating its covector from its integrated Hessian would
+recreate the unavailable JE--FM step.
+
+For a stationary-minimizer bypass one may replace
+\eqref{JC:eq:coarse-action-bound} by the weaker localization statement:
+every stationary competitor $x$ with
+$\Phi_N(x)\le\Phi_N(0)$ satisfies
+\begin{equation}\label{JC:eq:stationary-coarse-localization}
+ 6a^2\sum_i d_i^2
+ +\Gjp_{\alpha_*}(z-Z_Nd)\le Ma^5.
+\end{equation}
+Together with JC--AR and JC--SP, this would put the competitor in the
+super-near action-positive branch and exclude a lower value through the
+exact JP--JC/NR assembly.  The present global wrapper
+gives only qualitative near-disk entry, not
+\eqref{JC:eq:stationary-coarse-localization}.  Thus the stationary route has
+three open analytic rows, not two.
+\end{contract}
+
+\begin{contract}[JC--PL: pathwise LCA payment]
+\label{JC:con:JC-PL}
+After decreasing the no-ratio fan and radial endpoint-chart thresholds so that
+$\varepsilon_V(S)\le\kappa/2$, prove, for every active normalized support
+vector $z\in\mathsf X_\alpha$ in that chart,
+\begin{equation}\label{JC:eq:JC-PL}
+ \boxed{\mathscr A_\alpha(z)\ge0.}
+\end{equation}
+The proof must use a disjoint, complete pair ledger.  The terminal two-ray
+power and the negative cotangent/area jump row must be joined before any
+estimate; every unused terminal annulus must remain in the nonterminal
+ledger; same-cell, adjacent, and first-separation LCA pairs must be counted
+exactly once.  The support-time integral must be taken before a side-ratio
+supremum, using Lemma~\ref{JC:lem:support-time-log}.  The true ground-state
+multiplier, reduced-energy, mixed-flux, area, and fixed-rank rows must
+retain the same completed covector $b_\alpha$ of
+\eqref{JC:eq:completed-covector}.  All constants must be independent of the
+smallest angle and adjacent ratios.  In particular the contract includes
+endpoints with an arbitrarily short positive side: smallness of an
+affine-side parametrization relative to the tangential fan polygon is not
+an assumption.  Its admissible chart is exactly the closed JP--NS output
+\[
+ h_\alpha\mathbf1+[0,1]z\ \hbox{active},\qquad
+ \sup_{0\le t\le1}\|\rho_t\|_{W^{1,\infty}}
+ +\Gjp_\alpha(z)^{1/2}\le C(S+\rho_0),
+\]
+not the false labelled affine-side chart of
+Proposition JP--NS~\textup{(radial-not-affine)}.
+
+Equivalently, by Proposition~\ref{JC:prop:JC-ALG}, prove
+\begin{equation}\label{JC:eq:JC}
+\boxed{
+ \mathscr R_\alpha(z)
+ \ge-\frac\kappa2\Jfour(\alpha)
+      -\frac12\Gjp_\alpha(z-z_\alpha^D).}
+\end{equation}
+The stage-130 moving-disk longitudinal calculation omits material
+chain-rule terms and is not an admissible proof of either display.
+\end{contract}
+
+\begin{theorem}[JC--PL closes the active-chart theorem]\label{JC:thm:JC-to-J0}
+Assume Contract~\ref{JC:con:JC-PL}.  Then every normalized polygon in the active
+near-disk chart satisfies
+\begin{equation}\label{JC:eq:J0}
+\boxed{
+ \Phi_\alpha(h_\alpha\mathbf1+z)
+ -\Phi_{\alpha_*}(h_*\mathbf1)
+ \ge\kappa\Jfour(\alpha)
+      +\frac12\Gjp_\alpha(z-z_\alpha^D).}
+\end{equation}
+Moreover
+\begin{equation}\label{JC:eq:corrector-bound}
+ \Gjp_\alpha(z_\alpha^D)
+ \le\frac{C_p^2}{4}\Jfour(\alpha).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Add and subtract the two disk endpoint values.  Equations
+\eqref{JC:eq:joint-residual}, \eqref{JC:eq:disk-completion}, and \eqref{JC:eq:V}
+give
+\begin{align*}
+ \Phi_\alpha(h_\alpha\mathbf1+z)
+ -\Phi_{\alpha_*}(h_*\mathbf1)
+ \ge{}&P_D^{\rm ns}(\alpha)-P_D^{\rm ns}(\alpha_*)
+       +\Gjp_\alpha(z-z_\alpha^D)\\
+ &-\varepsilon_V(S)\Jfour(\alpha)+\mathscr R_\alpha(z).
+\end{align*}
+Insert \eqref{JC:eq:D0}, \eqref{JC:eq:JC}, and
+$\varepsilon_V(S)\le\kappa/2$.  The fan coefficient is
+$2\kappa-\kappa/2-\kappa/2=\kappa$, and the support coefficient is
+$1-1/2=1/2$.  This proves \eqref{JC:eq:J0}.  Equations \eqref{JC:eq:P} and
+\eqref{JC:eq:corrector-size} prove \eqref{JC:eq:corrector-bound}.
+\end{proof}
+
+\begin{remark}[Precise mathematical cut]
+Contract~\ref{JC:con:JC-PL} is not a restatement of either discarded separated
+estimate.  At $\alpha=\alpha_*$ it asks only for the coarse one-sided
+support bound encoded by \eqref{JC:eq:JC}; away from the regular fan it gives
+the forcing access to the complete integrated Hessian surplus before a
+Schur complement is taken.  The exact algebra and the support-time
+logarithm cancellation are now proved.  Revision 24 further resolves the
+former vague ``regular plus path'' description into one closed and two
+open exact subcontracts.  The all-character regular completed-action Schur matrix
+JC--AR is now closed.  The two remaining open contracts are the
+completed-action Hessian modulus JC--SP and the coarse/far localization
+JC--CL.  The former period-three completed-covector claim remains
+retracted, and the fixed-reserve RF--IM target is disproved.  What is
+still missing is the ratio-free
+pathwise LCA payment for the true nonstationary ground-state multiplier and
+all remaining lower rows.  No retained node implies either open analytic
+estimate.
+\end{remark}
+
+\subsection{DAG disposition}
+
+\begin{center}
+\begin{longtable}{>{\raggedright\arraybackslash}p{.34\linewidth}
+                  >{\raggedright\arraybackslash}p{.54\linewidth}}
+\toprule
+item & revision-24 disposition\\
+\midrule
+$D0_{\rm ns}$, JE--P, JE--V & closed inputs, equations
+\eqref{JC:eq:D0}--\eqref{JC:eq:V};\\
+JE--FM & unavailable; the old material falsification is retracted and the
+row is absent from the active DAG;\\
+JP--SC & retained only as a possible stronger auxiliary estimate; no
+longer an active prerequisite;\\
+JC--ALG and JC--TL & closed by Proposition~\ref{JC:prop:JC-ALG} and
+Lemmas~\ref{JC:lem:support-time-log}--\ref{JC:lem:support-time-min};\\
+pure-support JC--AR row & closed for all characters by
+Lemma~\ref{JC:lem:fixed-character-support-limit} and
+Proposition~\ref{JC:prop:regular-support-renormalized};\\
+period-three completed-covector row & retracted by
+Remark~\ref{JC:rem:period-three-completion-retracted}; its true polygonal
+mixed finite part is now closed at every fixed Bloch ratio, as is the
+strict support--double-disk gap; the ratio certificate and uniform
+all-character bridge are closed by
+Proposition~\ref{JC:prop:regular-action-Schur-closed};\\
+RF--IM & disproved by
+Proposition~\ref{JC:prop:RF-IM-period-three-counterexample}; RF--REL is the
+replacement open sufficient interface for RF--BC;\\
+super-near bridge/activity & closed by
+Proposition~\ref{JC:prop:super-near-bridge-active};\\
+terminal-radius pure-power resummation & closed by
+Remark~\ref{JC:rem:super-near-completed-third-jet}; the old DAR row is
+retracted as noninvariant, while the completed third-jet/QRCI row stays open;\\
+JC--AR & closed all-character regular action Schur contract;\\
+JC--SP, JC--CL & remaining natural Hessian-modulus and coarse/far
+subcontracts inside JC--PL;\\
+JC--PL & unique open conceptual node, Contract~\ref{JC:con:JC-PL};\\
+JC--PL $\to$ JP--JC $\to$ J0 & closed algebraically by
+Theorem~\ref{JC:thm:JC-to-J0}.\\
+\bottomrule
+\end{longtable}
+\end{center}
+\endgroup

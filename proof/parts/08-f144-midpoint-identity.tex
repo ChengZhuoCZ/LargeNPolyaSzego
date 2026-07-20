@@ -1,0 +1,105 @@
+\begingroup
+\section{Foundation F144: Hilbert stress and the exact midpoint identity}
+\label{module:F144}
+\noindent\textit{Audited source: \nolinkurl{convex_largeN_polya_szego_stage144_NR_Hilbert_midpoint_quadrature_reduction.tex}.}
+\subsection{A second exact form of the cubic null structure}
+
+Use the periodic Hilbert transform convention
+\begin{equation}\label{F144:eq:H}
+ \widehat{\Hil f}(n)=-i\operatorname {sgn}(n)\widehat f(n),
+ \qquad |D|=\Hil\partial_\theta.
+\end{equation}
+The symmetric null form is the one of stage 138; on the diagonal,
+\begin{equation}\label{F144:eq:C}
+ \Cnull(f,f,f)=\int_\T f\{(|D|f)^2-(f')^2\}.
+\end{equation}
+
+\begin{lemma}[Hilbert stress identity]
+\label{F144:lem:stress}
+For every smooth real periodic $f$,
+\begin{equation}\label{F144:eq:stress}
+ \boxed{\Cnull(f,f,f)=\int_\T f''(\Hil f)^2.}
+\end{equation}
+The identity extends by Abel regularization whenever the right side is a
+well-defined distributional pairing.
+\end{lemma}
+
+\begin{proof}
+For a real function $g$ the Hilbert product identity is
+\begin{equation}\label{F144:eq:product}
+ (\Hil g)^2-g^2=\Hil(2g\Hil g).
+\end{equation}
+Indeed it follows first on trigonometric polynomials from
+$\Hil^2=-I$ and then by density.  Put $g=f'$.  By skew-adjointness of
+$\Hil$ and commutation with $\partial_\theta$,
+\begin{align*}
+ \Cnull(f,f,f)
+ &=\int f\Hil(2f'\Hil f')
+ =-2\int (\Hil f)f'(\Hil f)'\\
+ &=-\int f'\{(\Hil f)^2\}'
+ =\int f''(\Hil f)^2.
+\end{align*}
+Abel regularization proves the distributional extension.
+\end{proof}
+
+Polarization of \eqref{F144:eq:stress} also gives, for real $f,g,v$,
+\begin{equation}\label{F144:eq:polarized-stress}
+ \Cnull(f,g,v)=\frac13\int_\T
+ \{f''\Hil g\Hil v+g''\Hil f\Hil v+v''\Hil f\Hil g\}.
+\end{equation}
+In particular,
+\begin{equation}\label{F144:eq:q-q-v}
+ 3\Cnull(q,q,v)
+ =2\int q''\Hil q\Hil v+\int v''(\Hil q)^2.
+\end{equation}
+This will be the smaller starting point for the mixed row DM.
+
+\subsection{The cubic scalar is a midpoint quadrature error}
+
+Let $I_i=[\theta_i,\theta_{i+1}]$ have length $h_i>0$ and midpoint
+$c_i$.  On $I_i$ put
+\begin{equation}\label{F144:eq:q}
+ q_\alpha(\theta_i+x)=\frac12\min\{x^2,(h_i-x)^2\}.
+\end{equation}
+Then, as in stage 139,
+\begin{equation}\label{F144:eq:qdd}
+ q_\alpha''=1-\mu_\alpha,
+ \qquad \mu_\alpha=\sum_i h_i\delta_{c_i}.
+\end{equation}
+
+\begin{theorem}[Exact Hilbert midpoint formula]
+\label{F144:thm:midpoint}
+Put $w_\alpha=\Hil q_\alpha$.  Then
+\begin{equation}\label{F144:eq:midpoint}
+ \boxed{
+ \Cnull(q_\alpha,q_\alpha,q_\alpha)
+ =\int_\T(q_\alpha-\overline q_\alpha)^2
+ -\sum_i h_i|w_\alpha(c_i)|^2.}
+\end{equation}
+For the regular fan $a\mathbf1$, every sampled value is zero and
+\begin{equation}\label{F144:eq:regular}
+ \Cnull(q_{a\mathbf1}^3)=\frac{Na^5}{720}
+ =\frac{\pi a^4}{360}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Insert \eqref{F144:eq:qdd} in \eqref{F144:eq:stress}.  The Hilbert transform is an
+$L^2$ isometry on mean-zero functions, so
+\begin{equation*}
+ \int w_\alpha^2=\int(q_\alpha-\overline q_\alpha)^2.
+\end{equation*}
+This proves \eqref{F144:eq:midpoint}.  At the regular fan, reflection symmetry
+about each midpoint makes $q$ even and $\Hil q$ odd, hence
+$w(c_i)=0$.  Direct integration on one cell gives
+\begin{align}
+ \int_{I_i}q_\alpha&=\frac{h_i^3}{24},&
+ \int_{I_i}q_\alpha^2&=\frac{h_i^5}{320}.
+ \label{F144:eq:cell-integrals}
+\end{align}
+Using $Na=2\pi$ in the resulting variance gives \eqref{F144:eq:regular}.
+\end{proof}
+
+Thus the apparently cubic two-frequency obstruction is the difference of
+one explicit local scalar and one nonnegative one-frequency sampling row.
+\endgroup

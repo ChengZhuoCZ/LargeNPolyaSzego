@@ -1,0 +1,178 @@
+\begingroup
+\section{Foundation F148: the exact cumulative-free material matrix}
+\label{module:F148}
+\noindent\textit{Audited source: \nolinkurl{convex_largeN_polya_szego_stage148_NR_quadrature_primitive_material_matrix.tex}.}
+\subsection{Clausen material derivative as a length gradient}
+
+Let $I_j=[\theta_j,\theta_{j+1}]$ be a cyclic interval partition of
+$\T$, with length $h_j$ and midpoint $c_j$.  Put
+\begin{equation}\label{F148:eq:clausen}
+ \Phi(x)=\sum_{n\ge1}\frac{\sin(nx)}{n^2},\qquad
+ K(x)=\Phi'(x)=-\log\left|2\sin\frac x2\right|.
+\end{equation}
+The sampled conjugate of the quadratic fan spline is
+\begin{equation}\label{F148:eq:w}
+ w_i=\frac1\pi\sum_jh_j\Phi(c_i-c_j).
+\end{equation}
+Along a positive affine path, let $h_j'=d_j$, $\sum_jd_j=0$, and let
+$s_j=c_j'$.  Stage 144 gives
+\begin{equation}\label{F148:eq:material-old}
+ W_i:=\dot w_i=\frac1\pi\sum_{j\ne i}
+ \{d_j\Phi(c_i-c_j)+h_j(s_i-s_j)K(c_i-c_j)\}.
+\end{equation}
+
+Fix the target $i$.  Relabel cyclically and choose a partition endpoint
+$\theta_0$ as a cut; write $\theta_0+2\pi$ for its second copy.  The cut
+may be chosen at circular distance at least $\pi/3$ from $c_i$.  This
+target-dependent relabelling changes neither \eqref{F148:eq:w} nor
+\eqref{F148:eq:material-old}.
+
+For $k<i$ define
+\begin{align}
+ \mathscr E_{ik}^-&=
+ \sum_{j<k}h_jK(c_i-c_j)+\frac{h_k}{2}K(c_i-c_k)
+ -\int_{\theta_0}^{c_k}K(c_i-y)\,dy. \label{F148:eq:Eminus}
+\end{align}
+For $k>i$ define
+\begin{align}
+ \mathscr E_{ik}^+&=
+ \int_{c_k}^{\theta_0+2\pi}K(c_i-y)\,dy
+ -\frac{h_k}{2}K(c_i-c_k)-\sum_{j>k}h_jK(c_i-c_j).
+ \label{F148:eq:Eplus}
+\end{align}
+The two arcs in these definitions do not contain $c_i$ in their
+interiors.  Finally put
+\begin{align}
+ E_i^-&=\sum_{j<i}h_jK(c_i-c_j)
+       -\int_{\theta_0}^{\theta_i}K(c_i-y)\,dy,\notag\\
+ E_i^+&=\sum_{j>i}h_jK(c_i-c_j)
+       -\int_{\theta_{i+1}}^{\theta_0+2\pi}K(c_i-y)\,dy,
+ \label{F148:eq:E-self}
+\end{align}
+and define the matrix
+\begin{equation}\label{F148:eq:matrix}
+ \mathscr E_{ik}=\begin{cases}
+ \mathscr E_{ik}^-,&k<i,\\
+ (E_i^--E_i^+)/2,&k=i,\\
+ \mathscr E_{ik}^+,&k>i.
+ \end{cases}
+\end{equation}
+
+\begin{theorem}[Exact cumulative-free material matrix]
+\label{F148:thm:matrix}
+For every zero-sum length velocity $d$,
+\begin{equation}\label{F148:eq:W-matrix}
+ \boxed{W_i=\frac1\pi\sum_k d_k\mathscr E_{ik}.}
+\end{equation}
+Thus no node velocity $s_j$, root velocity, or cumulative sum of the
+$d_j$ occurs in the final coefficient matrix.
+\end{theorem}
+
+\begin{proof}
+Temporarily keep the cut fixed.  Its length coordinates give
+\begin{equation*}
+ \frac{\partial c_j}{\partial h_k}=
+ \begin{cases}0,&j<k,\\1/2,&j=k,\\1,&j>k.
+ \end{cases}
+\end{equation*}
+If $M_{ik}=\pi\,\partial w_i/\partial h_k$, differentiation of
+\eqref{F148:eq:w} gives
+\begin{equation}\label{F148:eq:M}
+ M_{ik}=\Phi(c_i-c_k)+\sum_jh_j
+ \left(\frac{\partial c_i}{\partial h_k}
+       -\frac{\partial c_j}{\partial h_k}\right)K(c_i-c_j),
+\end{equation}
+where the self coefficient of $K(0)$ is zero before the Abel limit.
+
+For $k<i$, equation \eqref{F148:eq:M} becomes
+\begin{equation*}
+ M_{ik}=\Phi(c_i-c_k)+\sum_{j<k}h_jK(c_i-c_j)
+                    +\frac{h_k}{2}K(c_i-c_k).
+\end{equation*}
+The fundamental theorem of calculus gives exactly
+\begin{equation*}
+ \int_{\theta_0}^{c_k}K(c_i-y)\,dy
+ =\Phi(c_i-\theta_0)-\Phi(c_i-c_k).
+\end{equation*}
+After rotating the origin to the cut, the first term on the right is
+$\Phi(c_i)$.  Hence
+$M_{ik}=\Phi(c_i)+\mathscr E_{ik}^-$.  The same calculation on the
+right arc gives
+$M_{ik}=\Phi(c_i)+\mathscr E_{ik}^+$ for $k>i$.
+
+For $k=i$, \eqref{F148:eq:M} reads
+\begin{equation*}
+ M_{ii}=\frac12\sum_{j<i}h_jK(c_i-c_j)
+       -\frac12\sum_{j>i}h_jK(c_i-c_j).
+\end{equation*}
+The exact integrals over the two sides of $I_i$ give
+$M_{ii}=\Phi(c_i)+(E_i^--E_i^+)/2$.  Therefore
+\begin{equation*}
+ M_{ik}=\Phi(c_i)+\mathscr E_{ik}\qquad\hbox{for every }k.
+\end{equation*}
+Since $\sum_kd_k=0$, the common Clausen term disappears and
+\eqref{F148:eq:W-matrix} follows.  This also proves that the result is
+independent of the chosen cut.
+\end{proof}
+
+\subsection{The matrix is a cotangent integral of a cellwise sawtooth}
+
+On each cell define
+\begin{equation}\label{F148:eq:eta}
+ \eta(y)=\begin{cases}
+ -(y-\theta_j),&\theta_j<y<c_j,\\
+ \theta_{j+1}-y,&c_j<y<\theta_{j+1}.
+ \end{cases}
+\end{equation}
+Then, distributionally on $I_j$,
+\begin{equation}\label{F148:eq:eta-properties}
+ d\eta=h_j\delta_{c_j}-\mathbf1_{I_j}\,dy,\qquad
+ |\eta|\le h_j/2,\qquad
+ \int_{I_j}\eta=0.
+\end{equation}
+Moreover
+\begin{equation}\label{F148:eq:Kprime}
+ K'(x)=-\frac12\cot\frac x2=-\pi\kappa(x),
+ \qquad \kappa(x)=\frac1{2\pi}\cot\frac x2.
+\end{equation}
+
+\begin{proposition}[Exact sawtooth representation]
+\label{F148:prop:sawtooth}
+For $k<i$ and $k>i$, respectively,
+\begin{align}
+ \mathscr E_{ik}^-&=
+ \int_{\theta_0}^{c_k}\eta(y)K'(c_i-y)\,dy,
+ \label{F148:eq:saw-left}\\
+ \mathscr E_{ik}^+&=-
+ \int_{c_k}^{\theta_0+2\pi}\eta(y)K'(c_i-y)\,dy.
+ \label{F148:eq:saw-right}
+\end{align}
+The terminal half-atom at $c_k$ closes the cumulative mass to zero.
+Likewise $E_i^-$ and $E_i^+$ are the corresponding full-cell integrals
+on the two sides of $I_i$.  Hence every matrix entry is assembled from
+the same cellwise mean-zero sawtooth and one cotangent frequency.
+\end{proposition}
+
+\begin{proof}
+On the left arc, the signed midpoint-quadrature measure consists of all
+full atoms before $I_k$, half of the atom at $c_k$, and minus Lebesgue
+measure on the arc.  Its cumulative distribution is exactly $\eta$ and
+vanishes at both endpoints.  Stieltjes integration by parts therefore
+gives
+\begin{equation*}
+ \int K(c_i-y)\,d\eta(y)
+ =-\int\eta(y)\frac d{dy}K(c_i-y)\,dy
+ =\int\eta(y)K'(c_i-y)\,dy,
+\end{equation*}
+which is \eqref{F148:eq:saw-left}.  The right arc has the opposite orientation,
+giving \eqref{F148:eq:saw-right}.  The full-side statements are identical.
+\end{proof}
+
+\begin{remark}[Both former cancellations are now identities]
+The endpoint vanishing in stage 147 is encoded by the fact that $\eta$
+is zero at every cell endpoint.  The cumulative-velocity cancellation is
+encoded by $\int_{I_j}\eta=0$ and the disappearance of the common
+$\Phi(c_i)$ in Theorem~\ref{F148:thm:matrix}.  Thus neither cancellation needs
+to be recovered after a triangle inequality.
+\end{remark}
+\endgroup

@@ -1,0 +1,358 @@
+\begingroup
+\renewcommand{\qD}{q_{\mathbb D}^{0}}
+\section{Foundation F51: exact disk Hessian and Bessel--Schur normalization}
+\label{module:F51}
+\noindent\textit{Audited source: \nolinkurl{convex_largeN_polya_szego_stage51_exact_disk_normalization.tex}.}
+\subsection{Fourier and energy conventions}
+
+For a real $2\pi$-periodic function $f$, use
+\begin{equation}
+ \widehat f_n=\frac1{2\pi}\int_0^{2\pi}f(\theta)e^{-in\theta}\,d\theta,
+ \qquad
+ f(\theta)=\sum_{n\in\mathbb Z}\widehat f_ne^{in\theta}.
+\end{equation}
+Our normalized circle inner product is
+\begin{equation}\label{F51:eq:L2-star}
+ \langle f,g\rangle_{L^2_*}
+ :=\frac1{2\pi}\int_0^{2\pi}f(\theta)\overline{g(\theta)}\,d\theta
+ =\sum_{n\in\mathbb Z}\widehat f_n\overline{\widehat g_n}.
+\end{equation}
+Let
+\begin{equation}
+ H_{\rm ng}^{s}
+ :=\left\{f\in H^s(\Sone):
+ \widehat f_0=\widehat f_1=\widehat f_{-1}=0\right\},
+ \qquad
+ \PiNG f=\sum_{|n|\ge2}\widehat f_ne^{in\theta}.
+\end{equation}
+The normalized homogeneous and inhomogeneous half-order forms are
+\begin{align}
+ \|f\|_{\dot H^{1/2}_*}^2
+ &:=\sum_{|n|\ge2}|n|\,|\widehat f_n|^2,\label{F51:eq:hhalf}\\
+ \qplus(f,g)
+ &:=\sum_{|n|\ge2}(|n|+1)\widehat f_n\overline{\widehat g_n}.
+ \label{F51:eq:qplus}
+\end{align}
+If $U$ is the decaying harmonic extension of $f$ to the half-cylinder
+$\Sone\times(0,\infty)$, Parseval's identity gives
+\begin{equation}\label{F51:eq:cylinder}
+ \int_{\Sone\times(0,\infty)}|\nabla U|^2\,d\theta\,dy
+ =2\pi\|f\|_{\dot H^{1/2}_*}^2.
+\end{equation}
+Thus a strip computation made in cylinder energy must be divided by $2\pi$
+before it is inserted into \eqref{F51:eq:hhalf}.  This is the source of the two
+constants
+\begin{equation}\label{F51:eq:twoK}
+ K_{\rm cyl}=\frac{\zeta(3)}{\pi^3},
+ \qquad
+ K_*:=\frac{K_{\rm cyl}}{2\pi}
+ =\frac{\zeta(3)}{2\pi^4}.
+\end{equation}
+They are not competing normalizations of the same displayed form.
+
+\subsection{The exact fan/support affine class}
+
+Let
+\begin{equation}
+ \alpha_i>0,\qquad \sum_{i=1}^N\alpha_i=2\pi,
+ \qquad \theta_{i+1}-\theta_i=\alpha_i
+\end{equation}
+cyclically, and put $\nu_i=(\cos\theta_i,\sin\theta_i)$.  On the edge cell
+\begin{equation}
+ K_i=[-\alpha_{i-1}/2,\alpha_i/2]
+\end{equation}
+write
+\begin{equation}
+ a=\alpha_{i-1},\quad b=\alpha_i,\quad
+ s=\frac{x+a/2}{(a+b)/2},\quad
+ r_- =\frac{z_i-z_{i-1}}a,\quad
+ r_+=\frac{z_{i+1}-z_i}b.
+\end{equation}
+
+\begin{definition}[Exact trigonometric support trace]\label{F51:def:T}
+For $z\in\R^N$, define $T_\alpha z$ on $K_i$ by
+\begin{equation}\label{F51:eq:T}
+ (T_\alpha z)_i(x)
+ =z_i\cos x+\bigl((1-s)a_i^-+sa_i^+\bigr)\sin x,
+\end{equation}
+where
+\begin{equation}\label{F51:eq:apm}
+ a_i^-=r_-\frac a{\sin a}-z_i\tan\frac a2,
+ \qquad
+ a_i^+=r_+\frac b{\sin b}+z_i\tan\frac b2.
+\end{equation}
+The formulas on adjacent cells agree at their common endpoint, so
+$T_\alpha z$ is continuous and belongs to $H^1(\Sone)$.
+\end{definition}
+
+Indeed, at the right endpoint of $K_i$, direct substitution gives
+\begin{equation}
+ (T_\alpha z)_i(b/2)
+ =\frac{z_i+z_{i+1}}{2\cos(b/2)}
+ =(T_\alpha z)_{i+1}(-b/2).
+\end{equation}
+The exact area row is
+\begin{equation}\label{F51:eq:area-row}
+ L_\alpha z=\sum_{i=1}^N\ell_i z_i,
+ \qquad
+ \ell_i=\tan\frac{\alpha_{i-1}}2+\tan\frac{\alpha_i}2,
+\end{equation}
+and the admissible coefficient space is $Z_\alpha=\ker L_\alpha$.  Let
+\begin{equation}\label{F51:eq:V}
+ V_\alpha:=\PiNG T_\alpha Z_\alpha\subset H_{\rm ng}^{1/2}.
+\end{equation}
+
+Let $B_\alpha^{\rm ex}\in H^{1/2}(\Sone)$ be the exact canonical fan
+profile in this fixed material convention.  The normalization of that
+profile is part of the definition; no factor is silently absorbed into it.
+Set
+\begin{equation}\label{F51:eq:b}
+ b_\alpha:=\PiNG B_\alpha^{\rm ex},
+ \qquad
+ \mathcal A_\alpha=b_\alpha+V_\alpha.
+\end{equation}
+All endpoint values below depend only on the affine subspace
+$\mathcal A_\alpha$, so replacing $B_\alpha^{\rm ex}$ by
+$B_\alpha^{\rm ex}+T_\alpha z_0$ with $z_0\in Z_\alpha$ changes no value.
+
+\subsubsection{Translations}
+
+\begin{lemma}[Exact translation identity]\label{F51:lem:translations}
+For $c\in\R^2$, put $z_i=c\cdot\nu_i$.  Then $L_\alpha z=0$ and
+\begin{equation}\label{F51:eq:translation}
+ T_\alpha z(\theta)=c\cdot(\cos\theta,\sin\theta).
+\end{equation}
+Consequently $\PiNG T_\alpha z=0$.
+\end{lemma}
+
+\begin{proof}
+Let $\tau_i=(-\sin\theta_i,\cos\theta_i)$.  From
+\begin{equation}
+ \nu_{i-1}=\nu_i\cos a-\tau_i\sin a,
+ \qquad
+ \nu_{i+1}=\nu_i\cos b+\tau_i\sin b
+\end{equation}
+one obtains from \eqref{F51:eq:apm}
+\begin{equation}
+ a_i^-=a_i^+=c\cdot\tau_i.
+\end{equation}
+Equation \eqref{F51:eq:T} is therefore exactly
+\begin{equation}
+ (c\cdot\nu_i)\cos x+(c\cdot\tau_i)\sin x
+ =c\cdot\nu(\theta_i+x),
+\end{equation}
+which proves \eqref{F51:eq:translation}.  The area row vanishes because
+translations preserve area.  Algebraically, it is the closure identity
+$\sum_i\ell_i\nu_i=0$ for the tangential polygon with normal fan $\alpha$.
+The last assertion follows from the Fourier support of
+$c\cdot\nu(\theta)$.
+\end{proof}
+
+Thus centering only chooses a representative of the translation orbit.  It
+does not add a finite-rank loss to the nongeometric endpoint Schur value.
+
+\subsection{The disk multiplier}
+
+Let $j=j_{0,1}$ be the first positive zero of $J_0$.  For $n\ge2$, set
+\begin{equation}\label{F51:eq:kn}
+ k_n=j\frac{J_{n+1}(j)}{J_n(j)}.
+\end{equation}
+
+\begin{lemma}[A rational enclosure for $j$]\label{F51:lem:j-bound}
+One has
+\begin{equation}\label{F51:eq:j-bound}
+ 2.4<j<2.405,
+ \qquad \frac{j^2}{4}<1.447.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The series
+\begin{equation}
+ J_0(x)=\sum_{m\ge0}\frac{(-1)^m(x^2/4)^m}{(m!)^2}
+\end{equation}
+is alternating with decreasing terms on the indicated interval after its
+first term.  Rational partial sums through orders eight and nine give
+\begin{align*}
+ 0.0025076832943&<J_0(12/5)<0.0025076834966,\\
+ -0.000090558004&<J_0(481/200)<-0.000090557793.
+\end{align*}
+Moreover $J_0'=-J_1$, and
+\begin{equation}
+ J_1(x)=\frac x2\sum_{m\ge0}
+ \frac{(-1)^m(x^2/4)^m}{m!(m+1)!}>0
+ \qquad(0<x\le2.405),
+\end{equation}
+because the alternating sum is at least $1-(2.405)^2/8>0$.
+Hence $J_0$ is strictly decreasing there and its first zero lies in the
+displayed interval.  The final bound follows by squaring $2.405$.
+\end{proof}
+
+\begin{theorem}[Positive order-$(-1)$ splitting]\label{F51:thm:bessel}
+For every $n\ge2$,
+\begin{equation}\label{F51:eq:recurrence}
+ 1+j\frac{J_n'(j)}{J_n(j)}=n+1-k_n,
+\end{equation}
+and
+\begin{equation}\label{F51:eq:k-bounds}
+ 0<k_n\le \frac{2x}{n+1-x}<2,
+ \qquad k_n<\frac4n,
+ \qquad x:=\frac{j^2}{4}<1.447.
+\end{equation}
+In particular
+\begin{equation}\label{F51:eq:weight-equivalence}
+ \frac13(n+1)\le n+1-k_n\le n+1
+ \qquad(n\ge2).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The Bessel recurrence
+\begin{equation}
+ jJ_n'(j)=nJ_n(j)-jJ_{n+1}(j)
+\end{equation}
+gives \eqref{F51:eq:recurrence}.  Write
+\begin{equation}
+ J_n(j)=\frac{(j/2)^n}{n!}F_n,
+ \qquad
+ F_n=\sum_{m\ge0}\frac{(-1)^mx^m}{m!(n+1)_m}.
+\end{equation}
+For $n\ge2$, the ratio of consecutive absolute terms is at most
+$x/(n+1)<1/2$.  Alternating-series bounds give
+\begin{equation}
+ 0<1-\frac{x}{n+1}\le F_n\le1.
+\end{equation}
+Consequently
+\begin{equation}
+ 0<k_n=\frac{2x}{n+1}\frac{F_{n+1}}{F_n}
+ \le\frac{2x}{n+1-x}.
+\end{equation}
+The right-hand side is decreasing in $n$ and is less than $1.864$ at
+$n=2$.  Direct cross multiplication, using $x<1.447$, also gives
+$2x/(n+1-x)<4/n$ for every $n\ge2$.  Hence
+$n+1-k_n\ge n-1\ge(n+1)/3$, proving
+\eqref{F51:eq:weight-equivalence}.
+\end{proof}
+
+Define the positive self-adjoint multiplier
+\begin{equation}
+ K_{-1}e^{in\theta}=k_{|n|}e^{in\theta},
+ \qquad |n|\ge2,
+\end{equation}
+and the reduced disk form
+\begin{equation}\label{F51:eq:qD}
+ \qD(f,g):=\qplus(f,g)-k(f,g),
+ \qquad
+ k(f,g):=\langle f,K_{-1}g\rangle_{L^2_*}.
+\end{equation}
+The physical disk quadratic Taylor form (equivalently, one half of the
+second variation of the scale-invariant deficit at the disk) is
+\begin{equation}\label{F51:eq:physical-Q}
+ \mathsf Q_D(f,g):=2j^2\qD(f,g).
+\end{equation}
+Thus the full Hessian is $2\mathsf Q_D=4j^2\qD$.  The factor $2j^2$ is
+not included in either $\qplus$ or $\qD$.
+
+\begin{corollary}[Coercivity and negative order]\label{F51:cor:coercivity}
+For $f\in H_{\rm ng}^{1/2}$,
+\begin{equation}\label{F51:eq:coercivity}
+ \frac13\qplus(f,f)\le\qD(f,f)\le\qplus(f,f).
+\end{equation}
+Moreover
+\begin{equation}\label{F51:eq:minus}
+ |k(f,g)|\le C_j\|f\|_{H^{-1/2}}\|g\|_{H^{-1/2}}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Equation \eqref{F51:eq:coercivity} is \eqref{F51:eq:weight-equivalence} summed over
+Fourier modes.  By \eqref{F51:eq:k-bounds}, $k_n\le C_j/n$; Cauchy--Schwarz with
+weight $1/n$ gives \eqref{F51:eq:minus}.
+\end{proof}
+
+\subsection{Exact terminal Schur identity}
+
+For the affine class \eqref{F51:eq:b}, define
+\begin{align}
+ \Pplus(\alpha)
+ &:=\inf_{v\in V_\alpha}\qplus(b_\alpha+v,b_\alpha+v),\label{F51:eq:Pplus}\\
+ \widetilde{\PD}(\alpha)
+ &:=\inf_{v\in V_\alpha}\qD(b_\alpha+v,b_\alpha+v),\label{F51:eq:PDtilde}\\
+ \PD(\alpha)&:=2j^2\widetilde{\PD}(\alpha).
+ \label{F51:eq:PD}
+\end{align}
+Let $f_\alpha\in\mathcal A_\alpha$ be the unique $\qplus$-minimal
+residual.  Thus
+\begin{equation}\label{F51:eq:galerkin}
+ \qplus(f_\alpha,v)=0\qquad(v\in V_\alpha).
+\end{equation}
+On $V_\alpha$, define
+\begin{equation}
+ A_{D,\alpha}[v,w]=\qD(v,w),
+ \qquad g_\alpha(v)=k(f_\alpha,v).
+\end{equation}
+
+\begin{theorem}[Terminal Bessel--Schur formula]\label{F51:thm:schur}
+For every positive fan,
+\begin{equation}\label{F51:eq:schur}
+ \widetilde{\PD}(\alpha)
+ =\Pplus(\alpha)-k(f_\alpha,f_\alpha)
+ -\langle g_\alpha,A_{D,\alpha}^{-1}g_\alpha\rangle.
+\end{equation}
+The inverse and dual pairing are taken on the quotient of $V_\alpha$ by its
+zero trace; by \eqref{F51:eq:coercivity} they are well defined.
+\end{theorem}
+
+\begin{proof}
+Every element of $\mathcal A_\alpha$ has a unique representation
+$f_\alpha+w$ modulo the zero trace, with $w\in V_\alpha$.  Using
+\eqref{F51:eq:galerkin},
+\begin{align*}
+ \qD(f_\alpha+w,f_\alpha+w)
+ ={}&\qplus(f_\alpha,f_\alpha)-k(f_\alpha,f_\alpha)\\
+ &+A_{D,\alpha}[w,w]-2g_\alpha(w).
+\end{align*}
+Completing the square in the coercive form $A_{D,\alpha}$ gives
+\eqref{F51:eq:schur}.
+\end{proof}
+
+\subsection{The uniform fan}
+
+Let $\alpha_*=a\mathbf1$, $a=2\pi/N$.  Rotation by $a$ acts on coefficient
+vectors by the cyclic shift and on traces by the unitary rotation
+$R_af(\theta)=f(\theta-a)$.
+
+\begin{lemma}[Uniform Bessel forcing vanishes]\label{F51:lem:gzero}
+Assume the canonical choice of $B_{\alpha_*}^{\rm ex}$ is cyclically
+equivariant.  Then
+\begin{equation}\label{F51:eq:gzero}
+ g_{\alpha_*}=0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The affine class, $\qplus$, and the canonical datum are invariant under
+$R_a$, so uniqueness of the $\qplus$ projection gives
+$R_af_{\alpha_*}=f_{\alpha_*}$.  The multiplier $K_{-1}$ commutes with
+$R_a$.  Hence for $z\in Z_{\alpha_*}$,
+\begin{equation}
+ k(f_{\alpha_*},\PiNG T_{\alpha_*}z)
+ =k\left(f_{\alpha_*},\PiNG T_{\alpha_*}
+ \frac1N\sum_{m=0}^{N-1}\sigma^m z\right),
+\end{equation}
+where $\sigma$ is the cyclic shift.  At the uniform fan,
+$L_{\alpha_*}z=0$ is equivalent to $\sum_i z_i=0$, so the averaged
+coefficient vector is zero.  Therefore the displayed pairing vanishes for
+every element of $V_{\alpha_*}$.
+\end{proof}
+
+Combining Theorem~\ref{F51:thm:schur} and Lemma~\ref{F51:lem:gzero} gives the exact
+endpoint difference
+\begin{align}\label{F51:eq:endpoint-difference}
+ \widetilde{\PD}(\alpha)-\widetilde{\PD}(\alpha_*)
+ ={}&\Pplus(\alpha)-\Pplus(\alpha_*)\\
+ &-\bigl[k(f_\alpha,f_\alpha)
+          -k(f_{\alpha_*},f_{\alpha_*})\bigr]\notag\\
+ &-\langle g_\alpha,A_{D,\alpha}^{-1}g_\alpha\rangle.\notag
+\end{align}
+\endgroup

@@ -1,0 +1,286 @@
+\begingroup
+\section{Node QB: quadratic-bubble reduction}
+\label{module:QB}
+\noindent\textit{Audited source: \nolinkurl{QB_bubble_reduction.tex}.}
+\subsection{Quadratic polar spline}
+
+Let
+\begin{equation}\label{QB:eq:fan}
+ \alpha_i>0,\qquad \sum_i\alpha_i=2\pi,
+ \qquad a=\frac{2\pi}{N},\qquad S=\max_i\alpha_i+a.
+\end{equation}
+Choose normal angles $\theta_i$ with
+$\theta_{i+1}-\theta_i=\alpha_i$ and put
+\begin{equation}\label{QB:eq:vertex}
+ \varphi_i=\theta_i+\frac{\alpha_i}{2}.
+\end{equation}
+The polar cell of side $i$ is
+\begin{equation}\label{QB:eq:cell}
+ K_i=[\varphi_{i-1},\varphi_i]
+ =[\theta_i-\alpha_{i-1}/2,\theta_i+\alpha_i/2].
+\end{equation}
+Define the continuous periodic quadratic spline
+\begin{equation}\label{QB:eq:q}
+ q_\alpha(\theta)=\frac12(\theta-\theta_i)^2,
+ \qquad \theta\in K_i.
+\end{equation}
+Continuity follows because the two values at $\varphi_i$ are both
+$\alpha_i^2/8$.
+
+The exact radial fan graph is
+\begin{equation}\label{QB:eq:f}
+ f_\alpha(\theta)=h_\alpha\sec(\theta-\theta_i)-1,
+ \qquad \theta\in K_i,
+\end{equation}
+with
+$h_\alpha=(\pi/\sum_j\tan(\alpha_j/2))^{1/2}$.
+
+\begin{lemma}[Secant/quadratic profile split]
+\label{QB:lem:split}
+There is a constant $c_\alpha$ and a continuous remainder $r_\alpha$ such
+that
+\begin{equation}\label{QB:eq:split}
+ f_\alpha=c_\alpha+q_\alpha+r_\alpha,
+\end{equation}
+and, without a minimum-angle assumption,
+\begin{equation}\label{QB:eq:r-size}
+ \|r_\alpha\|_\infty\le CS^4,
+ \qquad \|r_\alpha\|_{W^{1,\infty}}\le CS^3,
+ \qquad \|r_\alpha\|_{H^{1/2}}^2\le CS^7.
+\end{equation}
+Also
+\begin{equation}\label{QB:eq:q-size}
+ \|q_\alpha\|_\infty\le CS^2,
+ \qquad \|q_\alpha\|_{W^{1,\infty}}\le CS,
+ \qquad \|q_\alpha\|_{H^{1/2}}^2\le CS^3.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Take $c_\alpha=h_\alpha-1$ and write, on a cell,
+\begin{equation*}
+ r_\alpha(x)
+ =(h_\alpha-1)\frac{x^2}{2}
+ +h_\alpha\left(\sec x-1-\frac{x^2}{2}\right).
+\end{equation*}
+Since $h_\alpha-1=O(\sum_i\alpha_i^3)=O(S^2)$ and
+$\sec x-1-x^2/2=O(x^4)$ through one normalized derivative, the first two
+estimates in \eqref{QB:eq:r-size} follow.  Same and adjacent half-cells in the
+Slobodeckij seminorm cost $C\alpha_i^8$.  On separated half-cells subtract
+both means and use the first-separating dyadic annulus.  Thus
+\begin{equation*}
+ \|r_\alpha\|_{H^{1/2}}^2
+ \le C\sum_i\alpha_i^8
+ \le CS^4\sum_i\alpha_i^4\le CS^7.
+\end{equation*}
+The proof of \eqref{QB:eq:q-size} is identical with local amplitude
+$\alpha_i^2$ and derivative amplitude $\alpha_i$.
+\end{proof}
+
+\subsection{The higher secant profile is harmless}
+
+Recall the symmetric null form of stage 138,
+\begin{multline}\label{QB:eq:C}
+ \Cnull(g_1,g_2,g_3)\\
+ =\frac13\sum_{\rm cyc}\int_\T g_1
+ \{(\Dop g_2)(\Dop g_3)-g_2'g_3'\}\,d\theta.
+\end{multline}
+It has total order two and the tame estimate
+\begin{equation}\label{QB:eq:C-tame}
+ |\Cnull(g_1,g_2,g_3)|
+ \le C\sum_{p<q}\|g_p\|_{H^{1/2}}\|g_q\|_{H^{1/2}}
+ \|g_\ell\|_{W^{1,\infty}}.
+\end{equation}
+
+\begin{lemma}[Constants disappear]
+\label{QB:lem:constant}
+For every $g$ and every constant $c$,
+\begin{equation}\label{QB:eq:constant}
+ \Cnull(g+c,g+c,g+c)=\Cnull(g,g,g).
+\end{equation}
+The same is true after polarization whenever a constant occupies any one
+slot.
+\end{lemma}
+
+\begin{proof}
+Terms in which a differentiated slot is constant vanish.  If the
+undifferentiated slot is constant, Parseval gives
+$\|\Dop g\|_2^2=\|g'\|_2^2$.  Polarization proves the last assertion.
+\end{proof}
+
+\begin{theorem}[Secant-to-quadratic transfer]
+\label{QB:thm:transfer}
+There are moduli $\varepsilon_q(S),\varepsilon_{q,s}(S)\to0$ such that
+\begin{align}
+ &|\{\Cnull(f_\alpha^3)-\Cnull(q_\alpha^3)\}
+ -\{\Cnull(f_{a\mathbf1}^3)-\Cnull(q_{a\mathbf1}^3)\}|
+ \le\varepsilon_q(S)\Jfour(\alpha),
+ \label{QB:eq:transfer-fan}\\
+ &|\Cnull(f_\alpha,f_\alpha,v_\alpha(z))
+ -\Cnull(q_\alpha,q_\alpha,v_\alpha(z))|
+ \le\varepsilon_{q,s}(S)\Jfour(\alpha)^{1/2}
+ \widetilde{\mathfrak G}_\alpha(z)^{1/2}.
+ \label{QB:eq:transfer-mixed}
+\end{align}
+Here $v_\alpha(z)$ is the normal component of the physical support trace.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{QB:lem:constant}, only $r_\alpha$ occurs in the difference.
+Equations \eqref{QB:eq:C-tame}--\eqref{QB:eq:q-size} give the absolute estimates
+\begin{equation}\label{QB:eq:transfer-absolute}
+ |\Cnull(f_\alpha^3)-\Cnull(q_\alpha^3)|\le CS^6,
+\end{equation}
+and
+\begin{equation}\label{QB:eq:transfer-mixed-absolute}
+ |\Cnull(f_\alpha,f_\alpha,v)-\Cnull(q_\alpha,q_\alpha,v)|
+ \le CS^{9/2}\|v\|_{H^{1/2}}.
+\end{equation}
+For example, an energetic $(q,r)$ pair and a coefficient $q$ cost
+$S^{3/2}S^{7/2}S=S^6$; the other placements are no larger.
+
+Use the far threshold $\Jfour\ge S^{6-\beta}$, $0<\beta<1$.
+Equations \eqref{QB:eq:transfer-absolute}--
+\eqref{QB:eq:transfer-mixed-absolute} give an $o(1)$ multiple of the required
+right sides.  In the complementary regime,
+\begin{equation*}
+ \|\alpha-a\mathbf1\|_\infty/S
+ \le CS^{(2-\beta)/4},
+\end{equation*}
+so the whole segment is in a fixed complex material polydisc.  Pull every
+half-cell to $[0,1]$ before differentiating.  Cauchy's estimate applied to
+the two absolute majorants gives
+\begin{equation*}
+ |F_q''(t)|\le CS^2E(t),
+ \qquad \|\Psi_q'(t)\|\le CS^{5/2}E(t)^{1/2}.
+\end{equation*}
+Cyclic symmetry kills the regular first fan derivative and the regular
+support functional on the exact quotient.  Integrate with the weighted and
+unweighted quartic actions.  Physical trace equivalence replaces
+$\|v_\alpha(z)\|_{H^{1/2}}$ by
+$C\widetilde{\mathfrak G}_\alpha(z)^{1/2}$.
+\end{proof}
+
+\subsection{Exact midpoint-atom formula}
+
+Let
+\begin{equation}\label{QB:eq:mu}
+ \mu_\alpha=\sum_i\alpha_i\delta_{\varphi_i}.
+\end{equation}
+
+\begin{lemma}[Distributional spline identity]
+\label{QB:lem:distribution}
+One has
+\begin{equation}\label{QB:eq:distribution}
+ q_\alpha''=1-\mu_\alpha
+\end{equation}
+on $\T$.  With Fourier convention
+$\widehat g(n)=(2\pi)^{-1}\int_\T g(\theta)e^{-in\theta}\,d\theta$, put
+\begin{equation}\label{QB:eq:M}
+ M_\alpha(n)=\sum_i\alpha_i e^{-in\varphi_i}.
+\end{equation}
+Then, for $n\ne0$,
+\begin{equation}\label{QB:eq:qhat}
+ \widehat q_\alpha(n)=\frac{M_\alpha(n)}{2\pi n^2}.
+\end{equation}
+Moreover the midpoint cancellation is the exact identity
+\begin{equation}\label{QB:eq:midpoint-cancellation}
+ M_\alpha(n)=\sum_i\alpha_i e^{-in\varphi_i}
+ \left\{1-\operatorname{sinc}\left(\frac{n\alpha_i}{2}\right)\right\},
+ \qquad n\ne0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Inside every open cell, $q_\alpha''=1$.  At the vertex $\varphi_i$ the
+one-sided derivatives are $\alpha_i/2$ and $-\alpha_i/2$, so the derivative
+jump is $-\alpha_i$.  This proves \eqref{QB:eq:distribution}; Fourier
+transformation gives \eqref{QB:eq:qhat}.
+
+The normal intervals
+$I_i=[\theta_i,\theta_{i+1}]$ partition the circle and have midpoint
+$\varphi_i$.  Hence, for $n\ne0$,
+\begin{equation*}
+ 0=\int_\T e^{-in\theta}\,d\theta
+ =\sum_i\alpha_i e^{-in\varphi_i}
+ \operatorname{sinc}\left(\frac{n\alpha_i}{2}\right).
+\end{equation*}
+Subtract this equality from \eqref{QB:eq:M}.
+\end{proof}
+
+\begin{theorem}[Exact discrete cubic scalar]
+\label{QB:thm:discrete}
+The pure quadratic-bubble null form is
+\begin{equation}\label{QB:eq:discrete}
+ \boxed{
+ \Cnull(q_\alpha,q_\alpha,q_\alpha)
+ =\frac1{\pi^2}\operatorname{Re}
+ \sum_{p,q\ge1}
+ \frac{M_\alpha(p)M_\alpha(q)
+ \overline{M_\alpha(p+q)}}{pq(p+q)^2}.}
+\end{equation}
+The series is interpreted by symmetric Abel limits and is absolutely
+convergent after the midpoint cancellation \eqref{QB:eq:midpoint-cancellation}
+is inserted sourcewise.
+\end{theorem}
+
+\begin{proof}
+For a real $g$, Fourier expansion of \eqref{QB:eq:C} shows that only triples
+with two frequencies of the same sign survive.  If $p,q>0$ and the third
+frequency is $-(p+q)$, the unsymmetrized coefficient is $2pq$.
+The positive and negative triples are conjugate, so
+\begin{equation*}
+ \Cnull(g,g,g)=8\pi\operatorname{Re}
+ \sum_{p,q\ge1}pq\,\widehat g(p)\widehat g(q)
+ \overline{\widehat g(p+q)}.
+\end{equation*}
+Insert \eqref{QB:eq:qhat}; since
+$8\pi/(2\pi)^3=1/\pi^2$, this gives \eqref{QB:eq:discrete}.
+Abel regularization $r^{p+q}$ justifies rearrangement.  Formula
+\eqref{QB:eq:midpoint-cancellation} gives two powers of $n\alpha_i$ at low
+frequency and the trivial bound at high frequency; dyadic source
+allocation then makes the Abel limit independent of the order of
+summation.
+\end{proof}
+
+\subsection{Final discrete obligations}
+
+\begin{obligation}[DF: midpoint cubic Bregman estimate]
+\label{QB:obl:DF}
+For the explicit scalar on the right of \eqref{QB:eq:discrete}, prove
+\begin{equation}\label{QB:eq:DF}
+ |\Cnull(q_\alpha^3)-\Cnull(q_{a\mathbf1}^3)|
+ \le CS\Jfour(\alpha).
+\end{equation}
+Every cumulative phase produced by differentiating $\varphi_i$ must first
+be summed cyclically; the midpoint factor in
+\eqref{QB:eq:midpoint-cancellation} is not to be differentiated row by row.
+\end{obligation}
+
+\begin{obligation}[DM: polarized midpoint/support estimate]
+\label{QB:obl:DM}
+For the polarization of \eqref{QB:eq:discrete} with one slot replaced by the
+physical normal trace $v_\alpha(z)$, prove
+\begin{equation}\label{QB:eq:DM}
+ |\Cnull(q_\alpha,q_\alpha,v_\alpha(z))|
+ \le\varepsilon_{\rm DM}(S)\Jfour(\alpha)^{1/2}
+ \widetilde{\mathfrak G}_\alpha(z)^{1/2},
+ \qquad \varepsilon_{\rm DM}(S)\to0.
+\end{equation}
+\end{obligation}
+
+\begin{proposition}[Equivalence]
+\label{QB:prop:equivalence}
+DF and the secant-to-quadratic transfer imply the pure principal row NF.
+DF, DM, and the same transfer imply the mixed principal row NM.  These are
+exactly the two terminal principal inputs exported by QB; the conversion
+to CF, CM, NR, and J0 is performed only in the current
+\texttt{NR\_assembly.tex} node.
+\end{proposition}
+
+\begin{proof}
+Apply Theorem~\ref{QB:thm:transfer} to the pure and mixed null forms and absorb
+its moduli into the DF and DM moduli.  No downstream tensor or value
+statement is imported here.
+\end{proof}
+\endgroup

@@ -1,0 +1,643 @@
+\begingroup
+\section{Foundation F65: the exact angular disk endpoint}
+\label{module:F65}
+\noindent\textit{Audited source: \nolinkurl{convex_largeN_polya_szego_stage65_correct_source_disk_endpoint.tex}.}
+\subsection{Fan, correct source, and the two support spaces}
+
+Let
+\begin{equation}\label{F65:eq:fan}
+ \alpha_i>0,\qquad \sum_i\alpha_i=2\pi,
+ \qquad \theta_{i+1}-\theta_i=\alpha_i,
+ \qquad \bar\alpha=\frac{2\pi}{N},
+\end{equation}
+and put
+\begin{equation}\label{F65:eq:SJ}
+ S=\alpha_{\max}+\bar\alpha,
+ \qquad
+ \Jfour(\alpha)=\sum_i\alpha_i^4-N\bar\alpha^4.
+\end{equation}
+Set $\phi_i=\theta_i+\alpha_i/2$ and
+$K_i=[\phi_{i-1},\phi_i]$.  On $K_i$ write
+\begin{equation}
+ a=\alpha_{i-1},\quad b=\alpha_i,\quad
+ x=\theta-\theta_i,\quad
+ s=\frac{x+a/2}{(a+b)/2},
+\end{equation}
+and define the correct principal source
+\begin{equation}\label{F65:eq:G}
+ G_\alpha(\theta)=\frac{x^2}{2}.
+\end{equation}
+
+For a coefficient vector $z$, put
+\begin{equation}
+ r_- =\frac{z_i-z_{i-1}}a,
+ \qquad r_+=\frac{z_{i+1}-z_i}b.
+\end{equation}
+The homogeneous and exact vertex-compatible traces are
+\begin{align}
+ (T_\alpha^0z)_i(x)
+ &=z_i+x\bigl((1-s)r_-+sr_+\bigr),\label{F65:eq:T0}\\
+ (T_\alpha z)_i(x)
+ &=z_i\cos x+\bigl((1-s)a_i^-+sa_i^+\bigr)\sin x,
+ \label{F65:eq:T}
+\end{align}
+where
+\begin{equation}\label{F65:eq:apm}
+ a_i^-=r_-\frac a{\sin a}-z_i\tan\frac a2,
+ \qquad
+ a_i^+=r_+\frac b{\sin b}+z_i\tan\frac b2.
+\end{equation}
+Both traces are continuous at the vertices $\phi_i$.
+
+The homogeneous and exact area rows are
+\begin{align}
+ L_\alpha^0z
+ &=\frac12\sum_i(\alpha_{i-1}+\alpha_i)z_i,\label{F65:eq:L0}\\
+ L_\alpha z
+ &=\sum_i\left(\tan\frac{\alpha_{i-1}}2
+ +\tan\frac{\alpha_i}2\right)z_i.\label{F65:eq:L}
+\end{align}
+Let $Z_\alpha^0=\ker L_\alpha^0$ and $Z_\alpha=\ker L_\alpha$.
+Centering rows may be added throughout; translations will be removed exactly
+in Section~\ref{F65:sec:translations}.
+
+Work in $H=H^{1/2}(\Sone)/\R$ with
+\begin{equation}\label{F65:eq:qplus}
+ \qplus(f)=\sum_{n\ne0}(|n|+1)|\widehat f_n|^2,
+ \qquad
+ \widehat f_n=\frac1{2\pi}\int_0^{2\pi}f(\theta)e^{-in\theta}\,d\theta.
+\end{equation}
+Set
+\begin{equation}
+ V_\alpha^0=T_\alpha^0Z_\alpha^0,
+ \qquad V_\alpha=T_\alpha Z_\alpha,
+\end{equation}
+and
+\begin{align}
+ P_0^G(\alpha)&=\inf_{v\in V_\alpha^0}\qplus(G_\alpha+v),
+ \label{F65:eq:P0}\\
+ P_{\rm tr}^G(\alpha)&=\inf_{v\in V_\alpha}\qplus(G_\alpha+v).
+ \label{F65:eq:Ptr}
+\end{align}
+The corrected homogeneous theorem gives
+\begin{equation}\label{F65:eq:input-gap}
+ P_0^G(\alpha)-P_0^G(\bar\alpha\mathbf1)
+ \ge\frac{\zeta(3)}{10\pi^4}\Jfour(\alpha).
+\end{equation}
+
+\subsection{No-ratio exact-trace graph}
+
+\begin{lemma}[Local jet coercivity]\label{F65:lem:jet}
+There are absolute constants $0<c<C$ such that, with $w=a+b$,
+\begin{equation}\label{F65:eq:jet}
+ cw\bigl(z_i^2+w^2r_-^2+w^2r_+^2\bigr)
+ \le\|T_\alpha^0z\|_{L^2(K_i)}^2
+ \le Cw\bigl(z_i^2+w^2r_-^2+w^2r_+^2\bigr).
+\end{equation}
+The constants are independent of $a/b$.
+\end{lemma}
+
+\begin{proof}
+After $x=(w/2)(y-t)$ with $t=a/w$, the three normalized polynomials are
+\begin{equation}
+ 1,\qquad (y-t)(1-y),\qquad (y-t)y,
+ \qquad 0\le y\le1.
+\end{equation}
+The matrix carrying the two slope variables to the linear and quadratic
+coefficients has determinant one and it and its inverse are uniformly
+bounded for $0\le t\le1$.  Finite-dimensional norm equivalence proves
+\eqref{F65:eq:jet}.
+\end{proof}
+
+\begin{lemma}[Exact-minus-homogeneous graph]\label{F65:lem:graph}
+For $S$ sufficiently small there is a bijection
+$C_\alpha:Z_\alpha^0\to Z_\alpha$ for which
+\begin{equation}
+ J_\alpha(T_\alpha^0z)=T_\alpha C_\alpha z
+\end{equation}
+satisfies
+\begin{equation}\label{F65:eq:Jclose}
+ \|(J_\alpha-I)v\|_H\le CS^{3/2}\|v\|_H,
+ \qquad v\in V_\alpha^0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Taylor's formula in \eqref{F65:eq:T}--\eqref{F65:eq:apm} gives on $K_i$
+\begin{align}
+ \|T_\alpha z-T_\alpha^0z\|_{L^\infty(K_i)}
+ &\le C\bigl(w^2|z_i|+w^3(|r_-|+|r_+|)\bigr),\notag\\
+ \|\partial_\theta(T_\alpha z-T_\alpha^0z)\|_{L^\infty(K_i)}
+ &\le C\bigl(w|z_i|+w^2(|r_-|+|r_+|)\bigr).
+ \label{F65:eq:trace-jets}
+\end{align}
+The error is continuous at every wall.  Summing \eqref{F65:eq:trace-jets},
+using Lemma~\ref{F65:lem:jet}, cyclic Poincar\'e on the area kernel, and
+$\|f\|_{H^{1/2}}^2\le C\|f\|_{L^2}\|f\|_{H^1}$ gives
+\begin{equation}\label{F65:eq:trace-close}
+ \|T_\alpha z-T_\alpha^0z\|_H
+ \le CS^{3/2}\|T_\alpha^0z\|_H.
+\end{equation}
+
+For $z\in Z_\alpha^0$, define
+\begin{equation}
+ C_\alpha z=z-\frac{L_\alpha z}{L_\alpha\mathbf1}\mathbf1.
+\end{equation}
+Since
+\begin{equation}
+ \left|\tan\frac u2-\frac u2\right|\le Cu^3,
+\end{equation}
+the coefficient correction is $O(S^2)$ in the trace metric.  The analogous
+formula with $L_\alpha^0$ is the inverse map.  Combining this row correction
+with \eqref{F65:eq:trace-close} proves \eqref{F65:eq:Jclose}.
+\end{proof}
+
+\begin{lemma}[Hilbert Schur perturbation]\label{F65:lem:schur}
+If $J:V_0\to V_1$ is a bijection with
+$\|(J-I)v\|\le\eta\|v\|$, $\eta<1/2$, then
+\begin{equation}\label{F65:eq:schur}
+ \left|\operatorname {dist}(b,V_1)^2
+ -\operatorname {dist}(b,V_0)^2\right|
+ \le C\eta\|b\|^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Map the orthogonal projection of $-b$ onto $V_0$ through $J$ and use it as
+a competitor in $V_1$.  Apply the same argument to $J^{-1}$.
+\end{proof}
+
+The continuous edge quadratic satisfies the no-ratio spline bound
+\begin{equation}\label{F65:eq:Gbound}
+ \qplus(G_\alpha)\le C\sum_i\alpha_i^4\le CS^3.
+\end{equation}
+Indeed, affine normalization on each $K_i$ controls the same-cell and
+adjacent-cell terms, while dyadic annuli control the separated-cell part.
+Lemma~\ref{F65:lem:schur} therefore yields, for
+\begin{equation}
+ R_{\rm tr}^G=P_{\rm tr}^G-P_0^G,
+\end{equation}
+the absolute estimate
+\begin{equation}\label{F65:eq:trace-absolute}
+ |R_{\rm tr}^G(\alpha)|\le CS^{9/2}.
+\end{equation}
+
+\subsection{Relative trace comparison}
+
+\begin{proposition}[Quasiuniform trace Hessian]\label{F65:prop:trace-hessian}
+Suppose
+\begin{equation}\label{F65:eq:quasiuniform}
+ (1-\eta_0)a\le\gamma_i\le(1+\eta_0)a,
+ \qquad \sum_i\gamma_i=2\pi,
+\end{equation}
+where $0<\eta_0<1/4$.  If $\sum_i\delta_i=0$, then
+\begin{equation}\label{F65:eq:trace-hessian}
+ |D^2R_{\rm tr}^G(\gamma)[\delta,\delta]|
+ \le Ca^{1/2}\sum_i\gamma_i^2\delta_i^2.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+If $\delta\ne0$, complexify
+$\gamma(z)=\gamma+z\delta$ in the disk
+\begin{equation}
+ |z|<r,\qquad r=\frac{c_0a}{\|\delta\|_{\ell^\infty}}.
+\end{equation}
+For every cyclic arc $I$,
+\begin{equation}
+ \left|z\sum_{i\in I}\delta_i\right|
+ \le c_0a\#I
+ \le Cc_0\sum_{i\in I}\gamma_i.
+\end{equation}
+Thus the cellwise affine material map changes every arc length by a fixed
+small relative amount.  The pulled-back Gagliardo kernel, the $L^2$ row,
+the two traces, the area graph, and the polynomial source $G_{\gamma(z)}$
+are holomorphic.  Their Gram inverses stay uniformly bounded by
+Lemma~\ref{F65:lem:jet}.  The proof of \eqref{F65:eq:trace-absolute} applies to the
+complex bilinear Schur formula and gives
+\begin{equation}
+ |R_{\rm tr}^G(\gamma(z))|\le Ca^{9/2}.
+\end{equation}
+Cauchy's estimate gives
+\begin{equation}
+ |D^2R_{\rm tr}^G(\gamma)[\delta,\delta]|
+ \le Ca^{5/2}\|\delta\|_{\ell^\infty}^2.
+\end{equation}
+Use
+$\sum_i\gamma_i^2\delta_i^2\ge c a^2
+\|\delta\|_{\ell^\infty}^2$ to obtain \eqref{F65:eq:trace-hessian}.
+\end{proof}
+
+\begin{lemma}[Relative trace remainder]\label{F65:lem:trace-relative}
+For every sufficiently fine positive fan,
+\begin{equation}\label{F65:eq:trace-relative}
+ |R_{\rm tr}^G(\alpha)-R_{\rm tr}^G(\bar\alpha\mathbf1)|
+ \le C(S^{1/4}+S^{1/2})\Jfour(\alpha).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $a=\bar\alpha$ and $d_i=\alpha_i-a$.  The exact identity
+\begin{equation}\label{F65:eq:Jidentity}
+ \Jfour(\alpha)
+ =\sum_i d_i^2(\alpha_i^2+2a\alpha_i+3a^2)
+\end{equation}
+implies $\max_i|d_i|^4\le C\Jfour(\alpha)$.
+If $\Jfour\ge S^{17/4}$, use \eqref{F65:eq:trace-absolute}.  Otherwise
+$\max|d_i|/S\le CS^{1/16}$, so the segment
+$a\mathbf1+td$ is quasiuniform.  Cyclic invariance makes the first
+derivative of $R_{\rm tr}^G$ vanish at $a\mathbf1$ on the zero-sum
+direction.  Taylor's formula, Proposition~\ref{F65:prop:trace-hessian}, and
+\eqref{F65:eq:Jidentity} give the $CS^{1/2}\Jfour$ bound.  The two cases prove
+\eqref{F65:eq:trace-relative}.
+\end{proof}
+
+\begin{theorem}[Correct-source exact-trace gap]\label{F65:thm:trace-gap}
+There is $S_{\rm tr}>0$ such that, for $S\le S_{\rm tr}$,
+\begin{equation}\label{F65:eq:trace-gap}
+ \boxed{
+ P_{\rm tr}^G(\alpha)-P_{\rm tr}^G(\bar\alpha\mathbf1)
+ \ge\frac{\zeta(3)}{20\pi^4}\Jfour(\alpha).}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Combine \eqref{F65:eq:input-gap} and \eqref{F65:eq:trace-relative}, decreasing
+$S_{\rm tr}$ until the latter coefficient is at most
+$\zeta(3)/(20\pi^4)$.
+\end{proof}
+
+\subsection{Exact translations}\label{F65:sec:translations}
+
+\begin{lemma}[Translation quotient]\label{F65:lem:translations}
+For $c\in\R^2$, let $z_i=c\cdot(\cos\theta_i,\sin\theta_i)$.  Then
+\begin{equation}\label{F65:eq:translation}
+ L_\alpha z=0,
+ \qquad T_\alpha z(\theta)=c\cdot(\cos\theta,\sin\theta).
+\end{equation}
+Consequently
+\begin{equation}\label{F65:eq:translation-quotient}
+ P_{\rm tr}^G(\alpha)
+ =\inf_{v\in\PiNG V_\alpha}
+ \qplus(\PiNG G_\alpha+v),
+\end{equation}
+where $\PiNG$ removes the modes $0,\pm1$.
+\end{lemma}
+
+\begin{proof}
+With $\tau_i=(-\sin\theta_i,\cos\theta_i)$, the identities
+\begin{equation}
+ \nu_{i-1}=\nu_i\cos a-\tau_i\sin a,
+ \qquad
+ \nu_{i+1}=\nu_i\cos b+\tau_i\sin b
+\end{equation}
+give $a_i^-=a_i^+=c\cdot\tau_i$ in \eqref{F65:eq:apm}.  Hence
+\eqref{F65:eq:T} equals $c\cdot\nu(\theta)$.  Translation invariance of area
+gives $L_\alpha z=0$.  Orthogonality of the Fourier modes proves
+\eqref{F65:eq:translation-quotient}.
+\end{proof}
+
+\subsection{Bessel order-minus-one reduction}
+
+Let $j=j_{0,1}$ and, for $n\ge2$, set
+\begin{equation}
+ k_n=j\frac{J_{n+1}(j)}{J_n(j)}.
+\end{equation}
+On the range of $\PiNG$, define
+\begin{align}
+ k(f,g)&=\sum_{|n|\ge2}k_{|n|}\widehat f_n\widehat g_{-n},\notag\\
+ \qdisk(f,g)&=\qplus(f,g)-k(f,g).
+ \label{F65:eq:qdisk}
+\end{align}
+The Bessel recurrence and its alternating fixed-argument series give
+\begin{equation}\label{F65:eq:bessel-bounds}
+ 0<k_n<\frac4n,
+ \qquad \frac13\qplus(f)\le\qdisk(f)\le\qplus(f).
+\end{equation}
+Put
+\begin{equation}
+ b_\alpha^G=\PiNG G_\alpha,
+ \qquad W_\alpha=\PiNG V_\alpha,
+\end{equation}
+and
+\begin{equation}\label{F65:eq:PDG}
+ P_D^G(\alpha)=\inf_{v\in W_\alpha}\qdisk(b_\alpha^G+v).
+\end{equation}
+
+\begin{lemma}[No-ratio exact-trace quasi-interpolant]
+\label{F65:lem:QI}
+There is a linear operator
+\begin{equation}
+ I_\alpha:H_{\rm ng}^{3/2}(\Sone)\longrightarrow W_\alpha
+\end{equation}
+such that, for every sufficiently fine positive fan,
+\begin{equation}\label{F65:eq:interpolant}
+ \|\psi-I_\alpha\psi\|_{H^{1/2}}
+ \le CS\|\psi\|_{H^{3/2}}.
+\end{equation}
+The constant is independent of the smallest cell and every adjacent
+mesh ratio.
+\end{lemma}
+
+\begin{proof}
+It is enough to work first in the homogeneous trace space.  Put
+\(M=\lfloor S^{-1}\rfloor\) and let \(\phi=P_{\le M}\psi\) be the
+Fourier projection onto \(|n|\le M\).  Directly from the Fourier norms,
+\begin{equation}\label{F65:eq:QI-tail}
+ \|\psi-\phi\|_{H^{1/2}}
+ \le CS\|\psi\|_{H^{3/2}},
+ \qquad
+ \|\phi''\|_{L^2}
+ \le CS^{-1/2}\|\psi\|_{H^{3/2}}.
+\end{equation}
+
+Take the nodal values \(z_i=\phi(\theta_i)\) and set
+\(Q_\alpha\phi=T_\alpha^0z\).  We give the global estimate rather than
+invoke a mesh-regular interpolation theorem.  On
+\(K_i=[\phi_{i-1},\phi_i]\), write
+\(a=\alpha_{i-1}\), \(b=\alpha_i\), \(w=a+b\), and
+\(\omega_i=[\theta_{i-1},\theta_{i+1}]\).  Since
+\begin{equation*}
+ r_-=\frac1a\int_{\theta_{i-1}}^{\theta_i}\phi'(u)\,du,
+ \qquad
+ r_+=\frac1b\int_{\theta_i}^{\theta_{i+1}}\phi'(u)\,du,
+\end{equation*}
+Cauchy--Schwarz and the fundamental theorem of calculus give
+\begin{equation}\label{F65:eq:QI-slope}
+ |r_--\phi'(\theta_i)|+|r_+-\phi'(\theta_i)|
+ \le Cw^{1/2}\|\phi''\|_{L^2(\omega_i)}.
+\end{equation}
+The trace formula \eqref{F65:eq:T0} reproduces every affine function.  Using
+\eqref{F65:eq:QI-slope} in that formula, and using Taylor's integral formula
+for \(\phi\), yields for \(x\in K_i\)
+\begin{align}
+ |\phi(x)-Q_\alpha\phi(x)|
+ &\le Cw^{3/2}\|\phi''\|_{L^2(\omega_i)},\label{F65:eq:QI-point}\\
+ |\phi'(x)-(Q_\alpha\phi)'(x)|
+ &\le Cw^{1/2}\|\phi''\|_{L^2(\omega_i)}.\label{F65:eq:QI-derivative}
+\end{align}
+Indeed, after subtracting the affine Taylor polynomial at \(\theta_i\),
+the first row consists of \(x\) times a convex combination of the two
+slope errors, and the differentiated row contains in addition
+\(2x(r_+-r_-)/w\); all its coefficients are bounded for
+\(-a/2\le x\le b/2\), including when \(a/b\) tends to zero or infinity.
+
+The intervals \(\omega_i\) have overlap at most two when their
+\(L^2\)-mass is assigned back to the two constituent normal cells.
+Since \(w\le2S\), integration of
+\eqref{F65:eq:QI-point}--\eqref{F65:eq:QI-derivative} and summation give
+\begin{equation}\label{F65:eq:QI-L2H1}
+ \|\phi-Q_\alpha\phi\|_{L^2}
+ \le CS^2\|\phi''\|_{L^2},
+ \qquad
+ \|\phi-Q_\alpha\phi\|_{H^1}
+ \le CS\|\phi''\|_{L^2}.
+\end{equation}
+The Fourier interpolation inequality
+\(\|e\|_{H^{1/2}}^2\le\|e\|_{L^2}\|e\|_{H^1}\),
+\eqref{F65:eq:QI-tail}, and \eqref{F65:eq:QI-L2H1} imply
+\begin{equation}\label{F65:eq:QI-homogeneous}
+ \|\phi-Q_\alpha\phi\|_{H^{1/2}}
+ \le CS^{3/2}\|\phi''\|_{L^2}
+ \le CS\|\psi\|_{H^{3/2}}.
+\end{equation}
+
+It remains only to impose the exact finite rows.  Replace \(z\) by
+\begin{equation*}
+ z^0=z-\frac{L_\alpha^0z}{L_\alpha^0\mathbf1}\mathbf1.
+\end{equation*}
+Because \(T_\alpha^0\mathbf1=1\), this changes the homogeneous trace only
+by a constant.  Put \(v^0=T_\alpha^0z^0\in V_\alpha^0\) and define
+\begin{equation}
+ I_\alpha\psi=\PiNG J_\alpha v^0\in W_\alpha,
+\end{equation}
+where \(J_\alpha\) is the exact area graph of
+Lemma~\ref{F65:lem:graph}.  The projection \(\PiNG\) is an orthogonal
+contraction in every Fourier Sobolev norm, \(\psi=\PiNG\psi\), and
+\eqref{F65:eq:Jclose} gives
+\begin{equation*}
+ \|\PiNG(J_\alpha-I)v^0\|_{H^{1/2}}
+ \le CS^{3/2}\|v^0\|_{H^{1/2}}
+ \le CS\|\psi\|_{H^{3/2}}.
+\end{equation*}
+Together with \eqref{F65:eq:QI-tail} and
+\eqref{F65:eq:QI-homogeneous}, this is \eqref{F65:eq:interpolant}.
+\end{proof}
+
+\begin{lemma}[Galerkin negative-norm gain]\label{F65:lem:negative}
+Let $f_\alpha=b_\alpha^G+v_\alpha$ be the $\qplus$-minimizing residual.
+Then
+\begin{equation}\label{F65:eq:negative}
+ \|f_\alpha\|_{H^{-1/2}}
+ \le CS\|f_\alpha\|_{H^{1/2}}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $g\in H_{\rm ng}^{1/2}$ solve $(|D|+I)\psi=g$.  Galerkin
+orthogonality and Lemma~\ref{F65:lem:QI} give
+\begin{equation}
+ |\langle f_\alpha,g\rangle|
+ =|\qplus(f_\alpha,\psi-I_\alpha\psi)|
+ \le CS\|f_\alpha\|_{H^{1/2}}\|g\|_{H^{1/2}}.
+\end{equation}
+Taking the dual supremum proves \eqref{F65:eq:negative}.
+\end{proof}
+
+Let
+\begin{equation}
+ R_B^G(\alpha)=P_{\rm tr}^G(\alpha)-P_D^G(\alpha).
+\end{equation}
+Completing the disk square gives the exact identity
+\begin{equation}\label{F65:eq:bessel-schur}
+ R_B^G
+ =k(f_\alpha,f_\alpha)
+ +\langle g_\alpha,A_{D,\alpha}^{-1}g_\alpha\rangle,
+ \qquad g_\alpha(v)=k(f_\alpha,v),
+\end{equation}
+where $A_{D,\alpha}=\qdisk|_{W_\alpha}$.
+Equations \eqref{F65:eq:bessel-bounds}, \eqref{F65:eq:negative},
+\eqref{F65:eq:Gbound}, and \eqref{F65:eq:bessel-schur} imply
+\begin{equation}\label{F65:eq:bessel-absolute}
+ 0\le R_B^G(\alpha)\le CS^5.
+\end{equation}
+
+\begin{proposition}[Relative Bessel correction]\label{F65:prop:bessel-relative}
+For every sufficiently fine positive fan,
+\begin{equation}\label{F65:eq:bessel-relative}
+ |R_B^G(\alpha)-R_B^G(\bar\alpha\mathbf1)|
+ \le C(S^{1/2}+S)\Jfour(\alpha).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+In a quasiuniform band, pull all functions to a fixed real fan.  If
+$h=\|\delta\|_{\ell^\infty}/a$, the first two material derivatives of
+$\qplus$ are bounded by $Ch^r$ in $H^{1/2}$, while those of $k$ are bounded
+by $Ch^r$ in $H^{-1/2}$.  The latter follows from
+\begin{equation}
+ |\Delta^rk_n|\le C_r(1+n)^{-1-r},\qquad 0\le r\le3,
+\end{equation}
+and three discrete summations by parts in the pulled-back kernel.
+Differentiating the Galerkin equation and \eqref{F65:eq:negative} twice gives
+\begin{equation}
+ \|\partial_t^rf_t\|_{H^{1/2}}\le Ch^ra^{3/2},
+ \qquad
+ \|\partial_t^rf_t\|_{H^{-1/2}}\le Ch^ra^{5/2},
+ \quad r=0,1,2.
+\end{equation}
+Twice differentiating \eqref{F65:eq:bessel-schur} therefore yields
+\begin{equation}\label{F65:eq:bessel-hessian}
+ |D^2R_B^G(\gamma)[\delta,\delta]|
+ \le Ca\sum_i\gamma_i^2\delta_i^2.
+\end{equation}
+
+Use \eqref{F65:eq:bessel-absolute} when
+$\Jfour\ge S^{9/2}$.  In the complementary regime,
+\eqref{F65:eq:Jidentity} makes the radial segment from the uniform fan
+quasiuniform; cyclic invariance kills the first derivative there, and
+\eqref{F65:eq:bessel-hessian} with Taylor's formula gives
+$CS\Jfour$.  This proves \eqref{F65:eq:bessel-relative}.
+\end{proof}
+
+\begin{corollary}[Correct-source Bessel gap]\label{F65:cor:bessel-gap}
+There is $S_D>0$ such that, for $S\le S_D$,
+\begin{equation}\label{F65:eq:bessel-gap}
+ \boxed{
+ P_D^G(\alpha)-P_D^G(\bar\alpha\mathbf1)
+ \ge\frac{\zeta(3)}{40\pi^4}\Jfour(\alpha).}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Subtract \eqref{F65:eq:bessel-relative} from \eqref{F65:eq:trace-gap} and decrease
+$S_D$ until the relative error is at most $\zeta(3)/(40\pi^4)$.
+\end{proof}
+
+\subsection{The exact secant source}
+
+Let
+\begin{equation}\label{F65:eq:secant}
+ A_\alpha=\sum_i\tan\frac{\alpha_i}{2},
+ \qquad h_\alpha=\left(\frac\pi{A_\alpha}\right)^{1/2},
+ \qquad
+ \rho_\alpha^{\rm tan}=h_\alpha\sec x-1
+ \quad\hbox{on }K_i.
+\end{equation}
+Writing $c_\alpha=h_\alpha-1$, one has
+\begin{equation}\label{F65:eq:secant-split}
+ \rho_\alpha^{\rm tan}=c_\alpha+G_\alpha+E_\alpha,
+ \qquad
+ E_\alpha=h_\alpha(\sec x-1)-\frac{x^2}{2}.
+\end{equation}
+
+\begin{lemma}[Scaled-spline secant remainder]\label{F65:lem:secant-remainder}
+For every sufficiently fine positive fan,
+\begin{equation}\label{F65:eq:secant-remainder}
+ \|E_\alpha\|_{H^{1/2}}
+ \le CS^2\|G_\alpha\|_{H^{1/2}}.
+\end{equation}
+The estimate is independent of the smallest cell.
+\end{lemma}
+
+\begin{proof}
+On $K_i$, normalized by $x=(a+b)(y-t)/2$, both $G_\alpha$ and
+$E_\alpha$ belong to a fixed compact family of even analytic profiles.
+Taylor's formula gives, through one normalized derivative,
+\begin{equation}\label{F65:eq:normalized-remainder}
+ |E_\alpha|+(a+b)|E_\alpha'|
+ \le CS^2(a+b)^2.
+\end{equation}
+The values from the two incident cells agree at each vertex.
+
+For completeness, the mesh-independent assembly is as follows.  Split the
+Slobodeckij integral into same-cell, adjacent-cell, and separated-cell
+pieces.  Affine normalization and finite-dimensional norm equivalence apply
+to the first two pieces.  For a separated pair $K_i,K_j$, subtract the cell
+means and use
+\begin{equation}
+ \iint_{K_i\times K_j}\frac{d\theta\,d\varphi}
+ {\operatorname {dist}_{\Sone}(\theta,\varphi)^2}
+ \le C\frac{|K_i||K_j|}{d_{ij}^2}.
+\end{equation}
+Summing in dyadic annuli bounds the mean-difference energy by the same-cell
+and adjacent-cell charges.  Equation \eqref{F65:eq:normalized-remainder} makes
+every charge of $E_\alpha$ at most $CS^2$ times the corresponding charge of
+$G_\alpha$.  This proves \eqref{F65:eq:secant-remainder} without a mesh-ratio
+assumption.
+\end{proof}
+
+Define the exact tangential-source disk value
+\begin{equation}\label{F65:eq:PDtan}
+ P_D^{\rm tan}(\alpha)
+ =\inf_{v\in W_\alpha}
+ \qdisk\bigl(\PiNG(\rho_\alpha^{\rm tan}-c_\alpha)+v\bigr)
+\end{equation}
+and
+\begin{equation}
+ R_{\rm sec}(\alpha)=P_D^{\rm tan}(\alpha)-P_D^G(\alpha).
+\end{equation}
+Coercivity of \eqref{F65:eq:bessel-bounds}, the Hilbert distance inequality,
+Lemma~\ref{F65:lem:secant-remainder}, and \eqref{F65:eq:Gbound} give
+\begin{equation}\label{F65:eq:secant-absolute}
+ |R_{\rm sec}(\alpha)|\le CS^5.
+\end{equation}
+
+\begin{lemma}[Relative secant correction]\label{F65:lem:secant-relative}
+For every sufficiently fine positive fan,
+\begin{equation}\label{F65:eq:secant-relative}
+ |R_{\rm sec}(\alpha)-R_{\rm sec}(\bar\alpha\mathbf1)|
+ \le C(S^{1/2}+S)\Jfour(\alpha).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Work in a real quasiuniform material segment
+$\gamma(t)=\gamma+t\delta$ and put
+$h=\|\delta\|_{\ell^\infty}/a$.  Affine normalization of
+\eqref{F65:eq:secant} and two differentiations of its elementary trigonometric
+coefficients give, for $r=0,1,2$,
+\begin{equation}
+ \|\partial_t^rG_{\gamma(t)}\|_{H^{1/2}}
+ \le Ch^ra^{3/2},
+ \qquad
+ \|\partial_t^rE_{\gamma(t)}\|_{H^{1/2}}
+ \le Ch^ra^{7/2}.
+\end{equation}
+The real-material $q_D$ form and the exact trace/area graph have first and
+second derivatives bounded by $Ch^r$ in their natural energy metrics; for
+the Bessel part this is the order-minus-one kernel estimate used in
+Proposition~\ref{F65:prop:bessel-relative}.  Differentiating the two coercive
+Schur equations defining $P_D^{\rm tan}$ and $P_D^G$ therefore shows that
+every second-derivative term in their difference is bounded by
+\begin{equation}
+ Ch^2(a^{3/2})(a^{7/2})=Ch^2a^5.
+\end{equation}
+Thus
+\begin{equation}
+ |D^2R_{\rm sec}(\gamma)[\delta,\delta]|
+ \le Ca\sum_i\gamma_i^2\delta_i^2.
+\end{equation}
+The two-regime argument used in Proposition~\ref{F65:prop:bessel-relative},
+with threshold $\Jfour=S^{9/2}$, proves \eqref{F65:eq:secant-relative}.
+\end{proof}
+
+\begin{theorem}[Exact tangential-polygon disk endpoint]\label{F65:thm:exact-disk}
+There is $S_*>0$ such that, whenever $S\le S_*$,
+\begin{equation}\label{F65:eq:exact-disk-gap}
+ \boxed{
+ P_D^{\rm tan}(\alpha)-P_D^{\rm tan}(\bar\alpha\mathbf1)
+ \ge\frac{\zeta(3)}{80\pi^4}\Jfour(\alpha).}
+\end{equation}
+In particular, equality
+$P_D^{\rm tan}(\alpha)=P_D^{\rm tan}(\bar\alpha\mathbf1)$ forces
+$\alpha_i=\bar\alpha$ for every $i$.
+\end{theorem}
+
+\begin{proof}
+Combine \eqref{F65:eq:bessel-gap} and \eqref{F65:eq:secant-relative}, decreasing
+$S_*$ until the latter coefficient is at most
+$\zeta(3)/(80\pi^4)$.  Strict convexity of $x^4$ gives
+$\Jfour(\alpha)=0$ only at the uniform fan.
+\end{proof}
+\endgroup

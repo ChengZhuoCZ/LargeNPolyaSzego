@@ -1,0 +1,328 @@
+\begingroup
+\section{Node DF0A: intrinsic variance and the far stratum}
+\label{module:DF0A}
+\noindent\textit{Audited source: \nolinkurl{DF0_variance.tex}.}
+\subsection{The intrinsic equality-stratum variance}
+
+Let
+\begin{equation}\label{DF0A:eq:data}
+ h_i>0,\qquad \sum_i h_i=2\pi=:L,
+ \qquad a=\frac{2\pi}{N},\qquad
+ S=\max_i h_i+a.
+\end{equation}
+The quadratic cell bubble and its sampled Hilbert conjugate are
+\begin{align}
+ q_\alpha(\theta_i+x)
+ &=\frac12\min\{x^2,(h_i-x)^2\},\qquad 0\le x\le h_i,
+ \label{DF0A:eq:q}\\
+ T(\alpha)&=\sum_i h_i|\Hil q_\alpha(c_i)|^2,
+ \qquad c_i=\theta_i+h_i/2.\label{DF0A:eq:T}
+\end{align}
+Put $A_k=\sum_i h_i^k$ and define
+\begin{equation}\label{DF0A:eq:D}
+ \ell^2:=\frac{A_3}{L},
+ \qquad
+ \boxed{\mathfrak D(\alpha)
+ :=\sum_i h_i(h_i^2-\ell^2)^2
+ =A_5-\frac{A_3^2}{L}.}
+\end{equation}
+
+\begin{lemma}[Pair-variance formula and equality strata]
+\label{DF0A:lem:pair}
+One has
+\begin{equation}\label{DF0A:eq:pair}
+ \mathfrak D(\alpha)
+ =\frac1{2L}\sum_{i,j}h_ih_j(h_i^2-h_j^2)^2.
+\end{equation}
+Consequently $\mathfrak D\ge0$, and it vanishes exactly when all
+positive cell lengths are equal.  After zero-cell deletion, these are
+precisely the collapsed-uniform strata.
+\end{lemma}
+
+\begin{proof}
+Expand the double sum and use $\sum_i h_i=L$ and
+$\sum_i h_i^3=A_3$.  Equality in a weighted variance holds precisely
+when $h_i^2$ is constant on its positive support.
+\end{proof}
+
+Recall the quartic Bregman charge
+\begin{equation}\label{DF0A:eq:J}
+ \Jfour(\alpha)=\sum_i(h_i-a)^2(h_i^2+2ah_i+3a^2).
+\end{equation}
+
+\begin{proposition}[The intrinsic variance is paid by the DAG charge]
+\label{DF0A:prop:D-J}
+For every positive fan,
+\begin{equation}\label{DF0A:eq:D-J}
+ \boxed{\mathfrak D(\alpha)\le S\Jfour(\alpha).}
+\end{equation}
+The estimate is independent of the minimum cell and all adjacent ratios.
+\end{proposition}
+
+\begin{proof}
+The number $\ell^2=A_3/L$ is the weighted least-squares minimizer of
+$m\mapsto\sum_i h_i(h_i^2-m)^2$.  Hence, using the competitor $m=a^2$,
+\begin{align*}
+ \mathfrak D(\alpha)
+ &\le\sum_i h_i(h_i^2-a^2)^2\\
+ &=\sum_i h_i(h_i-a)^2(h_i+a)^2\\
+ &\le S\sum_i(h_i-a)^2(h_i^2+2ah_i+3a^2)
+ =S\Jfour(\alpha).
+\end{align*}
+\end{proof}
+
+\subsection{Exact relation with the cubic null form}
+
+Stage 144 proves
+\begin{align}
+ \Cnull(q_\alpha^3)&=V(\alpha)-T(\alpha),\label{DF0A:eq:C-VT}\\
+ V(\alpha)&=\frac{A_5}{320}-\frac{A_3^2}{1152\pi}.
+ \label{DF0A:eq:V}
+\end{align}
+
+\begin{proposition}[Intrinsic defect identity]
+\label{DF0A:prop:defect}
+For every positive fan,
+\begin{equation}\label{DF0A:eq:defect}
+ \boxed{
+ \Cnull(q_\alpha^3)-\frac1{720}\sum_i h_i^5
+ =\frac1{576}\mathfrak D(\alpha)-T(\alpha).}
+\end{equation}
+In particular the sharp inequality
+\begin{equation}\label{DF0A:eq:sharp-candidate}
+ \Cnull(q_\alpha^3)\ge\frac1{720}\sum_i h_i^5
+\end{equation}
+is equivalent to $T\le\mathfrak D/576$.
+\end{proposition}
+
+\begin{proof}
+Since $L=2\pi$,
+\[
+ \frac1{320}-\frac1{720}=\frac1{576},
+ \qquad
+ \frac{A_3^2}{1152\pi}=\frac1{576}\frac{A_3^2}{L}.
+\]
+Insert these two equalities in \eqref{DF0A:eq:C-VT}--\eqref{DF0A:eq:V}.
+\end{proof}
+
+\begin{remark}[Logical status of the sharp constant]
+Equation \eqref{DF0A:eq:defect} is proved; inequality
+\eqref{DF0A:eq:sharp-candidate} is not used as an established fact.  The
+unconditional proof only needs an unspecified universal constant in the
+following smaller endpoint leaf.
+\end{remark}
+
+\begin{obligation}[AVS: adaptive equality-stratum variance sampling]
+\label{DF0A:obl:AVS}
+Prove
+\begin{equation}\label{DF0A:eq:AVS}
+ \boxed{T(\alpha)\le C\mathfrak D(\alpha)}
+\end{equation}
+for every positive fine fan.  By Proposition~\ref{DF0A:prop:D-J}, AVS implies
+HQ and hence DF.  Unlike the deleted HMS/QPS route, AVS vanishes on every
+collapsed-uniform endpoint stratum and contains no path velocity.
+\end{obligation}
+
+\subsection{A global absolute sampling bound}
+
+We use the following mesh-free sampling theorem in the precise special
+case needed here.
+
+\begin{lemma}[Adaptive truncated-Hilbert sampling]
+\label{DF0A:lem:sampling}
+Let $\{I_i\}$ be any interval partition of the circle, with lengths
+$h_i$ and midpoints $c_i$.  If $f\in L^2(\T)$ satisfies
+\begin{equation}\label{DF0A:eq:self-zero}
+ \operatorname {pv}\int_{I_i}\frac1{2\pi}
+ \cot\frac{c_i-y}{2}\,f(y)\,dy=0
+ \qquad\text{for every }i,
+\end{equation}
+then
+\begin{equation}\label{DF0A:eq:sampling}
+ \sum_i h_i|\Hil f(c_i)|^2\le C\|f\|_2^2.
+\end{equation}
+The constant is independent of all interval ratios.
+\end{lemma}
+
+\begin{proof}
+The left side of \eqref{DF0A:eq:self-zero} is the part removed by symmetric
+truncation at radius $h_i/2$.  For every $x\in I_i$, the
+scale-restricted Cotlar inequality gives
+\[
+ |\Hil f(c_i)|\le C\{M(\Hil f)(x)+Mf(x)\}.
+\]
+Indeed, split at radius $h_i$; moving the centre from $c_i$ to $x$
+changes the far part by a Hardy--Littlewood average, and the intervening
+annulus is another such average.  Square, integrate on $I_i$, sum the
+disjoint cells, and use the $L^2$ boundedness of $M$ and $\Hil$.
+\end{proof}
+
+\begin{theorem}[Unconditional absolute endpoint bound]
+\label{DF0A:thm:absolute}
+For every positive fan,
+\begin{equation}\label{DF0A:eq:absolute}
+ \boxed{T(\alpha)\le C A_5=C\sum_i h_i^5.}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+On its own cell, $q_\alpha$ is even about $c_i$, while the Hilbert kernel
+is odd.  Thus \eqref{DF0A:eq:self-zero} holds with $f=q_\alpha$.  Moreover
+direct integration of the two half-bubbles gives
+\[
+ \|q_\alpha\|_2^2=\sum_i\frac{h_i^5}{320}.
+\]
+Apply Lemma~\ref{DF0A:lem:sampling}.
+\end{proof}
+
+\subsection{All fans away from the equality strata are closed}
+
+\begin{theorem}[Far-stratum AVS and HQ]
+\label{DF0A:thm:far}
+Fix $0<\delta<1$.  If
+\begin{equation}\label{DF0A:eq:far}
+ \mathfrak D(\alpha)\ge\delta A_5,
+\end{equation}
+then
+\begin{equation}\label{DF0A:eq:far-conclusion}
+ T(\alpha)\le C_\delta\mathfrak D(\alpha)
+ \le C_\delta S\Jfour(\alpha).
+\end{equation}
+Thus AVS, HQ, and the pure cubic row DF are unconditional on the complete
+far-stratum region, including arbitrary minimum cells and ratios.
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{DF0A:thm:absolute} and \eqref{DF0A:eq:far} give the first inequality;
+Proposition~\ref{DF0A:prop:D-J} gives the second.  Stage 144 then gives
+HQ $\Rightarrow$ DF.
+\end{proof}
+
+\subsection{Quantitative selection of the nearest collapsed-uniform stratum}
+
+It remains to treat $\mathfrak D<\delta A_5$.  This condition has a
+strong geometric consequence which we now make exact.
+
+\begin{lemma}[Concentration of physical angular mass]
+\label{DF0A:lem:concentration}
+Assume $0<\delta<1$ and
+$\mathfrak D<\delta A_5$.  Then
+\begin{equation}\label{DF0A:eq:D-small}
+ \mathfrak D\le\frac{\delta}{1-\delta}L\ell^4.
+\end{equation}
+For $0<\rho<1$ let
+\begin{equation}\label{DF0A:eq:bad}
+ \mathcal B_\rho=\{i:|h_i/\ell-1|\ge\rho\},
+ \qquad B_\rho=\sum_{i\in\mathcal B_\rho}h_i.
+\end{equation}
+Then
+\begin{equation}\label{DF0A:eq:bad-mass}
+ \boxed{
+ \frac{B_\rho}{L}
+ \le\frac{\delta}{(1-\delta)\rho^2}.}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Equation \eqref{DF0A:eq:D} gives $A_5=\mathfrak D+L\ell^4$;
+this proves \eqref{DF0A:eq:D-small}.  On a bad cell,
+$|h_i^2-\ell^2|\ge\rho\ell^2$.  Hence
+$\rho^2\ell^4B_\rho\le\mathfrak D$, and
+\eqref{DF0A:eq:bad-mass} follows.
+\end{proof}
+
+Let $\mathcal G_\rho$ be the complementary good set and
+$M=|\mathcal G_\rho|$.  If
+$\delta<(1-\delta)\rho^2$, Lemma~\ref{DF0A:lem:concentration} ensures
+$M\ge1$.  Define the collapsed-uniform reference fan $\beta$ by
+\begin{equation}\label{DF0A:eq:beta}
+ \beta_i=\begin{cases}b:=L/M,&i\in\mathcal G_\rho,\\0,&i\in\mathcal B_\rho.
+ \end{cases}
+\end{equation}
+After deleting its zero cells, $\beta$ is the regular $M$-fan; therefore
+all its Hilbert midpoint samples vanish.
+
+\begin{lemma}[Quantitative distance to the selected stratum]
+\label{DF0A:lem:reference}
+Put $\varepsilon=B_\rho/L$.  Then
+\begin{equation}\label{DF0A:eq:b-ell}
+ \frac{1-\rho}{1-\varepsilon}
+ \le\frac b\ell\le
+ \frac{1+\rho}{1-\varepsilon}.
+\end{equation}
+If $\rho+\varepsilon\le1/4$, then
+\begin{equation}\label{DF0A:eq:reference-charge}
+ \boxed{
+ b^3\sum_{i\in\mathcal G_\rho}(h_i-b)^2
+ +\sum_{i\in\mathcal B_\rho}h_i(h_i^2-\ell^2)^2
+ \le C_\rho\mathfrak D(\alpha).}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since every good length lies between $(1-\rho)\ell$ and
+$(1+\rho)\ell$,
+\[
+ M(1-\rho)\ell\le L-B_\rho
+ \le M(1+\rho)\ell.
+\]
+Using $b=L/M$ gives \eqref{DF0A:eq:b-ell}.
+
+Write $e_i=h_i-\ell$ on the good set.  There
+\[
+ h_i(h_i^2-\ell^2)^2\ge c_\rho\ell^3e_i^2.
+\]
+Also
+\[
+ M(b-\ell)=\sum_{i\in\mathcal G_\rho}e_i+B_\rho.
+\]
+Therefore Cauchy--Schwarz, $M\asymp L/\ell$, and
+$\rho^2\ell^4B_\rho\le\mathfrak D$ give
+\begin{align*}
+ b^3\sum_{\mathcal G_\rho}(h_i-b)^2
+ &\le C_\rho\ell^3\sum_{\mathcal G_\rho}e_i^2
+   +C_\rho\frac{\ell^3B_\rho^2}{M}\\
+ &\le C_\rho\mathfrak D
+   +C_\rho\ell^4\frac{B_\rho^2}{L}
+ \le C_\rho\mathfrak D.
+\end{align*}
+The bad term in \eqref{DF0A:eq:reference-charge} is a sub-sum of
+$\mathfrak D$.
+\end{proof}
+
+The preceding lemmas reduce the near-stratum region to the following
+strictly localized endpoint estimate.
+
+\begin{obligation}[ELCA: equality-stratum first-separation square]
+\label{DF0A:obl:ELCA}
+For the good/bad decomposition and collapsed-uniform reference
+\eqref{DF0A:eq:beta}, prove directly from the endpoint kernel-difference
+identity of stage 152 that
+\begin{multline}\label{DF0A:eq:ELCA}
+ T(\alpha)\\
+ \le C_\rho\left\{
+ b^3\sum_{i\in\mathcal G_\rho}(h_i-b)^2
+ +\sum_{i\in\mathcal B_\rho}h_i(h_i^2-\ell^2)^2
+ \right\}.
+\end{multline}
+The regular $M$-fan is used only after zero-cell deletion.  A maximal
+consecutive bad block is kept intact until its first separating scale;
+the two endpoint kernels may not be estimated separately inside that
+block.  Good--good rectangles use the signed variable-grid discrete
+Calder\'on--Zygmund square, while every rectangle meeting a bad block is
+paid by the second term in \eqref{DF0A:eq:ELCA}.  Descendants are squared
+before ancestors are summed.
+\end{obligation}
+
+\begin{proposition}[ELCA is the only remaining pure endpoint row]
+\label{DF0A:prop:ELCA}
+ELCA implies AVS in the near-stratum region.  Together with
+Theorem~\ref{DF0A:thm:far}, it implies AVS, HQ, and DF for every positive fan.
+\end{proposition}
+
+\begin{proof}
+Lemma~\ref{DF0A:lem:reference} bounds the right side of \eqref{DF0A:eq:ELCA} by
+$C_\rho\mathfrak D$.  This is AVS.  The far and near regions exhaust all
+fans.  Proposition~\ref{DF0A:prop:D-J} and stage 144 then give HQ and DF.
+\end{proof}
+\endgroup

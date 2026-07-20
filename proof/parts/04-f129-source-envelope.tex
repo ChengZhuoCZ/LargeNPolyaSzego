@@ -1,0 +1,417 @@
+\begingroup
+\renewcommand{\qD}{q_D}
+\section{Foundation F129: the exact disk-source envelope}
+\label{module:F129}
+\noindent\textit{Audited source: \nolinkurl{convex_largeN_polya_szego_stage129_EF_sharp_strip_gluing_closure.tex}.}
+\subsection{Exact source and the three disk rows}
+
+Let
+\begin{equation}\label{F129:eq:fan}
+ \alpha_i>0,\qquad \sum_i\alpha_i=2\pi,\qquad
+ a=\frac{2\pi}{N},\qquad
+ \Jfour(\alpha)=\sum_i\alpha_i^4-Na^4.
+\end{equation}
+Choose consecutive side normals \(\theta_i\), put
+\(I_i=[\theta_i,\theta_{i+1}]\), and use \(x=\theta-\theta_i\) on
+\(I_i\).  After removal of a constant, the unnormalized exact secant source
+is
+\begin{equation}\label{F129:eq:B}
+ B_\alpha(\theta_i+x)
+ =F_{\alpha_i}(x)
+ :=\sec\bigl(\min\{x,\alpha_i-x\}\bigr)-1,
+ \qquad 0\le x\le\alpha_i.
+\end{equation}
+Both \(F_h\) and \(F_h'\) vanish at \(0,h\), so the pieces form one
+continuous periodic source.  The exact area-normalized source is
+\begin{equation}\label{F129:eq:b}
+ b_\alpha=h_\alpha\PiNG B_\alpha,\qquad
+ h_\alpha^2=\frac{\pi}{A_\alpha},\qquad
+ A_\alpha=\sum_i\tan\frac{\alpha_i}{2}.
+\end{equation}
+
+For \(n\ge2\), set
+\begin{equation}\label{F129:eq:symbols}
+ k_n=j_{0,1}\frac{J_{n+1}(j_{0,1})}{J_n(j_{0,1})},
+ \qquad m_n=n+1-k_n.
+\end{equation}
+On nongeometric modes,
+\begin{equation}\label{F129:eq:split}
+ \qD(f)=\qdot(f)+\qzero(f)-\kform(f),
+\end{equation}
+where
+\begin{align}
+ \qdot(f)&=\sum_{|n|\ge2}|n|\,|\widehat f_n|^2,\label{F129:eq:qdot}\\
+ \qzero(f)&=\sum_{|n|\ge2}|\widehat f_n|^2,\label{F129:eq:qzero}\\
+ \kform(f)&=\sum_{|n|\ge2}k_{|n|}|\widehat f_n|^2.\label{F129:eq:kform}
+\end{align}
+Stages 51 and 65 give, for \(0\le r\le3\),
+\begin{equation}\label{F129:eq:k-symbol}
+ 0<k_n\le\frac Cn,\qquad
+ |\Delta^rk_n|\le C_r(1+n)^{-1-r}.
+\end{equation}
+
+\subsection{The sharp broken-strip gluing lemma}
+
+For \(0<h\le h_0<\pi\), let \(V_h\) be the Neumann harmonic extension of
+\(F_h\) to the half-strip
+\(\Sigma_h=(0,h)\times(0,\infty)\):
+\begin{equation}\label{F129:eq:strip-problem}
+ \Delta V_h=0,\qquad V_h(\cdot,0)=F_h,\qquad
+ \partial_xV_h(0,\cdot)=\partial_xV_h(h,\cdot)=0.
+\end{equation}
+Its limit at infinity is the cell mean
+\begin{equation}\label{F129:eq:mean}
+ \mathfrak m(h)=\frac1h\int_0^hF_h(x)\,dx,
+\end{equation}
+and put
+\begin{equation}\label{F129:eq:N}
+ \mathcal N(h)=\int_{\Sigma_h}|\nabla V_h|^2\,dx\,dy.
+\end{equation}
+
+\begin{lemma}[Scaled strip data]\label{F129:lem:scaled}
+For \(0<h\le h_0\),
+\begin{equation}\label{F129:eq:scaled-bounds}
+ |\mathfrak m(h)|\le Ch^2,\qquad
+ 0\le\mathcal N(h)\le Ch^4,\qquad
+ |\mathcal N''(h)|\le Ch^2.
+\end{equation}
+If \(w_h(y)=V_h(0,y)=V_h(h,y)\), then
+\begin{equation}\label{F129:eq:wall-scale}
+ w_h(y)=h^2W_h(y/h),
+\end{equation}
+where \(h\mapsto W_h\) is bounded with two derivatives in
+\(H^{1/2}(\mathbb R_+)\cap L^2(\mathbb R_+)\) after its constant limit is
+removed.
+\end{lemma}
+
+\begin{proof}
+Write
+\begin{equation}\label{F129:eq:profile}
+ F_h(hs)=h^2\Phi_h(s),\qquad
+ \Phi_h(s)=\frac{\sec(h\min\{s,1-s\})-1}{h^2}.
+\end{equation}
+The family \(\Phi_h\), including its analytic value at \(h=0\), is bounded
+with two \(h\)-derivatives and four one-sided \(s\)-derivatives.  Its value
+and first derivative vanish at \(s=0,1\).  Expand it in the Neumann cosine
+basis:
+\begin{equation}
+ \Phi_h(s)=\overline\Phi_h+\sum_{\ell\ge1}c_\ell(h)\cos(\ell\pi s).
+\end{equation}
+The midpoint derivative jump gives
+\(|\partial_h^r c_\ell(h)|\le C_r(1+\ell)^{-2}\), \(0\le r\le2\).
+Consequently
+\begin{align}
+ V_h(hs,hy)
+ &=h^2\left\{\overline\Phi_h+
+   \sum_{\ell\ge1}c_\ell(h)
+   \cos(\ell\pi s)e^{-\ell\pi y}\right\},\label{F129:eq:scaled-V}\\
+ \mathcal N(h)
+ &=\frac{\pi h^4}{2}\sum_{\ell\ge1}\ell\,|c_\ell(h)|^2.\label{F129:eq:N-series}
+\end{align}
+Equations \eqref{F129:eq:scaled-bounds} and \eqref{F129:eq:wall-scale} now follow by
+termwise differentiation; the series are dominated by
+\(\sum\ell^{-3}\).
+\end{proof}
+
+For \(H>0\), use the wall-trace norm
+\begin{equation}\label{F129:eq:XH}
+ \|g\|_{X_H}^2
+ :=\|g\|_{\dot H^{1/2}(\mathbb R_+)}^2
+   +H^{-1}\|g\|_{L^2(\mathbb R_+)}^2.
+\end{equation}
+Functions below vanish at \(y=0\) and at infinity, so the homogeneous
+half-line norm has no constant ambiguity.
+
+\begin{lemma}[Wall equalization and lifting]\label{F129:lem:wall}
+Fix \(a\le h_0\).  There are modified strip fields
+\(\widetilde V_h\) with the same bottom value \(F_h\), common limit
+\(\mathfrak m(a)\) at infinity, and
+\begin{equation}\label{F129:eq:modified-energy}
+ \int_{\Sigma_h}|\nabla\widetilde V_h|^2
+ \le\mathcal N(h)+C\{\mathfrak m(h)-\mathfrak m(a)\}^2.
+\end{equation}
+For two adjacent widths \(h,k\), \(H=\max\{h,k\}\), their wall jump
+\(j_{h,k}\) satisfies
+\begin{equation}\label{F129:eq:jump}
+ \|j_{h,k}\|_{X_H}^2
+ \le C\{(h^2-a^2)^2+(k^2-a^2)^2\}.
+\end{equation}
+Moreover the jump can be lifted into the wider of the two adjacent strips,
+with zero bottom value, zero limit at infinity, and Dirichlet energy at
+most \(C\|j_{h,k}\|_{X_H}^2\).
+\end{lemma}
+
+\begin{proof}
+Choose a fixed smooth \(\chi\) on \([0,\infty)\) with
+\(\chi(0)=0\) and \(\chi=1\) on \([1,\infty)\), and set
+\begin{equation}\label{F129:eq:tail-correction}
+ C_h(x,y)=-\{\mathfrak m(h)-\mathfrak m(a)\}\chi(y/h),
+ \qquad \widetilde V_h=V_h+C_h.
+\end{equation}
+The correction is independent of \(x\).  Since the horizontal mean of
+\(\partial_yV_h\) is zero, its Dirichlet cross term with \(C_h\) vanishes.
+Direct scaling gives
+\begin{equation}
+ \int_{\Sigma_h}|\nabla C_h|^2
+ =|\mathfrak m(h)-\mathfrak m(a)|^2
+   \int_0^\infty|\chi'(s)|^2\,ds,
+\end{equation}
+which proves \eqref{F129:eq:modified-energy}.
+
+The modified wall trace is zero at \(y=0\) and tends to the common value
+\(\mathfrak m(a)\).  Subtract that common value.  Equations
+\eqref{F129:eq:wall-scale} and \eqref{F129:eq:tail-correction}, followed by scaling
+in \eqref{F129:eq:XH}, prove \eqref{F129:eq:jump}.  For completeness, first suppose
+\(h,k\in[a/2,2a]\).  The fundamental theorem of calculus in the scale
+parameter gives
+\[
+ \|j_{h,k}\|_{X_H}^2\le C(h-k)^2(h+k)^2.
+\]
+If at least one width lies outside \([a/2,2a]\), the triangle inequality
+and scaling of the two tail-equalized traces give
+\[
+ \|j_{h,k}\|_{X_H}^2
+ \le C(h^4+k^4+a^4)
+ \le C\{(h^2-a^2)^2+(k^2-a^2)^2\}.
+\]
+When one width remains in \([a/2,2a]\), insert the nearer endpoint
+\(a/2\) or \(2a\) as an intermediate scale, use the first estimate on the
+short piece, and the coarse estimate on the other.  This proves
+\eqref{F129:eq:jump} in every ratio.  The \(a^4\) term is essential when both
+\(h\) and \(k\) are much smaller than \(a\): it pays for changing their
+common strip tail to the regular-cell mean.
+
+Finally, the Poisson extension in a quadrant is a right inverse of the
+vertical trace with energy
+\(\|j\|_{\dot H^{1/2}(\mathbb R_+)}^2\).  Multiply it by a horizontal cutoff
+supported before distance \(H/3\).  The cutoff row costs
+\(CH^{-1}\|j\|_2^2\), proving the \(X_H\) estimate.  Put the lifting in the
+wider adjacent strip.  The two possible liftings assigned to one strip
+occupy its left and right thirds, so their overlap is uniformly bounded.
+\end{proof}
+
+\begin{proposition}[Sharp no-ratio strip gluing]\label{F129:prop:gluing}
+For every sufficiently fine positive fan,
+\begin{equation}\label{F129:eq:gluing}
+ \sum_{n\ne0}|n|\,|\widehat B_{\alpha,n}|^2
+ \le\frac1{2\pi}\sum_i\mathcal N(\alpha_i)
+   +C\sum_i(\alpha_i^2-a^2)^2.
+\end{equation}
+At the regular fan equality holds without the last term:
+\begin{equation}\label{F129:eq:uniform-strip}
+ \sum_{n\ne0}|n|\,|\widehat B_{a\mathbf1,n}|^2
+ =\frac N{2\pi}\mathcal N(a).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Place \(\widetilde V_{\alpha_i}\) over \(I_i\).  Lemma~\ref{F129:lem:wall}
+gives wall jumps which vanish at the bottom and at infinity.  Lift all
+jumps as in that lemma, assigning each lifting to the wider adjacent strip.
+The resulting field \(U\) belongs to
+\(H^1(\Sone\times\mathbb R_+)\), has bottom trace \(B_\alpha\), and tends
+to the single constant \(\mathfrak m(a)\).
+
+The original \(V_{\alpha_i}\) is harmonic and has zero normal derivative
+on its vertical walls.  Hence it is Dirichlet-orthogonal to every jump
+lifting, which vanishes on the bottom and at infinity.  It is also
+orthogonal to the constant-in-\(x\) tail correction.  The only remaining
+cross term is between tail corrections and jump liftings; Cauchy--Schwarz
+absorbs it into their two energies.  Lemma~\ref{F129:lem:wall} therefore gives
+\begin{equation}
+ \int|\nabla U|^2
+ \le\sum_i\mathcal N(\alpha_i)
+ +C\sum_i(\alpha_i^2-a^2)^2.
+\end{equation}
+The harmonic-extension characterization of the periodic
+\(\dot H^{1/2}\) norm proves \eqref{F129:eq:gluing}.
+
+For \(\alpha_i=a\), all strip fields and their wall traces agree.  No tail
+correction or lifting is present, and reflection of \(V_a\) across every
+vertical wall is exactly the periodic harmonic extension.  This proves
+\eqref{F129:eq:uniform-strip}.
+\end{proof}
+
+\subsection{The order-one and identity source envelopes}
+
+Recall the exact identity
+\begin{equation}\label{F129:eq:Jidentity}
+ \Jfour(\alpha)
+ =\sum_i(\alpha_i-a)^2
+   (\alpha_i^2+2a\alpha_i+3a^2).
+\end{equation}
+In particular,
+\begin{equation}\label{F129:eq:square-charge}
+ \sum_i(\alpha_i^2-a^2)^2
+ \le\Jfour(\alpha).
+\end{equation}
+
+\begin{theorem}[Sharp order-one source envelope]\label{F129:thm:qdot}
+For every sufficiently fine positive fan,
+\begin{equation}\label{F129:eq:qdot-envelope}
+ \qdot(\PiNG B_\alpha)-\qdot(\PiNG B_{a\mathbf1})
+ \le C\Jfour(\alpha).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Removing the modes \(\pm1\) only decreases the left energy at \(\alpha\);
+they vanish at the regular fan by cyclic symmetry.  Apply
+Proposition~\ref{F129:prop:gluing} and subtract \eqref{F129:eq:uniform-strip}.
+By Lemma~\ref{F129:lem:scaled} and Taylor's formula,
+\begin{align}
+ \sum_i\{\mathcal N(\alpha_i)-\mathcal N(a)\}
+ &=\sum_i\{\mathcal N(\alpha_i)-\mathcal N(a)
+           -\mathcal N'(a)(\alpha_i-a)\}\notag\\
+ &\le C\sum_i(\alpha_i-a)^2(\alpha_i+a)^2
+ \le C\Jfour(\alpha).\label{F129:eq:N-Bregman}
+\end{align}
+Use \eqref{F129:eq:square-charge} for the gluing row.
+\end{proof}
+
+\begin{lemma}[Identity source envelope]\label{F129:lem:qzero}
+For every sufficiently fine positive fan,
+\begin{equation}\label{F129:eq:qzero-envelope}
+ \qzero(\PiNG B_\alpha)-\qzero(\PiNG B_{a\mathbf1})
+ \le C\Jfour(\alpha).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put
+\begin{equation}
+ R(h)=\int_0^hF_h(x)^2\,dx,\qquad
+ M(h)=\int_0^hF_h(x)\,dx
+     =2\int_0^{h/2}(\sec x-1)\,dx.
+\end{equation}
+Scaling gives \(|R''(h)|\le Ch^3\).  The linear terms cancel under
+\(\sum_i(\alpha_i-a)=0\), so
+\begin{equation}
+ \sum_i\{R(\alpha_i)-R(a)\}
+ \le C h_0\sum_i(\alpha_i-a)^2(\alpha_i+a)^2
+ \le C\Jfour(\alpha).
+\end{equation}
+Moreover
+\begin{equation}
+ M''(h)=\frac12\sec\frac h2\tan\frac h2>0.
+\end{equation}
+Thus Jensen's inequality gives
+\(\sum_iM(\alpha_i)\ge NM(a)>0\); subtracting the squared global mean can
+only improve the relative upper bound.  Finally, the regular source has no
+modes \(\pm1\), while deleting those modes at \(\alpha\) again decreases
+the energy.  Parseval proves \eqref{F129:eq:qzero-envelope}.
+\end{proof}
+
+\subsection{The smoother Bessel row}
+
+\begin{lemma}[Regular Bessel baseline]\label{F129:lem:kbaseline}
+For every sufficiently small \(a\),
+\begin{equation}\label{F129:eq:kbaseline}
+ 0\le\kform(\PiNG B_{a\mathbf1})\le Ca^5.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Cyclic symmetry restricts the Fourier support to \(N\mathbb Z\).
+The scaled cosine expansion in Lemma~\ref{F129:lem:scaled} gives
+\(|\widehat B_{\ell N}|\le Ca^2(1+|\ell|)^{-2}\).  Since
+\(k_{\ell N}\le C/(|\ell|N)\le Ca/|\ell|\), summation proves
+\eqref{F129:eq:kbaseline}.
+\end{proof}
+
+\begin{lemma}[Quasiuniform Bessel material Hessian]\label{F129:lem:kHessian}
+Suppose
+\begin{equation}
+ \frac a2\le\gamma_i\le\frac{3a}{2},\qquad
+ \sum_i\gamma_i=2\pi,\qquad \sum_i d_i=0.
+\end{equation}
+Then
+\begin{equation}\label{F129:eq:kHessian}
+ \left|D^2\{\kform(\PiNG B_\gamma)\}[d,d]\right|
+ \le Ca\sum_i\gamma_i^2d_i^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Pull every normal interval affinely to the regular material interval.
+The profile \eqref{F129:eq:profile} and its first two material derivatives are
+uniformly bounded after the factors \(\gamma_i^2\), \(\gamma_id_i\), and
+\(d_i^2\) are removed.  The multiplier bounds \eqref{F129:eq:k-symbol} allow
+three cyclic Abel summations in the pulled-back kernel.  The first removes
+the arbitrary root velocity, because consecutive midpoint velocities
+differ by \((d_i+d_{i+1})/2\); the next two give a summable
+\((1+|r|)^{-2}\) interaction between material cells at distance \(r\).
+Cauchy--Schwarz after the full cyclic sum yields
+\begin{equation}
+ |D^2\kform|
+ \le Ca\sum_i\gamma_i^2d_i^2.
+\end{equation}
+The factor \(a\) is the order-minus-one gain.  This is the source-only
+specialization of the real-material Bessel Hessian estimate proved in
+stage 65; no Galerkin or support-space term is present here.
+\end{proof}
+
+\begin{proposition}[Relative Bessel source row]\label{F129:prop:krelative}
+For every sufficiently fine positive fan,
+\begin{equation}\label{F129:eq:krelative}
+ -\{\kform(\PiNG B_\alpha)-\kform(\PiNG B_{a\mathbf1})\}
+ \le C\Jfour(\alpha).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+If \(\Jfour(\alpha)\ge a^5\), positivity and
+Lemma~\ref{F129:lem:kbaseline} give
+\begin{equation}
+ -\{\kform(B_\alpha)-\kform(B_{a\mathbf1})\}
+ \le\kform(B_{a\mathbf1})\le C\Jfour(\alpha).
+\end{equation}
+If \(\Jfour(\alpha)<a^5\), \eqref{F129:eq:Jidentity} implies
+\(\max_i|\alpha_i-a|^4\le\Jfour<a^5\).  For small \(a\), the whole affine
+segment \(\gamma_i(t)=a+t(\alpha_i-a)\) lies in
+\([a/2,3a/2]\).  Cyclic invariance kills the first derivative at
+\(a\mathbf1\).  Lemma~\ref{F129:lem:kHessian}, Taylor's formula, and
+\begin{equation}
+ \Jfour(\alpha)
+ =12\int_0^1(1-t)\sum_i\gamma_i(t)^2(\alpha_i-a)^2\,dt
+\end{equation}
+prove the stronger bound \(Ca\Jfour\).
+\end{proof}
+
+\subsection{Exact source envelope and endpoint forcing}
+
+\begin{theorem}[Unnormalized exact disk-source envelope]\label{F129:thm:B}
+For every sufficiently fine positive fan,
+\begin{equation}\label{F129:eq:B-envelope}
+ \qD(\PiNG B_\alpha)-\qD(\PiNG B_{a\mathbf1})
+ \le C\Jfour(\alpha).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Add Theorem~\ref{F129:thm:qdot}, Lemma~\ref{F129:lem:qzero}, and
+Proposition~\ref{F129:prop:krelative} according to the exact multiplier split
+\eqref{F129:eq:split}.
+\end{proof}
+
+\begin{theorem}[Area-normalized exact source envelope]\label{F129:thm:b}
+For every sufficiently fine positive fan,
+\begin{equation}\label{F129:eq:b-envelope}
+ \boxed{\qD(b_\alpha)-\qD(b_{a\mathbf1})
+ \le C\Jfour(\alpha).}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Convexity of \(\tan(x/2)\) and \(\sum_i\alpha_i=Na\) give
+\(A_\alpha\ge A_{a\mathbf1}\), hence
+\(h_\alpha^2\le h_{a\mathbf1}^2\).  From \eqref{F129:eq:b},
+\begin{align}
+ \qD(b_\alpha)-\qD(b_{a\mathbf1})
+ &=h_\alpha^2\{\qD(B_\alpha)-\qD(B_{a\mathbf1})\}\notag\\
+ &\quad +(h_\alpha^2-h_{a\mathbf1}^2)\qD(B_{a\mathbf1}).\label{F129:eq:area-sign}
+\end{align}
+The second term is nonpositive.  The factors \(h_\alpha\) are uniformly
+bounded for fine fans, so Theorem~\ref{F129:thm:B} proves the claim.
+\end{proof}
+\endgroup

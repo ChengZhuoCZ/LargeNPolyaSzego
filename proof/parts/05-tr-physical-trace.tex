@@ -1,0 +1,688 @@
+\begingroup
+\section{Node TR: physical trace and relative Schur transfer}
+\label{module:TR}
+\noindent\textit{Audited source: \nolinkurl{TR_physical_trace.tex}.}
+\subsection{The true straight-edge material trace}
+
+Let $\alpha_i>0$, $\sum_i\alpha_i=2\pi$, and
+$\theta_{i+1}-\theta_i=\alpha_i$.  Put
+\begin{equation}\label{TR:eq:fan}
+ a=\alpha_{i-1},\qquad b=\alpha_i,\qquad
+ K_i=[\theta_i-a/2,\theta_i+b/2],\qquad x=\theta-\theta_i.
+\end{equation}
+The area-normalized tangential polygon has common support
+\begin{equation}\label{TR:eq:h}
+ h_\alpha=\left(\frac\pi{\sum_j\tan(\alpha_j/2)}\right)^{1/2}
+\end{equation}
+and radial boundary $h_\alpha\sec x$ on $K_i$.
+
+For support increments $z=(z_i)$, the two endpoint displacement vectors
+of side $i$ have components in the frame $(\nu_i,\tau_i)$
+\begin{equation}\label{TR:eq:endpoint-components}
+ (z_i,a_i^-),\qquad (z_i,a_i^+),
+\end{equation}
+where
+\begin{equation}\label{TR:eq:apm}
+ a_i^-=\frac{z_i-z_{i-1}}{\sin a}-z_i\tan\frac a2,
+ \qquad
+ a_i^+=\frac{z_{i+1}-z_i}{\sin b}+z_i\tan\frac b2.
+\end{equation}
+Indeed these are obtained by differentiating the two adjacent support-line
+intersection equations.
+
+The physical affine coordinate of the radial point
+$h_\alpha\nu_i+h_\alpha\tan x\,\tau_i$ is
+\begin{equation}\label{TR:eq:t}
+ t_i(x)=\frac{\tan x+\tan(a/2)}
+ {\tan(a/2)+\tan(b/2)}.
+\end{equation}
+Hence the genuine radial component of the straight-edge affine material
+velocity is
+\begin{equation}\label{TR:eq:Tphysical}
+ (\widetilde{T}_\alpha z)_i(x)
+ =z_i\cos x+
+ \bigl((1-t_i(x))a_i^-+t_i(x)a_i^+\bigr)\sin x.
+\end{equation}
+For comparison, the stage-65 angular trace is
+\begin{equation}\label{TR:eq:Tangular}
+ (T_\alpha z)_i(x)
+ =z_i\cos x+
+ \bigl((1-s_i(x))a_i^-+s_i(x)a_i^+\bigr)\sin x,
+ \qquad
+ s_i(x)=\frac{x+a/2}{(a+b)/2}.
+\end{equation}
+
+We use the Fourier norm
+\begin{equation}\label{TR:eq:Hhalf}
+ \|f\|_{H^{1/2}}^2
+ =\sum_{n\in\mathbb Z}(1+|n|)|\widehat f(n)|^2.
+\end{equation}
+All quotient estimates below are unchanged if the equivalent disk form
+$q_{\mathbb D}$ is used.
+
+\begin{lemma}[Endpoint-uniform interpolation jets]
+\label{TR:lem:weight-jets}
+Put $w=a+b$, $p=a/w$, $y=s_i(x)$, and assume $0<w\le w_0<\pi$.
+Then, uniformly for $0\le p\le1$,
+\begin{align}
+ |t_i-s_i|&\le Cw^2s_i(1-s_i),
+ \label{TR:eq:weight-value}\\
+ w|t_i'-s_i'|&\le Cw^2.
+ \label{TR:eq:weight-derivative}
+\end{align}
+In particular, no endpoint factor occurs in
+\eqref{TR:eq:weight-derivative}.
+\end{lemma}
+
+\begin{proof}
+In normalized variables,
+\begin{equation}\label{TR:eq:normalized-t}
+ \vartheta_{w,p}(y)=
+ \frac{\tan(\frac w2(y-p))+\tan(\frac{wp}2)}
+ {\tan(\frac{wp}2)+\tan(\frac{w(1-p)}2)},
+ \qquad t_i(x)=\vartheta_{w,p}(y).
+\end{equation}
+The denominator is between $w/2$ and $C_{w_0}w$.  Direct
+differentiation gives
+\begin{equation}\label{TR:eq:normalized-second}
+ \partial_y^2\vartheta_{w,p}(y)
+ =\frac{w^2}{2}
+ \frac{\sec^2(\frac w2(y-p))\tan(\frac w2(y-p))}
+ {\tan(\frac{wp}2)+\tan(\frac{w(1-p)}2)},
+\end{equation}
+and hence $|\partial_y^2\vartheta_{w,p}|\le Cw^2$.
+The function $f=\vartheta_{w,p}-y$ vanishes at $0$ and $1$.
+The Green function of $-\partial_y^2$ on $[0,1]$ therefore gives
+$|f(y)|\le Cw^2y(1-y)$.  Moreover
+$\int_0^1f'(y)\,dy=0$, so
+$|f'(y)|\le\|f''\|_\infty\le Cw^2$.  Since
+$\partial_x=(2/w)\partial_y$, these are exactly
+\eqref{TR:eq:weight-value}--\eqref{TR:eq:weight-derivative}.
+\end{proof}
+
+For the next lemma, write $w_i=\alpha_{i-1}+\alpha_i$ and
+$d_i=a_i^+-a_i^-$.  The length of $K_i$ is $w_i/2$.
+
+\begin{lemma}[Stable extraction of the internal quadratic coefficient]
+\label{TR:lem:coefficient-stability}
+For $S$ sufficiently small,
+\begin{equation}\label{TR:eq:local-coefficient}
+ w_i^2|d_i|^2
+ \le C\left(
+ [T_\alpha z]_{H^{1/2}(K_i)}^2+w_i^4|z_i|^2\right).
+\end{equation}
+On the exact area kernel, modulo exact support translations,
+\begin{equation}\label{TR:eq:nodal-sampling}
+ \sum_iw_i|z_i|^2
+ \le C\|\PiNG T_\alpha z\|_{H^{1/2}(\T)}^2.
+\end{equation}
+Both constants are independent of adjacent ratios.
+\end{lemma}
+
+\begin{proof}
+Pull $K_i$ to $0\le y\le1$ and put
+\begin{equation*}
+ Z=z_i,\qquad A=w_i a_i^-,\qquad B=w_i a_i^+,
+ \qquad \xi=\frac{w_i}{2}(y-p).
+\end{equation*}
+The normalized trace is
+\begin{equation}\label{TR:eq:normalized-trace}
+ F_{w_i,p}(y)=Z\cos\xi+\{(1-y)A+yB\}\frac{\sin\xi}{w_i}.
+\end{equation}
+At $w_i=0$ its continuous limit is
+\begin{equation}\label{TR:eq:homogeneous-normalized-trace}
+ F_{0,p}(y)=Z+\frac12(y-p)\{(1-y)A+yB\}.
+\end{equation}
+Modulo constants, the last two normalized polynomials have coefficient
+matrix
+\begin{equation*}
+ \begin{pmatrix}1+p&-p\\-1&1\end{pmatrix},
+\end{equation*}
+whose determinant is one and whose inverse is uniformly bounded for
+$0\le p\le1$.  Finite-dimensional norm equivalence therefore gives
+\begin{equation}\label{TR:eq:homogeneous-coercivity}
+ |A|^2+|B|^2\le C[F_{0,p}]_{H^{1/2}(0,1)}^2.
+\end{equation}
+Taylor's formula in \eqref{TR:eq:normalized-trace}, in the same
+finite-dimensional space, gives
+\begin{equation}\label{TR:eq:normalized-perturbation}
+ [F_{w_i,p}-F_{0,p}]_{H^{1/2}(0,1)}
+ \le Cw_i^2(|Z|+|A|+|B|).
+\end{equation}
+After decreasing the mesh threshold, the $A,B$ terms are absorbed into
+\eqref{TR:eq:homogeneous-coercivity}.  Since
+$B-A=w_i d_i$ and the $H^{1/2}$ seminorm is invariant under affine
+rescaling in one dimension, this proves \eqref{TR:eq:local-coefficient}.
+
+We also need the constant and translation gauges.  The full normalized
+$L^2$ three-jet matrix associated with \eqref{TR:eq:normalized-trace} is
+uniformly invertible.  Hence, for every constant $c$,
+\begin{equation}\label{TR:eq:local-sampling}
+ \sum_iw_i|z_i-c|^2
+ \le C\|T_\alpha z-c\|_{L^2(\T)}^2.
+\end{equation}
+Every first harmonic is exactly the angular trace of a support
+translation $z_i^{\rm tr}=q\cdot\nu_i$, and $L_\alpha z^{\rm tr}=0$.
+Subtract the unique translation producing the $n=\pm1$ part of
+$T_\alpha z$.  For the resulting representative,
+\begin{equation*}
+ T_\alpha z=g+c,\qquad g=\PiNG T_\alpha z.
+\end{equation*}
+The exact area row is
+\begin{equation}\label{TR:eq:exact-area-row}
+ L_\alpha z=\sum_i\ell_i z_i=0,\qquad
+ \ell_i=\tan\frac{\alpha_{i-1}}2+
+        \tan\frac{\alpha_i}2\asymp w_i.
+\end{equation}
+By Cauchy--Schwarz and \eqref{TR:eq:local-sampling},
+\begin{equation*}
+ |c|L_\alpha\mathbf1=|L_\alpha(z-c\mathbf1)|
+ \le C\Big(\sum_iw_i|z_i-c|^2\Big)^{1/2},
+\end{equation*}
+where $L_\alpha\mathbf1\asymp1$.  Thus
+$|c|\le C\|g\|_{L^2}$.  Applying
+\eqref{TR:eq:local-sampling} once more proves
+\eqref{TR:eq:nodal-sampling}.  Exact translation subtraction does not
+change $d_i$, because $a_i^-=a_i^+=q\cdot\tau_i$ for a translation.
+\end{proof}
+
+\begin{lemma}[Stable zero-wall bubble decomposition]
+\label{TR:lem:zero-wall}
+Let $E$ equal $E_i$ on $K_i$, where
+\begin{equation}\label{TR:eq:trace-error-local}
+ E_i=(t_i-s_i)d_i\sin x.
+\end{equation}
+Then
+\begin{equation}\label{TR:eq:zero-wall-bound}
+ \|E\|_{H^{1/2}(\T)}^2\le C\sum_iw_i^6|d_i|^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Lemma~\ref{TR:lem:weight-jets} gives, in normalized coordinates,
+\begin{equation}\label{TR:eq:E-normalized-jets}
+ |E_i(y)|\le Cw_i^3|d_i|y(1-y),
+ \qquad
+ |\partial_yE_i(y)|\le Cw_i^3|d_i|.
+\end{equation}
+In particular, $E_i$ vanishes at both endpoints.  The same-cell
+Gagliardo integral is at most $Cw_i^6|d_i|^2$.  For the cross-cell
+integral use
+\begin{equation*}
+ |E_i(\theta)-E_j(\varphi)|^2
+ \le2|E_i(\theta)|^2+2|E_j(\varphi)|^2.
+\end{equation*}
+For $\theta\in K_i$, integration of the circular kernel over
+$\T\setminus K_i$ is bounded by
+\begin{equation*}
+ C\left(1+\operatorname {dist}(\theta,\partial K_i)^{-1}\right).
+\end{equation*}
+The endpoint factor in \eqref{TR:eq:E-normalized-jets} makes the resulting
+Hardy integral at most $Cw_i^6|d_i|^2$.  Summing over $i$, and adding the
+$L^2$ row, proves \eqref{TR:eq:zero-wall-bound}.  This argument sums the
+whole complement of each cell at once, so it has no mesh-depth or
+adjacent-ratio constant.
+\end{proof}
+
+\begin{lemma}[Physical versus angular interpolation]
+\label{TR:lem:trace-close}
+Let $S=\max_i\alpha_i+2\pi/N$.  On the exact area and translation
+quotient,
+\begin{equation}\label{TR:eq:trace-close}
+ \|\PiNG(\widetilde T_\alpha-T_\alpha)z\|_{H^{1/2}(\T)}
+ \le CS^2\|\PiNG T_\alpha z\|_{H^{1/2}(\T)}.
+\end{equation}
+The constant is independent of every adjacent-cell ratio.
+\end{lemma}
+
+\begin{proof}
+Projection is contractive in \eqref{TR:eq:Hhalf}.  By
+Lemmas~\ref{TR:lem:coefficient-stability} and \ref{TR:lem:zero-wall},
+\begin{align*}
+ \|\PiNG E\|_{H^{1/2}}^2
+ &\le C\sum_iw_i^6|d_i|^2\\
+ &\le CS^4\sum_i[T_\alpha z]_{H^{1/2}(K_i)}^2
+   +C\sum_iw_i^8|z_i|^2\\
+ &\le CS^4\|\PiNG T_\alpha z\|_{H^{1/2}}^2
+   +CS^7\sum_iw_i|z_i|^2\\
+ &\le CS^4\|\PiNG T_\alpha z\|_{H^{1/2}}^2.
+\end{align*}
+Here we use the representative constructed in the proof of
+Lemma~\ref{TR:lem:coefficient-stability}, for which
+$T_\alpha z=\PiNG T_\alpha z+c$; consequently its local seminorms are
+those of $\PiNG T_\alpha z$.  Also $w_i\le2S$, and the same-cell
+Gagliardo integrals are positive parts of the global seminorm.  Taking square roots proves
+\eqref{TR:eq:trace-close}.
+\end{proof}
+
+\begin{remark}[The repaired terminology]
+$T_\alpha z$ remains a useful trigonometric spline and the stage-65 disk
+gap for it is valid.  Equation \eqref{TR:eq:Tphysical}, not
+\eqref{TR:eq:Tangular}, is the trace of an actual affine map of a straight
+edge.  The distinction is a small relative error, but it is not an exact
+identity and may not be suppressed in a value comparison.
+\end{remark}
+
+\subsection{Transfer of D0 to the physical trace}
+
+We first fix a normalization which was ambiguous in the historical
+notation.  The reduced Fourier--Bessel form of F51 is denoted by
+$\qDzero$; the physical half-Hessian form is
+\begin{equation}\label{TR:eq:physical-disk-normalization}
+ \boxed{\qphys(f,g):=2j_{0,1}^{\,2}\qDzero(f,g)
+ =\frac12D^2\mathcal L(0)[fe_r,ge_r].}
+\end{equation}
+Every disk endpoint, metric, pairing, and distance below uses $\qphys$.
+Thus the angular endpoint imported from F65 is first multiplied by
+$2j_{0,1}^{\,2}$; this changes only its positive universal gap constant,
+and changes neither its minimizer nor any relative trace comparison.
+
+Let
+\begin{equation}\label{TR:eq:source}
+ b_\alpha=\PiNG\{h_\alpha\sec x-1\}
+\end{equation}
+on the cells $K_i$.  Define the angular and physical disk values
+\begin{align}
+ P_D(\alpha)&=\inf_{z\in Z_\alpha}
+ \qphys(b_\alpha+\PiNG T_\alpha z),\label{TR:eq:PD}\\
+ \widetilde P_D(\alpha)&=\inf_{z\in Z_\alpha}
+ \qphys(b_\alpha+\PiNG\widetilde T_\alpha z).
+ \label{TR:eq:PDphysical}
+\end{align}
+Here $Z_\alpha$ includes the exact area row and is quotiented by
+translations.  Let
+\begin{equation}\label{TR:eq:Gphysical}
+ \widetilde\G_\alpha(z)
+ =\qphys(\PiNG\widetilde T_\alpha z),
+\end{equation}
+and let $\widetilde z_\alpha^\sharp$ be the corresponding Schur corrector.
+
+Write $H_{\rm ng}=\PiNG H^{1/2}(\T)$ and let
+$\langle\cdot,\cdot\rangle_D$ be the bilinear form associated with
+$\qphys$.  The Fourier--Bessel bounds from the disk Hessian give
+\begin{equation}\label{TR:eq:Bessel-coercivity}
+ c\|f\|_{H^{1/2}}^2\le \qphys(f)\le
+ C\|f\|_{H^{1/2}}^2,\qquad f\in H_{\rm ng}.
+\end{equation}
+Set
+\begin{equation}\label{TR:eq:trace-spaces}
+ V_\alpha=\PiNG T_\alpha Z_\alpha,\qquad
+ \widetilde V_\alpha=\PiNG\widetilde T_\alpha Z_\alpha.
+\end{equation}
+Thus $P_D(\alpha)$ and $\widetilde P_D(\alpha)$ are the squared
+$\qphys$-distances from $-b_\alpha$ to $V_\alpha$ and
+$\widetilde V_\alpha$, respectively.
+
+\begin{lemma}[Differentiated Hilbert projection calculus]
+\label{TR:lem:projection-calculus}
+Let $q_t$ be uniformly coercive $C^2$ Hilbert forms on a fixed Hilbert
+space, let $P_t,\widetilde P_t$ be the corresponding orthogonal
+projections onto two $C^2$ families of closed subspaces, and put
+$\Delta P_t=\widetilde P_t-P_t$.  Suppose, for $0\le r\le2$,
+\begin{align}
+ \|\partial_t^rq_t\|&\le C_rh^r,
+ \label{TR:eq:q-material-bound}\\
+ \|\partial_t^rP_t\|+\|\partial_t^r\widetilde P_t\|
+ &\le C_rh^r,
+ \qquad
+ \|\partial_t^r\Delta P_t\|\le C_rh^r\varepsilon,
+ \label{TR:eq:P-material-bound}\\
+ \|\partial_t^rb_t\|&\le C_rh^rB.
+ \label{TR:eq:b-material-bound}
+\end{align}
+Then
+\begin{equation}\label{TR:eq:projection-calculus-output}
+ \left|\partial_t^2\left\{
+ \operatorname {dist}_{q_t}(-b_t,\widetilde V_t)^2-
+ \operatorname {dist}_{q_t}(-b_t,V_t)^2\right\}\right|
+ \le Ch^2\varepsilon B^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Orthogonal completion of the square gives
+\begin{equation}\label{TR:eq:projection-difference-identity}
+ \operatorname {dist}_{q_t}(-b_t,\widetilde V_t)^2-
+ \operatorname {dist}_{q_t}(-b_t,V_t)^2
+ =-q_t(\Delta P_tb_t,(\widetilde P_t+P_t)b_t).
+\end{equation}
+Differentiate this identity twice.  Every resulting term contains one of
+$\Delta P_t$, $\partial_t\Delta P_t$, or
+$\partial_t^2\Delta P_t$; the remaining factors are bounded by
+\eqref{TR:eq:q-material-bound}--\eqref{TR:eq:b-material-bound}.  Each term is
+therefore at most $Ch^2\varepsilon B^2$.
+\end{proof}
+
+\begin{lemma}[Uniform material calculus for the paired trace spaces]
+\label{TR:lem:material-calculus}
+Let
+\begin{equation}\label{TR:eq:quasiuniform-band}
+ (1-\eta_0)a\le\gamma_i\le(1+\eta_0)a,\qquad
+ \sum_i\gamma_i=2\pi,\qquad 0<\eta_0<\frac14,
+\end{equation}
+and let $\sum_i\delta_i=0$.  If
+\begin{equation}\label{TR:eq:Rtr}
+ R_{\rm tr}(\alpha)=\widetilde P_D(\alpha)-P_D(\alpha),
+\end{equation}
+then
+\begin{equation}\label{TR:eq:transfer-hessian}
+ |D^2R_{\rm tr}(\gamma)[\delta,\delta]|
+ \le Ca\sum_i\gamma_i^2\delta_i^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The assertion is trivial for $\delta=0$.  Otherwise put
+\begin{equation}\label{TR:eq:material-h}
+ h=\frac{\|\delta\|_{\ell^\infty}}a,
+ \qquad \gamma(t)=\gamma+t\delta,
+ \qquad |t|<c_0h^{-1}.
+\end{equation}
+Let $\Phi_t$ be the piecewise affine circle map carrying the normal nodes
+of $\gamma$ to those of $\gamma(t)$, and pull all functions back by
+$\Phi_t$.  For every oriented cyclic arc $I$ of length at most $\pi$,
+\begin{equation}\label{TR:eq:arc-material}
+ \left|t\sum_{i\in I}\delta_i\right|
+ \le c_0a\# I\le Cc_0\sum_{i\in I}\gamma_i.
+\end{equation}
+Consequently $\Phi_t'$ and every chord ratio are a fixed small relative
+perturbation of one.  Differentiating the pulled Gagliardo kernel
+\begin{equation}\label{TR:eq:pulled-Gagliardo}
+ \frac{\Phi_t'(\xi)\Phi_t'(\eta)}
+ {\sin^2((\Phi_t(\xi)-\Phi_t(\eta))/2)}
+\end{equation}
+zero, one, or two times proves
+\begin{equation}\label{TR:eq:form-material}
+ \|\partial_t^rq_t\|\le C_rh^r,\qquad 0\le r\le2.
+\end{equation}
+Here the order-one part is exactly \eqref{TR:eq:pulled-Gagliardo}; the
+$L^2$ row is elementary.  For the Bessel remainder use its established
+order-minus-one coefficients
+\begin{equation}\label{TR:eq:Bessel-differences}
+ |\Delta^rk_n|\le C_r(1+|n|)^{-1-r},\qquad 0\le r\le3,
+\end{equation}
+and discrete summation by parts.  It satisfies the same estimate, with
+one extra order of decay.
+
+The normalized secant formula and two material differentiations give
+\begin{equation}\label{TR:eq:source-material}
+ \|\partial_t^rb_{\gamma(t)}\|_{H^{1/2}}
+ \le C_rh^ra^{3/2},\qquad 0\le r\le2.
+\end{equation}
+Indeed a cell source has amplitude $O(a^2)$ and scale-invariant
+$H^{1/2}$ charge $O(a^4)$; summing $O(a^{-1})$ cells gives $O(a^3)$.
+Every normalized material derivative costs at most $h$.  The global
+factor $h_{\gamma(t)}$ obeys the same bounds after differentiating its
+explicit tangent sum.
+
+We next fix the coefficient space.  Let
+\[
+ \tau_t^1=(\cos\theta_i(t))_i,\qquad
+ \tau_t^2=(\sin\theta_i(t))_i
+\]
+be the two exact support-translation vectors.  They satisfy
+$L_{\gamma(t)}\tau_t^\mu=0$.  With the area weights
+$\ell_i(t)$ from \eqref{TR:eq:exact-area-row}, the $2\times2$ Gram matrix
+\[
+ M_t^{\mu\nu}=\sum_i\ell_i(t)\tau_{t,i}^\mu\tau_{t,i}^\nu
+\]
+is uniformly comparable with the identity in the quasiuniform band.
+Define the explicit translation gauge
+\begin{equation}\label{TR:eq:translation-gauge}
+ \mathcal Q_tz=z-\sum_{\mu,\nu=1}^2
+ (M_t^{-1})_{\mu\nu}
+ \left(\sum_i\ell_i(t)z_i\tau_{t,i}^\nu\right)\tau_t^\mu
+\end{equation}
+and transport the area kernel by
+\begin{equation}\label{TR:eq:area-transport}
+ C_tz=\mathcal Q_t\left(
+ z-\frac{L_{\gamma(t)}z}{L_{\gamma(t)}\mathbf1}\mathbf1\right).
+\end{equation}
+The coefficients of $L_{\gamma(t)}$ are comparable to $a$, and their
+first two normalized derivatives are bounded by $C_rh^r$.  The same is
+true of $\tau_t^\mu$, $M_t^{-1}$, $\mathcal Q_t$, and $C_t$.
+The sampling estimate \eqref{TR:eq:nodal-sampling} makes the range of
+$C_t$ uniformly transverse to the area and translation gauges.  Thus,
+on the area/translation complement $X$ at $t=0$, the pulled trace injections
+\begin{equation*}
+ B_t=\PiNG(T_{\gamma(t)}C_t)\circ\Phi_t,
+ \qquad
+ \widetilde B_t=\PiNG(\widetilde T_{\gamma(t)}C_t)\circ\Phi_t
+\end{equation*}
+are uniformly bounded below in the pulled $q_t$ norm.
+
+Apply the normalized calculation
+\eqref{TR:eq:normalized-t}--\eqref{TR:eq:E-normalized-jets} on this
+quasiuniform material band.  Its first two material derivatives give
+\begin{align}
+ \left|\partial_t^r\{(t_i-s_i)\sin x\}\right|
+ &\le C_rh^ra^3y(1-y),\label{TR:eq:material-E-value}\\
+ \left|\partial_y\partial_t^r\{(t_i-s_i)\sin x\}\right|
+ &\le C_rh^ra^3,\qquad 0\le r\le2.
+ \label{TR:eq:material-E-derivative}
+\end{align}
+The derivative row uses the bound without an endpoint factor from
+\eqref{TR:eq:weight-derivative}.  The coefficient-extraction and zero-wall
+proofs then apply after each material differentiation.  Together with
+the derivative bounds for $C_t$, this gives
+\begin{align}
+ \|\partial_t^rB_t\|+\|\partial_t^r\widetilde B_t\|
+ &\le C_rh^r,
+ \label{TR:eq:B-material}\\
+ \|\partial_t^r(\widetilde B_t-B_t)\|
+ &\le C_rh^ra^2,\qquad 0\le r\le2.
+ \label{TR:eq:DeltaB-material}
+\end{align}
+All operator norms use the fixed energy norm on $X$ and the pulled
+$q_t$ norm on the target.  Notice that the endpoint factors were proved
+before differentiating, so no inverse minimum cell is present.
+
+For completeness, the $q_t$-orthogonal projection onto
+$\operatorname {ran}B_t$ is
+\begin{equation}\label{TR:eq:Gram-projection}
+ P_t=B_tG_t^{-1}B_t^{*t},\qquad
+ G_t=B_t^{*t}B_t,
+\end{equation}
+where $*t$ is the adjoint in $q_t$.  The corresponding formula with
+$\widetilde B_t$ defines $\widetilde P_t$.  Uniform trace coercivity
+bounds both Gram inverses.  Differentiating
+\eqref{TR:eq:Gram-projection} and
+\begin{equation*}
+ \partial_tG_t^{-1}=-G_t^{-1}(\partial_tG_t)G_t^{-1}
+\end{equation*}
+twice, using \eqref{TR:eq:form-material}, \eqref{TR:eq:B-material}, and
+\eqref{TR:eq:DeltaB-material}, yields
+\begin{align}
+ \|\partial_t^rP_t\|+\|\partial_t^r\widetilde P_t\|
+ &\le C_rh^r,\notag\\
+ \|\partial_t^r(\widetilde P_t-P_t)\|
+ &\le C_rh^ra^2,\qquad 0\le r\le2.
+ \label{TR:eq:projection-material}
+\end{align}
+Lemma~\ref{TR:lem:projection-calculus}, with
+$\varepsilon=a^2$ and $B=a^{3/2}$, now gives
+\begin{equation}\label{TR:eq:R-second-h}
+ |D^2R_{\rm tr}(\gamma)[\delta,\delta]|
+ \le Ch^2a^5=Ca^3\|\delta\|_{\ell^\infty}^2.
+\end{equation}
+Finally
+$\sum_i\gamma_i^2\delta_i^2\ge ca^2
+\|\delta\|_{\ell^\infty}^2$, which proves
+\eqref{TR:eq:transfer-hessian}.
+\end{proof}
+
+\begin{lemma}[Relative physical-trace Schur transfer]
+\label{TR:lem:physical-transfer}
+There is a modulus $\omega_{\rm tr}(S)\to0$ such that
+\begin{equation}\label{TR:eq:physical-transfer}
+ |\{\widetilde P_D(\alpha)-P_D(\alpha)\}
+  -\{\widetilde P_D(\alpha_*)-P_D(\alpha_*)\}|
+ \le\omega_{\rm tr}(S)\Jfour(\alpha).
+\end{equation}
+Moreover $\widetilde\G_\alpha$ and $\G_\alpha$ are uniformly equivalent,
+with relative error $O(S^2)$.
+\end{lemma}
+
+\begin{proof}
+The equivalence of the support metrics follows from
+Lemma~\ref{TR:lem:trace-close}, the Bessel coercivity
+$\qphys\asymp H^{1/2}$, and polarization; more precisely,
+\begin{equation}\label{TR:eq:metric-equivalence}
+ |\widetilde\G_\alpha(z)-\G_\alpha(z)|
+ \le CS^2\G_\alpha(z).
+\end{equation}
+Lemma~\ref{TR:lem:trace-close} also gives a graph bijection
+$J_\alpha:V_\alpha\to\widetilde V_\alpha$ satisfying
+$\|J_\alpha-I\|\le CS^2$ in the $\qphys$ norm.  The elementary Hilbert
+distance comparison therefore gives
+\begin{equation}\label{TR:eq:transfer-absolute}
+ |R_{\rm tr}(\alpha)|
+ \le CS^2\qphys(b_\alpha)\le CS^5.
+\end{equation}
+The final source estimate follows by normalized same/adjacent/separated
+Gagliardo summation for the continuous secant source:
+$\qphys(b_\alpha)\le C\sum_i\alpha_i^4\le CS^3$.
+
+Put $a=2\pi/N$, $d_i=\alpha_i-a$, and recall the exact identity
+\begin{equation}\label{TR:eq:Jfour-identity}
+ \Jfour(\alpha)=
+ \sum_i d_i^2(\alpha_i^2+2a\alpha_i+3a^2).
+\end{equation}
+If $\Jfour(\alpha)\ge S^{9/2}$, apply
+\eqref{TR:eq:transfer-absolute} at $\alpha$ and at
+$\alpha_*=a\mathbf1$ to obtain
+\begin{equation}\label{TR:eq:far-transfer}
+ |R_{\rm tr}(\alpha)-R_{\rm tr}(\alpha_*)|
+ \le CS^{1/2}\Jfour(\alpha).
+\end{equation}
+
+Suppose instead that $\Jfour(\alpha)<S^{9/2}$.  Then
+$\|d\|_{\ell^\infty}^4\le C\Jfour(\alpha)$, so
+$\|d\|_{\ell^\infty}/S\le CS^{1/8}$.  Since
+$S=a+\max_i\alpha_i$, the whole segment
+$\gamma(t)=a\mathbf1+td$ lies in a fixed quasiuniform band and
+$a\asymp S$.  Cyclic invariance makes
+$DR_{\rm tr}(a\mathbf1)[d]=0$, because the gradient at the regular fan
+is constant and $\sum_i d_i=0$.  Taylor's formula and
+Lemma~\ref{TR:lem:material-calculus} give
+\begin{align}
+ |R_{\rm tr}(\alpha)-R_{\rm tr}(\alpha_*)|
+ &\le Ca\int_0^1(1-t)
+       \sum_i\gamma_i(t)^2d_i^2\,dt\notag\\
+ &\le CS\Jfour(\alpha),
+ \label{TR:eq:near-transfer}
+\end{align}
+where the last inequality follows from
+\eqref{TR:eq:Jfour-identity} and quasiuniformity.  Combining
+\eqref{TR:eq:far-transfer} and \eqref{TR:eq:near-transfer} proves
+\eqref{TR:eq:physical-transfer} with
+\begin{equation}\label{TR:eq:transfer-modulus}
+ \omega_{\rm tr}(S)=C(S^{1/2}+S).
+\end{equation}
+\end{proof}
+
+\begin{theorem}[Physical disk endpoint D0]
+\label{TR:thm:physical-D0}
+For all sufficiently fine positive fans,
+\begin{equation}\label{TR:eq:physical-D0}
+ \qphys(b_\alpha+\PiNG\widetilde T_\alpha z)
+ -\widetilde P_D(\alpha_*)
+ \ge c_f\Jfour(\alpha)
+   +c_s\widetilde\G_\alpha(z-\widetilde z_\alpha^\sharp),
+\end{equation}
+where $c_f,c_s>0$ are independent of all minimum cells.
+\end{theorem}
+
+\begin{proof}
+Complete the physical support square exactly:
+\begin{equation*}
+ \qphys(b_\alpha+\PiNG\widetilde T_\alpha z)
+ =\widetilde P_D(\alpha)
+  +\widetilde\G_\alpha(z-\widetilde z_\alpha^\sharp).
+\end{equation*}
+The angular endpoint gap of stages 65 and 129, together with
+Lemma~\ref{TR:lem:physical-transfer}, gives
+$\widetilde P_D(\alpha)-\widetilde P_D(\alpha_*)\ge c_f\Jfour$ after
+decreasing the fine-mesh threshold.  Uniform coercivity gives the support
+constant $c_s$.
+\end{proof}
+
+\subsection{An exact fixed-disk scalar for the polygon}
+
+Before the harmless area dilation, let $p_i(h)$ be the intersection of
+the support lines with normals $\nu_i,\nu_{i+1}$.  It depends linearly on
+$(h_i,h_{i+1})$.  On side $i$ define
+\begin{equation}\label{TR:eq:material-boundary}
+ X_{\alpha,z}(\theta)
+ =(1-t_i(x))p_{i-1}(h_\alpha\mathbf1+z)
+  +t_i(x)p_i(h_\alpha\mathbf1+z).
+\end{equation}
+As $\theta$ traverses $K_i$, this traverses the actual straight side;
+hence its image is exactly $\partial P(\alpha,h_\alpha\mathbf1+z)$.
+Scale normalization of the eigenvalue makes the omitted final area
+dilation irrelevant.
+
+Write
+\begin{equation}\label{TR:eq:W}
+ X_{\alpha,z}(\theta)=e_r(\theta)+W_{\alpha,z}(\theta).
+\end{equation}
+At $z=0$, \eqref{TR:eq:material-boundary} is the radial parametrization of the
+tangential polygon.  Equations \eqref{TR:eq:endpoint-components}--
+\eqref{TR:eq:Tphysical} therefore give the exact identity
+\begin{equation}\label{TR:eq:normal-W}
+ \PiNG(W_{\alpha,z}\cdot e_r)
+ =b_\alpha+\PiNG\widetilde T_\alpha z
+ =:\widetilde\tau(\alpha,z).
+\end{equation}
+
+Choose a fixed annular extension of $W$ which equals $W$ at $r=1$ and
+vanishes for $r\le1/2$.  For $\|W\|_{W^{1,\infty}}$ small, the map
+$F_W={\rm id}+EW$ is bi-Lipschitz.  Pulling stiffness and mass back by
+$F_W$ defines the scale-normalized first eigenvalue
+\begin{equation}\label{TR:eq:LambdaW}
+ \mathcal L(W)=\frac{|F_W(\mathbb D)|}{\pi}
+ \lambda_1(F_W(\mathbb D)).
+\end{equation}
+
+\begin{lemma}[Parametric fixed-chart analyticity]
+\label{TR:lem:parametric-analytic}
+$\mathcal L$ is real analytic on a fixed small ball of
+$W^{1,\infty}(\T;\mathbb R^2)$.  It depends only on the boundary image,
+and
+\begin{equation}\label{TR:eq:parametric-Hessian}
+ D\mathcal L(0)=0,
+ \qquad
+ \frac12D^2\mathcal L(0)[W,W]
+ =\qphys\bigl(\PiNG(W\cdot e_r)\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The pullback coefficients are rational analytic functions of $DF_W$ and
+$\det DF_W$ on a small $L^\infty$ ball.  Uniform ellipticity, simplicity
+of the first eigenvalue, and the Riesz projection give operator-norm
+analyticity exactly as in the radial fixed chart.  Two extensions with the
+same boundary image are related by a bi-Lipschitz change of variables and
+therefore give the same eigenvalue and area.  The disk is critical for the
+scale-normalized functional.  Reparametrization invariance removes the
+tangential component from its second differential; the normal component
+is the Fourier--Bessel disk Hessian.  This proves
+\eqref{TR:eq:parametric-Hessian}.
+\end{proof}
+
+Define the nonlinear spectral remainder
+\begin{equation}\label{TR:eq:N}
+ \mathcal N(W)=\mathcal L(W)-\mathcal L(0)
+ -\qphys\bigl(\PiNG(W\cdot e_r)\bigr).
+\end{equation}
+Since \eqref{TR:eq:material-boundary} parametrizes the actual polygon,
+\begin{equation}\label{TR:eq:exact-value-split}
+ \boxed{
+ \lambda_1(P(\alpha,H_\alpha(z)))
+ =\mathcal L(0)+\qphys(\widetilde\tau(\alpha,z))
+  +\mathcal N(W_{\alpha,z}).}
+\end{equation}
+Here the left side is area normalized; equivalently one may use the
+unnormalized support polygon because \eqref{TR:eq:LambdaW} already performs
+the scale normalization.
+\endgroup

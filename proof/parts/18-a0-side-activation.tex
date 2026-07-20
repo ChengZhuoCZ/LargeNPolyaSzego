@@ -1,0 +1,217 @@
+\begingroup
+\section{Node A0: strict transverse side activation}
+\label{module:A0}
+\noindent\textit{Audited source: \nolinkurl{A0_side_activation.tex}.}
+\subsection{A sharp one-dimensional tent inequality}
+
+For \(L>0\) and \(x\in(0,L)\), let
+\begin{equation}\label{A0:eq:green}
+ K_x(s)=
+ \begin{cases}
+  \displaystyle\frac{s(L-x)}{L},&0\le s\le x,\\[2mm]
+  \displaystyle\frac{x(L-s)}{L},&x\le s\le L.
+ \end{cases}
+\end{equation}
+Thus \(K_x\) is the Dirichlet Green kernel of \(-d^2/ds^2\), viewed as a
+function of \(s\), and the unit-height triangular tent is
+\begin{equation}\label{A0:eq:tent}
+ h_x(s)=\frac{L}{x(L-x)}K_x(s).
+\end{equation}
+
+\begin{lemma}[Log-concave density dominates its constant rearrangement]
+\label{A0:lem:tent}
+Let \(q:(0,L)\to(0,\infty)\) be log-concave and integrable, with
+\begin{equation}\label{A0:eq:endpoint}
+ \lim_{s\downarrow0}q(s)=\lim_{s\uparrow L}q(s)=0.
+\end{equation}
+Put
+\begin{equation}
+ \mu=\frac1L\int_0^Lq(s)\,ds.
+\end{equation}
+If
+\begin{equation}\label{A0:eq:barycenter}
+ \int_0^L\left(s-\frac L2\right)q(s)\,ds=0,
+\end{equation}
+then, for every \(x\in(0,L)\),
+\begin{equation}\label{A0:eq:tent-positive}
+ \boxed{\int_0^Lh_x(s)\{q(s)-\mu\}\,ds>0.}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Set \(g=q-\mu\) and
+\begin{equation}
+ G(y)=\int_0^yg(s)\,ds,\qquad
+ H(y)=\int_0^yG(r)\,dr.
+\end{equation}
+Mass and barycenter matching give
+\begin{equation}\label{A0:eq:moments}
+ \int_0^Lg=0,\qquad \int_0^Lsg(s)\,ds=0,
+\end{equation}
+and therefore
+\begin{equation}\label{A0:eq:Hend}
+ H(L)=\int_0^L(L-s)g(s)\,ds=0.
+\end{equation}
+
+Log-concavity says that every superlevel set of \(q\) is an interval.
+In view of \eqref{A0:eq:endpoint} and \(\int q=\mu L\), the set
+\(\{q>\mu\}\) is a nonempty interval \((a,b)\Subset(0,L)\), up to
+irrelevant closed plateau endpoints.  Thus \(g\) has the sign pattern
+\[
+ -,\quad +,\quad -.
+\]
+Consequently \(G\) first decreases, then increases, and finally decreases
+to \(G(L)=0\).  On the last interval it must be nonnegative, because it is
+decreasing to zero.  Hence \(G\) changes sign exactly once, from negative
+to positive.  It follows that \(H\) first decreases and then increases.
+Together with \(H(0)=H(L)=0\), this gives
+\begin{equation}\label{A0:eq:Hnegative}
+ H(y)<0,\qquad 0<y<L.
+\end{equation}
+Strictness follows because \(q\) cannot equal the positive constant
+\(\mu\) while satisfying \eqref{A0:eq:endpoint}.
+
+Now set
+\[
+ F(x)=\int_0^LK_x(s)g(s)\,ds.
+\]
+The Green-kernel identity gives
+\[
+ -F''=g,\qquad F(0)=F(L)=0.
+\]
+Moreover \(F'(0)=L^{-1}\int_0^L(L-s)g(s)\,ds=0\) by
+\eqref{A0:eq:moments}.  Hence \(F'=-G\) and \(F=-H\).  Equation
+\eqref{A0:eq:Hnegative} yields \(F(x)>0\).  Multiplication by the positive
+factor in \eqref{A0:eq:tent} proves \eqref{A0:eq:tent-positive}.
+\end{proof}
+
+\begin{remark}
+The proof is a convex-order statement, but no external convex-order
+theorem is needed.  The only special input is that a log-concave density
+crosses its average on one interval; the two moment equalities then force
+the sign of every tent pairing.
+\end{remark}
+
+\subsection{Log-concavity of the side flux}
+
+Let \(P\) be a bounded convex polygon and let \(u>0\) be its first
+Dirichlet eigenfunction:
+\begin{equation}
+ -\Delta u=\lambda u\quad\hbox{in }P,\qquad
+ u=0\quad\hbox{on }\partial P.
+\end{equation}
+Fix an open side \(S\), identify it with \(0<s<L\), and let
+\(\nu_{\rm in}\) be its inward unit normal.  Define
+\begin{equation}\label{A0:eq:p}
+ p(s)=\partial_{\nu_{\rm in}}u(s)>0.
+\end{equation}
+
+\begin{lemma}[The boundary flux is log-concave on a side]
+\label{A0:lem:flux-logconcave}
+The function \(p\) in \eqref{A0:eq:p} is log-concave on \((0,L)\).
+Moreover,
+\begin{equation}\label{A0:eq:p-endpoints}
+ p(s)\longrightarrow0
+ \quad\hbox{as }s\downarrow0\hbox{ or }s\uparrow L.
+\end{equation}
+Consequently \(p^2\) satisfies the hypotheses of
+Lemma~\ref{A0:lem:tent}.
+\end{lemma}
+
+\begin{proof}
+The Brascamp--Lieb theorem~\cite{BL76} gives log-concavity of \(u\) in every bounded
+convex domain.  Fix \(s_0,s_1\in(0,L)\) and \(0<\theta<1\).  For all
+sufficiently small \(r>0\), the three points
+\[
+ s_j+r\nu_{\rm in}\quad(j=0,1),\qquad
+ ((1-\theta)s_0+\theta s_1)+r\nu_{\rm in}
+\]
+belong to \(P\).  Log-concavity of \(u\) gives
+\begin{multline}
+ \frac{u(((1-\theta)s_0+\theta s_1)+r\nu_{\rm in})}{r}\\
+ \ge
+ \left(\frac{u(s_0+r\nu_{\rm in})}{r}\right)^{1-\theta}
+ \left(\frac{u(s_1+r\nu_{\rm in})}{r}\right)^\theta.
+\end{multline}
+Letting \(r\downarrow0\) proves log-concavity of \(p\).
+
+At a convex vertex of interior angle \(\omega<\pi\), the standard corner
+expansion of a Dirichlet solution starts with
+\(r^{\pi/\omega}\sin(\pi\vartheta/\omega)\).  Hence its gradient is
+\(O(r^{\pi/\omega-1})\), which tends to zero.  This proves
+\eqref{A0:eq:p-endpoints}.
+\end{proof}
+
+\subsection{Activating one new side}
+
+Use the scale-invariant functional
+\begin{equation}\label{A0:eq:Lambda}
+ \Lambda(P)=\frac{|P|}{\pi}\lambda_1(P).
+\end{equation}
+Suppose \(P\) is stationary under all active vertex variations.  On each
+side \(S\) of length \(L\), stages 70--72 give the exact identities
+\begin{align}
+ \frac1L\int_0^Lp(s)^2\,ds&=\frac{\lambda}{|P|}=:\mu,
+ \label{A0:eq:mean}\\
+ \int_0^L\left(s-\frac L2\right)p(s)^2\,ds&=0.
+ \label{A0:eq:first-moment}
+\end{align}
+
+Choose \(x\in(0,L)\), insert at that point a collinear marked vertex, and
+move it a distance \(\varepsilon>0\) in the outward normal direction,
+keeping the two endpoints of \(S\) fixed.  For small \(\varepsilon\) this
+replaces \(S\) by two sides of a convex polygon and adds a triangular cap.
+At \(\varepsilon=0\), the normal velocity on \(S\) is exactly the tent
+\(h_x\) of \eqref{A0:eq:tent}.
+
+\begin{theorem}[Strict side-activation descent]\label{A0:thm:descent}
+For every side and every \(x\in(0,L)\), the outward splitting path
+\(P_\varepsilon\) satisfies
+\begin{equation}\label{A0:eq:strict}
+ \boxed{
+ \frac d{d\varepsilon}\Lambda(P_\varepsilon)
+ \bigg|_{\varepsilon=0+}<0.}
+\end{equation}
+Thus a stationary convex \(M\)-gon is not stationary, and is not a local
+minimum, in the closed class of convex polygons with at most \(M+1\)
+active sides.
+\end{theorem}
+
+\begin{proof}
+Hadamard's formula and the area derivative give, for an outward normal
+velocity \(h\),
+\begin{align}
+ D\Lambda(P)[h]
+ &=\frac{\lambda}{\pi}\int_{\partial P}h\,ds
+   -\frac{|P|}{\pi}\int_{\partial P}p^2h\,ds\notag\\
+ &=\frac{|P|}{\pi}\int_{\partial P}
+   \left(\frac{\lambda}{|P|}-p^2\right)h\,ds.
+ \label{A0:eq:Hadamard}
+\end{align}
+For the splitting path, \(h=h_x\) on \(S\) and is zero on the other
+sides.  Lemma~\ref{A0:lem:flux-logconcave} applies to \(q=p^2\), while
+\eqref{A0:eq:mean}--\eqref{A0:eq:first-moment} are precisely its mass and
+barycenter hypotheses.  Lemma~\ref{A0:lem:tent} therefore gives
+\[
+ \int_0^Lh_x(p^2-\mu)\,ds>0.
+\]
+Insert this inequality and \(\mu=\lambda/|P|\) into
+\eqref{A0:eq:Hadamard} to obtain \eqref{A0:eq:strict}.
+
+The path has one additional active vertex for every sufficiently small
+\(\varepsilon>0\).  Since its scale-invariant value decreases to first
+order, the final assertion follows.
+\end{proof}
+
+\begin{corollary}[No minimizing side loss]\label{A0:cor:no-loss}
+Let \(P\) minimize \(\Lambda\) in the class of convex polygons with at
+most \(N\) sides.  If \(P\) has at least three sides and is stationary in
+its active stratum, then it has exactly \(N\) active sides.
+\end{corollary}
+
+\begin{proof}
+If \(P\) had \(M<N\) active sides, Theorem~\ref{A0:thm:descent} would produce
+a convex \((M+1)\)-gon with strictly smaller \(\Lambda\), contradicting
+minimality.
+\end{proof}
+\endgroup

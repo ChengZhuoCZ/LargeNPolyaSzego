@@ -1,0 +1,1435 @@
+\begingroup
+\renewcommand{\Rone}{\mathcal R_1}
+\section{Node CT: exact cubic tensor and retraction of CT-JM}
+\label{module:CT}
+\noindent\textit{Audited source: \nolinkurl{CT_complete_tensor.tex}.}
+\subsection{Two functional spaces and the physical support quotient}
+\label{CT:sec:functional-spaces}
+
+The earlier working copies used the same symbol $\mathcal X$ for two
+different objects.  We separate them here.  For an arbitrary boundary
+vector field $W:\T\to\mathbb R^2$ let
+\begin{equation}\label{CT:eq:Y-norm}
+ \|W\|_{\Y}^{2}
+ :=\sum_{n\in\mathbb Z}(1+|n|)|\widehat W(n)|^2.
+\end{equation}
+Thus $\Y=H^{1/2}(\T;\mathbb R^2)$ is the fixed space in which the disk
+Taylor tensors are estimated.
+
+The support space is a different, fan-dependent quotient.  Choose side
+normals $\nu_i=e_r(\theta_i)$, put $\tau_i=e_\theta(\theta_i)$, and write
+\begin{equation}\label{CT:eq:support-area-row}
+ \mathsf Z_\alpha
+ :=\left\{z\in\mathbb R^N:
+ \sum_i\left(\tan\frac{\alpha_{i-1}}2+
+              \tan\frac{\alpha_i}2\right)z_i=0\right\}
+ \big/\{(q\cdot\nu_i)_i:q\in\mathbb R^2\}.
+\end{equation}
+For $x=\theta-\theta_i$ on
+$K_i=[\theta_i-\alpha_{i-1}/2,\theta_i+\alpha_i/2]$, set
+\begin{align}
+ a_i^-&=\frac{z_i-z_{i-1}}{\sin\alpha_{i-1}}
+          -z_i\tan\frac{\alpha_{i-1}}2,\notag\\
+ a_i^+&=\frac{z_{i+1}-z_i}{\sin\alpha_i}
+          +z_i\tan\frac{\alpha_i}2,\label{CT:eq:support-endpoint-jets}\\
+ t_i(x)&=\frac{\tan x+\tan(\alpha_{i-1}/2)}
+ {\tan(\alpha_{i-1}/2)+\tan(\alpha_i/2)}.\notag
+\end{align}
+The normal component of the genuine straight-side material velocity is
+\begin{equation}\label{CT:eq:physical-normal-trace}
+ v_\alpha(z)(\theta)
+ =z_i\cos x+\bigl\{(1-t_i(x))a_i^-+t_i(x)a_i^+\bigr\}\sin x.
+\end{equation}
+Its tangential component, needed only in the curvature row, is
+\begin{equation}\label{CT:eq:physical-tangential-trace}
+ w_\alpha(z)(\theta)
+ =-z_i\sin x+\bigl\{(1-t_i(x))a_i^-+t_i(x)a_i^+\bigr\}\cos x.
+\end{equation}
+Let $\PiNG$ delete the constant and first harmonics.  The physical Schur
+form and the support Hilbert norm are, by definition,
+\begin{equation}\label{CT:eq:Xalpha-definition}
+ \Gtilde_\alpha(z)
+ :=\qD(\PiNG v_\alpha(z)),
+ \qquad
+ \|z\|_{\X_\alpha}:=\Gtilde_\alpha(z)^{1/2}.
+\end{equation}
+The disk Bessel coercivity makes this a norm on the quotient
+$\mathsf Z_\alpha$.  When a physical support slot is denoted by
+$Z_\alpha(z)$, we use the unambiguous convention
+\begin{equation}\label{CT:eq:support-X-convention}
+ \|Z_\alpha(z)\|_{\X_\alpha}:=\|z\|_{\X_\alpha}.
+\end{equation}
+In particular, the comparison imported later by NR is not an additional
+theorem: with the current notation it is the identity
+\begin{equation}\label{CT:eq:exact-norm-interface}
+ \boxed{\|Z_\alpha(z)\|_{\X_\alpha}^2
+        =\Gtilde_\alpha(z).}
+\end{equation}
+
+For later bookkeeping put
+$A_i(x)=(1-t_i(x))a_i^-+t_i(x)a_i^+$.  Direct rotation gives the Cartesian
+identity
+\begin{equation}\label{CT:eq:cartesian-support-trace}
+ v_\alpha(z)e_r+w_\alpha(z)e_\theta
+ =z_i\nu_i+A_i(x)\tau_i\qquad(x\in K_i).
+\end{equation}
+The endpoint formulas \eqref{CT:eq:support-endpoint-jets} make the two Cartesian
+values at every common vertex identical.  They do \emph{not}, however, give
+a ratio-free reconstruction of the full vector trace from its normal
+component.
+
+\begin{proposition}[Failure of full-vector reconstruction]
+\label{CT:prop:no-vector-reconstruction}
+There is no constant independent of $N$ for which
+\[
+ \|v_\alpha(z)e_r+w_\alpha(z)e_\theta\|_{H^{1/2}}
+ \le C\|\PiNG v_\alpha(z)\|_{H^{1/2}}
+\]
+holds on all exact support classes.
+\end{proposition}
+
+\begin{proof}
+Take an even regular fan, $\alpha_i=a=2\pi/N$, and the alternating support
+mode $z_i=(-1)^i$, which satisfies the area row and has no translation
+component.  The endpoint formulas give
+\[
+ a_i^-=z_i\cot(a/2),\qquad a_i^+=-z_i\cot(a/2).
+\]
+Thus the normal trace has a fixed normalized-cell profile of amplitude
+$O(1)$, while the tangential coefficient $A_i$ runs between values of size
+$\cot(a/2)\asymp a^{-1}$.  Scale invariance of the cell
+$\dot H^{1/2}$ seminorm and summation over the $N$ cells give
+\[
+ \|\PiNG v_\alpha(z)\|_{H^{1/2}}^2\asymp N,
+ \qquad
+ \|v_\alpha(z)e_r+w_\alpha(z)e_\theta\|_{H^{1/2}}^2
+ \asymp Na^{-2}.
+\]
+The squared ratio therefore diverges like $a^{-2}$.
+\end{proof}
+
+Consequently tangential material velocities may enter only through the
+completed physical-coordinate chain rule in \eqref{CT:eq:physical-chain}; they
+cannot be treated as an $H^{1/2}$ support slot.  This is exactly the
+vertex-reparametrization issue isolated below.
+
+\subsection{Fixed-domain coefficient ledger}
+
+Let $E$ be a fixed annular extension from boundary vector fields to
+$W^{1,\infty}(\mathbb D;\mathbb R^2)$, vanishing on $\{|x|\le1/2\}$.
+For three boundary directions $V_i$ put
+\[
+ F_t(x)=x+\sum_{i=1}^3t_iEV_i(x),\qquad
+ G_i=D(EV_i),\qquad G(t)=\sum_it_iG_i.
+\]
+Write
+\begin{equation}\label{CT:eq:JC}
+ J(t)=\det(I+G(t)),\qquad
+ P(t)=(I+G(t))^{-1},\qquad
+ C(t)=J(t)P(t)P(t)^T.
+\end{equation}
+If $I$ is an ordered list of distinct indices, a subscript $I$ denotes
+$\partial_I|_{t=0}$, and $I_0\dot\cup\cdots\dot\cup I_r=I$ denotes an
+ordered set partition, empty blocks being allowed.
+
+All coefficient derivatives through cubic order are explicit.  Namely,
+\begin{align}
+ J_i&=\operatorname {tr}G_i,\notag\\
+ J_{ij}&=(\operatorname {tr}G_i)(\operatorname {tr}G_j)
+          -\operatorname {tr}(G_iG_j),\qquad J_{ijk}=0,
+ \label{CT:eq:J-jets}\\
+ P_i&=-G_i,\notag\\
+ P_{ij}&=G_iG_j+G_jG_i,\notag\\
+ P_{ijk}&=-\sum_{\pi\in S_3}
+ G_{\pi(i)}G_{\pi(j)}G_{\pi(k)},
+ \label{CT:eq:P-jets}\\
+ C_I&=\sum_{I_0\dot\cup I_1\dot\cup I_2=I}
+ J_{I_0}P_{I_1}P_{I_2}^{T}.
+ \label{CT:eq:C-jets}
+\end{align}
+Here $J_\varnothing=1$ and $P_\varnothing=I$.  Formula
+\eqref{CT:eq:C-jets}, rather than an ellipsis, is the metric/Jacobian ledger.
+
+On $H_0^1(\mathbb D)$ define
+\begin{align}
+ A_t(u,v)&=\int_{\mathbb D}\nabla u\cdot C(t)\nabla v,
+ &M_t(u,v)&=\int_{\mathbb D}J(t)uv,\label{CT:eq:forms}\\
+ s(t)&=\pi^{-1}\int_{\mathbb D}J(t),
+ &\widehat A_t&=s(t)A_t.\label{CT:eq:scale-form}
+\end{align}
+Thus the generalized eigenvalue of $(\widehat A_t,M_t)$ is the first
+Dirichlet eigenvalue after normalization to area $\pi$.  Its scale rows are
+\begin{equation}\label{CT:eq:scale-jets}
+ \widehat A_I
+ =\sum_{I_0\dot\cup I_1=I}s_{I_0}A_{I_1},
+ \qquad
+ A_I(u,v)=\int\nabla u\cdot C_I\nabla v,
+ \qquad M_I(u,v)=\int J_Iuv.
+\end{equation}
+No area constraint has yet been imposed in \eqref{CT:eq:scale-jets}; in
+particular, the scale terms have not been silently deleted.
+
+To use a fixed inner product, let $S(t)$ be multiplication by
+$J(t)^{-1/2}$ and set
+\begin{equation}\label{CT:eq:H}
+ H(t)=S(t)\widehat A_tS(t)
+\end{equation}
+in the form sense on $L^2(\mathbb D)$.  The mass/Jacobian jets are
+\begin{align}
+ S_i&=-\tfrac12J_i,\notag\\
+ S_{ij}&=\tfrac34J_iJ_j-\tfrac12J_{ij},\notag\\
+ S_{ijk}&=-\tfrac{15}{8}J_iJ_jJ_k
+ +\tfrac34(J_{ij}J_k+J_{ik}J_j+J_{jk}J_i),
+ \label{CT:eq:S-jets}
+\end{align}
+and the completed operator jets are
+\begin{equation}\label{CT:eq:H-jets}
+ H_I=\sum_{I_0\dot\cup I_1\dot\cup I_2=I}
+ S_{I_0}\widehat A_{I_1}S_{I_2}.
+\end{equation}
+Equations \eqref{CT:eq:J-jets}--\eqref{CT:eq:H-jets} list every direct metric,
+Jacobian, mass, and scale monomial through third order.
+
+\subsection{The full symmetric state tensor}
+
+Let $u_0$ be the positive normalized disk state, $H_0u_0=\lambda_0u_0$,
+and put
+\begin{equation}\label{CT:eq:R}
+ Q=I-|u_0\rangle\langle u_0|,
+ \qquad R=Q(H_0-\lambda_0)^{-1}Q,
+ \qquad h_i=QH_iu_0.
+\end{equation}
+The inverse in \eqref{CT:eq:R} is positive because $\lambda_0$ is the first
+simple eigenvalue.
+
+\begin{proposition}[Complete third reduced-resolvent formula]
+\label{CT:prop:full-tensor}
+For arbitrary directions $V_1,V_2,V_3$, the full symmetric third
+derivative is
+\begin{align}
+ \lambda_{123}={}&\langle u_0,H_{123}u_0\rangle\label{CT:eq:full-tensor}\\
+ &-\sum_{\rm cyc(ij,k)}
+ \bigl\{\langle QH_{ij}u_0,Rh_k\rangle
+          +\langle h_k,RQH_{ij}u_0\rangle\bigr\}\notag\\
+ &+\sum_{\pi\in S_3}
+ \left\langle h_{\pi(1)},
+ R(H_{\pi(2)}-\lambda_{\pi(2)}I)R
+ h_{\pi(3)}\right\rangle.\notag
+\end{align}
+Here $\lambda_i=\langle u_0,H_iu_0\rangle$.  At the scale-normalized disk
+$\lambda_i=0$ for every boundary direction.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{CT:prop:full-tensor}]
+Choose the analytic normalized eigenvector $u(t)$ with
+$\langle u(t),u(t)\rangle=1$.  The first differentiated state equation
+gives
+\begin{equation}\label{CT:eq:first-state}
+ Qu_i=-Rh_i,
+ \qquad \langle u_i,u_0\rangle=0.
+\end{equation}
+Differentiate once more, project by $Q$, and use the differentiated
+normalization to eliminate the component along $u_0$.  Substitution in
+$\lambda_i=\langle u,H_iu\rangle$ gives \eqref{CT:eq:full-tensor}.
+For a repeated direction it reduces to
+\[
+ \lambda'''=\langle H'''\rangle
+ -6\langle QH''u_0,Rh\rangle
+ +6\langle h,R(H'-\lambda'I)Rh\rangle,
+\]
+which also checks all multiplicities.  Polarization proves the displayed
+symmetric formula.  Criticality follows from dilation-normalized disk
+stationarity.
+\end{proof}
+
+\begin{proposition}[Two energetic slots in the disk cubic tensor]
+\label{CT:prop:cubic-tame}
+The complete tensor of Proposition~\ref{CT:prop:full-tensor} extends to two
+$\Y$ slots and one Lipschitz coefficient slot, and
+\begin{equation}\label{CT:eq:cubic-tame}
+ |D^3\mathcal L(0)[U,V,W]|
+ \le C\sum_{\rm cyc}
+ \|U\|_\Y\|V\|_\Y\|W\|_{W^{1,\infty}}.
+\end{equation}
+The statement concerns the complete vector tensor; no radial
+reparametrization row has been separated from it.
+\end{proposition}
+
+\begin{proof}
+For smooth traces use the exact physical chain rule
+\eqref{CT:eq:physical-chain}.  The normal tensor is the null form
+\eqref{CT:eq:null} plus the seven order-one rows
+\eqref{CT:eq:seven-rows}.  Its multipliers have total order at most two and
+obey the stated allocation by the dyadic argument of
+Lemma~\ref{CT:lem:seven-row-audit}.
+
+It remains to audit the curvature part.  The disk Hessian has symbol
+$d^2(1+\mu_n)$ on $|n|\ge2$, hence order one with the standard discrete
+differences.  The three terms in $\Gamma_{ij}$ have orders zero, one, and
+one.  After symmetric polarization, their multipliers are finite
+permutations of
+\begin{equation*}
+ (1+\mu_{n_1}),\qquad
+ n_2(1+\mu_{n_1}),
+ \qquad n_1+n_2+n_3=0,
+\end{equation*}
+up to the harmless shifts by one caused by $e_r,e_\theta$.  They have
+total order at most two.  On each dyadic block put the two largest half
+derivatives in $L^2$ and the remaining coefficient, together with its one
+allowed derivative, in $L^\infty$.  The finite-rank area and translation
+rows vanish by \eqref{CT:eq:geometric-kernel}.  Discrete Coifman--Meyer
+summation proves \eqref{CT:eq:cubic-tame}.  Density defines the two energetic
+slots and preserves extension independence.
+\end{proof}
+
+The uncancelled rows in \eqref{CT:eq:full-tensor} are now literally:
+\begin{center}
+\begin{longtable}{>{\raggedright\arraybackslash}p{.23\linewidth}
+                  >{\raggedright\arraybackslash}p{.66\linewidth}}
+\toprule
+row & exact source\\
+\midrule
+\endfirsthead
+\toprule
+row & exact source\\
+\midrule
+\endhead
+third direct row & $\langle H_{123}u_0,u_0\rangle$ with
+\eqref{CT:eq:H-jets};\\
+second-state rows & the six $H_{ij}$--$R$--$H_k$ pairings in the second
+line of \eqref{CT:eq:full-tensor};\\
+three first-state rows & the six $H_i$--$R$--$H_j$--$R$--$H_k$ pairings
+in the last line;\\
+state normalization & the three $-\lambda_iH_j$ insertions in that same
+last line;\\
+metric/Jacobian & the $C_I$ terms of \eqref{CT:eq:C-jets};\\
+mass & the nonempty $S_I$ terms of \eqref{CT:eq:H-jets};\\
+scale/area factor & the nonempty $s_I$ terms of
+\eqref{CT:eq:scale-jets}.\\
+\bottomrule
+\end{longtable}
+\end{center}
+Thus the word ``state rows'' does not conceal a differentiated state, and
+the geometric rows are finite set-partition sums.
+
+\subsection{Physical coordinates, curvature, area, and translations}
+
+Write a boundary vector direction as
+\begin{equation}\label{CT:eq:components}
+ V_i=f_i e_r+w_i e_\theta.
+\end{equation}
+The radial graph of the image of
+$e_r+\sum t_iV_i$ has first jet $f_i$ and second jet
+\begin{equation}\label{CT:eq:Gamma}
+ \Gamma_{ij}=w_iw_j-w_if_j'-w_jf_i'.
+\end{equation}
+Indeed, take the modulus and argument of
+$e^{i\theta}(1+\sum t_if_i+i\sum t_iw_i)$ and then express the modulus in
+the new angular variable.  This gives \eqref{CT:eq:Gamma} before using any
+invariance.
+
+The exact area-and-centering chart adds a unique $\chi_{ij}$ in the span
+of $1,\cos\theta,\sin\theta$ to the second radial jet.  Its coefficients
+are
+\begin{align}
+ \chi_{ij}={}&c_{ij}^0+c_{ij}^1\cos\theta+c_{ij}^2\sin\theta,
+ \label{CT:eq:chi}\\
+ c_{ij}^0={}&-\frac1{2\pi}\int_\T
+    (\Gamma_{ij}+f_if_j),\notag\\
+ c_{ij}^1={}&-\frac1\pi\int_\T
+    (\Gamma_{ij}+2f_if_j)\cos\theta,\notag\\
+ c_{ij}^2={}&-\frac1\pi\int_\T
+    (\Gamma_{ij}+2f_if_j)\sin\theta.\notag
+\end{align}
+These are obtained by twice differentiating
+\[
+ \tfrac12\int R^2=\pi,
+ \qquad \tfrac13\int R^3(\cos\theta,\sin\theta)=0.
+\]
+They are the area row and the two translation-projection rows; there is no
+unspecified finite-rank correction.
+
+Let $\Lambda^{\rm n}(\rho)$ denote the scale-normalized scalar in the
+normal radial chart.  Since $D\Lambda^{\rm n}(0)=0$, the exact cubic chain
+rule is
+\begin{multline}\label{CT:eq:physical-chain}
+ D^3\mathcal L(0)[V_1,V_2,V_3]
+ =D^3\Lambda^{\rm n}(0)[f_1,f_2,f_3]\\
+ +\sum_{\rm cyc(ij,k)}D^2\Lambda^{\rm n}(0)
+ [f_k,\Gamma_{ij}+\chi_{ij}].
+\end{multline}
+Scale and translation invariance imply
+\begin{equation}\label{CT:eq:geometric-kernel}
+ D^2\Lambda^{\rm n}(0)[g,\psi]=0,
+ \qquad \psi\in\operatorname {span}\{1,\cos\theta,\sin\theta\}.
+\end{equation}
+
+The disk Hessian used throughout this node is the following literal
+Fourier--Bessel form.  If
+$d=\partial_ru_0(1)$ for the positive $L^2$-normalized disk state and
+$\mathcal D_\circ$ is the multiplier in \eqref{CT:eq:DtN}, set
+\begin{equation}\label{CT:eq:qD-definition}
+ \qD(g,h):=d^2\int_\T
+  (\PiNG g)(\mathcal D_\circ+1)(\PiNG h),
+ \qquad \qD(g):=\qD(g,g).
+\end{equation}
+Thus
+\begin{equation}\label{CT:eq:disk-Hessian}
+ \boxed{\frac12D^2\Lambda^{\rm n}(0)[g,h]=\qD(g,h)},
+ \qquad
+ c\|\PiNG g\|_{H^{1/2}}^2
+ \le \qD(g)\le
+ C\|\PiNG g\|_{H^{1/2}}^2.
+\end{equation}
+Indeed, for a mean-zero diagonal direction the second boundary row is
+$u_2|=d(f\mathcal D_\circ f+f^2/2)$.  Green's identity gives the raw
+second Taylor coefficient
+$d^2\int(f\mathcal D_\circ f+f^2/2)$.  Multiplication by the area factor
+$1+\varepsilon^2(2\pi)^{-1}\int f^2$ adds
+$j^2(2\pi)^{-1}\int f^2=(d^2/2)\int f^2$, because
+$d^2=j^2/\pi$.  This proves the first identity by polarization.
+Moreover, $\mu_{\pm1}=-1$ and
+$\mu_n+1\asymp1+|n|$ for $|n|\ge2$, which proves the coercivity statement
+and the geometric kernel \eqref{CT:eq:geometric-kernel}.
+
+Consequently all $\chi_{ij}$ rows cancel exactly.  The surviving
+$D^2\Lambda^{\rm n}[f_k,\Gamma_{ij}]$ rows are the curvature rows.  For
+$V_1=V_2=fe_r$ and $V_3=we_\theta$, \eqref{CT:eq:physical-chain} becomes
+\begin{equation}\label{CT:eq:tangent-special}
+ D^3\mathcal L(0)[fe_r,fe_r,we_\theta]
+ =-2D^2\Lambda^{\rm n}(0)[f,wf'],
+\end{equation}
+or, equivalently, $-4\qD(f,wf')$.  After multiplication by the Taylor
+factor $1/2$ appropriate to the differentiated cubic term
+$3\mathcal T_3$, the same row is $-2\qD(f,wf')$.  This distinction fixes
+the multiplicity used downstream.
+
+\begin{proposition}[Retraction of the curvature-as-remainder estimate]
+\label{CT:prop:curvature-counterexample}
+Let $f_\alpha$ be the normal fan field and let
+$Z_\alpha(z)=v_\alpha(z)e_r+w_\alpha(z)e_\theta$ be a physical support
+slot.  The formerly asserted estimate
+\begin{equation}\label{CT:eq:curvature-absolute}
+ \left|4\qD(f_\alpha,w_\alpha(z)f_\alpha')\right|
+ \le CS^{5/2}\|Z_\alpha(z)\|_{\X_\alpha}.
+\end{equation}
+is false uniformly as $N\to\infty$.  Consequently the curvature row cannot
+be placed by itself in the $o(1)$ mixed remainder.
+\end{proposition}
+
+\begin{proof}
+Take $N=3M$, $a=2\pi/N$, and the three-periodic fan
+$\alpha_{3j+r}=ap_r$ with $p=(1/6,8/3,1/6)$.  Choose a three-periodic
+support vector satisfying the exact area row and the two translation rows;
+after scaling it tends to $(17,-2,0)$.  In the material coordinate
+$y=\theta/a$ one has
+\[
+ f_\alpha=a^2F_p+O(a^4),\qquad
+ w_\alpha(z)f_\alpha'=G_{p,z}+O(a^2),\qquad
+ \|Z_\alpha(z)\|_{\X_\alpha}^2\asymp a^{-1}.
+\]
+The high-frequency expansion
+$\mathcal D_\circ+1=|D|+1+O(|D|^{-1})$ gives
+\[
+ \qD(f_\alpha,w_\alpha(z)f_\alpha')
+ =2\pi d^2m_{p,z}a+O(a^2),
+ \qquad m_{p,z}\ne0.
+\]
+Here $m_{p,z}$ is the mean Fourier pairing on the material period of length
+three.  The factor $2\pi$ comes from its $2\pi/(3a)$ repetitions and the
+change $d\theta=a\,dy$.  For a check independent of tail monotonicity, put
+\[
+ \widehat H(n)=\frac13\int_0^3H(y)e^{-2\pi iny/3}\,dy
+\]
+for every three-periodic material profile, and put
+\[
+ S_K=2\sum_{n=1}^K\frac{2\pi n}{3}
+ \operatorname {Re}\{\overline{\widehat F_p(n)}
+                         \widehat G_{p,z}(n)\}.
+\]
+On each of the three cells the two functions are polynomials of degree at
+most two.  For $omega=2\pi n/3$ their integrals are evaluated by
+\[
+ I_0(l,u;\omega)=\frac{e^{-i\omega l}-e^{-i\omega u}}{i\omega},
+ \qquad
+ I_j(l,u;\omega)=
+ \left[-\frac{x^je^{-i\omega x}}{i\omega}\right]_{l}^{u}
+ +\frac{j}{i\omega}I_{j-1}(l,u;\omega).
+\]
+Substitution of the rational cell endpoints and coefficients, with
+outward rational enclosures for $\pi$, sine, and cosine, gives at $K=4096$
+\[
+ 2.23372<S_{4096}<2.23374.
+\]
+Moreover $F_p'$ has total variation $6$ and direct differentiation of the
+three quadratic pieces, including their endpoint jumps, gives
+$\operatorname {TV}(G_{p,z})<210$.  Twice integrating by parts in
+$\widehat F_p$ and once in $\widehat G_{p,z}$ therefore yields
+\[
+ |m_{p,z}-S_K|
+ \le\frac{\operatorname {TV}(F_p')\operatorname {TV}(G_{p,z})}
+          {2\pi^2K},
+ \qquad
+ |m_{p,z}-S_{4096}|<0.01559.
+\]
+Thus $2.218<m_{p,z}<2.250$, in particular $m_{p,z}\ne0$.  The first ten
+modes give the additional regression value $2.159716$, but are not used
+for the rigorous tail separation.  The left side of
+\eqref{CT:eq:curvature-absolute} is therefore of order $a$, whereas its right
+side is $O(a^2)$.  This contradicts a uniform constant.
+\end{proof}
+
+The distributional curvature pairing remains part of the exact identity
+\begin{multline}\label{CT:eq:curvature-as-difference}
+ -4\qD(f_\alpha,w_\alpha(z)f_\alpha')\\
+ =D^3\mathcal L(0)[B_\alpha,B_\alpha,Z_\alpha(z)]
+  -D^3\Lambda^{\rm n}(0)
+    [f_\alpha,f_\alpha,v_\alpha(z)].
+\end{multline}
+but Proposition~\ref{CT:prop:no-vector-reconstruction} and
+Proposition~\ref{CT:prop:curvature-counterexample} show that its two terms may
+not be estimated separately.  In fact even their sum is not a small
+remainder, as proved below; it must be retained in a joint principal block.
+
+\subsection{Extraction of the unique order-two symbol}
+
+For real periodic functions define the same symmetric null form used by
+the quadratic-bubble node,
+\begin{equation}\label{CT:eq:null}
+ \Cnull(f_1,f_2,f_3)
+ =\frac13\sum_{\rm cyc}
+ \int_\T f_1\{(\Dop f_2)(\Dop f_3)-f_2'f_3'\}.
+\end{equation}
+With $j=j_{0,1}$, the fixed nonzero disk solvability constant in our
+integral convention is
+\begin{equation}\label{CT:eq:kappa}
+ \boxed{\kappa_{\mathbb D}=-\frac{6j^2}{\pi}}.
+\end{equation}
+Indeed, if $d=\partial_ru_0(1)$, then
+$\partial_\lambda u_0(1)=d/(2j^2)$; the coefficient of the cubic boundary
+solvability row is therefore $-2j^2$ times its angular mean.  The minus
+sign comes from solving
+\(
+ (d/(2j^2))\,\delta\lambda+d\,R=0
+\)
+for the spectral increment.  Conversion from the Taylor coefficient to
+$D^3$ supplies the factor $6$.  This sign is fixed by the outward radial
+convention in \eqref{CT:eq:components}; it is not absorbed into the definition
+of \(\Cnull\).
+
+On the nongeometric subspace let
+\begin{align}
+ \mathcal D_\circ e^{in\theta}&=\mu_ne^{in\theta}\quad(n\ne0),
+ &\mathcal D_\circ1&=0,\label{CT:eq:DtN}\\
+ \mu_n&=j\frac{J_{|n|}'(j)}{J_{|n|}(j)}=|n|+r_n,
+ &|\Delta^kr_n|&\le C_k(1+|n|)^{-1-k}.\notag
+\end{align}
+The Bessel equation also gives the exact second normal derivative
+\begin{equation}\label{CT:eq:rr-exact}
+ \partial_r^2\mathcal E_jg|_{r=1}
+ =\Dop^2g+\mathcal B_1g,
+ \qquad
+ \mathcal B_1e^{in\theta}=(-\mu_n-j^2)e^{in\theta},
+\end{equation}
+where $\mathcal B_1$ has order one.
+
+\begin{proposition}[Exact seven-row boundary formula]
+\label{CT:prop:seven-row}
+Let $f$ be real and $\PiZero f=f$, where $\PiZero$ deletes only the
+constant mode.  Then
+\begin{equation}\label{CT:eq:exact-boundary-cubic}
+ D^3\Lambda^{\rm n}(0)[f,f,f]
+ =\kappa_{\mathbb D}\,\mathfrak B(f),
+\end{equation}
+where
+\begin{multline}\label{CT:eq:B-exact}
+ \mathfrak B(f)
+ =\int_\T f\,\mathcal D_\circ
+       \left(f\mathcal D_\circ f+\frac12f^2\right)
+ -\frac12\int_\T f^2(\Dop^2+\mathcal B_1)f\\
+ +\frac{2-j^2}{6}\int_\T f^3.
+\end{multline}
+Consequently
+\begin{equation}\label{CT:eq:seven-row}
+ \mathfrak B(f)=\Cnull(f,f,f)+\sum_{a=1}^7\mathfrak r_a(f),
+\end{equation}
+with the seven literal lower rows
+\begin{align}
+ \mathfrak r_1(f)&=\int f\Dop(f\,r(D)f),
+ &\mathfrak r_2(f)&=\int f\,r(D)(f\Dop f),\\
+ \mathfrak r_3(f)&=\int f\,r(D)(f\,r(D)f),
+ &\mathfrak r_4(f)&=\frac12\int f\Dop(f^2),\\
+ \mathfrak r_5(f)&=\frac12\int f\,r(D)(f^2),
+ &\mathfrak r_6(f)&=-\frac12\int f^2\mathcal B_1f,
+ \label{CT:eq:seven-rows}\\
+ \mathfrak r_7(f)&=\frac{2-j^2}{6}\int f^3.&&
+\end{align}
+Here $r(D)=\mathcal D_\circ-\Dop$ on nonzero modes and is zero on the
+constant mode.  The polarized formulas are obtained by symmetric
+polarization of \eqref{CT:eq:seven-rows}.
+\end{proposition}
+
+\begin{proof}
+Write $u_0(r)=c_0J_0(jr)$, $d=\partial_ru_0(1)$, and expand without
+factorials
+\begin{equation*}
+ u=u_0+\varepsilon u_1+\varepsilon^2u_2+
+   \varepsilon^3u_3+O(\varepsilon^4),
+ \qquad
+ \lambda=j^2+\varepsilon^2\lambda_2+
+   \varepsilon^3\lambda_3+O(\varepsilon^4).
+\end{equation*}
+The linear term vanishes because $f$ has zero mean.  The first two
+Dirichlet rows are exactly
+\begin{align}
+ u_1|_{r=1}&=-df,
+ &u_2|_{r=1}
+ &=d\left(f\mathcal D_\circ f+\frac12f^2\right).
+ \label{CT:eq:first-two-boundary-rows}
+\end{align}
+The nonzero angular modes of $\partial_ru_2$ are therefore
+$d\mathcal D_\circ(f\mathcal D_\circ f+f^2/2)$.  Its constant mode contains
+the second spectral correction and the state-normalization correction, but
+it disappears after pairing with the mean-zero function $f$.  The Bessel
+equation gives the exact identities
+\begin{equation}\label{CT:eq:radial-identities}
+ \partial_r^2u_1|_{r=1}
+ =-d(\Dop^2+\mathcal B_1)f,
+ \qquad
+ \partial_r^3u_0(1)=(2-j^2)d.
+\end{equation}
+
+The third Dirichlet row is
+\begin{equation*}
+ u_3|_{r=1}
+ =-f\partial_ru_2-\frac12f^2\partial_r^2u_1
+   -\frac16f^3\partial_r^3u_0.
+\end{equation*}
+Choose the state normalization with $\langle u_1,u_0\rangle=0$.
+Green's identity then gives
+$\lambda_3=d\int_\T u_3|_{r=1}$.  Since the Rellich identity yields
+$d^2=j^2/\pi$, multiplication by $3!=6$ gives
+$-6d^2=\kappa_{\mathbb D}$.  Substitution of
+\eqref{CT:eq:first-two-boundary-rows}--\eqref{CT:eq:radial-identities} proves
+\eqref{CT:eq:exact-boundary-cubic}--\eqref{CT:eq:B-exact}.
+
+Finally insert $\mathcal D_\circ=\Dop+r(D)$.  The two terms containing
+only $\Dop$ are
+\begin{equation*}
+ \int f\Dop(f\Dop f)-\frac12\int f^2\Dop^2f
+ =\Cnull(f,f,f).
+\end{equation*}
+The remaining terms are exactly \eqref{CT:eq:seven-rows}.
+\end{proof}
+
+\begin{lemma}[Seven-row multiplier audit]
+\label{CT:lem:seven-row-audit}
+For the symmetric polarization $\mathfrak r_a(f_1,f_2,f_3)$ of every row
+in \eqref{CT:eq:seven-rows},
+\begin{equation}\label{CT:eq:seven-row-estimate}
+ |\mathfrak r_a(f_1,f_2,f_3)|
+ \le C\sum_{p<q}\|f_p\|_{H^{1/2}}
+                    \|f_q\|_{H^{1/2}}
+                    \|f_\ell\|_{L^\infty}.
+\end{equation}
+The constant is uniform over $a=1,\ldots,7$.
+\end{lemma}
+
+\begin{proof}
+The symbols of $r(D)$ and $\mathcal B_1$ satisfy
+\begin{align*}
+ |\Delta^kr_n|&\le C_k(1+|n|)^{-1-k},\\
+ |\Delta^k(-\mu_n-j^2)|&\le C_k(1+|n|)^{1-k}.
+\end{align*}
+After polarization, the seven multipliers are finite permutations of
+\begin{multline}\label{CT:eq:seven-symbols}
+ |n_2|r_{n_3},\quad r_{n_2}|n_3|,\quad
+ r_{n_2}r_{n_3},\quad |n_2|,\quad r_{n_2},\quad
+ -\mu_{n_3}-j^2,\quad1,\\
+ n_1+n_2+n_3=0.
+\end{multline}
+Each multiplier has total order at most one and satisfies
+\begin{equation*}
+ |\Delta^\gamma m(n_1,n_2,n_3)|
+ \le C_\gamma(1+\max_i|n_i|)^{1-|\gamma|}.
+\end{equation*}
+On a dyadic block the two largest frequencies are comparable.  Put the
+corresponding half derivatives in $L^2$ and the remaining low-frequency
+factor in $L^\infty$.  Discrete Coifman--Meyer summation, followed by
+Cauchy--Schwarz in the common high index, proves
+\eqref{CT:eq:seven-row-estimate}.  The finitely many modes with
+$|n|\le2$ are absorbed by the inhomogeneous norms.
+\end{proof}
+
+\begin{theorem}[Exact cubic split and literal remainder formula]
+\label{CT:thm:complete-split}
+For mean-zero normal directions, $\PiZero f_i=f_i$, one has the exact
+identity
+\begin{equation}\label{CT:eq:complete-split}
+ \boxed{
+ D^3\Lambda^{\rm n}(0)[f_1,f_2,f_3]
+ =\kappa_{\mathbb D}\Cnull(f_1,f_2,f_3)
+  +\Rone(f_1,f_2,f_3).}
+\end{equation}
+The remainder is not defined by an order symbol.  Its literal formula is
+\begin{align}
+ \Rone(f_1,f_2,f_3)={}&
+ \langle u_0,H_{123}u_0\rangle
+ -\sum_{\rm cyc(ij,k)}
+ \bigl\{\langle QH_{ij}u_0,Rh_k\rangle
+        +\langle h_k,RQH_{ij}u_0\rangle\bigr\}
+ \notag\\
+ &+\sum_{\pi\in S_3}
+ \left\langle h_{\pi(1)},
+ R(H_{\pi(2)}-\lambda_{\pi(2)}I)R
+ h_{\pi(3)}\right\rangle
+ -\kappa_{\mathbb D}\Cnull(f_1,f_2,f_3),
+ \label{CT:eq:R-literal}
+\end{align}
+where every $H_I$ is the finite set-partition expression
+\eqref{CT:eq:H-jets}, with \eqref{CT:eq:scale-jets}, \eqref{CT:eq:C-jets}, and
+\eqref{CT:eq:J-jets} substituted.  Thus \eqref{CT:eq:R-literal}, unlike the old
+tag names alone, specifies every scalar monomial and its multiplicity.
+Equivalently, after the necessary direct/state cancellations have been
+performed, the same remainder is the seven-row grouped expression
+\begin{equation}\label{CT:eq:R-seven-polarized}
+ \boxed{\Rone(f_1,f_2,f_3)
+ =\kappa_{\mathbb D}\sum_{a=1}^7
+   \mathfrak r_a(f_1,f_2,f_3),}
+\end{equation}
+where $\mathfrak r_a(f_1,f_2,f_3)$ denotes symmetric polarization of the
+corresponding line of \eqref{CT:eq:seven-rows}.  Formula
+\eqref{CT:eq:R-seven-polarized}, rather than the uncancelled raw monomials, is
+the row decomposition used for analytic estimates.
+
+For bookkeeping, expand \eqref{CT:eq:R-literal} fully and assign each scalar
+monomial its first applicable tag in the ordered list
+\begin{equation}\label{CT:eq:R-tag-priority}
+ r(D),\quad \mathcal B_1,\quad C_I\ (I\ne\varnothing),\quad
+ S_I\ (I\ne\varnothing),\quad s_I\ (I\ne\varnothing).
+\end{equation}
+This gives the following disjoint ledger:
+\begin{equation}\label{CT:eq:R-ledger}
+ \Rone=R_{\rm state}^{r}+R_{rr}+R_{\rm met}
+       +R_{J/M}+R_{\rm scale}.
+\end{equation}
+Here:
+\begin{enumerate}
+\item $R_{\rm state}^{r}$ consists of the state monomials in
+\eqref{CT:eq:full-tensor} containing at least one $r_n$ from
+\eqref{CT:eq:DtN};
+\item $R_{rr}$ consists of those containing $\mathcal B_1$ from
+\eqref{CT:eq:rr-exact};
+\item $R_{\rm met}$ consists of the remaining nonprincipal monomials
+tagged by a nonempty $C_I$ in \eqref{CT:eq:C-jets};
+\item $R_{J/M}$ consists of the remaining monomials whose first tag is a
+nonempty $S_I$ in \eqref{CT:eq:H-jets};
+\item $R_{\rm scale}$ consists of the remaining monomials whose first tag
+is a nonempty $s_I$ in \eqref{CT:eq:scale-jets};
+\end{enumerate}
+The priority \eqref{CT:eq:R-tag-priority} makes the list disjoint, and the
+set-partition formulae make it exhaustive.
+\end{theorem}
+
+\begin{proof}[Proof of Theorem~\ref{CT:thm:complete-split}]
+Proposition~\ref{CT:prop:seven-row} proves the diagonal identity
+\eqref{CT:eq:complete-split} together with
+\eqref{CT:eq:R-seven-polarized}; symmetric polarization gives arbitrary
+nongeometric slots.  Independently, Proposition~\ref{CT:prop:full-tensor}
+gives the complete reduced-resolvent expression.  Subtracting the same
+principal null form from that expression gives \eqref{CT:eq:R-literal}.
+Hence the fixed-domain formula and the seven grouped boundary rows are two
+exact representations of the same trilinear remainder.
+
+Expanding \eqref{CT:eq:R-literal} and applying
+\eqref{CT:eq:R-tag-priority} records the origin of every raw monomial in
+\eqref{CT:eq:R-ledger}.  No estimate is taken before the raw metric and state
+rows have been recombined into the seven rows
+\eqref{CT:eq:R-seven-polarized}; this is the required order-two
+direct/resolvent cancellation.
+\end{proof}
+
+\begin{corollary}[Order-one normal remainder]
+\label{CT:cor:R-estimate}
+For mean-zero normal slots,
+\begin{equation}\label{CT:eq:R-estimate}
+ |\Rone(f_1,f_2,f_3)|
+ \le C\sum_{p<q}\|f_p\|_{H^{1/2}}
+                    \|f_q\|_{H^{1/2}}
+                    \|f_\ell\|_{L^\infty},
+ \qquad \{\ell\}=\{1,2,3\}\setminus\{p,q\}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Use \eqref{CT:eq:R-seven-polarized} and sum
+\eqref{CT:eq:seven-row-estimate} over the seven rows.
+\end{proof}
+
+For later fan inputs the constant scale mode must be retained explicitly.
+For arbitrary normal slots write
+\begin{equation*}
+ g_i=\PiZero f_i,
+ \qquad \psi_i=(I-\PiZero)f_i,
+\end{equation*}
+and, for $\varnothing\ne A\subset\{1,2,3\}$, let
+$\xi_i^A=\psi_i$ if $i\in A$ and $\xi_i^A=g_i$ otherwise.  Define the
+finite seven-term geometric remainder by
+\begin{equation}\label{CT:eq:Rgeo}
+ \Rgeo(f_1,f_2,f_3)
+ :=\sum_{\varnothing\ne A\subset\{1,2,3\}}
+ D^3\Lambda^{\rm n}(0)
+ [\xi_1^A,\xi_2^A,\xi_3^A]
+\end{equation}
+and set
+\begin{equation}\label{CT:eq:Rfull}
+ \Rfull(f_1,f_2,f_3)
+ :=\Rone(g_1,g_2,g_3)+\Rgeo(f_1,f_2,f_3).
+\end{equation}
+Multilinearity gives, with no omitted low mode,
+\begin{equation}\label{CT:eq:normal-full-split}
+ \boxed{
+ D^3\Lambda^{\rm n}(0)[f_1,f_2,f_3]
+ =\kappa_{\mathbb D}\Cnull(g_1,g_2,g_3)
+  +\Rfull(f_1,f_2,f_3).}
+\end{equation}
+Every term of \eqref{CT:eq:Rgeo} contains a constant.
+Apply Proposition~\ref{CT:prop:cubic-tame} with that smooth finite-mode slot
+as the Lipschitz coefficient slot and the other two as energetic slots.
+Together with Corollary~\ref{CT:cor:R-estimate}, this proves the same
+order-one bound for $\Rfull$ as in \eqref{CT:eq:R-estimate}, with every $f_i$
+replaced by its full inhomogeneous norm.  For the fan input,
+\begin{equation}\label{CT:eq:fan-geometric-size}
+ \|(I-\PiZero)f_\alpha\|_{W^{1,\infty}}\le CS^2,
+\end{equation}
+so the geometric pure and mixed rows have the lower majorants $CS^5$ and
+$CS^{7/2}\|Z\|_\X$, respectively.
+
+The physical curvature is a separate tensor, not a summand of the normal
+remainder.  Define
+\begin{equation}\label{CT:eq:K-physical}
+ \mathcal K_{\rm curv}(V_1,V_2,V_3)
+ :=\sum_{\rm cyc(ij,k)}D^2\Lambda^{\rm n}(0)
+     [f_k,\Gamma_{ij}].
+\end{equation}
+Set
+\begin{equation}\label{CT:eq:Rphys}
+ \Rphys(V_1,V_2,V_3)
+ :=\Rfull(f_1,f_2,f_3)
+   +\mathcal K_{\rm curv}(V_1,V_2,V_3).
+\end{equation}
+Then \eqref{CT:eq:physical-chain} and the geometric kernel give the typed
+identity
+\begin{equation}\label{CT:eq:physical-complete-split}
+ \boxed{
+ D^3\mathcal L(0)[V_1,V_2,V_3]
+ =\kappa_{\mathbb D}\Cnull(f_1,f_2,f_3)
+  +\Rphys(V_1,V_2,V_3).}
+\end{equation}
+The $\chi_{ij}$ rows are absent from this formula because they vanish
+exactly, not because they have been assigned to $\Rone$.
+
+For clarity, the cancellations used above are recorded separately:
+\begin{center}
+\begin{tabular}{>{\raggedright\arraybackslash}p{.27\linewidth}
+                >{\raggedright\arraybackslash}p{.61\linewidth}}
+\toprule
+family & cancellation or surviving order\\
+\midrule
+two principal state derivatives & self-adjointness and one integration by
+parts combine them into \eqref{CT:eq:null};\\
+mixed-sign order-two interactions & cancel inside
+$(\Dop f_2)(\Dop f_3)-f_2'f_3'$;\\
+direct metric versus second state & their order-two pieces reconstruct the
+boundary acceleration in Proposition~\ref{CT:prop:seven-row}; after the
+combination only the seven order-one rows \eqref{CT:eq:seven-rows} remain;\\
+state normalization & zero because $\lambda_i=0$ at the normalized disk;\\
+mass and scale & no tangential multiplier, hence order zero;\\
+curvature & total order two in general; its ambient two-energetic-slot bound
+does not imply a radial support bound.  Both the separate remainder estimate
+and the CT--JM small-sum estimate are false; the row is retained inside the
+honest JP--JC joint scalar audit;\\
+area and translations & exact Hessian kernel
+\eqref{CT:eq:geometric-kernel}.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+We next define the scalar and support functionals used in the relative
+argument.  Put $\alpha_*=a\mathbf1$,
+$\gamma(t)=\alpha_*+t(\alpha-\alpha_*)$, and write
+$f_t=f_{\gamma(t)}$.  Fix at $t=0$ a complement to the area and two
+translation rows.  Let
+\begin{equation}\label{CT:eq:constraint-transport}
+ C_t:\mathsf Z_{\alpha_*}\longrightarrow\mathsf Z_{\gamma(t)}
+\end{equation}
+be the analytic constraint transport obtained by adding the unique linear
+combination of the scale and two translation vectors that satisfies the
+three rows at $\gamma(t)$.  Its $3\times3$ Gram matrix is a uniform
+perturbation of the regular-fan matrix on the material polydisc, so $C_t$
+and $C_t^{-1}$ are uniformly bounded.  For a class $z$ in the fixed
+complement define
+\begin{align}
+ F_1(t)&:=\Rfull(f_t,f_t,f_t),\label{CT:eq:F1-definition}\\
+ \Psi_{1,n}(t)[z]
+ &:=\Rfull(f_t,f_t,v_{\gamma(t)}(C_tz)),
+ \label{CT:eq:Psi1n-definition}\\
+\Psi_{1,t}(t)[z]
+ &:=-4\qD
+ (f_t,w_{\gamma(t)}(C_tz)f_t').
+ \label{CT:eq:Psi1t-definition}
+\end{align}
+The last line is exactly the two curvature placements in
+\eqref{CT:eq:physical-chain}; it is not included a second time in
+$\Psi_{1,n}$.
+
+\begin{lemma}[Material Cauchy bounds for the normal order-one rows]
+\label{CT:lem:R-Cauchy}
+In the uniformly comparable material regime
+\eqref{CT:eq:uniformly-comparable}, $F_1$ and $\Psi_{1,n}$ extend
+holomorphically to the line polydisc of radius $c/\delta(t)$, where
+\begin{equation*}
+ \delta(t)=\max_i\frac{|\alpha_i-a|}{\gamma_i(t)}.
+\end{equation*}
+Their scalar and dual majorants are
+\begin{equation}\label{CT:eq:R-complex-majorants}
+ |F_1|\le CS^5,\qquad
+ \|\Psi_{1,n}\|_{\X_{\gamma(t)}^*}\le CS^{7/2}.
+\end{equation}
+Consequently, for
+$E(t)=\sum_i\gamma_i(t)^2(\alpha_i-a)^2$,
+\begin{align}
+ |F_1''(t)|&\le CSE(t),\label{CT:eq:F1-Cauchy}\\
+ \|\Psi_{1,n}'(t)\|_{\X_{\gamma(t)}^*}
+ &\le CS^{3/2}E(t)^{1/2}.\label{CT:eq:Psi1n-Cauchy}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Split every polar cell at its normal and pull both halves to $[0,1]$.
+The secant profile, the traces
+\eqref{CT:eq:physical-normal-trace}--\eqref{CT:eq:physical-tangential-trace},
+and the constraint matrix in \eqref{CT:eq:constraint-transport} are rational
+analytic functions of the incident widths.  Their denominators stay in a
+fixed sector on the stated polydisc.  The normal estimate
+\eqref{CT:eq:R-estimate} together with the finite geometric expansion
+\eqref{CT:eq:Rgeo} gives both bounds in
+\eqref{CT:eq:R-complex-majorants}.  Same and adjacent cells use
+the normalized jets.  On separated cells, subtracting both cell means
+makes the first-separating dyadic annuli summable.  No bound contains the
+number of cells.
+
+One-variable Cauchy on
+$\gamma(t)+\zeta(\alpha-\alpha_*)$ gives respectively
+$CS^5\delta(t)^2$ and $CS^{7/2}\delta(t)$.  If $k$ realizes $\delta(t)$, comparability gives
+\begin{equation*}
+ E(t)\ge\gamma_k(t)^2(\alpha_k-a)^2
+       \asymp S^4\delta(t)^2.
+\end{equation*}
+This proves \eqref{CT:eq:F1-Cauchy}--\eqref{CT:eq:Psi1n-Cauchy}.
+\end{proof}
+
+\begin{lemma}[Relative closure of the pure cubic row]
+\label{CT:lem:R-relative}
+Use the material notation of Section~\ref{CT:sec:material}.  Let $f_\alpha$
+be the exact normal fan input and let
+$Z_\alpha(z)$ be one physical support slot.  On the exact scale/translation
+quotient there is a modulus $\varepsilon_{1}\to0$ such that
+\begin{equation}
+ |\Rfull(f_\alpha,f_\alpha,f_\alpha)
+  -\Rfull(f_{a\mathbf1},f_{a\mathbf1},f_{a\mathbf1})|
+ \le\varepsilon_1(S)\Jfour(\alpha).\label{CT:eq:R-relative-pure}
+\end{equation}
+Equivalently, in the typed physical notation \eqref{CT:eq:Rphys}, the left
+side is
+\begin{equation}
+ \left|\Rphys(B_\alpha,B_\alpha,B_\alpha)
+       -\Rphys(B_{a\mathbf1},B_{a\mathbf1},B_{a\mathbf1})\right|.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The full remainder estimate following \eqref{CT:eq:Rfull},
+\eqref{CT:eq:fan-geometric-size}, and the fan sizes give absolute majorants
+$CS^5$ for the pure row.
+
+Fix $0<\beta<1$.  If $\Jfour\ge S^{5-\beta}$, these bounds divided by the
+right side of \eqref{CT:eq:R-relative-pure} gives $CS^\beta$.
+In the complementary regime the exact quartic Bregman identity
+\eqref{CT:eq:J4-bregman-comparability} and the quantitative estimate following
+it give
+$\|\alpha-a\mathbf1\|_\infty/S\le2S^{(1-\beta)/2}$, so for small $S$ the
+entire segment is uniformly comparable and lies in the material polydisc
+\eqref{CT:eq:material-polydisc}.
+Lemma~\ref{CT:lem:R-Cauchy} gives the required material derivative bound.
+Cyclic symmetry kills the first pure derivative at the regular fan.
+Integrate with \eqref{CT:eq:action}.  This proves
+\eqref{CT:eq:R-relative-pure} with no cell-count factor.
+\end{proof}
+
+\begin{proposition}[Retraction of CT--JM]
+\label{CT:prop:joint-mixed-counterexample}
+There is no modulus $\varepsilon_{\rm JM}(S)\to0$ for which
+\begin{equation}\label{CT:eq:false-R-relative-mixed}
+ \left|\Rphys(B_\alpha,B_\alpha,Z_\alpha(z))\right|
+ \le\varepsilon_{\rm JM}(S)\Jfour(\alpha)^{1/2}
+       \|Z_\alpha(z)\|_{\X_\alpha}
+\end{equation}
+holds uniformly on the exact scale/translation quotient.
+\end{proposition}
+
+\begin{proof}
+Use the three-periodic family from
+Proposition~\ref{CT:prop:curvature-counterexample}.  Its seven normal rows
+satisfy, by the displayed order-one multiplier estimate,
+\[
+ \Rfull(f_\alpha,f_\alpha,v_\alpha(z))=O(a^3),
+\]
+whereas
+\[
+ -4\qD(f_\alpha,w_\alpha(z)f_\alpha')
+ =-8\pi d^2m_{p,z}a+O(a^2),\qquad m_{p,z}\ne0.
+\]
+For this family $S\asymp a$,
+$\Jfour(\alpha)\asymp a^3$, and
+$\|Z_\alpha(z)\|_{\X_\alpha}\asymp a^{-1/2}$; hence the product on the
+right of \eqref{CT:eq:false-R-relative-mixed} is comparable to $a$.  Dividing
+by that product gives a positive limiting lower bound, contradicting
+$\varepsilon_{\rm JM}(S)\to0$.
+\end{proof}
+
+The surviving leading support forcing in the differentiated cubic Taylor
+row is therefore
+\begin{equation}\label{CT:eq:effective-leading-forcing}
+ 2\qD(f_\alpha,v_\alpha(z))
+ -2\qD(f_\alpha,w_\alpha(z)f_\alpha')
+ =2\qD\bigl(f_\alpha,
+     v_\alpha(z)-w_\alpha(z)f_\alpha'\bigr).
+\end{equation}
+For a polar graph $R_\alpha$, the corresponding genuine polygon-normal
+trace is
+\begin{equation}\label{CT:eq:effective-normal-trace}
+ v_{\alpha,{\rm eff}}(z)
+ =\frac{v_\alpha(z)-(R_\alpha'/R_\alpha)w_\alpha(z)}
+        {\sqrt{1+(R_\alpha'/R_\alpha)^2}}.
+\end{equation}
+Equations \eqref{CT:eq:effective-leading-forcing}--
+\eqref{CT:eq:effective-normal-trace}, together with all remaining cubic rows,
+are the exact input exported to the JP/JC joint scalar audit.  No estimate
+in this node replaces that joint principal analysis.
+
+\begin{remark}[Sign and geometric tests]
+The Fourier symbol in \eqref{CT:eq:null} vanishes when the two differentiated
+frequencies have opposite signs and equals twice their product when they
+have the same sign.  A constant in any slot gives zero by Parseval.  The
+full tensor, including \eqref{CT:eq:physical-chain}, vanishes on dilation and
+translation paths; the principal and lower rows need not vanish there
+separately.
+\end{remark}
+
+\subsection{Uniform analytic tail on material cells}
+\label{CT:sec:material}
+
+Let
+\begin{equation}\label{CT:eq:fan}
+ \alpha_i>0,\qquad \sum_i\alpha_i=2\pi,\qquad
+ a=2\pi/N,\qquad S=a+\max_i\alpha_i,
+\end{equation}
+and let $B_\alpha$ be the physical fan boundary field.
+
+\begin{theorem}[Unconditional fixed-chart and natural-order facts]
+\label{CT:thm:fixed-chart-unconditional}
+On a fixed sufficiently small real or complex $W^{1,\infty}$ ball, the
+pulled-back stiffness and mass forms, their compact solution operator, and
+the scale-normalized simple first-eigenvalue branch $\mathcal L(W)$ are
+analytic in operator norm.  On that complexified chart its bilinear
+Hessian, and hence at every real near-disk active polygon the genuine
+polygon-preserving Hessian on continuous physical-side-affine fields,
+satisfies
+\begin{equation}\label{CT:eq:polygon-natural-Hessian}
+ |D^2\mathcal L(W)[U,V]|
+ \le C\|U\|_{H^{1/2}(\partial P)}
+       \|V\|_{H^{1/2}(\partial P)}.
+\end{equation}
+Here the trace norms on the complexified chart are transported to the
+underlying real boundary; these norms are uniformly equivalent throughout
+the fixed chart.
+The constant is independent of the number, the minimum size, and the
+ratios of the sides.
+\end{theorem}
+
+\begin{proof}
+For the first assertion use the annular extension in the fixed-domain
+ledger.  The coefficients $J$, $P$, $C$, $S$, and $H$ in
+\eqref{CT:eq:JC}--\eqref{CT:eq:H} are convergent rational power series in
+$D(EW)$ on a fixed $L^\infty$ ball.  Uniform ellipticity, the disk spectral
+gap, the resolvent identity, and the Riesz projection therefore give the
+operator-norm analytic simple branch.  This applies directly to polygonal
+boundary traces and does not round their corners.
+
+For the second assertion, extend a physical affine-side trace by a uniform
+right inverse from $H^{1/2}(\partial P;\mathbb R^2)$ to
+$H^1(P;\mathbb R^2)$.  The radial bi-Lipschitz maps between the disk and
+the polygons give a uniform norm for this inverse.  Convexity and the
+common inner and outer radii give uniform bounds for the eigenvalue, its
+spectral gap, the ground state, and its gradient.  At a supporting line
+the barrier $s(D-s)$ gives
+$u(x)\le C\operatorname {dist}(x,\partial P)$; a scaled interior estimate
+then gives $\|\nabla u\|_\infty\le C$.
+
+In the exact second-variation formula, the first coefficient jet is linear
+and the second is quadratic in the two extension gradients.  The direct
+rows are bounded by the product of their $H^1$ norms; the two state
+forcings have the same $H^{-1}$ bounds, and the reduced resolvent is
+uniformly coercive.  On the smaller complex ball the real part of the
+pulled-back form remains uniformly coercive and the same spectral contour
+separates the analytic simple branch; the identical energy estimates
+therefore hold for the complex bilinear Hessian.  Polarization proves
+\eqref{CT:eq:polygon-natural-Hessian}.  Approximation by Lipschitz extensions
+and invariance under changes with zero boundary trace justify the use of
+the energy extensions.
+\end{proof}
+
+Put
+\begin{equation}\label{CT:eq:R4-definition}
+ \mathcal R_4(W)=\mathcal L(W)-\mathcal L(0)
+ -\frac12D^2\mathcal L(0)[W,W]
+ -\frac16D^3\mathcal L(0)[W,W,W].
+\end{equation}
+
+\begin{corollary}[Unconditional tame scalar fourth remainder]
+\label{CT:cor:tame-scalar-fourth}
+On a fixed smaller real or complex chart ball,
+\begin{equation}\label{CT:eq:tame-scalar-fourth}
+ \boxed{
+ |\mathcal R_4(W)|
+ \le C\|W\|_{H^{1/2}}^2\|W\|_{W^{1,\infty}}^2.}
+\end{equation}
+The constant is independent of the number, minimum size, and ratios of the
+physical sides.  This is a scalar statement and makes no assertion about
+the retired support-covector row of CT--M4.
+\end{corollary}
+
+\begin{proof}
+The scale-normalized disk branch has $D\mathcal L(0)=0$.  For fixed $W$ put
+\[
+ g(\zeta)=D^2\mathcal L(\zeta W)[W,W].
+\]
+Theorem~\ref{CT:thm:fixed-chart-unconditional} makes $g$ analytic for
+$|\zeta|<r_0/\|W\|_{W^{1,\infty}}$ and bounds it there by
+$C\|W\|_{H^{1/2}}^2$.  Cauchy's coefficient estimate, after decreasing the
+chart so that this radius is greater than $2$, gives for $0\le t\le1$
+\[
+ |g(t)-g(0)-tg'(0)|
+ \le C\|W\|_{H^{1/2}}^2\|W\|_{W^{1,\infty}}^2t^2.
+\]
+Twice integrating the scalar Taylor formula yields
+\[
+ \mathcal R_4(W)
+ =\int_0^1(1-t)\{g(t)-g(0)-tg'(0)\}\,dt,
+\]
+and proves \eqref{CT:eq:tame-scalar-fourth}.
+\end{proof}
+
+Call a material line $h_i(t)=a+td_i$ uniformly comparable when
+\begin{equation}\label{CT:eq:uniformly-comparable}
+ \frac a2\le h_i(t)\le\frac{3a}{2}
+ \qquad(1\le i\le N,\ 0\le t\le1).
+\end{equation}
+For such a line put
+\[
+ E(t)=\sum_i h_i(t)^2d_i^2.
+\]
+
+\begin{remark}[Retired CT--M4 proposal: not an active obligation]
+\label{CT:obl:material-fourth}
+Historically, this proposal assumed that CT--JP supplied a no-ratio Hilbert
+form $\Gjp_\alpha$ on the exact support quotient and wrote
+$\|z\|_{\Xjp_\alpha}=\Gjp_\alpha(z)^{1/2}$.  After splitting every physical
+cell at its normal and pulling the two halves to fixed unit intervals,
+prove the following four estimates with a constant independent of the
+number, minimum size, and ratios of the cells and moduli
+$\omega_4,\omega_{4,s}\downarrow0$ at the origin:
+\begin{align}
+ |\mathcal R_4(B_\alpha)|&\le CS^5,\notag\\
+ \|D\mathcal R_4(B_\alpha)\|_{(\Xjp_\alpha)^*}&\le CS^{7/2},
+ \label{CT:eq:M4-size}\\
+ \left|\frac{d^2}{dt^2}\mathcal R_4(B_{h(t)})\right|
+ &\le \omega_4(S) E(t),\notag\\
+ \left\|\frac d{dt}\left\{D\mathcal R_4(B_{h(t)})
+     \circ\mathcal T_t\right\}\right\|_{(\Xjp_\alpha)^*}
+ &\le \omega_{4,s}(S)E(t)^{1/2},
+ \label{CT:eq:M4-path}
+\end{align}
+Here the varying support fibers are identified by the uniformly bounded
+constraint-preserving material transport
+\[
+ \mathcal T_t:\Xjp_\alpha\longrightarrow\Xjp_{h(t)},
+ \qquad
+ \|\mathcal T_t\|+\|\mathcal T_t^{-1}\|\le C,
+ \qquad \mathcal T_1=I.
+\]
+It is obtained by the fixed half-cell pullback followed by the exact
+area/translation projection.  In the second estimate of
+\eqref{CT:eq:M4-path}, the derivative is the total derivative of the displayed
+fixed-fiber covector and therefore includes the variation of the physical
+support field as the fan changes.  The estimates concern the completed direct-plus-state
+functional; its order-two rows may not be estimated separately.
+\end{remark}
+
+\begin{remark}[Why the old CT--M4 proposal was insufficient]
+Theorem~\ref{CT:thm:fixed-chart-unconditional} proves scalar analyticity and
+an absolute $H^{1/2}$ Hessian bound, but neither gives the vanishing moduli
+in \eqref{CT:eq:M4-path}.  Those moduli express the cancellation between the
+direct metric row and the reduced-resolvent row at the natural boundary
+order.  Historical rounded Calder\'on arguments estimated those rows
+separately and therefore do not prove this obligation.
+
+Corollary~\ref{CT:cor:tame-scalar-fourth} now closes the first, purely scalar
+bound in \eqref{CT:eq:M4-size}.  It does not close the support-covector bound
+there, either relative path estimate in \eqref{CT:eq:M4-path}, or the moving
+support-fiber comparison.  Thus it is sufficient for JP--BU but does not
+resurrect CT--M4.
+
+The former fifth ``support Hessian'' row is not part of CT--M4.  It used the
+wrong radial Schur metric and cannot control the physical support problem.
+Its correct replacement is the exact support Hessian in JP--EH, integrated
+without a post-cubic support remainder.
+
+The former CT--AH hypothesis---bounded holomorphy of
+$W\mapsto D^2\mathcal L(W)$ in
+$\operatorname {Bil}(H^{1/2}\times H^{1/2})$ on a uniform complex
+$W^{1,\infty}$ ball---does not by itself imply CT--M4, because the ambient
+full-vector norm need not be uniformly comparable to the joint support
+metric.  CT--AH is no longer a vertex of the active DAG.
+\end{remark}
+
+The no-ratio physical sizes are
+\begin{equation}\label{CT:eq:fan-sizes}
+ \|B_\alpha\|_\Y^2\le CS^3,\qquad
+ \|B_\alpha\|_{W^{1,\infty}}\le CS.
+\end{equation}
+Split each material cell at its normal and pull both halves to $[0,1]$.
+The secant, support, Jacobian, and finite constraint coefficients are
+rational analytic functions of the incident widths.  Hence, on a fan
+satisfying \eqref{CT:eq:uniformly-comparable}, they extend to
+\begin{equation}\label{CT:eq:material-polydisc}
+ |\zeta_i-\alpha_i|<c\alpha_i,\qquad
+ \sum_i\zeta_i=2\pi,
+\end{equation}
+with the same bounds as \eqref{CT:eq:fan-sizes}.  The denominator sector and
+the chart radius are independent of $N$.
+
+\begin{lemma}[Archived consequences of the retired CT--M4 proposal]
+\label{CT:lem:Cauchy}
+Assume the retired CT--M4 proposal \ref{CT:obl:material-fourth}.  Let
+\begin{align*}
+ F_4(\alpha)&=\mathcal R_4(B_\alpha),\\
+ \Psi_4(\alpha)[Z]&=D\mathcal R_4(B_\alpha)[Z].
+\end{align*}
+At the real fan $\alpha$,
+\begin{equation}\label{CT:eq:tail-majorants}
+ |F_4|\le CS^5,\qquad
+ \|\Psi_4\|_{(\Xjp_\alpha)^*}\le CS^{7/2}.
+\end{equation}
+If $h_i(t)=a+t d_i$ is uniformly comparable in the sense of
+\eqref{CT:eq:uniformly-comparable} and
+$E(t)=\sum_i h_i(t)^2d_i^2$, then
+\begin{equation}\label{CT:eq:Cauchy-bounds}
+ |\partial_t^2F_4(h(t))|\le \omega_4(S)E(t),
+ \qquad
+ \left\|\partial_t\{\Psi_4(h(t))\circ\mathcal T_t\}
+     \right\|_{(\Xjp_\alpha)^*}
+ \le \omega_{4,s}(S)E(t)^{1/2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The two bounds in \eqref{CT:eq:tail-majorants} are
+\eqref{CT:eq:M4-size}; the two bounds in \eqref{CT:eq:Cauchy-bounds} are
+\eqref{CT:eq:M4-path}.  The identification of the varying dual spaces is the
+fixed material pullback required in CT--M4, so no derivative of a moving
+corner or hidden sum over material coordinates is introduced.
+\end{proof}
+
+The quartic action identities
+\begin{equation}\label{CT:eq:action}
+ \Jfour(\alpha)=12\int_0^1(1-t)E(t)\,dt,
+ \qquad
+ \int_0^1E(t)\,dt\le C\Jfour(\alpha)
+\end{equation}
+give the relative estimates as follows.  At the regular fan, cyclic
+symmetry makes $DF_4(a\mathbf1)$ a constant material covector, so it
+vanishes on $\sum_i d_i=0$.  The same symmetry makes
+$\Psi_4(a\mathbf1)$ a constant support covector, which vanishes on the
+area/translation quotient.  Taylor's formula and \eqref{CT:eq:Cauchy-bounds}
+therefore give
+\[
+ |F_4(\alpha)-F_4(a\mathbf1)|
+ \le \omega_4(S)\int_0^1(1-t)E(t)\,dt
+ \le C\omega_4(S)\Jfour(\alpha).
+\]
+Apply the fundamental theorem of calculus to the fixed-fiber covector
+$\Psi_4(h(t))\circ\mathcal T_t$.  The regular-fan value vanishes on the
+transported quotient, and Cauchy--Schwarz gives
+\[
+ |\Psi_4(\alpha)[Z]|
+ \le \omega_{4,s}(S)\left(\int_0^1E(t)\,dt\right)^{1/2}
+       \|Z\|_{\Xjp_\alpha}
+ \le C\omega_{4,s}(S)\Jfour(\alpha)^{1/2}\|Z\|_{\Xjp_\alpha}.
+\]
+These are the pure and mixed tail bounds in the uniformly comparable
+regime.  The following elementary dichotomy verifies that this regime and
+the absolute regime exhaust all positive fans.  The exact Bregman identity
+is
+\begin{equation}\label{CT:eq:J4-bregman-comparability}
+ \Jfour(\alpha)=\sum_i d_i^2
+  (\alpha_i^2+2a\alpha_i+3a^2).
+\end{equation}
+Let $m=\max_i\alpha_i$, so $S=a+m$, and put
+$\rho=\Jfour(\alpha)^{1/2}/S^2$.  Since $m\ge a$ and the summand at an
+index where $\alpha_i=m$ is at least $(m-a)^2m^2$,
+\[
+ \frac{m-a}{S}\le2\rho.
+\]
+If $\rho\le1/8$, then $a=(S-(m-a))/2\ge3S/8$; applying
+\eqref{CT:eq:J4-bregman-comparability} at every index gives
+\[
+ \max_i\frac{|d_i|}{S}
+ \le\frac{8}{3\sqrt3}\rho<2\rho,
+ \qquad
+ \max_i\frac{|d_i|}{a}\le\frac{16}{3}\rho.
+\]
+Fix $0<\beta<1$.  If $\Jfour<S^{5-\beta}$, then
+$\rho<S^{(1-\beta)/2}$; for all sufficiently small $S$ the last bound is
+at most $1/2$, and the whole segment is uniformly comparable by convexity.
+In the complementary case $\Jfour\ge S^{5-\beta}$,
+\eqref{CT:eq:tail-majorants} gives respectively the relative factors
+$CS^\beta$ and $CS^{1+\beta/2}$.  Thus the two cases are exhaustive and
+both are $o(1)$ multiples of the required defects.
+Thus, under CT--M4, the quartic-and-higher Taylor tail has the uniform
+material bounds required by CT.  This deduction uses no arbitrary-order
+tensor estimate.
+
+\subsection{Literal fan-to-bubble dictionary}
+
+Choose normal angles $\theta_i$ with
+$\theta_{i+1}-\theta_i=\alpha_i$ and set
+\begin{equation}\label{CT:eq:cells}
+ K_i=[\theta_i-\alpha_{i-1}/2,\theta_i+\alpha_i/2].
+\end{equation}
+On $K_i$, $x=\theta-\theta_i$, the exact normal fan input is
+\begin{equation}\label{CT:eq:secant}
+ f_\alpha(\theta)=h_\alpha\sec x-1,
+ \qquad
+ h_\alpha=\left(\frac{\pi}{\sum_j\tan(\alpha_j/2)}\right)^{1/2}.
+\end{equation}
+Define, on the same cell and with no change of nodes,
+\begin{align}
+ c_\alpha&=h_\alpha-1,\notag\\
+ q_\alpha(\theta)&=\tfrac12x^2,\label{CT:eq:bubble}\\
+ r_\alpha(\theta)&=(h_\alpha-1)\tfrac12x^2
+ +h_\alpha(\sec x-1-\tfrac12x^2).\notag
+\end{align}
+Then the coordinate dictionary is the literal equality
+\begin{equation}\label{CT:eq:dictionary}
+ \boxed{f_\alpha=c_\alpha+q_\alpha+r_\alpha.}
+\end{equation}
+The function $q_\alpha$ is continuous at the midpoint vertices because
+both adjacent values are $\alpha_i^2/8$, and
+\begin{equation}\label{CT:eq:q-distribution}
+ q_\alpha''=1-\sum_i\alpha_i
+ \delta_{\theta_i+\alpha_i/2}.
+\end{equation}
+Taylor's formula on each normalized half-cell gives
+\begin{equation}\label{CT:eq:r-bounds}
+ \|r_\alpha\|_\infty\le CS^4,\qquad
+ \|r_\alpha\|_{W^{1,\infty}}\le CS^3,\qquad
+ \|r_\alpha\|_{H^{1/2}}^2\le CS^7.
+\end{equation}
+Constants vanish in \eqref{CT:eq:null}, including after polarization, because
+$\int(\Dop g)(\Dop h)=\int g'h'$.  The tame estimate for the null form and
+\eqref{CT:eq:r-bounds} place every term containing $r_\alpha$ in the
+order-one/tail remainder already controlled above.  The normal component
+of the physical support slot is exactly the trace $v_\alpha(z)$ used in
+PT.  Therefore the two surviving principal rows of the third derivative
+are precisely
+\begin{equation}\label{CT:eq:terminal-rows}
+ \kappa_{\mathbb D}\Cnull(q_\alpha,q_\alpha,q_\alpha),
+ \qquad
+ \kappa_{\mathbb D}\Cnull(q_\alpha,q_\alpha,v_\alpha(z)),
+\end{equation}
+with the same nodes, normalization, and projection as the quadratic-bubble
+interface; the common fixed coefficient $\kappa_{\mathbb D}$ remains
+outside both terminal estimates.
+
+For downstream Taylor assembly one must use
+$\mathcal T_3=(3!)^{-1}D^3\mathcal L(0)$.  Thus the corresponding pure
+Taylor row and differentiated mixed Taylor row are
+\begin{equation}\label{CT:eq:terminal-taylor-rows}
+ \boxed{
+ \frac{\kappa_{\mathbb D}}6
+   \Cnull(q_\alpha,q_\alpha,q_\alpha),
+ \qquad
+ \frac{\kappa_{\mathbb D}}2
+   \Cnull(q_\alpha,q_\alpha,v_\alpha(z)).}
+\end{equation}
+The second coefficient is $3(\kappa_{\mathbb D}/6)$, because
+differentiating $\mathcal T_3(W,W,W)$ in one support slot produces three
+equal placements.
+
+\subsection{CT reduction theorem and audit}
+
+\begin{theorem}[Exact CT core]
+\label{CT:thm:CT}
+Unconditionally, the fixed-disk third derivative is the sum of
+$\kappa_{\mathbb D}$ times the null form \eqref{CT:eq:null} and the explicit
+normal order-one ledger \eqref{CT:eq:R-ledger}.  The full
+physical-coordinate tensor is \eqref{CT:eq:physical-complete-split}; its area
+and translation rows vanish exactly.  The radial null-form outputs are
+\eqref{CT:eq:terminal-rows}, with Taylor factors
+\eqref{CT:eq:terminal-taylor-rows}; the nonzero curvature support symbol
+\eqref{CT:eq:effective-leading-forcing} is retained separately and exported
+to the JP--JC audit.  All unconditional stated constants are independent
+of the number and minimum size of active cells.  The old material-tail
+proposal is not used by the active DAG.
+\end{theorem}
+
+\begin{proof}
+Combine Proposition~\ref{CT:prop:full-tensor}, Theorem~\ref{CT:thm:complete-split},
+Lemma~\ref{CT:lem:R-relative}, Propositions
+\ref{CT:prop:curvature-counterexample} and
+\ref{CT:prop:joint-mixed-counterexample}, and \eqref{CT:eq:dictionary}.  The
+None of these statements imports an estimate for either terminal null-form
+row, and the active proof imports no premise from the archived calculation.
+\end{proof}
+
+\begin{center}
+\begin{longtable}{>{\raggedright\arraybackslash}p{.30\linewidth}
+                  >{\raggedright\arraybackslash}p{.58\linewidth}}
+\toprule
+audit item & disposition\\
+\midrule
+\endfirsthead
+\toprule
+audit item & disposition\\
+\midrule
+\endhead
+state rows & all three families displayed in \eqref{CT:eq:full-tensor};\\
+metric, mass, and scale & generated exhaustively by
+\eqref{CT:eq:J-jets}--\eqref{CT:eq:H-jets};\\
+area and translation projection & explicit coefficients
+\eqref{CT:eq:chi}, then exact kernel cancellation;\\
+curvature/tangential support & both the separate bound and CT--JM are
+retracted; \eqref{CT:eq:effective-leading-forcing} is retained for JP--JC;\\
+principal symbol & same-sign null form \eqref{CT:eq:null};\\
+all lower rows & disjoint ledger \eqref{CT:eq:R-ledger} and
+order-one estimate \eqref{CT:eq:R-estimate};\\
+quartic pure/linear tail & old CT--M4 proposal and its consequences are
+retained only as an archive; the active exact-support route uses neither;\\
+bubble output & literal equality \eqref{CT:eq:dictionary}, with identical
+cells and midpoint atoms.\\
+\bottomrule
+\end{longtable}
+\end{center}
+\endgroup

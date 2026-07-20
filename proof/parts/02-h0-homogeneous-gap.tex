@@ -1,0 +1,478 @@
+\begingroup
+\section{Node H0: the correct-source homogeneous gap}
+\label{module:H0}
+\noindent\textit{Audited source: \nolinkurl{convex_largeN_polya_szego_stage64_correct_polygonal_source.tex}.}
+\subsection{Exact tangential-polygon geometry}
+
+Let
+\begin{equation}\label{H0:eq:fan}
+ \alpha_i>0,\qquad \sum_{i=1}^N\alpha_i=2\pi,
+ \qquad \theta_{i+1}-\theta_i=\alpha_i
+\end{equation}
+cyclically, and let
+$\nu_i=(\cos\theta_i,\sin\theta_i)$.  Put
+\begin{equation}\label{H0:eq:vertices}
+ \phi_i=\theta_i+\frac{\alpha_i}{2},
+ \qquad K_i=[\phi_{i-1},\phi_i].
+\end{equation}
+The polygon with all support numbers equal to one is
+\begin{equation}
+ P(\alpha,\mathbf 1)=\bigcap_i\{x:x\cdot\nu_i<1\}.
+\end{equation}
+Its area and its area-$\pi$ scaling factor are
+\begin{equation}\label{H0:eq:scale}
+ A_\alpha=\sum_i\tan\frac{\alpha_i}{2},
+ \qquad h_\alpha=\left(\frac{\pi}{A_\alpha}\right)^{1/2}.
+\end{equation}
+On $K_i$ use
+\begin{equation}\label{H0:eq:edge-coordinate}
+ x=\theta-\theta_i,
+ \qquad -\frac{\alpha_{i-1}}2\le x\le\frac{\alpha_i}2.
+\end{equation}
+The exact radial defect of the translated, area-normalized tangential
+polygon is
+\begin{equation}\label{H0:eq:exact-source}
+ \rho_\alpha^{\rm tan}(\theta)=h_\alpha\sec x-1,
+ \qquad \theta\in K_i.
+\end{equation}
+Translation of the polygon does not change its eigenvalue, so the auxiliary
+discrete centering translation is absent from \eqref{H0:eq:exact-source}.
+
+\begin{definition}[Correct principal source]\label{H0:def:G}
+Define the continuous edge source
+\begin{equation}\label{H0:eq:G}
+ G_\alpha(\theta)=\frac{x^2}{2},
+ \qquad \theta\in K_i,
+\end{equation}
+with $x$ as in \eqref{H0:eq:edge-coordinate}.
+\end{definition}
+
+\begin{lemma}[Exact source expansion]\label{H0:lem:source-expansion}
+Let $S=\alpha_{\max}$.  There is a constant $c_\alpha$ such that
+\begin{equation}\label{H0:eq:source-expansion}
+ \rho_\alpha^{\rm tan}=c_\alpha+G_\alpha+R_\alpha,
+\end{equation}
+where, on $K_i$,
+\begin{equation}\label{H0:eq:cell-remainder}
+ |R_\alpha(\theta)|\le CS^2x^2,
+ \qquad |R_\alpha'(\theta)|\le CS^2|x|.
+\end{equation}
+Consequently
+\begin{equation}\label{H0:eq:global-remainder}
+ \|R_\alpha\|_{H^{1/2}(\Sone)}
+ \le CS\|G_\alpha\|_{H^{1/2}(\Sone)}.
+\end{equation}
+The same estimate holds after removal of the modes $0,\pm1$.
+\end{lemma}
+
+\begin{proof}
+Taylor's formula and \eqref{H0:eq:fan} give
+\begin{equation}
+ A_\alpha
+ =\pi+\frac1{24}\sum_i\alpha_i^3+O(S^4),
+ \qquad h_\alpha=1+O(S^2).
+\end{equation}
+Take $c_\alpha=h_\alpha-1$.  Since
+\begin{equation}
+ \sec x-1=\frac{x^2}{2}+O(x^4),
+ \qquad (\sec x-1)'=x+O(x^3),
+\end{equation}
+uniformly for $|x|\le S$, equations
+\eqref{H0:eq:source-expansion}--\eqref{H0:eq:cell-remainder} follow.  The
+remainder is continuous at each $\phi_i$, because the two adjacent endpoint
+values use the same gap $\alpha_i$.
+
+More intrinsically, write $R_\alpha=m_\alpha G_\alpha$, extending the
+quotient continuously at $x=0$.  The even analytic quotient
+\begin{equation}
+ m_\alpha(x)=2h_\alpha\frac{\sec x-1}{x^2}-1
+\end{equation}
+satisfies
+\begin{equation}
+ \|m_\alpha\|_{L^\infty}\le CS^2,
+ \qquad \|m_\alpha'\|_{L^\infty(K_i)}\le CS.
+\end{equation}
+The endpoint values from the two incident edges agree, so $m_\alpha$ is a
+global Lipschitz multiplier.  The standard Lipschitz multiplier estimate on
+$H^{1/2}(\Sone)$ now gives \eqref{H0:eq:global-remainder}.  A fixed Fourier
+projection is bounded on $H^{1/2}$.
+\end{proof}
+
+\subsection{The old normal-cell source is not the polygonal source}
+
+For comparison, define the normal-cell bubble
+\begin{equation}\label{H0:eq:B}
+ B_\alpha(\theta_i+y)=y(\alpha_i-y),
+ \qquad 0\le y\le\alpha_i.
+\end{equation}
+Let $T_\alpha z$ be any vertex-compatible support trace obtained from a
+vector field affine along each straight edge.  In particular, on $K_i$ it
+has the exact trigonometric form
+\begin{equation}\label{H0:eq:exact-trace-form}
+ (T_\alpha z)(\theta)
+ =z_i\cos x+(A_i+B_i x)\sin x.
+\end{equation}
+The coefficients are constrained only by matching the common vertex
+velocities.  Thus $T_\alpha z$ is smooth in the interior of every $K_i$.
+
+\begin{proposition}[Principal source obstruction]\label{H0:prop:obstruction}
+For every positive fan and every $c\ne0$,
+\begin{equation}\label{H0:eq:not-affine}
+ G_\alpha\notin cB_\alpha+
+ \{T_\alpha z:z\in\R^N\}+\operatorname {span}\{1,\cos\theta,\sin\theta\}.
+\end{equation}
+The same assertion holds with the homogeneous support trace
+\begin{equation}\label{H0:eq:T0-pre}
+ T_\alpha^0z
+ =z_i+x\bigl((1-s)r_{i-1}+sr_i\bigr)
+ \quad\hbox{on }K_i.
+\end{equation}
+Hence an effective polygonal source of the form
+$cB_\alpha+O_{\rm scaled}(S^3)$ cannot follow from exact polygon geometry
+and vertex-compatible support completion.
+\end{proposition}
+
+\begin{proof}
+In the sense of periodic distributions,
+\begin{align}
+ G_\alpha''
+ &=1-\sum_i\alpha_i\delta_{\phi_i},\label{H0:eq:Gdd}\\
+ B_\alpha''
+ &=-2+\sum_i(\alpha_{i-1}+\alpha_i)\delta_{\theta_i}.
+ \label{H0:eq:Bdd}
+\end{align}
+Indeed, $G_\alpha'=x$ on $K_i$ and its jump at $\phi_i$ is
+$-\alpha_i$.  Likewise, $B_\alpha''=-2$ between consecutive normals and
+the derivative jump at $\theta_i$ is $\alpha_{i-1}+\alpha_i$.
+
+Every normal $\theta_i$ lies strictly inside $K_i$, whereas every
+$\phi_i$ is a polygonal vertex direction.  By
+\eqref{H0:eq:exact-trace-form}, the singular part of
+$(T_\alpha z)''$ is supported only on the set $\{\phi_i\}$.  The same is
+true for \eqref{H0:eq:T0-pre}; the three geometric modes are smooth.  If
+\eqref{H0:eq:not-affine} failed, comparison of the atoms at $\theta_i$ in the
+second distributional derivatives would give
+$c(\alpha_{i-1}+\alpha_i)=0$ for every $i$, contrary to $c\ne0$.
+
+The two atom measures in \eqref{H0:eq:Gdd}--\eqref{H0:eq:Bdd} have coefficients
+of order $S$ and their twice-integrated profiles have size $S^2$ on a
+normalized cell.  Thus the discrepancy occurs at principal order, not in
+an endpoint-weighted $O(S^3)$ remainder.
+\end{proof}
+
+\begin{remark}
+The bulk curvatures explain the formerly proposed constant: choosing
+$c=-1/2$ makes the absolutely continuous parts of
+$G_\alpha''$ and $(cB_\alpha)''$ agree.  It does not move the atomic part
+from the normals to the vertices.  Keeping only the bulk Taylor coefficient
+therefore loses exactly the geometric datum that the critical
+$H^{1/2}$ energy detects.
+\end{remark}
+
+\subsection{The corrected homogeneous Schur problem}
+
+Put
+\begin{equation}\label{H0:eq:r}
+ r_i=\frac{z_{i+1}-z_i}{\alpha_i}.
+\end{equation}
+On $K_i$, let
+\begin{equation}\label{H0:eq:T0}
+ T_\alpha^0z
+ =z_i+x\bigl((1-s)r_{i-1}+sr_i\bigr),
+ \qquad
+ s=\frac{x+\alpha_{i-1}/2}{(\alpha_{i-1}+\alpha_i)/2}.
+\end{equation}
+For
+\begin{equation}
+ \widehat f_n=\frac1{2\pi}\int_0^{2\pi}
+ f(\theta)e^{-in\theta}\,d\theta,
+ \qquad
+ \|f\|_{\dot H_*^{1/2}}^2
+ =\sum_{n\ne0}|n|\,|\widehat f_n|^2,
+\end{equation}
+define
+\begin{align}
+ \PGdot(\alpha)
+ :=\inf_{z\in Z_\alpha^0}
+ \|G_\alpha+T_\alpha^0z\|_{\dot H_*^{1/2}}^2,
+ \label{H0:eq:PGdot}\\
+ \PGplus(\alpha)
+ :=\inf_{z\in Z_\alpha^0}\left(
+ \|G_\alpha+T_\alpha^0z\|_{\dot H_*^{1/2}}^2
+ +\|G_\alpha+T_\alpha^0z\|_{L_*^2}^2\right),
+ \label{H0:eq:PGplus}
+\end{align}
+Here $Z_\alpha^0$ may be the full coefficient space or any homogeneous
+area/centering subspace for which $z=0$ is admissible at the uniform fan.
+The lower bounds below are pointwise in $z$ and are therefore unaffected by
+these rows.
+
+Let $\mathcal N_i(f)$ denote the least Dirichlet energy in the half-strip
+$K_i\times(0,\infty)$ with bottom trace $f|_{K_i}$ and homogeneous Neumann
+data on the two vertical walls.  Restriction of the periodic harmonic
+extension gives
+\begin{equation}\label{H0:eq:strip-localization}
+ 2\pi\|f\|_{\dot H_*^{1/2}}^2
+ \ge\sum_i\mathcal N_i(f).
+\end{equation}
+
+\subsection{Exact one-edge energy and the rational Bellman inequality}
+
+On one edge put
+\begin{equation}\label{H0:eq:normalized-variables}
+ a=\alpha_{i-1},\quad b=\alpha_i,\quad w=a+b,
+ \quad t=\frac aw,\quad X=1-2t,
+\end{equation}
+and
+\begin{equation}
+ \rho_-=\frac{r_{i-1}}w,\qquad
+ \rho_+=\frac{r_i}w,\qquad
+ \delta=\rho_+-\rho_-,\qquad
+ q=t\rho_-+(1-t)\rho_+.
+\end{equation}
+After subtracting the harmless constant $z_i$ and using $y=s$, the bottom
+trace is $w^2h(y)$, where
+\begin{equation}\label{H0:eq:h}
+ h(y)=\frac18(y-t)^2
+ +\frac12(y-t)\bigl((1-y)\rho_-+y\rho_+\bigr).
+\end{equation}
+
+\begin{lemma}[Exact edge energy]\label{H0:lem:edge-energy}
+With
+\begin{equation}
+ K_{\rm cyl}=\frac{\zeta(3)}{\pi^3},
+\end{equation}
+the Neumann half-strip energy of \eqref{H0:eq:h} is
+\begin{equation}\label{H0:eq:edge-energy}
+ \mathcal N_i(G_\alpha+T_\alpha^0z)
+ =\frac{K_{\rm cyl}}4w^4
+ \left[\left(\delta+\frac14\right)^2
+ +7\left(q+\frac X4\right)^2\right].
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $u=h'(0)$ and $v=h'(1)$.  Twice integrating the cosine coefficients by
+parts gives, for $k\ge1$,
+\begin{equation}
+ 2\int_0^1h(y)\cos(k\pi y)\,dy
+ =\frac{2\bigl((-1)^kv-u\bigr)}{(k\pi)^2}.
+\end{equation}
+The energy of this cosine mode in the unit half-strip is $k\pi/2$ times
+the square of its coefficient.  Since
+\begin{equation}
+ \sum_{k\ {\rm even}}\frac1{k^3}=\frac18\zeta(3),
+\qquad
+ \sum_{k\ {\rm odd}}\frac1{k^3}=\frac78\zeta(3),
+\end{equation}
+the total energy is
+\begin{equation}
+ \frac{K_{\rm cyl}}4w^4
+ \bigl((v-u)^2+7(v+u)^2\bigr).
+\end{equation}
+Direct differentiation of \eqref{H0:eq:h} gives
+\begin{equation}
+ v-u=\delta+\frac14,
+ \qquad v+u=q+\frac X4,
+\end{equation}
+which proves \eqref{H0:eq:edge-energy}.
+\end{proof}
+
+\begin{lemma}[Rational edge Bellman inequality]\label{H0:lem:bellman}
+For every $0\le t\le1$ and every $\rho_-,\rho_+\in\R$,
+\begin{align}
+ &\frac14\left[\left(\delta+\frac14\right)^2
+ +7\left(q+\frac X4\right)^2\right]\notag\\
+ &\quad\ge
+ \frac1{10}\bigl(t^4+(1-t)^4\bigr)+\frac1{320}
+ +(1-t)^3\rho_+-t^3\rho_- .
+ \label{H0:eq:bellman}
+\end{align}
+Equality holds at $t=1/2$ and $\rho_-=\rho_+=0$.
+\end{lemma}
+
+\begin{proof}
+Put
+\begin{equation}
+ s=t(1-t),\qquad
+ d=s(1-2s),\qquad e=X(1-s).
+\end{equation}
+The last two terms on the right of \eqref{H0:eq:bellman} that depend on the
+slopes satisfy
+\begin{equation}
+ (1-t)^3\rho_+-t^3\rho_-=d\delta+eq.
+\end{equation}
+Completing the two squares shows that the left side of
+\eqref{H0:eq:bellman} minus its right side is
+\begin{align}
+ &\frac14\left(\delta+\frac14-2d\right)^2
+ +\frac74\left(q+\frac X4-\frac{2e}{7}\right)^2\notag\\
+ &\quad+X^2\left(
+ \frac9{280}-\frac{X^2}{280}
+ -\frac{X^4}{112}-\frac{X^6}{64}\right).
+ \label{H0:eq:bellman-squares}
+\end{align}
+The bracket is decreasing as a function of $X^2\in[0,1]$ and its value at
+$X^2=1$ is $9/2240$.  Hence every term in
+\eqref{H0:eq:bellman-squares} is nonnegative.  The stated equality is immediate.
+\end{proof}
+
+Restoring $a,b,w$ in Lemma~\ref{H0:lem:bellman} and using
+Lemma~\ref{H0:lem:edge-energy} gives the pointwise inequality
+\begin{equation}\label{H0:eq:physical-bellman}
+ \mathcal N_i(G_\alpha+T_\alpha^0z)
+ \ge K_{\rm cyl}\left\{\frac1{10}(a^4+b^4)
+ +\frac1{320}(a+b)^4+b^3r_i-a^3r_{i-1}\right\}.
+\end{equation}
+
+\subsection{The replacement no-ratio gap}
+
+\begin{theorem}[Corrected homogeneous $|D|$ gap]\label{H0:thm:dot-gap}
+Let
+\begin{equation}
+ \bar\alpha=\frac{2\pi}{N},
+ \qquad
+ \Jfour(\alpha)=\sum_i\alpha_i^4-N\bar\alpha^4.
+\end{equation}
+For every positive cyclic fan,
+\begin{equation}\label{H0:eq:gap}
+ \boxed{
+ \PGdot(\alpha)-\PGdot(\bar\alpha\mathbf1)
+ \ge\frac{\zeta(3)}{10\pi^4}\Jfour(\alpha).}
+\end{equation}
+The conclusion remains valid after imposing the homogeneous area and
+centering rows described after \eqref{H0:eq:PGplus}.
+\end{theorem}
+
+\begin{proof}
+Sum \eqref{H0:eq:physical-bellman}.  The slope potential telescopes exactly:
+\begin{equation}
+ \sum_i(\alpha_i^3r_i-\alpha_{i-1}^3r_{i-1})=0.
+\end{equation}
+Together with \eqref{H0:eq:strip-localization}, this gives, pointwise in $z$,
+\begin{equation}\label{H0:eq:global-lower}
+ 2\pi\|G_\alpha+T_\alpha^0z\|_{\dot H_*^{1/2}}^2
+ \ge K_{\rm cyl}\left[
+ \frac15\sum_i\alpha_i^4
+ +\frac1{320}\sum_i(\alpha_{i-1}+\alpha_i)^4\right].
+\end{equation}
+For the uniform fan, $z=0$ makes the periodic harmonic extension even
+across every vertical wall.  Thus strip localization is an equality.
+Lemmas~\ref{H0:lem:edge-energy} and \ref{H0:lem:bellman} are also equalities, and
+\begin{equation}\label{H0:eq:uniform}
+ 2\pi\PGdot(\bar\alpha\mathbf1)
+ =\frac{K_{\rm cyl}}4N\bar\alpha^4.
+\end{equation}
+Finally,
+\begin{equation}
+ \sum_i(\alpha_{i-1}+\alpha_i)^4
+ \ge16N\bar\alpha^4
+\end{equation}
+by Jensen's inequality.  Subtract \eqref{H0:eq:uniform} from
+\eqref{H0:eq:global-lower}, take the infimum over $z$, and use
+$K_{\rm cyl}/(2\pi)=\zeta(3)/(2\pi^4)$.  This proves
+\eqref{H0:eq:gap}.
+\end{proof}
+
+\subsection{The identity multiplier has a nonnegative relative defect}
+
+For a function $f$ on the circle, set
+\begin{equation}
+ \|f\|_{L_*^2}^2
+ =\frac1{2\pi}\int_{\Sone}|f-\mathop{\rm avg}f|^2.
+\end{equation}
+On one edge the trace, after a cell constant is removed, is $w^2h(y)$ with
+$h$ given by \eqref{H0:eq:h} and $d\theta=(w/2)dy$.  Write
+\begin{equation}
+ \operatorname {Var}(h)=\int_0^1h^2-\left(\int_0^1h\right)^2.
+\end{equation}
+
+\begin{lemma}[Exact rational variance inequality]\label{H0:lem:variance}
+For all $0\le t\le1$ and all $\rho_-,\rho_+\in\R$,
+\begin{equation}\label{H0:eq:variance}
+ \frac12\operatorname {Var}(h)
+ \ge\frac1{23040}
+ +\frac1{180}\left((1-t)^4\rho_+-t^4\rho_-\right).
+\end{equation}
+Equality holds at $t=1/2$ and $\rho_-=\rho_+=0$.
+\end{lemma}
+
+\begin{proof}
+Up to an irrelevant constant, write $h(y)=Ay^2+By$, where
+\begin{equation}
+ A=\frac18+\frac\delta2,
+ \qquad B=\frac q2-\frac\delta2-\frac t4.
+\end{equation}
+The elementary moments of $y$ and $y^2$ give
+\begin{equation}\label{H0:eq:variance-polynomial}
+ \frac12\operatorname {Var}(h)
+ =\frac{2A^2}{45}+\frac{B^2}{24}+\frac{AB}{12}.
+\end{equation}
+Put
+\begin{equation}
+ s=t(1-t),\quad X=1-2t,\quad
+ d_4=s(1-3s),\quad e_4=X(1-2s).
+\end{equation}
+Then
+\begin{equation}
+ (1-t)^4\rho_+-t^4\rho_-=d_4\delta+e_4q.
+\end{equation}
+Define
+\begin{equation}
+ \delta_*=4d_4-\frac14,
+ \qquad q_*=\frac4{15}e_4-\frac X4.
+\end{equation}
+Substitution in \eqref{H0:eq:variance-polynomial} and completion of the two
+independent squares gives the exact identity
+\begin{align}
+ &\frac12\operatorname {Var}(h)-\frac1{23040}
+ -\frac1{180}(d_4\delta+e_4q)\notag\\
+ &\quad=\frac{(\delta-\delta_*)^2}{1440}
+ +\frac{(q-q_*)^2}{96}\notag\\
+ &\qquad+\frac{X^2}{345600}
+ \left(176+52X^2+116X^4-135X^6\right).
+ \label{H0:eq:variance-squares}
+\end{align}
+For $|X|\le1$, the last polynomial is at least
+$176-135=41$.  This proves \eqref{H0:eq:variance} and its equality statement.
+\end{proof}
+
+Restoring the physical widths in \eqref{H0:eq:variance} gives
+\begin{equation}\label{H0:eq:physical-variance}
+ \min_{C\in\R}\int_{K_i}
+ |G_\alpha+T_\alpha^0z+C|^2
+ \ge\frac{(a+b)^5}{23040}
+ +\frac1{180}(b^4r_i-a^4r_{i-1}).
+\end{equation}
+Summing removes the last potential.  Since a single global mean is no better
+than independent cell constants,
+\begin{equation}\label{H0:eq:global-L2}
+ 2\pi\|G_\alpha+T_\alpha^0z\|_{L_*^2}^2
+ \ge\frac1{23040}\sum_i(\alpha_{i-1}+\alpha_i)^5.
+\end{equation}
+At the uniform fan, $z=0$ gives equality in \eqref{H0:eq:global-L2}.  Jensen's
+inequality therefore shows that the identity-multiplier relative defect is
+nonnegative.
+
+\begin{corollary}[Corrected homogeneous $|D|+I$ gap]\label{H0:cor:plus-gap}
+For every positive cyclic fan,
+\begin{equation}\label{H0:eq:plus-gap}
+ \boxed{
+ \PGplus(\alpha)-\PGplus(\bar\alpha\mathbf1)
+ \ge\frac{\zeta(3)}{10\pi^4}\Jfour(\alpha).}
+\end{equation}
+The conclusion remains valid with the homogeneous area and centering rows.
+\end{corollary}
+
+\begin{proof}
+Add \eqref{H0:eq:global-L2} to the pointwise order-one estimate
+\eqref{H0:eq:global-lower}, subtract the two equalities at the uniform fan,
+and use
+\begin{equation}
+ \sum_i(\alpha_{i-1}+\alpha_i)^5
+ \ge N(2\bar\alpha)^5.
+\end{equation}
+Taking the infimum over the same coefficient space proves
+\eqref{H0:eq:plus-gap}.
+\end{proof}
+\endgroup

@@ -1,0 +1,150 @@
+\begingroup
+\section{Foundation F57: stationary side mass and first moment}
+\label{module:F57}
+\noindent\textit{Audited source: \nolinkurl{convex_largeN_polya_szego_stage57_stationary_flux_reduction.tex}.}
+\subsection{Active stationary polygons}
+
+Let
+\begin{equation}
+ P=\bigcap_{i=1}^M\{x\in\mathbb R^2:x\cdot\nu_i<h_i\}
+\end{equation}
+be a bounded convex active polygon.  Write
+\begin{equation}
+ \nu_i=(\cos\theta_i,\sin\theta_i),\qquad
+ \tau_i=(-\sin\theta_i,\cos\theta_i),
+\end{equation}
+and let $S_i$ be the side on the line $x\cdot\nu_i=h_i$.
+Every point of $S_i$ has the unique representation
+\begin{equation}\label{F57:eq:side-coordinate}
+ x=h_i\nu_i+s\tau_i,\qquad s_i^-<s<s_i^+.
+\end{equation}
+Thus its length is
+$\ell_i=s_i^+-s_i^-$.  Let $u>0$ be the $L^2(P)$-normalized first
+eigenfunction,
+\begin{equation}\label{F57:eq:eigen}
+ -\Delta u=\lambda u\quad\hbox{in }P,\qquad
+ u=0\quad\hbox{on }\partial P,\qquad
+ \int_Pu^2=1,
+\end{equation}
+and put
+\begin{equation}
+ p_i(s)=-\partial_\nu u(h_i\nu_i+s\tau_i)\ge0.
+\end{equation}
+Convex polygonal regularity gives $u\in H^2(P)$ and
+$p_i\in L^2(S_i)$.  The distributed Lipschitz-domain derivative, or
+equivalently approximation inside a fixed active chart, gives the Hadamard
+formula
+\begin{equation}\label{F57:eq:Hadamard}
+ D\lambda(P)[V]=-
+ \sum_i\int_{S_i}p_i^2(V\cdot\nu_i)\,ds
+\end{equation}
+for every vertex-compatible polygonal material field $V$.
+
+We use the scale-invariant functional
+\begin{equation}
+ \Lambda(P)=\frac{|P|}{\pi}\lambda_1(P).
+\end{equation}
+Stationarity of $\Lambda$ is equivalent to stationarity of $\lambda_1$
+under the constraint $|P|=A$.
+
+\subsection{The two exact sidewise moment identities}
+
+\begin{theorem}[Stationary flux equidistribution]\label{F57:thm:flux}
+Suppose that $P$ is stationary for $\Lambda$ with respect to all active
+vertex perturbations.  Then, on every side $S_i$,
+\begin{align}
+ \frac1{\ell_i}\int_{s_i^-}^{s_i^+}p_i(s)^2\,ds
+ &=\frac{\lambda}{|P|},\label{F57:eq:mean}\\
+ \int_{s_i^-}^{s_i^+}
+ \left(s-\frac{s_i^-+s_i^+}{2}\right)p_i(s)^2\,ds
+ &=0.\label{F57:eq:first-moment}
+\end{align}
+Both identities are independent of the smallest side and of all mesh
+ratios.
+\end{theorem}
+
+\begin{proof}
+Work first with the Lagrangian
+\begin{equation}
+ \mathcal F(P)=\lambda_1(P)+\mu |P|.
+\end{equation}
+
+Fix the normal fan and replace $h_i$ by $h_i+t z_i$.  On the open side
+$S_i$ the induced normal velocity is $z_i$; on every other open side it is
+zero.  The endpoint motions are tangential to the neighboring sides and do
+not contribute to the boundary integrals.  Consequently
+\begin{align}
+ D\lambda(P)[z]&=-\sum_i z_i\int_{S_i}p_i^2\,ds,
+ &D|P|[z]&=\sum_i z_i\ell_i.
+\end{align}
+The $z_i$ are independent in an active chart.  Stationarity gives
+\begin{equation}\label{F57:eq:multiplier-row}
+ \int_{S_i}p_i^2\,ds=\mu\ell_i
+ \qquad(1\le i\le M).
+\end{equation}
+
+To identify the multiplier, use the dilation field $V(x)=x$.  Scaling gives
+\begin{equation}
+ D\lambda(P)[x]=-2\lambda,\qquad D|P|[x]=2|P|.
+\end{equation}
+Hence $-2\lambda+2\mu|P|=0$, or
+\begin{equation}\label{F57:eq:mu}
+ \mu=\lambda/|P|.
+\end{equation}
+Equations \eqref{F57:eq:multiplier-row}--\eqref{F57:eq:mu} prove
+\eqref{F57:eq:mean}.
+
+It remains to rotate one supporting line.  Replace
+$\theta_i$ by $\theta_i+tq_i$ while keeping $h_i$ fixed.  Differentiating
+\begin{equation}
+ x_t\cdot\nu_i(t)=h_i
+\end{equation}
+at a point $x=h_i\nu_i+s\tau_i$ gives
+\begin{equation}\label{F57:eq:rot-velocity}
+ V\cdot\nu_i=-s q_i.
+\end{equation}
+The normal velocity is zero on every other open side.  Therefore
+\begin{align}
+ D\lambda(P)[q_i]
+ &=q_i\int_{s_i^-}^{s_i^+}s p_i(s)^2\,ds,\notag\\
+ D|P|[q_i]
+ &=-q_i\int_{s_i^-}^{s_i^+}s\,ds.
+\end{align}
+Stationarity of $\lambda+\mu|P|$ and the sign convention in
+\eqref{F57:eq:multiplier-row} give
+\begin{equation}\label{F57:eq:raw-first}
+ \int_{s_i^-}^{s_i^+}s p_i(s)^2\,ds
+ =\mu\int_{s_i^-}^{s_i^+}s\,ds.
+\end{equation}
+Subtract the midpoint times \eqref{F57:eq:multiplier-row} from
+\eqref{F57:eq:raw-first}.  This is \eqref{F57:eq:first-moment}.
+\end{proof}
+
+\begin{corollary}[Sidewise probability law]\label{F57:cor:probability}
+For every side define
+\begin{equation}\label{F57:eq:probability}
+ d\mathbb P_i(s)=
+ \frac{p_i(s)^2}{(\lambda/|P|)\ell_i}\,ds.
+\end{equation}
+Then $\mathbb P_i$ is a probability measure and
+\begin{equation}
+ \int s\,d\mathbb P_i(s)=\frac{s_i^-+s_i^+}{2}.
+\end{equation}
+In particular, a stationary short side cannot be analyzed using only its
+total flux: its first flux moment is fixed as well.
+\end{corollary}
+
+\begin{proof}
+This is exactly \eqref{F57:eq:mean} and \eqref{F57:eq:first-moment}.
+\end{proof}
+
+\begin{remark}[Why the moment row is not redundant]
+For a shallow corner model
+$p(s)^2\simeq C s^{2\varepsilon_-}
+(\ell-s)^{2\varepsilon_+}$, the normalized first moment is the mean of a
+beta distribution.  Its displacement from $\ell/2$ has the sign of
+$\varepsilon_--\varepsilon_+$.  Thus \eqref{F57:eq:first-moment} detects an
+imbalance of the two endpoint corner exponents which the average identity
+\eqref{F57:eq:mean} cannot see.
+\end{remark}
+\endgroup

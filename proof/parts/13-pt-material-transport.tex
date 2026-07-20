@@ -1,0 +1,665 @@
+\begingroup
+\section{Node PT: physical material transport and the mixed row DM}
+\label{module:PT}
+\noindent\textit{Audited source: \nolinkurl{PT_material_transport.tex}.}
+\subsection{The row and the two regimes}
+
+Let
+\begin{equation}\label{PT:eq:fan}
+ h_i>0,\qquad \sum_i h_i=2\pi,\qquad
+ a=\frac{2\pi}{N},\qquad S=a+\max_i h_i,
+\end{equation}
+and put
+\begin{equation}\label{PT:eq:J}
+ \Jfour(h)=\sum_i h_i^4-Na^4.
+\end{equation}
+On $I_i=[\theta_i,\theta_{i+1}]$ define
+\begin{equation}\label{PT:eq:q}
+ q_h(\theta_i+x)=\frac12\min\{x^2,(h_i-x)^2\},
+ \qquad0\le x\le h_i.
+\end{equation}
+
+Let $Z_h$ be the exact area tangent space of support increments in a fixed
+translation gauge, and let $v_h(z)$ be the physical-affine normal trace.
+On
+\[
+ K_i=[\theta_i-h_{i-1}/2,\theta_i+h_i/2],\qquad x=\theta-\theta_i,
+\]
+it is
+\begin{align}
+ v_h(z)(\theta)
+ &=\PiNG\left[z_i\cos x+
+ \{(1-t_i(x))A_i^-+t_i(x)A_i^+\}\sin x\right],
+ \label{PT:eq:trace}\\
+ t_i(x)&=\frac{\tan x+\tan(h_{i-1}/2)}
+ {\tan(h_{i-1}/2)+\tan(h_i/2)},\notag\\
+ A_i^-&=\frac{z_i-z_{i-1}}{\sin h_{i-1}}
+       -z_i\tan\frac{h_{i-1}}2,\qquad
+ A_i^+=\frac{z_{i+1}-z_i}{\sin h_i}
+       +z_i\tan\frac{h_i}2.\notag
+\end{align}
+The exact support metric satisfies
+\begin{equation}\label{PT:eq:metric}
+ c\|v_h(z)\|_{H^{1/2}}^2
+ \le\Gtilde_h(z)\le C\|v_h(z)\|_{H^{1/2}}^2.
+\end{equation}
+
+The symmetric null form is
+\begin{equation}\label{PT:eq:null}
+ \Cnull(f_1,f_2,f_3)
+ =\frac13\sum_{\rm cyc}\int_\T f_1
+ \{(|D|f_2)(|D|f_3)-f_2'f_3'\}\,d\theta.
+\end{equation}
+The row DM is
+\begin{equation}\label{PT:eq:DM-target}
+ |\Cnull(q_h,q_h,v_h(z))|
+ \le\varepsilon_{\rm DM}(S)\Jfour(h)^{1/2}
+       \Gtilde_h(z)^{1/2},
+ \qquad\varepsilon_{\rm DM}(S)\longrightarrow0.
+\end{equation}
+
+Fix $\beta=1/2$.  As in stage 161, split into
+\begin{align}
+ \Jfour(h)&\ge S^{5-\beta}&&\text{(far)},\label{PT:eq:far-regime}\\
+ \Jfour(h)&<S^{5-\beta}&&\text{(near)}.\label{PT:eq:near-regime}
+\end{align}
+The fully polarized one-Lipschitz estimate
+\begin{equation}\label{PT:eq:one-slot}
+ |\Cnull(f,g,w)|
+ \le C\|f'\|_\infty
+       \|g\|_{\dot H^{1/2}}\|w\|_{\dot H^{1/2}}
+\end{equation}
+follows from the same-sign Fourier formula by putting the low derivative
+block in $L^\infty$; when the Lipschitz slot is high, the remaining
+separation factor is $2^{-|j-k|/2}$.  Since
+\begin{equation}\label{PT:eq:q-size}
+ \|q_h'\|_\infty\le S,
+ \qquad \|q_h\|_{\dot H^{1/2}}\le CS^{3/2},
+\end{equation}
+the far regime gives
+\begin{equation}\label{PT:eq:far-bound}
+ |\Cnull(q_h,q_h,v_h(z))|
+ \le CS^{1/4}\Jfour(h)^{1/2}\Gtilde_h(z)^{1/2}.
+\end{equation}
+
+In the near regime set
+\begin{equation}\label{PT:eq:path}
+ d_i=h_i-a,\qquad h_i(t)=a+td_i.
+\end{equation}
+The exact identity
+\begin{equation}\label{PT:eq:Jidentity}
+ \Jfour(h)=\sum_i d_i^2(h_i^2+2ah_i+3a^2)
+\end{equation}
+gives $|d_i|^4\le C\Jfour(h)$.  In the near regime,
+$\max_i|d_i|\le CS^{(5-\beta)/4}=CS^{9/8}=o(S)$ as $S\to0$.
+Since $S=a+\max_i h_i$ and $|h_i-a|\le\max_j|d_j|$, both $a$ and every
+$h_i(t)$ therefore lie between fixed positive multiples of $S$, for all
+sufficiently small $S$.  Hence
+\begin{equation}\label{PT:eq:comparable}
+ cS\le a\le h_i(t)\le CS,
+ \qquad
+ \delta(t):=\max_i\frac{|d_i|}{h_i(t)}
+ \le C\frac{\max_i|d_i|}{S}.
+\end{equation}
+
+\subsection{Lipschitz covariance of the same-sign null form}
+
+For a periodic Lipschitz function $u$, put
+$F_\varepsilon(x)=x+\varepsilon u(x)$ and
+\begin{equation}\label{PT:eq:transport-derivative}
+ \mathfrak D_u\Cnull(f,g,w)
+ =\frac d{d\varepsilon}\bigg|_{\varepsilon=0}
+ \Cnull(f\circ F_\varepsilon^{-1},
+        g\circ F_\varepsilon^{-1},
+        w\circ F_\varepsilon^{-1}).
+\end{equation}
+
+\begin{lemma}[Critical Lipschitz covariance]\label{PT:lem:covariance}
+For real $f\in W^{1,\infty}(\T)$ and real
+$g,w\in H^{1/2}(\T)$,
+\begin{equation}\label{PT:eq:covariance}
+ \boxed{
+ |\mathfrak D_u\Cnull(f,g,w)|
+ \le C\|u'\|_\infty\|f'\|_\infty
+       \|g\|_{H^{1/2}}\|w\|_{H^{1/2}}.}
+\end{equation}
+The polarized estimate is uniform for piecewise-affine $u$.
+\end{lemma}
+
+\begin{proof}
+First take trigonometric polynomials.  The same-sign representation of
+\eqref{PT:eq:null} is a sum, over $p,q>0$, of the three placements of
+\begin{equation}\label{PT:eq:same-sign}
+ pq\,\widehat f_p\widehat g_q\overline{\widehat w_{p+q}}
+\end{equation}
+and their conjugates.  Since
+\[
+ \frac d{d\varepsilon}\bigg|_0
+ (f\circ F_\varepsilon^{-1})=-uf',
+\]
+differentiating the three slots in \eqref{PT:eq:same-sign} produces a
+quadrilinear multiplier with the deformation frequency $\ell$.  At
+$\ell=0$ the three contributions add to zero: this is exactly invariance
+under a common translation.  Therefore the summed multiplier is divisible
+by $\ell$, and $\ell\widehat u_\ell$ is a Fourier coefficient of $u'$.
+
+For completeness, this divisibility has a pointwise symbol bound.  Put
+\[
+ \tau(r,s,t)=\sum_{\rm cyc}(|s||t|+st),
+ \qquad r+s+t=0.
+\]
+Thus $\tau$ is twice the product of the two same-sign frequencies.  If
+$\ell+k+m+n=0$, direct substitution in the six possible sign orders gives
+\begin{multline}\label{PT:eq:symbol-bound}
+ \big|k\tau(k+\ell,m,n)+m\tau(k,m+\ell,n)\\
+       +n\tau(k,m,n+\ell)\big|
+ \le3|\ell|\,|k|\,|m|^{1/2}|n|^{1/2}.
+\end{multline}
+For example, on a region with $m,n>0$ the only changes occur when
+$k+\ell$, $m+\ell$, or $n+\ell$ crosses zero; on each resulting interval
+the left side is affine in $\ell$ after its zero value at $\ell=0$ is
+removed, and its two endpoint slopes are bounded by the right side.
+The other sign orders are permutations.  This proves
+\eqref{PT:eq:symbol-bound} without a smoothness assumption on $u$.
+
+We spell out the endpoint summation, since the pointwise bound alone is
+not an $L^\infty\times L^\infty\times L^2\times L^2$ theorem.  Let
+$P_j$ be cyclic Littlewood--Paley projections and write
+\[
+ U_j=P_j(u'),\quad F_j=P_j(f'),\quad
+ G_j=|D|^{1/2}P_jg,\quad W_j=|D|^{1/2}P_jw.
+\]
+Split each dyadic block further at the six sign boundaries
+\[
+ k=0,\quad m=0,\quad n=0,\quad
+ k+\ell=0,\quad m+\ell=0,\quad n+\ell=0.
+\]
+On every resulting interval the divided symbol
+\begin{equation}\label{PT:eq:divided-symbol}
+ \frac{k\tau(k+\ell,m,n)+m\tau(k,m+\ell,n)
+       +n\tau(k,m,n+\ell)}
+      {\ell k|m|^{1/2}|n|^{1/2}}
+\end{equation}
+and each discrete difference, multiplied by the corresponding dyadic
+scale, are bounded.  At a boundary the one-sided limits agree with the
+formula in the adjacent sign chamber; if one of $k,m,n$ is zero, the
+undivided symbol is zero.  Thus no boundary atom or zero-frequency row is
+lost.
+
+Let $J$ be the largest dyadic index and recall that the frequency sum
+forces the two largest indices to differ by at most $3$.  Up to exchanging
+$g,w$ and $u',f'$, all flag rows have the following bounds:
+on the chambers where one of $G,W$ is $r$ generations below a high
+$U$ or $F$ block, direct substitution in the same-sign product gives an
+extra $2^{-r/2}$; when both $G,W$ are lower by $r,s$ and $U,F$ are high,
+the divided symbol is bounded by $C2^{-(r+s)/2}$.  For example, if
+$k>0$, $m,n>0$, and $\ell<0$ are in the latter configuration, then
+$k+\ell=-(m+n)$ and the numerator in
+\eqref{PT:eq:divided-symbol} is $6kmn$, so division gives
+$C|mn|^{1/2}/|\ell|$.  The other five sign orders are identical after a
+permutation.  Thus all flag rows have the following bounds:
+\begin{center}
+\begin{tabular}{c|c}
+two high blocks & bound after the order-zero kernel is summed\\
+\hline
+$G_J,W_J$ &
+$C\|U_{\le J}\|_\infty\|F_{\le J}\|_\infty
+  \|G_J\|_2\|W_{J+O(1)}\|_2$\\
+$U_J,G_J$ &
+$C\sum_{r\ge0}2^{-r/2}\|U_J\|_\infty
+  \|F_{\le J}\|_\infty\|G_{J+O(1)}\|_2\|W_{J-r}\|_2$\\
+$F_J,G_J$ &
+$C\sum_{r\ge0}2^{-r/2}\|U_{\le J}\|_\infty
+  \|F_J\|_\infty\|G_{J+O(1)}\|_2\|W_{J-r}\|_2$\\
+$U_J,F_J$ &
+$C\sum_{r,s\ge0}2^{-(r+s)/2}\|U_J\|_\infty
+  \|F_{J+O(1)}\|_\infty\|G_{J-r}\|_2\|W_{J-s}\|_2$.
+\end{tabular}
+\end{center}
+The factors $2^{-r/2}$ are the unused half derivative in
+\eqref{PT:eq:symbol-bound}.  The same table holds when a shifted frequency
+touches a sign boundary, using the one-sided divided symbol above.
+
+Each Littlewood--Paley block is bounded in $L^\infty$ by the full
+$L^\infty$ norm.  Sum first in $r,s$ and then in $J$.  Young's inequality
+for the geometric sequences and Cauchy--Schwarz for the $G,W$ square
+functions give
+\[
+ C\|u'\|_\infty\|f'\|_\infty
+ \left(\sum_j\|G_j\|_2^2\right)^{1/2}
+ \left(\sum_j\|W_j\|_2^2\right)^{1/2}.
+\]
+The finitely many zero and unit frequencies are bounded by the
+inhomogeneous $H^{1/2}$ norms.  This is \eqref{PT:eq:covariance}.
+
+Approximate a Lipschitz $u$ by smooth functions with uniformly bounded
+derivative.  The estimate just proved is stable under this approximation,
+so it applies in particular to piecewise-affine velocities.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{PT:lem:covariance} measures $u'$ and not $u$.  Consequently a
+large cumulative displacement of grid nodes and a common rotation do not
+enter the estimate.  This is the precise replacement for the invalid
+bare-kernel order used in stage 161.
+\end{remark}
+
+\subsection{Exact material fan identity and support transport}
+
+Refine the fan mesh by the nodes $\theta_i(t)$ and the midpoints
+$c_i(t)=(\theta_i(t)+\theta_{i+1}(t))/2$.  Let
+$F_t:\T_0\to\T_t$ be the unique orientation-preserving map which is
+affine on every reference half-cell and sends
+\(\theta_i(0),c_i(0)\) to \(\theta_i(t),c_i(t)\).  Set
+\begin{equation}\label{PT:eq:finite-material-map}
+ G_{t,\varepsilon}=F_{t+\varepsilon}\circ F_t^{-1},
+ \qquad
+ u_t=\partial_\varepsilon G_{t,\varepsilon}\big|_{\varepsilon=0}.
+\end{equation}
+On the two halves of $I_i(t)$ one has
+\begin{equation}\label{PT:eq:uprime}
+ u_t'=\frac{d_i}{h_i(t)},
+ \qquad \|u_t'\|_\infty=\delta(t).
+\end{equation}
+
+\begin{lemma}[Exact fan transport]\label{PT:lem:q-transport}
+On both halves of $I_i(t)$,
+\begin{equation}\label{PT:eq:q-transport}
+ q_{h(t+\varepsilon)}\circ G_{t,\varepsilon}
+ =\left(1+\varepsilon\frac{d_i}{h_i(t)}\right)^2q_{h(t)}.
+\end{equation}
+Consequently, if a dot denotes the derivative of the pulled profile,
+\begin{equation}\label{PT:eq:qdot}
+ \|\dot q_t\|_{H^{1/2}}
+ \le C\delta(t)S^{3/2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+On either half-cell, $q_h$ is one half of the squared distance from its
+nearest endpoint.  The affine map multiplies that distance by
+$1+\varepsilon d_i/h_i(t)$, proving \eqref{PT:eq:q-transport}.
+
+Thus $\dot q_t=2(d_i/h_i(t))q_{h(t)}$ on $I_i(t)$.  Each cell piece
+vanishes quadratically at its outer endpoints.  Its zero extension has
+$H^{1/2}$ norm squared at most $Ch_i(t)^4|d_i/h_i(t)|^2$ by scaling the
+fixed unit-cell profile.  To sum the pieces, use comparability from
+\eqref{PT:eq:comparable}.  The $H^{1/2}$ pairing of two nonadjacent cell
+profiles at cyclic index distance $r$ is bounded by
+$CS^4|a_i a_j|/(1+r)^2$, where $a_i=d_i/h_i(t)$; adjacent pairs are
+bounded by the two-cell unit-profile norm.  Schur summation of
+$(1+r)^{-2}$ gives
+\[
+ \left\|\sum_i2a_iq_i\right\|_{H^{1/2}}^2
+ \le C\sum_i S^4|a_i|^2.
+\]
+Hence
+\[
+ \|\dot q_t\|_{H^{1/2}}^2
+ \le C\delta(t)^2\sum_i h_i(t)^4
+ \le C\delta(t)^2S^3,
+\]
+because $\sum_i h_i(t)=2\pi$ and $h_i(t)\le CS$.
+\end{proof}
+
+We next record the only finite-element statement about the physical
+support trace.  The estimate is on its natural support space, not on an
+arbitrary ambient target.
+
+\begin{lemma}[Stable physical material transport]\label{PT:lem:v-transport}
+Along every comparable path \eqref{PT:eq:comparable} there is a linear
+transport $z_1\mapsto z_t\in Z_{h(t)}$, preserving the exact area and
+translation quotient, such that, with
+\begin{equation}\label{PT:eq:vtilde}
+ \widetilde v_t=v_{h(t)}(z_t)\circ F_t,
+\end{equation}
+interpreted infinitesimally on the common refined grid,
+\begin{align}
+ \sup_{0\le t\le1}\|v_{h(t)}(z_t)\|_{H^{1/2}}
+ &\le C\|v_h(z_1)\|_{H^{1/2}},\label{PT:eq:v-uniform}\\
+ \|\dot{\widetilde v}_t\|_{H^{1/2}}
+ &\le C\delta(t)\|v_{h(t)}(z_t)\|_{H^{1/2}}.
+ \label{PT:eq:vdot}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+We include the discrete endpoint estimate which prevents a hidden
+mesh-frequency loss.  On a comparable cyclic mesh define
+\begin{equation}\label{PT:eq:discrete-H}
+ \|z\|_{\mathfrak h^{1/2}_S}^2
+ =S\sum_i|z_i|^2
+ +\sum_{i\ne j}\frac{|z_i-z_j|^2}{(1+|i-j|_{\rm cyc})^2}.
+\end{equation}
+
+First let $I_hz$ be the affine interpolant with nodal values $z_i$.
+For non-neighbouring cells $I_i,I_j$ at cyclic distance $r$,
+comparability gives
+\[
+ |x-y|\asymp S(1+r),\qquad |I_i|\asymp|I_j|\asymp S.
+\]
+The corresponding Gagliardo rectangle is therefore comparable with
+$|\bar z_i-\bar z_j|^2/(1+r)^2$, where $\bar z_i$ is the cell average.
+The two-cell rectangles give $|z_{i+1}-z_i|^2$.  Since
+\[
+ |\bar z_i-z_i|\le\tfrac12|z_{i+1}-z_i|,
+\]
+the triangle inequality converts nodal differences to average
+differences and conversely, with an error paid by these neighbouring
+rectangles.  The summability of $(1+r)^{-2}$ pays each such error a
+bounded number of times.
+Together with
+$\|I_hz\|_2^2\asymp S\sum_i|z_i|^2$, summing the rectangles in both
+directions proves
+\begin{equation}\label{PT:eq:affine-discrete}
+ \|I_hz\|_{H^{1/2}}^2\asymp
+ \|z\|_{\mathfrak h^{1/2}_S}^2.
+\end{equation}
+
+Now pull every patch $K_i$ in \eqref{PT:eq:trace} to $[0,1]$.  With
+$w_i=(h_{i-1}+h_i)/2$, $p_i=h_{i-1}/(h_{i-1}+h_i)$, and
+\[
+ Z=z_i,\qquad A=w_iA_i^-,\qquad B=w_iA_i^+,
+\]
+the normalized trace is
+\[
+ Z\cos\xi+\{(1-y)A+yB\}\frac{\sin\xi}{w_i},
+ \qquad \xi=w_i(y-p_i),
+\]
+where replacing $t_i$ by $y$ changes the coefficient functions by
+$O(S^2)$ in $C^1$.  Comparability places $p_i$ in a fixed compact
+subinterval of $(0,1)$.  As $w_i\to0$, the local three-node map tends to
+\begin{equation}\label{PT:eq:limiting-local-trace}
+ (z_{i-1},Z,z_{i+1})\longmapsto
+ Z+(y-p_i)\left\{
+ (1-y)\frac{Z-z_{i-1}}{2p_i}
+ +y\frac{z_{i+1}-Z}{2(1-p_i)}\right\}.
+\end{equation}
+This limiting map is injective: evaluation at $y=p_i$ first gives
+$Z=0$, and division by $y-p_i$ then gives an affine function whose two
+endpoint coefficients force $z_{i-1}=z_{i+1}=0$.  Finite-dimensional
+norm equivalence, compactness in $p_i$, and an $O(S^2)$ perturbation
+therefore give uniform upper and lower bounds for the local map and its
+inverse.  The physical trace and the affine interpolant are consequently
+related by uniformly invertible three-point finite-element maps.
+Applying the preceding rectangle argument to these local maps gives
+\begin{equation}\label{PT:eq:discrete-equivalence}
+ \|v_h(z)\|_{H^{1/2}}^2
+ \asymp\|z\|_{\mathfrak h^{1/2}_S}^2
+\end{equation}
+on the exact quotient.  Indeed, the area row controls the constant mode,
+while support translations are exactly the first two harmonics and are
+removed by $\PiNG$.  Hence no low-mode kernel remains in either direction.
+
+We next differentiate the actual coefficients.  Put
+\[
+ b_i^- =\frac{h_{i-1}}2,\quad b_i^+=\frac{h_i}2,\quad
+ D_i=\tan b_i^-+\tan b_i^+,\quad
+ N_i(x)=\tan x+\tan b_i^-.
+\]
+For the pulled local coordinate $x=x(t)$, direct differentiation gives
+\begin{align}
+ \dot t_i(x)
+ &=\frac{\{\sec^2x\,\dot x+\tfrac12\sec^2b_i^-d_{i-1}\}D_i
+       -N_i(x)\{\tfrac12\sec^2b_i^-d_{i-1}
+                  +\tfrac12\sec^2b_i^+d_i\}}
+       {D_i^2},\label{PT:eq:tdot}\\
+ \dot A_i^-
+ &=\frac{\dot z_i-\dot z_{i-1}}{\sin h_{i-1}}
+   -\frac{(z_i-z_{i-1})\cos h_{i-1}}{\sin^2h_{i-1}}d_{i-1}\\
+ &\hspace{12mm}-\dot z_i\tan\frac{h_{i-1}}2
+   -\frac12z_i\sec^2\frac{h_{i-1}}2d_{i-1},
+ \label{PT:eq:Adot-minus}\\
+ \dot A_i^+
+ &=\frac{\dot z_{i+1}-\dot z_i}{\sin h_i}
+   -\frac{(z_{i+1}-z_i)\cos h_i}{\sin^2h_i}d_i\\
+ &\hspace{12mm}+\dot z_i\tan\frac{h_i}2
+   +\frac12z_i\sec^2\frac{h_i}2d_i.
+ \label{PT:eq:Adot-plus}
+\end{align}
+Moreover
+\begin{align}
+ \partial_t\cos x&=-\dot x\sin x,\qquad
+ \partial_t\sin x=\dot x\cos x,\label{PT:eq:frame-dots}\\
+ |\dot x|&\le C\delta(t)S,\qquad
+ |\dot t_i|\le C\delta(t).
+\end{align}
+Substitution of \eqref{PT:eq:tdot}--\eqref{PT:eq:frame-dots} in
+\eqref{PT:eq:trace} shows that every pulled trace derivative is a bounded
+three-point finite-element combination of $\dot z$ and
+\begin{equation}\label{PT:eq:transport-ledger}
+ S a_i z_i,\qquad
+ a_i(z_{i+1}-z_i),\qquad
+ a_{i-1}(z_i-z_{i-1}),
+ \qquad |a_i|\le\delta(t),
+\end{equation}
+and their one-cell shifts.  There is no unweighted term $a_i z_i$: the
+trigonometric frame contributes $d_i=S a_i$, while every derivative of a
+normalized slope is paired with a nodal difference.  The two one-sided
+wall terms cancel because the physical affine vector field is continuous.
+Differentiating $\PiNG$ adds only the modes $1,\cos\theta,\sin\theta$ and
+their pulled derivatives $u_t\sin\theta,u_t\cos\theta$.  After subtracting
+the irrelevant common rotation, periodic Poincar\'e gives
+$\|u_t\|_\infty\le C\|u_t'\|_\infty$; these fixed-dimensional rows obey
+the same bound as \eqref{PT:eq:transport-ledger} and create no factor of $N$.
+
+The multiplier bound can be proved without a Fourier endpoint theorem.
+Write $Dz_i=z_{i+1}-z_i$ and let $K(i,j)=(1+|i-j|_{\rm cyc})^{-2}$.
+For $w_i=Sa_iz_i$,
+\begin{align*}
+ S\sum_i|w_i|^2&\le C\|a\|_\infty^2S\sum_i|z_i|^2,\\
+ \sum_{i\ne j}K(i,j)|w_i-w_j|^2
+ &\le2S^2\|a\|_\infty^2
+      \sum_{i\ne j}K(i,j)|z_i-z_j|^2\\
+ &\quad+8S^2\|a\|_\infty^2
+      \sum_j|z_j|^2\sum_iK(i,j).
+\end{align*}
+Since $\sup_j\sum_iK(i,j)<\infty$ and $S$ is bounded, this is controlled
+by \eqref{PT:eq:discrete-H}.  For $w_i=a_iDz_i$ use
+\[
+ S\sum_i|w_i|^2
+ \le S\|a\|_\infty^2\sum_i|Dz_i|^2
+ \le C\|a\|_\infty^2\|z\|_{\mathfrak h^{1/2}_S}^2
+\]
+and
+\[
+ |w_i-w_j|^2
+ \le2\|a\|_\infty^2|Dz_i-Dz_j|^2
+     +8\|a\|_\infty^2|Dz_j|^2
+\]
+and
+\[
+ |Dz_i-Dz_j|^2
+ \le2|z_{i+1}-z_{j+1}|^2+2|z_i-z_j|^2.
+\]
+The last row is controlled by the $|i-j|_{\rm cyc}=1$ part of
+\eqref{PT:eq:discrete-H}.  These estimates prove
+\begin{equation}\label{PT:eq:ledger-bound}
+ \|Sa z+a\Delta z\|_{\mathfrak h^{1/2}_S}
+ \le C\|a\|_{\ell^\infty}
+       \|z\|_{\mathfrak h^{1/2}_S}.
+\end{equation}
+
+It remains to define, rather than merely invoke, the constraint
+transport.  Let
+\begin{equation}\label{PT:eq:area-row}
+ L_tz=\sum_i\ell_i(t)z_i,\qquad
+ \ell_i(t)=\tan\frac{h_{i-1}(t)}2+\tan\frac{h_i(t)}2,
+\end{equation}
+and let
+\[
+ \tau_t^1=(\cos\theta_i(t))_i,\qquad
+ \tau_t^2=(\sin\theta_i(t))_i.
+\]
+These are the exact two support-translation vectors and satisfy
+$L_t\tau_t^\mu=0$.  The matrix
+\begin{equation}\label{PT:eq:translation-Gram}
+ M_t^{\mu\nu}=\sum_i\ell_i(t)\tau_{t,i}^\mu\tau_{t,i}^\nu
+\end{equation}
+is uniformly comparable with the identity.  Define
+\begin{align}
+ \mathcal Q_tz
+ &=z-\sum_{\mu,\nu=1}^2(M_t^{-1})_{\mu\nu}
+ \left(\sum_i\ell_i(t)z_i\tau_{t,i}^\nu\right)\tau_t^\mu,
+ \label{PT:eq:translation-projection}\\
+ C_tz
+ &=\mathcal Q_t\left(z-\frac{L_tz}{L_t\mathbf1}\mathbf1\right).
+ \label{PT:eq:constraint-transport}
+\end{align}
+If $z_1$ is in the chosen exact gauge, set
+\begin{equation}\label{PT:eq:z-transport}
+ z_t=C_tz_1.
+\end{equation}
+Then $L_tz_t=0$, $z_t$ is orthogonal to both translation rows in the
+$\ell(t)$-weighted Gram product, and $C_1z_1=z_1$.
+
+The explicit rows give
+\begin{align}
+ \ell_i&\asymp S,\qquad
+ |\dot\ell_i|\le C\delta(t)S,\label{PT:eq:constraint-row-bounds}\\
+ \|\dot\tau_t^\mu\|_{\mathfrak h^{1/2}_S}
+ &\le C\delta(t),\qquad
+ |\dot M_t|+|\partial_tM_t^{-1}|\le C\delta(t).
+\end{align}
+Indeed, $|\dot\theta_i|=|\sum_{k<i}d_k|\le C\delta(t)$ and adjacent
+differences of $\dot\theta_i$ equal $d_i$.  Differentiating
+\eqref{PT:eq:translation-projection}--\eqref{PT:eq:constraint-transport}, and
+using the bounded area and translation functionals furnished by
+\eqref{PT:eq:discrete-equivalence}, first yields
+\begin{equation}\label{PT:eq:Ct-raw-bounds}
+ \|C_t\|\le C,
+ \qquad
+ \|\dot C_tz_1\|_{\mathfrak h^{1/2}_S}
+ \le C\delta(t)\|z_1\|_{\mathfrak h^{1/2}_S}.
+\end{equation}
+On $Z_{h(1)}$ the terminal map $C_1$ is the identity.  Hence
+\[
+ \|(C_t-C_1)|_{Z_{h(1)}}\|
+ \le C\int_t^1\delta(s)\,ds
+ \le CS^{1/8}.
+\]
+For sufficiently small $S$ this norm is at most $1/2$.  The Neumann
+series therefore proves that $C_t|_{Z_{h(1)}}$ is injective onto its
+image and that its inverse is uniformly bounded.  Combining this inverse
+bound with \eqref{PT:eq:Ct-raw-bounds} gives
+\begin{equation}\label{PT:eq:Ct-bounds}
+ \|C_t\|+\|(C_t|_{Z_{h(1)}})^{-1}\|\le C,\qquad
+ \|\dot C_tz_1\|_{\mathfrak h^{1/2}_S}
+ \le C\delta(t)\|C_tz_1\|_{\mathfrak h^{1/2}_S}.
+\end{equation}
+
+Equations \eqref{PT:eq:discrete-equivalence},
+\eqref{PT:eq:ledger-bound}, and \eqref{PT:eq:Ct-bounds} now give
+\[
+ \|\dot{\widetilde v}_t\|_{H^{1/2}}
+ \le C\delta(t)\|v_{h(t)}(z_t)\|_{H^{1/2}}.
+\]
+The finite maps $F_t$ and $F_t^{-1}$ have uniformly bounded Lipschitz
+constants by \eqref{PT:eq:comparable}, so their pullbacks are uniformly
+bounded on $H^{1/2}$.  Finally,
+\begin{equation}\label{PT:eq:delta-integral}
+ \int_0^1\delta(t)\,dt
+ \le C\frac{\max_i|d_i|}{S}\le CS^{1/8}
+\end{equation}
+in the near regime.  Gronwall's inequality proves
+\eqref{PT:eq:v-uniform}, and the displayed derivative estimate is
+\eqref{PT:eq:vdot}.
+\end{proof}
+
+\subsection{The near material estimate}
+
+\begin{proposition}[Comparable Lipschitz material bound]
+\label{PT:prop:material}
+Along the near path \eqref{PT:eq:path} and the transport of
+Lemma~\ref{PT:lem:v-transport},
+\begin{equation}\label{PT:eq:material}
+ \boxed{
+ \left|\frac d{dt}
+ \Cnull(q_{h(t)},q_{h(t)},v_{h(t)}(z_t))\right|
+ \le CS^{5/2}\delta(t)\Gtilde_h(z_1)^{1/2}.}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Pull all three functions by the common refined-grid map.  The derivative
+splits into the common-coordinate row and three profile rows.
+Lemma~\ref{PT:lem:covariance}, \eqref{PT:eq:q-size},
+\eqref{PT:eq:uprime}, and \eqref{PT:eq:v-uniform} bound the coordinate row by
+the right side of \eqref{PT:eq:material}.
+
+For either fan-profile row use the polarized estimate
+\eqref{PT:eq:one-slot}, placing the Lipschitz derivative on the unchanged
+fan slot, and then use \eqref{PT:eq:qdot}:
+\[
+ |\Cnull(q_t,\dot q_t,v_t)|
+ \le C S\,(\delta(t)S^{3/2})\|v_t\|_{H^{1/2}}.
+\]
+For the physical-profile row, use \eqref{PT:eq:one-slot},
+\eqref{PT:eq:q-size}, and \eqref{PT:eq:vdot}:
+\[
+ |\Cnull(q_t,q_t,\dot{\widetilde v}_t)|
+ \le C S\,S^{3/2}\delta(t)\|v_t\|_{H^{1/2}}.
+\]
+Metric equivalence \eqref{PT:eq:metric} completes the proof.
+\end{proof}
+
+\begin{lemma}[Regular quotient cancellation]\label{PT:lem:regular}
+For the uniform fan and every exact support class,
+\begin{equation}\label{PT:eq:regular}
+ \Cnull(q_{a\mathbf1},q_{a\mathbf1},v_{a\mathbf1}(z))=0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The fan spline and the physical support construction commute with the
+cyclic shift.  Hence the left side is a cyclic-invariant linear functional
+of the support coefficients, and therefore a multiple of $\sum_i z_i$.
+At the regular tangential polygon the exact area tangent condition is
+$\sum_i z_i=0$; translations have already been removed.
+\end{proof}
+
+\begin{theorem}[Unconditional mixed row DM]\label{PT:thm:DM}
+For every sufficiently fine positive fan and every exact support class,
+\begin{equation}\label{PT:eq:DM}
+ \boxed{
+ |\Cnull(q_h,q_h,v_h(z))|
+ \le C(S^{1/4}+S^{1/2})\Jfour(h)^{1/2}
+       \Gtilde_h(z)^{1/2}.}
+\end{equation}
+In particular \eqref{PT:eq:DM-target} holds independently of every minimum
+cell and adjacent ratio.
+\end{theorem}
+
+\begin{proof}
+Use \eqref{PT:eq:far-bound} in the far regime.  In the near regime transport
+the final support class to the regular quotient and integrate
+\eqref{PT:eq:material}.  Equations \eqref{PT:eq:comparable} and
+\eqref{PT:eq:Jidentity} give
+\[
+ \Jfour(h)^{1/2}\ge cS\left(\sum_i d_i^2\right)^{1/2}
+ \ge cS\max_i|d_i|.
+\]
+Therefore
+\begin{align*}
+ |\Cnull(q_h,q_h,v_h(z))|
+ &\le CS^{5/2}\frac{\max_i|d_i|}{S}
+       \Gtilde_h(z)^{1/2}\\
+ &\le CS^{1/2}\Jfour(h)^{1/2}\Gtilde_h(z)^{1/2},
+\end{align*}
+where Lemma~\ref{PT:lem:regular} supplies the zero initial value.  Combining
+the regimes proves \eqref{PT:eq:DM}.
+\end{proof}
+
+\begin{corollary}[Handoff to the current NR assembly]\label{PT:cor:J0}
+Theorem~\ref{PT:thm:DM} supplies the mixed terminal input DM.  The exact flux
+audit shows, however, that DM does not imply the former JE--FM clause,
+which remains unavailable; its former period-three material falsification
+is retracted after the polygonal corner finite-part audit.  NR and active-chart J0 are
+assembled conditionally in \texttt{JC\_joint\_comparison.tex} and
+\texttt{NR\_assembly.tex}.  At the current audit DF, the CT core, and
+JP--DE are closed, while JC--PL is the unique open premise and JP--JC is
+its dependent exact output.  No historical CT
+proposition is imported in that assembly, and none of these conclusions
+uses a minimum fan, polar, or conformal cell.
+\end{corollary}
+\endgroup

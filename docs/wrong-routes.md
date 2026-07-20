@@ -21,4 +21,4 @@ route. It is not a log of every experiment.
 None of the entries above is silently reused. The only open conceptual node in
 the retained DAG is `JC-PL`, split internally into `JC-SP` and `JC-CL`. The
 machine-readable statuses are authoritative in
-[`dag/proof-dag.json`](dag/proof-dag.json).
+[`dag/proof-dag.json`](../dag/proof-dag.json).

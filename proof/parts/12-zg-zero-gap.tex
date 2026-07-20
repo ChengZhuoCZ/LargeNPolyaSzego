@@ -1,0 +1,962 @@
+\begingroup
+\section{Node ZG: strong ZG-T1 retracted; structured ZG-COM closed}
+\label{module:ZG}
+\noindent\textit{Audited source: \nolinkurl{ZG_zero_gap.tex}.}
+\subsection{Intrinsic cut and source decomposition}
+
+Let $I_i=[\theta_i,\theta_{i+1}]$ have length $h_i>0$ and midpoint
+$c_i$.  Put
+\begin{equation}\label{ZG:eq:q}
+ q_h=\sum_iq_i,
+ \qquad
+ q_i(\theta_i+x)=\frac12\min\{x^2,(h_i-x)^2\}
+ \quad(0\le x\le h_i),
+\end{equation}
+where every $q_i$ is extended by zero outside $I_i$.  Define
+\begin{equation}\label{ZG:eq:T}
+ T(h)=\sum_i h_i|\Hil q_h(c_i)|^2.
+\end{equation}
+
+As in stage 153, let
+\begin{equation}\label{ZG:eq:D}
+ \ell^2=\frac1{2\pi}\sum_i h_i^3,
+ \qquad
+ \Dvar(h)=\sum_i h_i(h_i^2-\ell^2)^2.
+\end{equation}
+The far region $\Dvar\ge\delta\sum_i h_i^5$ is already closed by the
+absolute adaptive sampling estimate.  In the complementary region choose
+$0<\rho<1/8$ and set
+\begin{equation}\label{ZG:eq:GB}
+ \mathcal G=\{i:|h_i/\ell-1|<\rho\},
+ \qquad \mathcal B=\{1,\ldots,N\}\setminus\mathcal G.
+\end{equation}
+Put
+\begin{equation}\label{ZG:eq:bE}
+ M=|\mathcal G|,\qquad b=\frac{2\pi}{M},\qquad
+ E=\sum_{i\in\mathcal B}h_i.
+\end{equation}
+The near-stratum selection gives $b\asymp_\rho\ell$ and $E$ smaller than
+a fixed multiple of $2\pi$.  We fix the stratum threshold so that
+$E\le\pi/4$.  If $E$ is larger, the absolute sampling bound
+$T\le C\sum_i h_i^5$, together with \eqref{ZG:eq:budget} below and
+$b^4\le Cb^4E$, already belongs to the closed far row.  The following
+static budget is the only
+place where the definition of the bad set is used:
+\begin{equation}\label{ZG:eq:budget}
+ b^3\sum_{i\in\mathcal G}(h_i-b)^2
+ +b^4E+\sum_{i\in\mathcal B}h_i^5
+ \le C_\rho\Dvar(h).
+\end{equation}
+Indeed, the good term is the reference-charge estimate of stage 153.
+On the bad set, with $r=h_i/\ell$,
+\[
+ |r-1|\ge\rho,
+ \qquad r^5+r\le C_\rho r(r^2-1)^2.
+\]
+Multiplication by $\ell^5$, summation, and $b\asymp_\rho\ell$ give
+\[
+ b^4E+\sum_{i\in\mathcal B}h_i^5
+ \le C_\rho\sum_{i\in\mathcal B}
+ h_i(h_i^2-\ell^2)^2,
+\]
+which proves \eqref{ZG:eq:budget} without invoking the retracted block
+lemma of stage 155.
+
+Split
+\begin{equation}\label{ZG:eq:split}
+ q_{\rm G}=\sum_{i\in\mathcal G}q_i,
+ \qquad q_{\rm B}=\sum_{i\in\mathcal B}q_i.
+\end{equation}
+Then
+\begin{equation}\label{ZG:eq:Tsplit}
+ T(h)\le2T_{\rm G}+2T_{\rm B},
+ \qquad
+ T_X:=\sum_i h_i|\Hil q_X(c_i)|^2.
+\end{equation}
+
+\subsection{The bad source is an absolute square}
+
+We recall the special adaptive sampling fact proved in stage 153.  If an
+interval partition has midpoints $c_i$ and $f\in L^2(\T)$ satisfies
+\begin{equation}\label{ZG:eq:selfzero}
+ \operatorname {pv}\int_{I_i}\frac1{2\pi}
+ \cot\frac{c_i-y}{2}f(y)\,dy=0
+ \quad\text{for every }i,
+\end{equation}
+then
+\begin{equation}\label{ZG:eq:adaptive}
+ \sum_i h_i|\Hil f(c_i)|^2\le C\|f\|_2^2.
+\end{equation}
+It follows by comparing the truncation at radius $h_i/2$ with the
+maximal Hilbert transform and integrating the Cotlar inequality over the
+disjoint cells.
+
+\begin{lemma}[Bad-source square]\label{ZG:lem:bad}
+For the decomposition \eqref{ZG:eq:split},
+\begin{equation}\label{ZG:eq:bad}
+ \boxed{
+ T_{\rm B}\le C\sum_{j\in\mathcal B}h_j^5.}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+If $i\in\mathcal G$, the function $q_{\rm B}$ vanishes on $I_i$.  If
+$i\in\mathcal B$, its restriction to $I_i$ is the even bubble $q_i$,
+while the cotangent kernel centred at $c_i$ is odd.  Thus
+\eqref{ZG:eq:selfzero} holds for $f=q_{\rm B}$ on every target cell.
+Equation \eqref{ZG:eq:adaptive} and the exact cell integral
+\[
+ \|q_{\rm B}\|_2^2
+ =\sum_{j\in\mathcal B}\int_{I_j}q_j^2
+ =\frac1{320}\sum_{j\in\mathcal B}h_j^5
+\]
+prove \eqref{ZG:eq:bad}.
+\end{proof}
+
+\begin{remark}
+This single application of \eqref{ZG:eq:adaptive} is the decisive cleaning
+step.  All bad midpoints are now inside the source $q_{\rm B}$ and are
+paid by their individual $h_j^5$ energies.  A maximal bad block is never
+asked to pack its internal midpoint set at every dyadic scale.
+\end{remark}
+
+\subsection{The good skeleton with zero-source gaps}
+
+Delete the bad bubbles but retain their intervals as gaps.  Thus
+$q_{\rm G}$ consists of comparable good bubbles, while a maximal
+consecutive bad block $B_\nu$ is a zero-source gap of length
+\begin{equation}\label{ZG:eq:gaps}
+ e_\nu=\sum_{i\in B_\nu}h_i,
+ \qquad \sum_\nu e_\nu=E.
+\end{equation}
+Only the two endpoints $\partial B_\nu$ are singular locations for the
+good source.
+
+For a target interval $Q$ of physical length $L_Q$ (either a member of
+one of the shifted grids or a node of the balanced target tree below),
+define the endpoint weight
+\begin{equation}\label{ZG:eq:Omega-end}
+ \Omega_{\rm end}(B,Q)=
+ \begin{cases}
+ \displaystyle \frac e{L_Q}
+ \left(1+\frac{\operatorname {dist}(B,Q)}{L_Q}\right)^{-3},
+ &e\le L_Q,\\[3mm]
+ \displaystyle \frac {L_Q}e
+ \left(1+\frac{\operatorname {dist}(\partial B,Q)}{L_Q}\right)^{-3},
+ &e>L_Q.
+ \end{cases}
+\end{equation}
+
+\begin{lemma}[Genuine endpoint packing]\label{ZG:lem:end-packing}
+For disjoint gaps, on each shifted dyadic grid and on every balanced
+target interval tree used below,
+\begin{equation}\label{ZG:eq:end-packing}
+ \sup_Q\sum_\nu\Omega_{\rm end}(B_\nu,Q)
+ +\sup_\nu\sum_Q\Omega_{\rm end}(B_\nu,Q)\le C.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $e\le L_Q$, disjointness bounds the total gap length in the $n$th
+distance annulus by $C2^nL_Q$; the factor
+$L_Q^{-1}2^{-3n}$ is summable.  For $e>L_Q$, sort gaps by
+$e\asymp2^mL_Q$.  The endpoints themselves need not be
+$2^mL_Q$-separated: two large gaps can be separated by one good cell.
+What is separated is the interior mass of the disjoint gaps.  Hence an
+annulus of length $C2^nL_Q$ meets at most
+$C(1+2^{n-m})$ such gaps.  Multiplication by
+$2^{-m}2^{-3n}$ is summable in $m,n$.
+
+With a gap fixed, the coarse scale sum is
+$\sum_{L_Q\ge e}e/L_Q<\infty$.  At fine scales there are only two
+singular points, so the annular sum is bounded at each scale and
+$\sum_{L_Q<e}L_Q/e<\infty$.  This proves \eqref{ZG:eq:end-packing}.  The
+argument would fail with all internal bad midpoints in place of the two
+endpoints; Lemma~\ref{ZG:lem:bad} is what removed them.
+\end{proof}
+
+We next isolate the precise zero-gap extension of the variable-grid
+square.  Only the good midpoint atoms occur in the opening operator:
+\begin{equation}\label{ZG:eq:tau}
+ d\tau_{\rm G}=\sum_{i\in\mathcal G}h_i\delta_{c_i},
+ \qquad d\mu=dx.
+\end{equation}
+Thus the source and target measures are different.  In particular the
+one-weight matrix theorem of stage 154 cannot be quoted here.  We give
+the continuous-to-atomic operator and its square estimate explicitly.
+
+The exact identity behind the next estimate is worth recording.  With
+$\Phi(x)=\sum_{n\ge1}\sin(nx)/n^2$, twice integrating
+$q_j''=\mathbf1_{I_j}-h_j\delta_{c_j}$ gives
+\begin{equation}\label{ZG:eq:Peano-H}
+ \Hil q_{\rm G}(x)=\frac1\pi\sum_{j\in\mathcal G}
+ \left\{h_j\Phi(x-c_j)-\int_{I_j}\Phi(x-y)\,dy\right\}.
+\end{equation}
+Each bracket has zero mass and zero first moment.  Formula
+\eqref{ZG:eq:Peano-H}, rather than separate endpoint kernels, is used until
+the first source--target separating scale.
+
+Put $B=\bigcup_\nu B_\nu$, $G^*=\bigcup_{j\in\mathcal G}I_j$, and
+\begin{equation}\label{ZG:eq:sigma}
+ \gamma=\frac EM,
+ \qquad
+ \sigma=\mathbf1_B-
+ \sum_{j\in\mathcal G}\frac{\gamma}{h_j}\mathbf1_{I_j}.
+\end{equation}
+Then $\int_\T\sigma=0$.  Let $u$ be the periodic primitive of $\sigma$
+with zero mean and set
+\begin{equation}\label{ZG:eq:collapse-map}
+ R_t(x)=x-tu(x),\qquad 0\le t\le1.
+\end{equation}
+On a good cell $R_t'=1+t\gamma/h_j$; on a gap $R_t'=1-t$.
+Consequently $R_1$ collapses every gap and maps $I_j$ affinely onto an
+interval of length $h_j+\gamma$.  In particular
+$R_1(c_j)=\widehat c_j$.
+
+For $f\in L^2(\mu)$ put
+\[
+ f_0=f-\frac1{2\pi}\int_\T f.
+\]
+For an oriented cyclic arc from $x$ to $z$, let
+$\epsilon_{x,z}$ be its signed indicator.  If $V_f$ is the periodic
+zero-mean primitive of $f_0$, then
+\begin{equation}\label{ZG:eq:oriented-primitive}
+ V_f(z)-V_f(x)=\int_\T\epsilon_{x,z}(s)f_0(s)\,ds.
+\end{equation}
+For $y\in I_j$, $j\in\mathcal G$, write $m(y)=c_j$ and
+$a_t(y)=R_t'(y)$.  Define
+\begin{align}
+ P_t(x,y)&=\Phi(R_t x-R_t m(y))-\Phi(R_t x-R_t y),
+ \label{ZG:eq:Pt}\\
+ (\mathcal T_tf)(x)
+ &=\frac1\pi\int_{G^*}
+ \Big[-f_0(y)P_t(x,y)\notag\\
+ &\hspace{13mm}+a_t(y)\{\Phi'(R_tx-R_tm(y))
+       [V_f(m(y))-V_f(x)]\notag\\
+ &\hspace{35mm}-\Phi'(R_tx-R_ty)
+       [V_f(y)-V_f(x)]\}\Big],dy .
+ \label{ZG:eq:Tt}
+\end{align}
+This is a linear map from $L^2(\mu)$ to functions on the good target
+points and annihilates constants.  On the zero-mean subspace,
+\eqref{ZG:eq:oriented-primitive} gives the raw kernel
+\begin{align}
+ K_t(x,s)=\frac1\pi\Big[&-\mathbf1_{G^*}(s)P_t(x,s)
+ \notag\\
+ &+\int_{G^*}a_t(y)
+ \{\Phi'(R_tx-R_tm(y))\epsilon_{x,m(y)}(s)\notag\\
+ &\hspace{35mm}-\Phi'(R_tx-R_ty)\epsilon_{x,y}(s)\}\,dy\Big].
+ \label{ZG:eq:Kt}
+\end{align}
+For arbitrary $f$ the actual kernel is the source-centred version
+\begin{equation}\label{ZG:eq:Kt-centred}
+ K_t^0(x,s)=K_t(x,s)-\frac1{2\pi}\int_\T K_t(x,r)\,dr,
+ \qquad
+ \mathcal T_tf(x)=\int_\T K_t^0(x,s)f(s)\,ds.
+\end{equation}
+Below we suppress the superscript $0$.  The subtracted row constant has
+zero source difference.  Integrating \eqref{ZG:eq:Kt} in $s$, using
+$\int_\T\Phi=0$, and pairing the two terminal half-cells gives
+\begin{equation}\label{ZG:eq:row-gauge}
+ \left|\frac1{2\pi}\int_\T K_t(x,s)\,ds\right|
+ +\left|\partial_x\frac1{2\pi}\int_\T K_t(x,s)\,ds\right|
+ \le C_\rho b^2.
+\end{equation}
+Thus the centred kernel obeys the same size, difference, and testing
+bounds (with a changed constant).
+
+\begin{proposition}[The strong ZG--$T1$ square is false]
+\label{ZG:prop:Peano-counterexample}
+There is no constant independent of $M$ for which
+\begin{equation}\label{ZG:eq:false-Peano-square}
+ \sum_{i\in\mathcal G}h_i|\mathcal T_0f(c_i)|^2
+ \le C b^4\|f\|_{L^2(\T)}^2
+\end{equation}
+holds for every $f$.  In fact, on the uniform gap-free fan the norm of
+$\mathcal T_0:L^2(dx)\to L^2(\tau_{\rm G})$ is at least a constant
+multiple of $b$.
+\end{proposition}
+
+\begin{proof}
+Take $h_j=b=2\pi/M$, $c_j=(j+\tfrac12)b$, and
+\[
+ f_M(\theta)=(2\pi)^{-1/2}e^{i(M-1)\theta}.
+\]
+Put $n=M-1$ and $q=e^{-ib}$.  Cellwise integration by parts in
+\eqref{ZG:eq:Tt}, followed by cyclic summation, gives for the unnormalised
+mode $e^{in\theta}$
+\begin{equation}\label{ZG:eq:counterexample-exact}
+ \mathcal T_0(e^{in\cdot})(c_0)
+ =\frac{B_M+C_M}{\pi i(M-1)},
+\end{equation}
+where
+\begin{align}
+ B_M&=-(1-q)\sum_{j=0}^{M-1}q^j\Phi(jb),
+ \label{ZG:eq:counterexample-B}\\
+ C_M&=b e^{-ib/2}\sum_{j=1}^{M-1}
+       \Phi'(jb)(1-q^j).
+ \label{ZG:eq:counterexample-C}
+\end{align}
+Here is the calculation before summing.  Write $x=c_0$, $m=c_j$,
+$d=x-m=-jb$, $F(y)=e^{iny}$, and
+$P(r)=\Phi(d)-\Phi(d-r)$, and denote by
+$[\mathcal T_0F(x)]_{I_j}$ the $I_j$-integral in \eqref{ZG:eq:Tt}.
+Integration by parts of $-FP$, using
+$F=(F/in)'$, cancels its interior $F\Phi'$ term against the last
+primitive term in \eqref{ZG:eq:Tt} and gives
+\begin{multline}\label{ZG:eq:counterexample-cell}
+ \pi[\mathcal T_0F(x)]_{I_j}
+ =\frac1{in}\Big\{
+ -[F(m+r)P(r)]_{-b/2}^{b/2}\\
+ +F(x)[\Phi(d+b/2)-\Phi(d-b/2)]
+ +b\Phi'(d)[F(m)-F(x)]\Big\}.
+\end{multline}
+For $j=0$ the last product is understood by continuity and is zero.
+Now
+\[
+ F(c_j)=-e^{-ib/2}q^j,
+ \qquad \Phi(-z)=-\Phi(z),
+ \qquad \Phi'(-z)=\Phi'(z).
+\]
+Substitution in \eqref{ZG:eq:counterexample-cell}, followed by one cyclic
+index shift in the endpoint terms, gives
+\eqref{ZG:eq:counterexample-B}--\eqref{ZG:eq:counterexample-C} and hence
+\eqref{ZG:eq:counterexample-exact}.
+
+The Riemann sum in \eqref{ZG:eq:counterexample-B} satisfies
+\[
+ b\sum_{j=0}^{M-1}e^{-ijb}\Phi(jb)
+ \longrightarrow\int_0^{2\pi}e^{-ix}\Phi(x)\,dx=-i\pi.
+\]
+Since $1-e^{-ib}=ib+O(b^2)$, it follows that $B_M\to-\pi$.
+Although $\Phi'$ has logarithmic endpoint singularities, the function
+\[
+ x\longmapsto\Phi'(x)(1-e^{-ix})
+\]
+extends continuously by zero at both endpoints.  Hence
+\begin{align*}
+ C_M&\longrightarrow
+ \int_0^{2\pi}\Phi'(x)(1-e^{-ix})\,dx\\
+ &= -\int_0^{2\pi}\Phi'(x)e^{-ix}\,dx=-\pi;
+\end{align*}
+the last equality is the first cosine coefficient of
+$\Phi'(x)=\sum_{k\ge1}\cos(kx)/k$.  Thus
+\begin{equation}\label{ZG:eq:counterexample-asymptotic}
+ |\mathcal T_0(e^{in\cdot})(c_0)|\sim\frac2M.
+\end{equation}
+Translation covariance gives the same modulus at all $M$ target atoms.
+The normalisation of $f_M$ cancels the total target mass $2\pi$, and so
+\[
+ \|\mathcal T_0f_M\|_{L^2(\tau_{\rm G})}
+ =\frac{|B_M+C_M|}{\pi(M-1)}\sim\frac2M.
+\]
+Since $b^2=4\pi^2/M^2$, the ratio of the two sides at the norm level is
+asymptotic to $M/(2\pi^2)$.  This contradicts
+\eqref{ZG:eq:false-Peano-square}.  If a nonempty deleted block is required,
+insert one gap of length $o(M^{-3})$ and distribute that length over the
+good cells.  For each fixed $M$ the finite cell integrals above depend
+continuously on those endpoints, so the same contradiction persists.
+\end{proof}
+
+\begin{remark}[Consequence for the former proof route]
+The former ZG--$T1$ obligation asserted \eqref{ZG:eq:false-Peano-square} for
+all $f$ and all $t$.  Proposition~\ref{ZG:prop:Peano-counterexample} shows
+that no completion of its proposed Haar paragraph can prove that claim.
+In particular, the previously stated kernel/testing package cannot have
+all the asserted uniform consequences.  None of those claims is used
+below.  The opening argument only needs the special density $\sigma$ and
+the time integral appearing in the exact deformation identity.
+\end{remark}
+
+\begin{lemma}[Endpoint Calder\'on estimate for a small change of variable]
+\label{ZG:lem:small-change}
+Let $S:\T\to\T$ be an orientation-preserving, degree-one, piecewise
+affine map, and choose its lift in the form $S(x)=x+v(x)$.  Suppose
+\begin{equation}\label{ZG:eq:small-change-hypothesis}
+ \|v'\|_\infty\le\eta<1.
+\end{equation}
+For $f\in W^{1,\infty}(\T)$ put
+\[
+ \mathfrak C_Sf=(\Hil f)\circ S-\Hil(f\circ S).
+\]
+Then
+\begin{align}
+ \|\mathfrak C_Sf\|_2
+ &\le C_\eta\|S'-1\|_2\|f\|_\infty,
+ \label{ZG:eq:small-change-H0}\\
+ \|(\mathfrak C_Sf)'\|_2
+ &\le C_\eta\|S'-1\|_2\|f'\|_\infty.
+ \label{ZG:eq:small-change-H1}
+\end{align}
+The same constants hold for limits of such maps with nonnegative
+derivative, provided each approximating map satisfies
+\eqref{ZG:eq:small-change-hypothesis}.
+\end{lemma}
+
+\begin{proof}
+We include the endpoint argument because replacing the right side of
+\eqref{ZG:eq:small-change-H0} by an arbitrary-input $L^2$ norm is precisely
+the false step retracted above.  First smooth $v$ and $f$; the estimates
+obtained below are uniform under this smoothing.
+
+On a lifted interval, changing variables in the first Hilbert transform
+and writing
+\[
+ \Delta_v(x,y)=\frac{v(x)-v(y)}{x-y}
+\]
+gives, for the singular part of the cotangent kernel,
+\begin{equation}\label{ZG:eq:calderon-kernel}
+ \frac{1+v'(y)}{Sx-Sy}-\frac1{x-y}
+ =\frac{v'(y)-\Delta_v(x,y)}
+ {(x-y)(1+\Delta_v(x,y))}.
+\end{equation}
+For the moment suppose $\|v'\|_\infty\le\eta_0$, where the universal
+$\eta_0>0$ will be chosen below.  Expand the last denominator
+geometrically.  It is therefore enough to estimate
+\begin{equation}\label{ZG:eq:calderon-Am}
+ A_m(v,g)(x)=\operatorname {pv}\!\int
+ g(y)\frac{(v'(y)-\Delta_v(x,y))
+                 \Delta_v(x,y)^m}{x-y}\,dy,
+ \qquad m\ge0,
+\end{equation}
+where in the application $g=f\circ S$.  The following two endpoint
+multiplier bounds are the elementary Calder\'on estimate:
+\begin{align}
+ \|A_m(v,g)\|_2
+ &\le C^{m+1}\|v'\|_2\|v'\|_\infty^m\|g\|_\infty,
+ \label{ZG:eq:Am-H0}\\
+ \|\partial_xA_m(v,g)\|_2
+ &\le C^{m+1}\|v'\|_2\|v'\|_\infty^m\|g'\|_\infty.
+ \label{ZG:eq:Am-H1}
+\end{align}
+Here is a direct frequency verification.  Use
+\[
+ \Delta_v(x,y)=\int_0^1v'(y+s(x-y))\,ds
+\]
+in \eqref{ZG:eq:calderon-Am}, expand into Fourier series, and divide the
+frequencies into the regions in which one of the $m+1$ copies of $v'$
+has largest modulus.  The difference
+$v'(y)-\Delta_v(x,y)$ makes the multiplier vanish unless such a
+$v'$-frequency dominates the frequency of $g$.  On each region the
+multiplier and all its discrete differences are bounded by $C^{m+1}$.
+Smooth dyadic resolution consequently writes that piece as
+\[
+ \sum_r P_rv'\,
+ T_r(P_{\le r+3}v',\ldots,P_{\le r+3}v',P_{\le r+3}g),
+\]
+up to a uniformly summable family of translates; the kernels of $T_r$
+have uniformly bounded $L^1$ norm.  The square-function inequality for
+the sole high-frequency factor and the uniform $L^\infty$ bounds for
+smooth low-frequency projections prove \eqref{ZG:eq:Am-H0}.  After applying
+$\partial_x$, summation by parts in the Fourier frequency of $g$ moves
+the output frequency onto $g'$; on the nonzero multiplier support its
+coefficient is bounded by the same largest $v'$-frequency.  The identical
+decomposition proves \eqref{ZG:eq:Am-H1}.  This also shows that the constants
+are independent of the number of affine pieces.
+
+Choose $\eta_0$ so that $C\eta_0<1/2$.  Summing
+\eqref{ZG:eq:Am-H0}--\eqref{ZG:eq:Am-H1} with the geometric coefficients gives
+the assertions for the flat singular kernel whenever
+$\|v'\|_\infty\le\eta_0$.  The
+difference $\frac12\cot(t/2)-1/t$ is smooth.  Subtracting $g(x)$ (constants
+are annihilated) and integrating once by parts reduces its two estimates
+to convolution with an $L^1$ kernel, and gives the same right sides.
+Thus \eqref{ZG:eq:small-change-H0}--\eqref{ZG:eq:small-change-H1} hold in the
+small-distortion case.  Notice that
+\[
+ \|g\|_\infty=\|f\|_\infty,
+ \qquad \|g'\|_\infty\le(1+\eta_0)\|f'\|_\infty.
+\]
+
+It remains to pass from $\eta_0$ to the stated fixed $\eta<1$ without
+using the divergent series above.  For $0\le s\le1$ define the degree-one
+map $S_s$ by
+\begin{equation}\label{ZG:eq:logarithmic-interpolation}
+ S_s'(x)=\frac{S'(x)^s}{(2\pi)^{-1}\int_\T S'(y)^s\,dy},
+ \qquad S_0=\operatorname {id}.
+\end{equation}
+Up to a harmless rotation, $S_1=S$.  Partition $[0,1]$ into a number
+$L=L(\eta,\eta_0)$ of equal pieces and set
+$T_j=S_{(j+1)/L}\circ S_{j/L}^{-1}$.  Since
+$1-\eta\le S'\le1+\eta$, differentiating
+\eqref{ZG:eq:logarithmic-interpolation} in $s$ gives
+\begin{equation}\label{ZG:eq:interpolation-cost}
+ \|T_j'-1\|_\infty\le\eta_0,
+ \qquad
+ \sum_{j=0}^{L-1}\|T_j'-1\|_2
+ \le C_\eta\|S'-1\|_2.
+\end{equation}
+Indeed, on this compact interval the functions $\log t$ and $t-1$ are
+uniformly comparable, and change of variables by every $S_s$ has
+Jacobian bounded above and below by constants depending only on $\eta$.
+
+For degree-one maps the commutator has the exact cocycle
+\begin{equation}\label{ZG:eq:change-cocycle}
+ \mathfrak C_{S_2\circ S_1}f
+ =\mathfrak C_{S_1}(f\circ S_2)
+   +(\mathfrak C_{S_2}f)\circ S_1.
+\end{equation}
+Iterate \eqref{ZG:eq:change-cocycle} over the $T_j$.  All intermediate
+Jacobians and inverse Jacobians are bounded by $C_\eta$; composition
+preserves the $L^\infty$ norm and multiplies the derivative norm by at
+most $C_\eta$.  Apply the already proved small-distortion estimates to
+each summand and use \eqref{ZG:eq:interpolation-cost}.  This proves
+\eqref{ZG:eq:small-change-H0}--\eqref{ZG:eq:small-change-H1} for every fixed
+$\eta<1$.
+
+Approximation and weak lower semicontinuity in $H^1$ remove the smoothing
+and prove the lemma.
+\end{proof}
+
+Put $R=R_1$ and $\widehat h_j=h_j+\gamma$ on the good indices.  After
+deleting the gaps, the $\widehat h_j$ form a positive partition of the
+circle and remain comparable with $b$.  Let $\widehat q$ be its complete
+quadratic spline.  Set $p=\widehat q\circ R$ and define the monotone-pullback
+commutator
+\begin{equation}\label{ZG:eq:collapse-commutator}
+ \mathfrak C_R\widehat q(x)
+ :=\Hil\widehat q(Rx)-\Hil p(x).
+\end{equation}
+Changing variables $z=R(y)$ in the first Hilbert transform gives the
+entirely explicit kernel formula
+\begin{multline}\label{ZG:eq:collapse-commutator-kernel}
+ \mathfrak C_R\widehat q(x)=\frac1{2\pi}\int_\T
+ \widehat q(Ry)\Big\{R'(y)
+ \cot\frac{Rx-Ry}{2}\\
+ -\cot\frac{x-y}{2}\Big\}\,dy ,
+\end{multline}
+with principal values taken symmetrically.  Here $R'=0$ on every gap and
+$R'=1+\gamma/h_j$ on $I_j$.
+
+\begin{theorem}[Collapsed-bubble commutator square]
+\label{ZG:thm:collapse-commutator}
+One has
+\begin{equation}\label{ZG:eq:collapse-commutator-square}
+ \boxed{
+ \sum_{i\in\mathcal G}h_i
+ |\mathfrak C_R\widehat q(c_i)|^2
+ \le C_\rho b^4E.}
+\end{equation}
+The constant must be independent of the number, length, and subdivision
+of the gaps.
+\end{theorem}
+
+\begin{proof}
+We resolve the collapse into geometrically summable, nondegenerate
+changes of variable.  If $B_\nu$ is a gap of length $e_\nu$, define the
+level-$k$ geometry by
+\begin{equation}\label{ZG:eq:dyadic-geometry}
+ e_\nu^{(k)}=2^{-k}e_\nu,
+ \qquad h_j^{(k)}=h_j+(1-2^{-k})\gamma,
+ \qquad k\ge0.
+\end{equation}
+These lengths sum to $2\pi$.  Let $S_k$ be the affine map from the
+level-$k$ circle to the level-$(k+1)$ circle which preserves the cyclic
+order of all cells.  Thus
+\begin{equation}\label{ZG:eq:Sk-derivative}
+ S_k'=\frac12\quad\hbox{on the gaps},
+ \qquad
+ S_k'=1+\frac{2^{-k-1}\gamma}{h_j^{(k)}}
+       \quad\hbox{on the $j$th good cell}.
+\end{equation}
+Put $R_0=\operatorname {id}$ and $R_{k+1}=S_k\circ R_k$.  Then
+$R_k$ converges uniformly to the collapse $R$.
+
+The good lengths are mutually comparable and their average is
+$g=(2\pi-E)/M$.  Since $E\le\pi/4$ and $\rho<1/8$, it follows directly
+from \eqref{ZG:eq:Sk-derivative} that
+\begin{equation}\label{ZG:eq:Sk-uniform}
+ \|S_k'-1\|_\infty\le\frac12,
+ \qquad
+ 1\le R_k'|_{I_j}\le C_\rho .
+\end{equation}
+Moreover, using $\sum_j(h_j^{(k)})^{-1}\le C_\rho M/b$ and
+$\gamma=E/M$, we have the exact layer computation
+\begin{align}
+ \|S_k'-1\|_2^2
+ &=\frac14,2^{-k}E
+   +2^{-2k-2}\gamma^2
+       \sum_{j\in\mathcal G}\frac1{h_j^{(k)}}
+ \le C_\rho2^{-k}E.                         \label{ZG:eq:Sk-L2}
+\end{align}
+
+Let $R_{k,\infty}$ be the monotone tail collapse from the level-$k$
+geometry to the final complete fan, and put
+\begin{equation}\label{ZG:eq:pk}
+ p_k=\widehat q\circ R_{k,\infty}.
+\end{equation}
+Then $p_0=p$, $p_k=p_{k+1}\circ S_k$, and $p_k$ vanishes on the
+level-$k$ gaps.  On a good cell $R_{k,\infty}$ is affine with derivative
+$\widehat h_j/h_j^{(k)}$.  Since all these lengths are comparable with
+$b$, the explicit quadratic bubble gives, uniformly in $k$,
+\begin{equation}\label{ZG:eq:pk-bounds}
+ \|p_k\|_\infty\le C_\rho b^2,
+ \qquad \|p_k'\|_\infty\le C_\rho b.
+\end{equation}
+
+On the original good set define
+\[
+ G_k=(\Hil p_k)\circ R_k.
+\]
+The identities $R_{k+1}=S_k\circ R_k$ and
+$p_k=p_{k+1}\circ S_k$ give the exact commutator cocycle
+\begin{equation}\label{ZG:eq:commutator-cocycle}
+ G_{k+1}-G_k=(\mathfrak C_{S_k}p_{k+1})\circ R_k.
+\end{equation}
+Lemma~\ref{ZG:lem:small-change}, \eqref{ZG:eq:Sk-L2},
+\eqref{ZG:eq:pk-bounds}, and the change of variables on the good cells in
+\eqref{ZG:eq:Sk-uniform} therefore imply
+\begin{align}
+ \|G_{k+1}-G_k\|_{L^2(G)}
+ &\le C_\rho b^2 2^{-k/2}E^{1/2},
+ \label{ZG:eq:Gk-H0}\\
+ \|(G_{k+1}-G_k)'\|_{L^2(G)}
+ &\le C_\rho b 2^{-k/2}E^{1/2}.
+ \label{ZG:eq:Gk-H1}
+\end{align}
+Both series are summable.  Since $G_0=\Hil p$ and
+$G_k\to(\Hil\widehat q)\circ R$ in $H^1$ on the union of the original
+good cells, their sum yields
+\begin{equation}\label{ZG:eq:commutator-continuous-H1}
+ \|\mathfrak C_R\widehat q\|_{L^2(G)}^2
+ +b^2\|(\mathfrak C_R\widehat q)'\|_{L^2(G)}^2
+ \le C_\rho b^4E.
+\end{equation}
+
+For $F\in H^1(I_i)$,
+\[
+ h_i|F(c_i)|^2
+ \le2\int_{I_i}|F|^2+h_i^2\int_{I_i}|F'|^2.
+\]
+Apply this to $F=\mathfrak C_R\widehat q$, sum over the disjoint good
+cells, and use $h_i\asymp_\rho b$ together with
+\eqref{ZG:eq:commutator-continuous-H1}.  This proves
+\eqref{ZG:eq:collapse-commutator-square}.
+\end{proof}
+
+\begin{lemma}[Static zero-gap opening square]\label{ZG:lem:opening}
+Let
+$\widehat c_j$ be the midpoints of the preceding collapsed partition and put
+\begin{equation}\label{ZG:eq:reference-vector}
+ U_i=\Hil\widehat q(\widehat c_i),\qquad i\in\mathcal G.
+\end{equation}
+Then
+\begin{equation}\label{ZG:eq:opening-square}
+ \boxed{
+ \sum_{i\in\mathcal G}h_i
+ \left|\Hil q_{\rm G}(c_i)-U_i\right|^2
+ \le C_\rho b^4E.}
+\end{equation}
+The constant is independent of the number and subdivision of the gaps.
+\end{lemma}
+
+\begin{proof}
+For $x=c_i$ define
+\begin{equation}\label{ZG:eq:Wt}
+ W_i(t)=\frac1\pi\sum_{j\in\mathcal G}\int_{I_j}a_t(y)
+ \{\Phi(R_tc_i-R_tc_j)-\Phi(R_tc_i-R_ty)\}\,dy.
+\end{equation}
+Changing variables $z=R_t(y)$ shows that $W_i(t)$ is the Hilbert
+sample of the quadratic bubbles on the images $R_t(I_j)$, evaluated at
+their transported midpoint.  Hence
+\[
+ W_i(0)=\Hil q_{\rm G}(c_i),
+ \qquad W_i(1)=\Hil\widehat q(\widehat c_i)=U_i.
+\]
+Differentiating \eqref{ZG:eq:Wt} under the integral and using $u'=\sigma$
+gives the exact identity
+\begin{equation}\label{ZG:eq:opening-identity}
+ \dot W_i(t)=\mathcal T_t\sigma(c_i).
+\end{equation}
+There is no omitted endpoint term: the gap motion is contained in the
+primitive differences in \eqref{ZG:eq:Tt}.
+
+It remains to separate the part of the opening error already controlled
+by elementary Sobolev sampling.  On a good cell put
+$a_j=1+\gamma/h_j=\widehat h_j/h_j$.  The quadratic bubble scales
+exactly, so
+\begin{equation}\label{ZG:eq:pullback-bubble}
+ p|_{I_j}=a_j^2q_j,
+ \qquad p=0\quad\hbox{on every gap}.
+\end{equation}
+Consequently $r:=q_{\rm G}-p$ belongs to $H^1(\T)$ and, since
+$h_j\asymp_\rho b$ and the near stratum has bounded small $E$,
+\begin{align}
+ \|r\|_2^2
+ &\le C_\rho E^2\sum_{j\in\mathcal G}h_j^5
+ \le C_\rho b^4E,\label{ZG:eq:amplitude-H0}\\
+ \|r'\|_2^2
+ &\le C_\rho E^2\sum_{j\in\mathcal G}h_j^3
+ \le C_\rho b^2E.\label{ZG:eq:amplitude-H1}
+\end{align}
+Indeed $|a_j^2-1|\le C_\rho E$, while
+$Mb=2\pi$.  For every $F\in H^1(I_j)$ the fundamental theorem of
+calculus and Cauchy--Schwarz give
+\[
+ h_j|F(c_j)|^2
+ \le2\int_{I_j}|F|^2+h_j^2\int_{I_j}|F'|^2.
+\]
+Apply this with $F=\Hil r$, sum the good cells, and use the $L^2$
+isometry of $\Hil$ and its commutation with differentiation.  Equations
+\eqref{ZG:eq:amplitude-H0}--\eqref{ZG:eq:amplitude-H1} yield
+\begin{equation}\label{ZG:eq:amplitude-trace}
+ \sum_{i\in\mathcal G}h_i|\Hil r(c_i)|^2
+ \le C_\rho b^4E.
+\end{equation}
+Finally, \eqref{ZG:eq:collapse-commutator} gives the exact decomposition
+\[
+ \Hil q_{\rm G}(c_i)-\Hil\widehat q(Rc_i)
+ =\Hil r(c_i)-\mathfrak C_R\widehat q(c_i).
+\]
+Combine \eqref{ZG:eq:amplitude-trace} with
+\eqref{ZG:eq:collapse-commutator-square} to prove
+\eqref{ZG:eq:opening-square}.  Integrating
+\eqref{ZG:eq:opening-identity} also shows that this static difference is
+$-\int_0^1\mathcal T_t\sigma(c_i)\,dt$; hence ZG--COM closes exactly the
+structured integrated opening-flow square, without a pointwise-in-$t$
+operator estimate.
+
+\end{proof}
+
+The restriction $i\in\mathcal G$ in Lemma~\ref{ZG:lem:opening} is
+essential.  On a bad midpoint the collapsed reference value is an
+endpoint trace, not zero.  It must be retained in the endpoint layer,
+rather than incorrectly charged to the opening density alone.
+
+\begin{lemma}[Normalized-bubble bad-target trace]\label{ZG:lem:gap-target}
+With the same notation,
+\begin{equation}\label{ZG:eq:gap-target}
+ \boxed{
+ \sum_{i\in\mathcal B}h_i|\Hil q_{\rm G}(c_i)|^2
+ \le C_\rho\left\{
+ b^3\sum_{j\in\mathcal G}(\widehat h_j-b)^2+b^4E\right\}.}
+\end{equation}
+The constant is independent of the number and subdivision of the gaps.
+\end{lemma}
+
+\begin{proof}
+Put
+\[
+ g:=\frac{2\pi-E}{M}=b-\gamma.
+\]
+Thus $\widehat h_j-b=h_j-g$, and $g\asymp_\rho b$.  On $0\le s\le1$
+write
+\[
+ \psi(s)=\frac12\min\{s^2,(1-s)^2\},
+ \qquad \overline\psi=\int_0^1\psi(s)\,ds=\frac1{24}.
+\]
+For a good cell $I_j=[\theta_j,\theta_{j+1}]$ define the normalized
+bubble
+\[
+ p_j(\theta_j+h_js)=g^2\psi(s),
+ \qquad p_{\rm G}=\sum_{j\in\mathcal G}p_j.
+\]
+The amplitude error
+\[
+ f:=q_{\rm G}-p_{\rm G}
+ =\sum_{j\in\mathcal G}(h_j^2-g^2)
+   \psi\!\left(\frac{\,\cdot-\theta_j\,}{h_j}\right)\mathbf1_{I_j}
+\]
+is even on every good target cell and is zero on every bad target cell.
+It therefore satisfies the self-zero hypothesis \eqref{ZG:eq:selfzero}.
+Since $\int_0^1\psi^2=1/320$ and $h_j,g\asymp_\rho b$,
+\begin{align}
+ \sum_i h_i|\Hil f(c_i)|^2
+ &\le C\|f\|_2^2\notag\\
+ &=\frac1{320}\sum_{j\in\mathcal G}
+ h_j(h_j^2-g^2)^2
+ \le C_\rho b^3\sum_{j\in\mathcal G}(h_j-g)^2.
+ \label{ZG:eq:amplitude-error}
+\end{align}
+
+It remains to estimate $p_{\rm G}$.  Decompose it as
+\begin{equation}\label{ZG:eq:normalized-decomposition}
+ p_{\rm G}=g^2\overline\psi\,\mathbf1_{G^*}+r_{\rm G},
+ \qquad
+ r_{\rm G}|_{I_j}
+ =g^2\left\{\psi\!\left(\frac{\,\cdot-\theta_j\,}{h_j}\right)
+             -\overline\psi\right\}.
+\end{equation}
+Because $\Hil\mathbf1=0$,
+$\Hil\mathbf1_{G^*}=-\Hil\mathbf1_B$.  The function $\mathbf1_B$ is
+constant on every target cell, hence also satisfies
+\eqref{ZG:eq:selfzero}.  The adaptive sampling estimate gives
+\begin{equation}\label{ZG:eq:mean-gap}
+ \sum_i h_i|\Hil(g^2\overline\psi\,\mathbf1_{G^*})(c_i)|^2
+ \le Cg^4\|\mathbf1_B\|_2^2
+ =Cg^4E.
+\end{equation}
+
+We now prove the same bound for $r_{\rm G}$ on the bad targets.  Fix a
+maximal gap $B_\nu=(a,a+e)$ and $x\in B_\nu$.  Put
+\[
+ r_-=x-a,\qquad r_+=a+e-x.
+\]
+The two good cells adjacent to $a$ and $a+e$ have lengths comparable
+with $g$.  On either adjacent cell the profile
+$\psi-\overline\psi$ has the common endpoint value
+$-\overline\psi$; its difference from that endpoint is $\psi$ and
+vanishes quadratically.  Since the periodic Hilbert kernel
+$K(t)=(2\pi)^{-1}\cot(t/2)$ is odd, pairing the two adjacent cells gives
+\begin{equation}\label{ZG:eq:paired-log}
+ \left|\int_{I_- \cup I_+}K(x-y)r_{\rm G}(y)\,dy\right|
+ \le C_\rho g^2
+ \left(1+\left|\log\frac{r_-}{r_+}\right|\right).
+\end{equation}
+Indeed, the two constant endpoint pieces are
+\[
+ -g^2\overline\psi
+ \left\{\int_0^{h_-}K(r_-+u)\,du
+       -\int_0^{h_+}K(r_++u)\,du\right\}.
+\]
+Lift the gap and its two adjacent cells to the real arc; this is
+unambiguous because $E\le\pi/4$ and the fan is sufficiently fine.  Then
+\[
+ \int_0^hK(t+u)\,du
+ =\frac1\pi\log\frac{\sin((t+h)/2)}{\sin(t/2)}
+\]
+exactly.  On this arc $\sin(v/2)\asymp v$, while
+$h_\pm\asymp_\rho g$.  Moreover
+$u\mapsto\log(1+e^{-u})$ is $1$-Lipschitz.  Applying this with
+$u=\log(t/h)$ shows that the difference of the two logarithms is bounded
+by $C_\rho+|\log(r_-/r_+)|$, which proves the constant part of
+\eqref{ZG:eq:paired-log}.  For the two remaining pieces use
+$\psi(u/h)\le C\min\{(u/h)^2,((h-u)/h)^2\}$; their integrals against
+$|K(t+u)|$ are uniformly bounded.
+
+Every other good cell $J$ is at distance at least $c_\rho g$ from $x$.
+On $J$ the function $r_{\rm G}$ has zero mass and zero first moment
+about the midpoint.  Two Taylor subtractions and
+$|K''(t)|\le C\operatorname {dist}(t,2\pi\mathbb Z)^{-3}$ give
+\[
+ \left|\int_JK(x-y)r_{\rm G}(y)\,dy\right|
+ \le \frac{C_\rho g^5}{\operatorname {dist}(x,J)^3}.
+\]
+The $k$th good cell in either cyclic direction is at distance at least
+$c_\rho kg$; summing $k^{-3}$ and combining with
+\eqref{ZG:eq:paired-log} yields
+\begin{equation}\label{ZG:eq:gap-pointwise}
+ |\Hil r_{\rm G}(x)|
+ \le C_\rho g^2
+ \left(1+\left|\log\frac{r_-}{r_+}\right|\right).
+\end{equation}
+
+Finally, for an arbitrary subdivision of $(a,a+e)$ into target cells
+with midpoints $c_i$,
+\begin{equation}\label{ZG:eq:midpoint-log-square}
+ \sum_{I_i\subset B_\nu}h_i
+ \left(1+\left|\log
+ \frac{c_i-a}{a+e-c_i}\right|\right)^2
+ \le Ce.
+\end{equation}
+To see this, scale to $(0,1)$.  On either half interval the displayed
+profile is monotone, so the value at a cell midpoint is bounded by twice
+its integral over the half of that cell nearer the corresponding
+endpoint.  A cell crossing $1/2$ contributes $O(h_i)$.  The remaining
+claim is the elementary finite integral
+\[
+ \int_0^1\left(1+\left|\log\frac{s}{1-s}\right|\right)^2ds<\infty.
+\]
+Equations \eqref{ZG:eq:gap-pointwise}--\eqref{ZG:eq:midpoint-log-square},
+summed over the disjoint gaps, prove
+\begin{equation}\label{ZG:eq:oscillation-gap}
+ \sum_{i\in\mathcal B}h_i|\Hil r_{\rm G}(c_i)|^2
+ \le C_\rho g^4E.
+\end{equation}
+Combining \eqref{ZG:eq:amplitude-error}, \eqref{ZG:eq:mean-gap}, and
+\eqref{ZG:eq:oscillation-gap}, and using $g\asymp_\rho b$ and
+$h_j-g=\widehat h_j-b$, proves \eqref{ZG:eq:gap-target}.
+\end{proof}
+
+We can now state the corrected replacement for the stage 155 opening
+square.
+
+\begin{lemma}[Zero-gap skeleton square]\label{ZG:lem:skeleton}
+Let good source
+cells have lengths comparable with $b$, let disjoint
+zero-source gaps have total length $E$, and let the target measure put
+the actual cell mass at every good or bad midpoint.  If the configuration
+is obtained from the collapsed regular $M$-fan by varying the good
+lengths to $h_i$ and opening the gaps, then
+\begin{equation}\label{ZG:eq:skeleton}
+ \boxed{
+ \sum_i h_i|\Hil q_{\rm G}(c_i)|^2
+ \le C_\rho\left\{
+ b^3\sum_{j\in\mathcal G}(h_j-b)^2+b^4E\right\}.}
+\end{equation}
+The constant is independent of the number of gaps, the number of
+target cells inside a gap, and every gap ratio.
+\end{lemma}
+
+\begin{proof}
+Let $\gamma=E/M$ and $\widehat h_j=h_j+\gamma$.  Then
+$\sum_{j\in\mathcal G}\widehat h_j=2\pi$ and
+\[
+ \sum_{j\in\mathcal G}(\widehat h_j-b)^2
+ =\sum_{j\in\mathcal G}(h_j-b)^2-\frac{E^2}{M}
+ \le\sum_{j\in\mathcal G}(h_j-b)^2.
+\]
+The complete fan $\widehat h$ is comparable with $b$.  The variable-grid
+$T1$ theorem of stage 154, applied on that complete fan, gives
+\[
+ \sum_{i\in\mathcal G}h_i
+ |\Hil\widehat q(\widehat c_i)|^2
+ \le C_\rho b^3
+ \sum_{j\in\mathcal G}(h_j-b)^2,
+\]
+because $h_i\asymp_\rho b$.  This is precisely the square of the
+reference vector on the good target atoms.  Lemma~\ref{ZG:lem:opening}
+bounds the good-target opening error by $C_\rho b^4E$, and
+Lemma~\ref{ZG:lem:gap-target} bounds all bad target atoms.  Since
+\[
+ \sum_{j\in\mathcal G}(\widehat h_j-b)^2
+ \le\sum_{j\in\mathcal G}(h_j-b)^2,
+\]
+the inequality $|x+y|^2\le2|x|^2+2|y|^2$ proves
+\eqref{ZG:eq:skeleton}.
+\end{proof}
+
+\subsection{AVS, HQ, and DF}
+
+\begin{theorem}[Adaptive variance sampling]
+\label{ZG:thm:AVS}
+For every
+positive sufficiently fine fan,
+\begin{equation}\label{ZG:eq:AVS}
+ \boxed{
+ T(h)\le C\Dvar(h)\le CS\Jfour(h).}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The far-stratum region is Theorem 4.1 of stage 153.  In the near region,
+combine \eqref{ZG:eq:Tsplit}, Lemma~\ref{ZG:lem:bad}, and
+Lemma~\ref{ZG:lem:skeleton}, and then apply the static budget
+\eqref{ZG:eq:budget}.  This gives $T\le C_\rho\Dvar$.  Stage 153 proves
+$\Dvar\le S\Jfour$.
+\end{proof}
+
+\begin{corollary}[Pure midpoint row DF]\label{ZG:cor:DF}
+The pure cubic Bregman row DF holds unconditionally.
+\end{corollary}
+
+\begin{proof}
+Stage 144 gives the exact identity
+\[
+ \Cnull(q_h^3)-\Cnull(q_{a\mathbf1}^3)
+ =\frac1{720}\left(\sum_i h_i^5-Na^5\right)
+  +\frac1{576}\Dvar(h)-T(h),
+ \qquad a=\frac{2\pi}{N}.
+\]
+The linear part of the fifth-power Bregman difference cancels because
+$\sum_i(h_i-a)=0$.  Taylor's formula and $h_i,a\le S$ give
+\[
+ 0\le\sum_i h_i^5-Na^5
+ \le CS\sum_i(h_i-a)^2(h_i^2+2ah_i+3a^2)
+ =CS\Jfour(h).
+\]
+Also $\Dvar\le S\Jfour$ by stage 153, and
+$0\le T\le C\Dvar$ by Theorem~\ref{ZG:thm:AVS}.  Taking absolute values in
+the exact identity proves DF with no omitted sign case.
+\end{proof}
+\endgroup

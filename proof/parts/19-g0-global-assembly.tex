@@ -1,0 +1,334 @@
+\begingroup
+\section{Node G0: compact global assembly and equality rigidity}
+\label{module:G0}
+\noindent\textit{Audited source: \nolinkurl{G0_global_wrapper.tex}.}
+\subsection{Statement and normalization}
+
+For $A>0$, let $\Pclass_N^{\rm conv}(A)$ be the class of bounded convex
+planar polygons of area $A$ with exactly $N$ genuine sides, after
+consecutive collinear sides are merged.  Let $R_N(A)$ be the regular
+$N$-gon of area $A$.
+
+\begin{theorem}[Global theorem conditional on J0]
+\label{G0:thm:main}
+Assume the active near-disk coercivity input in
+\ref{G0:thm:J0}.  Then
+For every $A>0$ there is $N_0$ such that, for all $N\ge N_0$ and all
+$P\in\Pclass_N^{\rm conv}(A)$,
+\begin{equation}\label{G0:eq:main}
+ \lambda_1(P)\ge\lambda_1(R_N(A)).
+\end{equation}
+Equality holds if and only if $P$ is congruent to $R_N(A)$.
+\end{theorem}
+
+Put
+\begin{equation}\label{G0:eq:Lambda}
+ \LambdaF(\Omega)=\frac{|\Omega|}{\pi}\lambda_1(\Omega).
+\end{equation}
+It is invariant under dilations.  Hence it is enough to work at area
+$\pi$; the general statement follows by the dilation
+$P\mapsto(\pi/A)^{1/2}P$.
+
+Let $\Kclass_{\le N}^{\rm conv}(\pi)$ be the Hausdorff-closed class of
+area-$\pi$ convex polygons with at most $N$ active sides.  This class is
+used only to take a global minimum.  The theorem itself concerns exactly
+$N$ sides.
+
+\subsection{The two retained local inputs}
+
+We isolate the only two nonclassical inputs used in the global assembly.
+
+\begin{theorem}[Strict transverse side activation; stage 132]
+\label{G0:thm:activation}
+Let $Q$ be a stationary convex $M$-gon for $\LambdaF$ in its active
+stratum.  Insert a marked point in the relative interior of any side and
+move it outward while keeping the two endpoints fixed.  For all
+sufficiently small positive displacements this gives a convex
+$(M+1)$-gon $Q_\varepsilon$ and
+\begin{equation}\label{G0:eq:activation}
+ \frac d{d\varepsilon}\LambdaF(Q_\varepsilon)
+ \bigg|_{\varepsilon=0+}<0.
+\end{equation}
+The assertion is independent of all side lengths and mesh ratios.
+\end{theorem}
+
+The proof in stage 132 uses the stationary mass and barycenter identities
+for the squared ground-state flux on a side, log-concavity of that flux,
+and Hadamard's formula.  In particular, it is a first-variation theorem at
+the lower-side point; it is not a mountain-pass deformation theorem.
+
+\begin{obligation}[Active near-disk value coercivity; current J0 input]
+\label{G0:thm:J0}
+There are $\eta_0,S_0,c_0>0$ such that the following holds.  Let $P$ be an
+area-$\pi$ active convex $N$-gon with positive normal fan
+\begin{equation*}
+ \alpha_i>0,\qquad \sum_i\alpha_i=2\pi,\qquad
+ a=\frac{2\pi}{N},\qquad S=a+\max_i\alpha_i\le S_0.
+\end{equation*}
+Assume, after translation, that its radial graph is within $\eta_0$ of
+the disk in $W^{1,\infty}$.  Let $h$ be its support vector in the fixed
+translation complement of JP.  Put $h_0=h_\alpha\mathbf1$,
+$A_0=A_\alpha(h_0)$, and
+\(
+s_\alpha(h)=A_\alpha'[h_0;h]/(2A_0).
+\)
+Normalize scale by
+\[
+ \widetilde h=\frac{h}{s_\alpha(h)},
+ \qquad s_\alpha(\widetilde h)=1,
+ \qquad \widetilde h=h_\alpha\mathbf1+z,
+ \qquad z\in\mathsf X_\alpha.
+\]
+Shrinking the physical chart if necessary, $s_\alpha(h)>0$ and this
+normalization stays in the same uniform near-disk chart.  Then
+\begin{equation}\label{G0:eq:J0}
+ \boxed{
+ \lambda_1(P)-\lambda_1(R_N(\pi))
+ \ge c_0\left\{
+ \Jfour(\alpha)
+ +\Gjp_\alpha(z-z_\alpha^\sharp)\right\},}
+\end{equation}
+where
+\begin{equation}\label{G0:eq:J4}
+ \Jfour(\alpha)=\sum_i\alpha_i^4-Na^4.
+\end{equation}
+The support metric is positive on the fixed affine scale section
+$\mathsf X_\alpha$ after the fixed translation normalization.  Since
+$\Phi_\alpha$ is scale invariant and the original $P$ has area $\pi$,
+the JP/NR value inequality for $\widetilde h$ is exactly
+\eqref{G0:eq:J0} for $\lambda_1(P)$.
+Every constant is independent of the smallest physical, polar, and
+conformal cells and of adjacent ratios.
+\end{obligation}
+
+For clarity, the conditional analytic chain behind input~\ref{G0:thm:J0} is
+\begin{equation}\label{G0:eq:analytic-chain}
+ \begin{gathered}
+ \text{TR: exact physical trace, disk endpoint gap, value split}\\
+ \downarrow\\
+ \text{CT core}\longrightarrow\{\text{JP--EH},\text{JP--NS}\}\\
+ \text{JP--NS+TR+CT core+QB+DF+DM}\longrightarrow\text{JP--DE}\\
+ \text{JP--EH+JP--NS+JP--DE}\longrightarrow
+ \{\text{JC--ALG},\text{JC--TL}\}\\
+ \text{JC--ALG+JC--TL}\longrightarrow\text{JC--PL}
+ \longrightarrow\text{JP--JC}\\
+ \downarrow\\
+ \text{JP--DE+JP--JC}\longrightarrow\text{NR}\longrightarrow\text{J0}.
+ \end{gathered}
+\end{equation}
+No stationary Hessian is integrated on the nonstationary chart.
+
+\subsection{Compact minimization in the closed side class}
+
+\begin{lemma}[Compact spectral sublevels]\label{G0:lem:compact}
+For fixed $N$ and $L<\infty$, the family
+\begin{equation}\label{G0:eq:sublevel}
+ \{P\in\Kclass_{\le N}^{\rm conv}(\pi):
+       \lambda_1(P)\le L\}
+\end{equation}
+is Hausdorff precompact up to translations.  Its Hausdorff limits remain
+in $\Kclass_{\le N}^{\rm conv}(\pi)$, and $\lambda_1$ is continuous along
+such nondegenerate convex-domain convergence.  Consequently the infimum
+of $\lambda_1$ over $\Kclass_{\le N}^{\rm conv}(\pi)$ is attained.
+\end{lemma}
+
+\begin{proof}
+If $w(P)$ is the minimum width, containment in a strip and the
+one-dimensional Poincar\'e inequality give
+\[
+ \lambda_1(P)\ge\frac{\pi^2}{w(P)^2}.
+\]
+Thus a spectral sublevel has a positive width bound.  For convex bodies,
+fixed area and a positive minimum-width bound give a diameter bound.  To
+see this without an implicit eccentricity lemma, let $[A,B]\subset P$ be
+a diameter, $D=|A-B|$, and use it as the horizontal axis.  If $y_+$ and
+$y_-$ are the extreme signed heights of $P$ above and below that axis,
+the two triangles with base $[A,B]$ and apices at the corresponding
+support points have disjoint interiors and lie in $P$.  Hence
+\[
+ |P|\ge \frac D2(y_+-y_-)
+      \ge \frac D2 w(P),
+ \qquad
+ D\le \frac{2\pi}{w(P)}.
+\]
+After fixing, for example, the Steiner point at the origin, Blaschke
+compactness then gives a Hausdorff convergent
+subsequence.  Area is continuous for convex bodies, and having at most
+$N$ genuine sides is closed (parametrize by at most $N$ cyclic vertices
+and allow adjacent vertices to coalesce).  Dirichlet spaces of bounded convex
+domains converge in the Mosco sense under this Hausdorff convergence, so
+the first eigenvalue converges.  A minimizing sequence may be restricted
+to the sublevel determined by any one competitor, proving attainment.
+\end{proof}
+
+\begin{proposition}[A closed-class minimizer loses no side]
+\label{G0:prop:no-loss}
+Every minimizer $Q_N$ of $\lambda_1$ over
+$\Kclass_{\le N}^{\rm conv}(\pi)$ has exactly $N$ active sides.
+\end{proposition}
+
+\begin{proof}
+After collinear sides are merged, suppose that $Q_N$ has $M<N$ genuine
+sides.  The active $M$-gon stratum is a smooth finite-dimensional
+manifold near $Q_N$ after the area and rigid gauges are fixed.  Since
+$Q_N$ is a global minimizer, it is stationary on that stratum.
+Theorem~\ref{G0:thm:activation} supplies a convex $(M+1)$-gon with strictly
+smaller $\LambdaF$, hence with strictly smaller $\lambda_1$ at fixed
+area.  It still belongs to $\Kclass_{\le N}^{\rm conv}(\pi)$, a
+contradiction.
+\end{proof}
+
+\begin{remark}[Why SB disappears]
+Stage 133 correctly observes that different one-side activation branches
+need not be connected below the value of their common lower stratum.
+Proposition~\ref{G0:prop:no-loss} does not connect them.  It selects a global
+minimizer and needs only one strict feasible descent to contradict
+minimality.  Therefore the side-branch bypass SB is not an open edge of
+this proof.
+\end{remark}
+
+\subsection{Qualitative global-to-local entry}
+
+Let $B$ be the area-$\pi$ disk and
+$\lambda_B=\lambda_1(B)$.
+
+\begin{lemma}[Regular polygons converge spectrally to the disk]
+\label{G0:lem:regular-limit}
+The area-$\pi$ regular polygons satisfy
+\begin{equation}\label{G0:eq:regular-limit}
+ R_N(\pi)\longrightarrow B\quad\text{in Hausdorff distance},
+ \qquad
+ \lambda_1(R_N(\pi))\longrightarrow\lambda_B.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The inradius and circumradius of the area-normalized regular $N$-gon both
+tend to one.  This proves Hausdorff convergence.  Spectral convergence is
+the convex-domain stability used in Lemma~\ref{G0:lem:compact}.
+\end{proof}
+
+\begin{lemma}[Near-disk entry from a competing value]
+\label{G0:lem:entry}
+Let $N_j\to\infty$ and let
+$P_j\in\Kclass_{\le N_j}^{\rm conv}(\pi)$ satisfy
+\begin{equation}\label{G0:eq:competing}
+ \lambda_1(P_j)\le\lambda_1(R_{N_j}(\pi)).
+\end{equation}
+Then, after translations,
+\begin{equation}\label{G0:eq:support-limit}
+ P_j\longrightarrow B\quad\text{in Hausdorff distance},\qquad
+ \|h_{P_j}-1\|_{L^\infty(\mathbb S^1)}\longrightarrow0.
+\end{equation}
+If every $P_j$ is active and $\alpha_{\max}(P_j)$ denotes its largest
+gap between consecutive outer normals, then
+\begin{equation}\label{G0:eq:angle-limit}
+ \alpha_{\max}(P_j)\longrightarrow0.
+\end{equation}
+Finally its radial function $r_j=1+\rho_j$ satisfies
+\begin{equation}\label{G0:eq:radial-limit}
+ \|\rho_j\|_{W^{1,\infty}(\mathbb S^1)}\longrightarrow0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Faber--Krahn and \eqref{G0:eq:competing}--\eqref{G0:eq:regular-limit} give
+\[
+ \lambda_B\le\lambda_1(P_j)
+ \le\lambda_1(R_{N_j}(\pi))\longrightarrow\lambda_B.
+\]
+The sequence lies in one fixed spectral sublevel.  The proof of
+Lemma~\ref{G0:lem:compact}, with no fixed side bound needed for the convex
+compactness part, gives Hausdorff precompactness after translation.
+Every limit has area $\pi$ and first eigenvalue $\lambda_B$.
+Faber--Krahn rigidity makes the limit the disk.  Since every subsequential
+limit is the disk, the whole sequence converges, and convergence of convex
+support functions gives \eqref{G0:eq:support-limit}.
+
+Suppose \eqref{G0:eq:angle-limit} failed.  Along a subsequence two adjacent
+supporting normals would have a gap at least $\varepsilon>0$.  Their
+support numbers tend uniformly to one by \eqref{G0:eq:support-limit}; their
+intersection vertex in the bisector direction would therefore have
+distance at least $\sec(\varepsilon/2)+o(1)>1$ from the origin.  This
+contradicts Hausdorff convergence to $B$.
+
+For a ray meeting the side with normal angle $\theta_i$ and support
+number $h_i$,
+\begin{equation}\label{G0:eq:radial-side}
+ r_j(\theta)=\frac{h_i}{\cos(\theta-\theta_i)}.
+\end{equation}
+Hausdorff convergence and the inclusions
+$(1-\varepsilon_j)B\subset P_j\subset(1+\varepsilon_j)B$ give
+$r_j\to1$ uniformly, while support convergence gives $h_i\to1$
+uniformly in $i$.  Thus, whenever the ray at $\theta$ meets side $i$,
+\[
+ \cos(\theta-\theta_i)=\frac{h_i}{r_j(\theta)}\longrightarrow1
+\]
+uniformly.  In particular $|\theta-\theta_i|\to0$; this also proves the
+needed statement at one-sided sector endpoints.  Equation
+\eqref{G0:eq:radial-side} and its one-sided derivative therefore give
+\eqref{G0:eq:radial-limit}.
+\end{proof}
+
+\subsection{Contradiction and equality rigidity}
+
+\begin{proof}[Proof of Theorem~\ref{G0:thm:main}]
+By scale invariance, take $A=\pi$.
+
+Assume first that the inequality fails for arbitrarily large side counts.
+Then there are $N_j\to\infty$ and exact $N_j$-gons $P_j$ such that
+\begin{equation}\label{G0:eq:strict-counter}
+ \lambda_1(P_j)<\lambda_1(R_{N_j}(\pi)).
+\end{equation}
+Let $Q_j$ minimize $\lambda_1$ over
+$\Kclass_{\le N_j}^{\rm conv}(\pi)$.  Lemma~\ref{G0:lem:compact} and
+Proposition~\ref{G0:prop:no-loss} show that $Q_j$ exists and has exactly
+$N_j$ active sides.  Moreover
+\begin{equation}\label{G0:eq:min-counter}
+ \lambda_1(Q_j)\le\lambda_1(P_j)
+ <\lambda_1(R_{N_j}(\pi)).
+\end{equation}
+Lemma~\ref{G0:lem:entry} gives
+\[
+ \|\rho_{Q_j}\|_{W^{1,\infty}}\to0,\qquad
+ S_j=\frac{2\pi}{N_j}+\alpha_{\max}(Q_j)\to0.
+\]
+Thus input~\ref{G0:thm:J0} applies for all sufficiently large $j$ and
+gives
+\[
+ \lambda_1(Q_j)-\lambda_1(R_{N_j}(\pi))
+ \ge c_0\{\Jfour(\alpha^{(j)})
+ +\Gjp_{\alpha^{(j)}}(
+ z_j-z_{\alpha^{(j)}}^\sharp)\}\ge0,
+\]
+contradicting \eqref{G0:eq:min-counter}.  Hence the inequality in
+\eqref{G0:eq:main} holds for every sufficiently large $N$.
+
+Suppose next that nonregular equality cases exist for arbitrarily large
+$N$.  Choose $N_j\to\infty$ and nonregular exact $N_j$-gons $P_j$ with
+\[
+ \lambda_1(P_j)=\lambda_1(R_{N_j}(\pi)).
+\]
+The inequality just proved shows that this common value is the minimum
+over the exact $N_j$-side class.  If the minimum over the closed class
+with at most $N_j$ sides were smaller, its minimizer would have exactly
+$N_j$ sides by Proposition~\ref{G0:prop:no-loss}, contradicting the proved
+inequality.  Hence each $P_j$ is also a closed-class minimizer.
+Lemma~\ref{G0:lem:entry} and input~\ref{G0:thm:J0} apply and force
+\begin{equation}\label{G0:eq:defect-zero}
+ \Jfour(\alpha^{(j)})=0,\qquad
+ \Gjp_{\alpha^{(j)}}(
+ z_j-z_{\alpha^{(j)}}^\sharp)=0.
+\end{equation}
+Strict convexity of $x^4$ under $\sum_i\alpha_i=2\pi$ makes the first
+identity equivalent to $\alpha_i=2\pi/N_j$ for every $i$.  At the uniform
+fan cyclic symmetry gives
+$z_{\alpha^{(j)}}^\sharp=0$ on the exact quotient.  Positivity
+of the support metric then makes the support vector constant modulo
+translations and scale.  Thus $P_j$ is congruent to the regular
+$N_j$-gon, a contradiction.
+
+Both a strict failure and a nonregular equality can therefore occur only
+for finitely many side counts.  Increasing $N_0$ proves the theorem.
+\end{proof}
+\endgroup

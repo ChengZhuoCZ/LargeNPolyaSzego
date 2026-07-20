@@ -1,0 +1,317 @@
+\begingroup
+\section{Node DF0B: the comparable-grid discrete square}
+\label{module:DF0B}
+\noindent\textit{Audited source: \nolinkurl{DF0_good_grid.tex}.}
+\subsection{Quasiuniform data and the exact material matrix}
+
+Let $M\ge2$, $b=2\pi/M$, and let
+\begin{equation}\label{DF0B:eq:quasi}
+ h_i>0,\qquad \sum_i h_i=2\pi,
+ \qquad (1-\rho)b\le h_i\le(1+\rho)b,
+ \qquad 0<\rho<\frac14.
+\end{equation}
+Put $d_i=h_i-b$ and $h_i(t)=b+td_i$.  Then
+\begin{equation}\label{DF0B:eq:path-quasi}
+ (1-\rho)b\le h_i(t)\le(1+\rho)b,
+ \qquad |d_i|\le\rho b,\qquad \sum_i d_i=0.
+\end{equation}
+
+For a positive current partition $g=(g_i)$ with endpoints $\theta_i$ and
+midpoints $c_i$, the assembled foundation F148 gives the exact material
+derivative of
+\begin{equation}\label{DF0B:eq:w}
+ w_i=\Hil q_g(c_i)=\frac1\pi\sum_jg_j\Phi(c_i-c_j),
+ \qquad \Phi'(x)=-\log\left|2\sin\frac x2\right|,
+\end{equation}
+in the form
+\begin{equation}\label{DF0B:eq:matrix}
+ \dot w_i=\frac1\pi\sum_kd_k\mathcal E_{ik}(g).
+\end{equation}
+For completeness, choose for each target $i$ a cut $\theta_0$ at circular
+distance at least $\pi/3$ from $c_i$.  With
+$K=\Phi'$ and cyclic indices relabelled at that cut, the entries are
+\begin{align}
+ \mathcal E_{ik}^-&=
+ \sum_{j<k}g_jK(c_i-c_j)+\frac{g_k}{2}K(c_i-c_k)
+ -\int_{\theta_0}^{c_k}K(c_i-y)\,dy, &&k<i,\notag\\
+ \mathcal E_{ik}^+&=
+ \int_{c_k}^{\theta_0+2\pi}K(c_i-y)\,dy
+ -\frac{g_k}{2}K(c_i-c_k)-\sum_{j>k}g_jK(c_i-c_j), &&k>i,
+ \label{DF0B:eq:E-explicit}\\
+ \mathcal E_{ii}&=\frac12\left\{
+ \sum_{j<i}g_jK(c_i-c_j)-\int_{\theta_0}^{\theta_i}K(c_i-y)\,dy
+ \right.\notag\\
+ &\hspace{34mm}\left.
+ -\sum_{j>i}g_jK(c_i-c_j)
+ +\int_{\theta_{i+1}}^{\theta_0+2\pi}K(c_i-y)\,dy
+ \right\}.\notag
+\end{align}
+Set $\mathcal E_{ik}=\mathcal E_{ik}^-$ for $k<i$ and
+$\mathcal E_{ik}=\mathcal E_{ik}^+$ for $k>i$.  F148 proves
+\eqref{DF0B:eq:matrix} by differentiating the Clausen formula: every raw
+coefficient equals a common $\Phi(c_i)$ plus the displayed quadrature
+primitive, and the common term vanishes because $\sum_kd_k=0$.
+
+Every entry also has the following signed sawtooth representation.  With
+\begin{equation}\label{DF0B:eq:eta}
+ \eta(y)=\begin{cases}
+ -(y-\theta_j),&\theta_j<y<c_j,\\
+ \theta_{j+1}-y,&c_j<y<\theta_{j+1},
+ \end{cases}
+\end{equation}
+one has on every complete cell
+\begin{equation}\label{DF0B:eq:eta-properties}
+ |\eta|\le g_j/2,\qquad \int_{I_j}\eta=0,
+\end{equation}
+and, on the left or right arc selected by an antipodal cut,
+\begin{equation}\label{DF0B:eq:saw}
+ \mathcal E_{ik}=\pm\int_{\mathrm{arc}(i,k)}
+ \eta(y)K'(c_i-y)\,dy,
+ \qquad K'(x)=-\frac12\cot\frac x2.
+\end{equation}
+The terminal half-cell is part of the integral; it is not separated from
+the complete-cell primitive.
+
+\subsection{The variable-grid discrete CZ lemma}
+
+Write $|i-k|_M$ for cyclic index distance.  Since adding a constant to
+every entry of one row does not change \eqref{DF0B:eq:matrix} on
+$\sum d_k=0$, choose the representative
+$\widetilde{\mathcal E}$ whose one-sided primitives are centred at an
+antipodal cut.  Thus the two terminal values at the cut are opposite (or
+zero when there is a single antipodal index).  We do not subtract a row
+average, which could destroy the far-index size.
+
+\begin{lemma}[Signed primitive estimates on a comparable mesh]
+\label{DF0B:lem:kernel}
+Assume
+\begin{equation}\label{DF0B:eq:current-comparable}
+ \kappa b\le g_j\le\kappa^{-1}b
+\end{equation}
+with fixed $0<\kappa<1$.  Then, after choosing the three usual shifted
+antipodal cuts, the normalized matrix
+$A=b^{-1}\widetilde{\mathcal E}$ satisfies
+\begin{align}
+ |A_{ik}|&\le\frac{C_\kappa}{1+|i-k|_M},\label{DF0B:eq:size}\\
+ |A_{i,k+1}-A_{ik}|+|A_{i+1,k}-A_{ik}|
+ &\le\frac{C_\kappa}{(1+|i-k|_M)^2}
+ \label{DF0B:eq:smooth}
+\end{align}
+away from the two harmless cut indices.  At a cut the two one-sided
+values obey \eqref{DF0B:eq:size}.  Moreover, for every cyclic index interval
+$J$,
+\begin{multline}\label{DF0B:eq:testing}
+ \sum_{i\in J}\left|\sum_{k\in J}A_{ik}\right|^2
+ +\sum_{k\in J}\left|\sum_{i\in J}A_{ik}\right|^2
+ \le C_\kappa|J|.
+\end{multline}
+All constants are independent of $M$ and of cumulative displacement of
+the variable grid from the regular grid.
+\end{lemma}
+
+\begin{proof}
+Quasiuniformity converts physical distance to index distance:
+\[
+ \operatorname {dist}(c_i,c_k)\asymp_\kappa
+ b(1+|i-k|_M)
+\]
+on the selected arc.  In \eqref{DF0B:eq:saw}, a complete cell has both the
+endpoint cancellation and the zero mean in
+\eqref{DF0B:eq:eta-properties}.  Subtracting $K'(c_i-c_j)$ on that cell and
+using $|(K')'(x)|\le C/\operatorname {dist}(x,2\pi\mathbb Z)^2$
+gives
+\[
+ \left|\int_{I_j}\eta(y)K'(c_i-y)\,dy\right|
+ \le \frac{C_\kappa b}{(1+|i-j|_M)^2}.
+\]
+The terminal half-cell is estimated together with its endpoint atom and
+costs $C_\kappa b/(1+|i-k|_M)$.  Summing from the antipode proves
+\eqref{DF0B:eq:size}.  Advancing the terminal index by one cell leaves exactly
+one complete zero-mean cell, proving the $k$-difference in
+\eqref{DF0B:eq:smooth}.  Moving the target by one comparable cell and
+subtracting the old kernel value gives the $i$-difference.  The cut
+values have physical distance comparable with one and satisfy the same
+size estimate directly.
+
+For testing, retain the left/right signs from the antipodally centred
+primitive.  Summation by parts with \eqref{DF0B:eq:smooth} shows that a target
+at index distance $r$ from the nearer boundary of $J$ contributes at
+most
+\[
+ C_\kappa\left(1+\log\frac{|J|+1}{r+1}\right).
+\]
+The square of this profile is summable:
+\[
+ \sum_{r=0}^{|J|-1}
+ \left(1+\log\frac{|J|+1}{r+1}\right)^2\le C|J|.
+\]
+This proves the first test.  For the adjoint test, reverse the source and
+target roles in \eqref{DF0B:eq:saw}; the complete-cell zero mean and the
+terminal endpoint term are unchanged, so the same argument proves the
+second test.  No absolute harmonic row sum is used.
+\end{proof}
+
+\begin{lemma}[Finite cyclic discrete $T1$ square]
+\label{DF0B:lem:T1}
+Any cyclic matrix satisfying \eqref{DF0B:eq:size}--\eqref{DF0B:eq:testing} obeys
+\begin{equation}\label{DF0B:eq:T1}
+ \|Ax\|_{\ell^2}\le C_\kappa\|x\|_{\ell^2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Use the three shifted dyadic grids on the cyclic index set and expand
+$x$ and a test vector $y$ in normalized Haar functions.  If their
+support intervals are disjoint, subtract the kernel at the two interval
+centres.  Equation \eqref{DF0B:eq:smooth} gives
+\[
+ |\langle Ah_I,h_J\rangle|
+ \le C_\kappa
+ \frac{|I|^{1/2}|J|^{1/2}\min\{|I|,|J|\}}
+ {(\operatorname {dist}(I,J)+\max\{|I|,|J|\})^2}.
+\]
+The two-sided annular sum is Schur summable.  For nested supports, split
+the larger Haar function into its constant child value plus a mean-zero
+remainder.  The remainder has the same separated estimate; the constant
+parts form the two paraproducts.  Their coefficients are Carleson because
+\eqref{DF0B:eq:testing} is exactly the square testing condition for $A1_J$
+and $A^*1_J$.  The dyadic Carleson embedding theorem bounds both
+paraproducts.  The three grids place every pair of cyclic intervals in
+one of these separated or nested configurations with comparable parent.
+Summing the Haar coefficients proves \eqref{DF0B:eq:T1}.
+\end{proof}
+
+\begin{theorem}[Quasiuniform quadrature-primitive square]
+\label{DF0B:thm:QPS}
+Under \eqref{DF0B:eq:current-comparable}, for every zero-sum direction $d$,
+\begin{equation}\label{DF0B:eq:QPS}
+ \boxed{
+ \sum_i\left|\sum_kd_k\mathcal E_{ik}(g)\right|^2
+ \le C_\kappa b^2\sum_kd_k^2.}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The chosen row gauge does not change the action on $d$.  Apply
+Lemmas~\ref{DF0B:lem:kernel}--\ref{DF0B:lem:T1} to
+$A=b^{-1}\widetilde{\mathcal E}$ and rescale.
+\end{proof}
+
+\subsection{Endpoint integration inside one equality component}
+
+Along \eqref{DF0B:eq:path-quasi}, Theorem~\ref{DF0B:thm:QPS} and
+\eqref{DF0B:eq:matrix} give
+\begin{equation}\label{DF0B:eq:material-L2}
+ \sum_i|\dot w_i(t)|^2\le C_\rho b^2\sum_kd_k^2.
+\end{equation}
+At $t=0$ the regular $M$-fan has $w_i(0)=0$.
+
+\begin{theorem}[Complete quasiuniform AVS]
+\label{DF0B:thm:AVS}
+Every fan satisfying \eqref{DF0B:eq:quasi} obeys
+\begin{equation}\label{DF0B:eq:AVS}
+ \boxed{
+ T(\alpha)=\sum_i h_i|\Hil q_\alpha(c_i)|^2
+ \le C_\rho b^3\sum_i(h_i-b)^2
+ \le C_\rho\Dvar(\alpha).}
+\end{equation}
+Hence HQ and DF are closed on the entire quasiuniform component, with no
+adjacent-ratio derivative or cumulative-position hypothesis.
+\end{theorem}
+
+\begin{proof}
+Cauchy--Schwarz in $t$, \eqref{DF0B:eq:quasi}, and
+\eqref{DF0B:eq:material-L2} give
+\begin{align*}
+ T(\alpha)
+ &\le(1+\rho)b\int_0^1\sum_i|\dot w_i(t)|^2\,dt\\
+ &\le C_\rho b^3\sum_i d_i^2.
+\end{align*}
+For the last inequality in \eqref{DF0B:eq:AVS}, use the pair formula of stage
+153.  On \eqref{DF0B:eq:quasi},
+\[
+ h_ih_j(h_i^2-h_j^2)^2\asymp_\rho
+ b^4(h_i-h_j)^2.
+\]
+Since $2\pi=Mb$ and $\sum_i d_i=0$,
+\[
+ \Dvar(\alpha)
+ \asymp_\rho\frac{b^4}{Mb}
+ \sum_{i,j}(d_i-d_j)^2
+ =2b^3\sum_i d_i^2
+\]
+up to constants depending only on $\rho$.  Stage 153 gives
+AVS $\Rightarrow$ HQ $\Rightarrow$ DF.
+\end{proof}
+
+The same square is needed at the collapsed locations at which a bad
+block will later be opened.  Write $z_i=\theta_i$ for the cell endpoints.
+
+\begin{corollary}[Quasiuniform endpoint samples]
+\label{DF0B:cor:endpoints}
+Under \eqref{DF0B:eq:quasi},
+\begin{equation}\label{DF0B:eq:endpoint-samples}
+ \boxed{
+ b\sum_i|\Hil q_\alpha(z_i)|^2
+ \le C_\rho b^3\sum_i(h_i-b)^2.}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Repeat the material calculation with the target carried by the endpoint
+$z_i(t)$ instead of the midpoint $c_i(t)$.  The exact length gradient is
+again a signed quadrature primitive.  At the target endpoint the two
+incident terminal half-cells must be kept together; their quadratic
+profiles and first derivatives vanish at their common endpoint.  Thus
+there is no boundary logarithm.  Advancing either source or target by one
+cell leaves one complete mean-zero sawtooth, so
+\eqref{DF0B:eq:size}--\eqref{DF0B:eq:testing} hold for the endpoint matrix with the
+same constants.  Lemma~\ref{DF0B:lem:T1} therefore gives the analogue of
+\eqref{DF0B:eq:material-L2}.  At the regular fan the spline is even about every
+endpoint, so all endpoint Hilbert samples vanish.  Integration in $t$
+proves \eqref{DF0B:eq:endpoint-samples}.
+\end{proof}
+
+\begin{remark}[Why stage 152 does not contradict this theorem]
+The false HMS/QPS family has half of its current cells of length
+$\varepsilon a$ while their fixed straight-path directions have size
+$a$.  It leaves every fixed quasiuniform component.  In
+Theorem~\ref{DF0B:thm:AVS}, both the current lengths and the entire connecting
+segment remain comparable with $b$, and $|d_i|\le\rho b$.
+\end{remark}
+
+\subsection{Effect on the ELCA ledger}
+
+Use the good/bad selection of stage 153.  On a maximal collection of
+good cells whose zero-cell deletion contains no intervening bad block,
+the current effective mesh is comparable with the selected stratum
+length $b$.  The preceding theorem closes every good--good
+first-separation rectangle.
+
+\begin{corollary}[Only bad-block rectangles remain]
+\label{DF0B:cor:remaining}
+In ELCA of stage 153, all rows whose source and target shadows avoid the
+bad set satisfy
+\begin{equation}\label{DF0B:eq:good-good}
+ T_{\mathrm{good\text{-}good}}
+ \le C_\rho b^3\sum_{i\in\mathcal G_\rho}(h_i-b)^2.
+\end{equation}
+Thus the remaining pure endpoint ledger consists only of rectangles for
+which the source shadow or target shadow meets a maximal bad block.  Such
+a block must be retained as a whole until its first separating scale and
+paid by
+\begin{equation}\label{DF0B:eq:bad-charge}
+ \sum_{i\in\mathcal B_\rho}h_i(h_i^2-\ell^2)^2.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{DF0B:thm:AVS} on each good component after the common
+collapsed-uniform reference has been fixed.  At its two boundary cuts,
+keep the terminal half-cell with the adjacent bad block; those boundary
+rectangles are not included in \eqref{DF0B:eq:good-good}.  Disjoint good
+components have disjoint physical mass, so their squares sum.  The
+reference-charge estimate of stage 153 then gives the displayed right
+side.  Every omitted rectangle meets a bad block by construction.
+\end{proof}
+\endgroup

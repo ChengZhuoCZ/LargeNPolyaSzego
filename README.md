@@ -4,9 +4,9 @@
 > claim an unconditional proof of the convex large-\(N\) polygonal
 > Pólya--Szegő theorem.
 
-This is the cleaned revision-24 proof package. Historical stage snapshots,
-duplicate builds, numerical scratch files, and superseded proof drafts have
-been omitted.
+This is the cleaned, modular revision-24 proof package. Historical stage
+snapshots, duplicate builds, numerical scratch files, and superseded proof
+drafts have been omitted.
 
 ## Current theorem
 
@@ -36,15 +36,18 @@ flowchart TD
 
 ## Files
 
-- [`proof/conditional-proof.tex`](proof/conditional-proof.tex): standalone
-  LaTeX source for the complete conditional assembly.
+- [`proof/conditional-proof.tex`](proof/conditional-proof.tex): modular LaTeX
+  entry point for the complete conditional assembly.
+- [`proof/parts/`](proof/parts): the 19 proof modules in DAG/topological order.
 - [`proof/conditional-proof.pdf`](proof/conditional-proof.pdf): compiled proof.
 - [`proof/conditional-proof.fls`](proof/conditional-proof.fls): LaTeX recorder.
-- [`proof-audit.md`](proof-audit.md): concise status, citation, compilation,
+- [`docs/proof-audit.md`](docs/proof-audit.md): concise status, citation, compilation,
   and integrity audit.
 - [`dag/proof-dag.json`](dag/proof-dag.json): machine-readable conceptual DAG.
-- [`wrong-routes.md`](wrong-routes.md): concise record of retracted, disproved,
+- [`docs/wrong-routes.md`](docs/wrong-routes.md): concise record of retracted, disproved,
   or inactive routes.
+- [`MAINTENANCE.md`](MAINTENANCE.md): ownership rules and the update checklist.
+- [`scripts/check_repo.py`](scripts/check_repo.py): structural DAG/source check.
 
 ## Build
 
@@ -52,8 +55,14 @@ From the repository root:
 
 ```powershell
 cd proof
-latexmk -pdf -no-shell-escape -recorder -file-line-error \
+latexmk -pdf -no-shell-escape -recorder -file-line-error `
   -interaction=nonstopmode -halt-on-error conditional-proof.tex
 ```
 
-The source is self-contained and has no local `\input` dependencies.
+Then verify the source layout and DAG:
+
+```powershell
+python scripts/check_repo.py
+```
+
+See [`proof/README.md`](proof/README.md) for the module index.

@@ -1,0 +1,94 @@
+\begingroup
+\section{Node NR: joint endpoint assembly and J0 handoff}
+\label{module:NR}
+\noindent\textit{Audited source: \nolinkurl{NR_assembly.tex}.}
+\subsection{Incoming joint comparison}
+
+Use the notation of the JP and JC nodes.  In particular,
+\begin{equation}\label{NR:eq:corrector}
+ z_\alpha^D=-\frac12\mathcal R_\alpha^{-1}p_\alpha,
+ \qquad
+ \Gjp_\alpha(z_\alpha^D)
+ \le\frac{C_p^2}{4}\Jfour(\alpha),
+\end{equation}
+and the exact disk completion is
+\begin{equation}\label{NR:eq:disk-completion}
+ q_D(B_\alpha+K_\alpha z)
+ =P_D^{\rm ns}(\alpha)+\Gjp_\alpha(z-z_\alpha^D).
+\end{equation}
+The closed disk endpoint has margin $2\kappa\Jfour$, and closed value
+matching has error at most $\varepsilon_V(S)\Jfour$.  JC--ALG and JC--TL
+are closed.  The sole unavailable input is JC--PL; its exact algebraic
+output is the fixed-fan scalar comparison JP--JC,
+\begin{equation}\label{NR:eq:JC}
+ \mathscr R_\alpha(z)
+ \ge-\frac\kappa2\Jfour(\alpha)
+      -\frac12\Gjp_\alpha(z-z_\alpha^D),
+ \qquad \varepsilon_V(S)\le\frac\kappa2.
+\end{equation}
+
+\subsection{Conditional NR/J0 theorem}
+
+\begin{theorem}[JP--JC implies J0]\label{NR:thm:NR}
+Assume JC--PL, equivalently its JP--JC output \eqref{NR:eq:JC}.  Then every normalized polygon in
+the active near-disk chart satisfies
+\begin{equation}\label{NR:eq:J0}
+\boxed{
+ \Phi_\alpha(h_\alpha\mathbf1+z)
+ -\Phi_{\alpha_*}(h_*\mathbf1)
+ \ge\kappa\Jfour(\alpha)
+      +\frac12\Gjp_\alpha(z-z_\alpha^D).}
+\end{equation}
+The corrector obeys the first estimate in \eqref{NR:eq:corrector}, uniformly
+in the smallest angle and all adjacent ratios.
+\end{theorem}
+
+\begin{proof}
+By the definition of the honest joint residual,
+\begin{align*}
+ \Phi_\alpha(h_\alpha\mathbf1+z)
+ -\Phi_{\alpha_*}(h_*\mathbf1)
+ ={}&q_D(B_\alpha+K_\alpha z)-q_D(B_{\alpha_*})\\
+ &+\mathscr R_\alpha(z)+E_{V,\alpha},
+ \qquad |E_{V,\alpha}|\le\varepsilon_V(S)\Jfour(\alpha).
+\end{align*}
+Insert \eqref{NR:eq:disk-completion}, the closed estimate
+$P_D^{\rm ns}(\alpha)-P_D^{\rm ns}(\alpha_*)
+\ge2\kappa\Jfour(\alpha)$, and \eqref{NR:eq:JC}.  Since
+$\varepsilon_V(S)\le\kappa/2$, the remaining coefficients are exactly
+$\kappa$ and $1/2$, which proves \eqref{NR:eq:J0}.  The corrector estimate is
+the closed JE--P row followed by exact Hilbert completion.
+\end{proof}
+
+\begin{corollary}[Exact downstream handoff]\label{NR:cor:J0}
+The implication
+\[
+ \boxed{\mathrm{JP\text{-}DE+JP\text{-}JC}
+ \Longrightarrow\mathrm{NR}\Longrightarrow\mathrm{J0}}
+\]
+is proved.  JP--DE abbreviates the closed $D0_{\rm ns}$, JE--P, and JE--V
+rows.  JC--PL is the only unavailable premise; JP--JC is dependent on it.
+\end{corollary}
+
+\subsection{DAG certificate}
+
+\begin{center}
+\begin{longtable}{>{\raggedright\arraybackslash}p{.34\linewidth}
+                  >{\raggedright\arraybackslash}p{.54\linewidth}}
+\toprule
+edge & disposition\\
+\midrule
+JP--EH and JP--NS & closed exact scalar/Hessian chart and disk metric;\\
+JP--DE & closed disk Schur gap, corrector bound, and value matching;\\
+JP--SC, JE--FM, JP--FS, JP--BR & removed from the active chain; the old
+period-three material argument for JE--FM is retracted, and all four rows
+are unnecessary on the joint route;\\
+JC--ALG and JC--TL & closed exact action and support-time cancellation;\\
+JC--PL & unique open pathwise LCA payment;\\
+JP--JC & dependent exact output of JC--PL;\\
+JP--DE$+$JP--JC $\to$ NR $\to$ J0 & proved by
+Theorem~\ref{NR:thm:NR}.\\
+\bottomrule
+\end{longtable}
+\end{center}
+\endgroup

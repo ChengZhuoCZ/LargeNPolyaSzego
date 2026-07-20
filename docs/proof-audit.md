@@ -16,10 +16,11 @@
   proof premises. Exact counterexamples and retractions affecting route choice
   are summarized in `wrong-routes.md`.
 - LaTeX compilation: compiled with `latexmk`.
-- LaTeX source SHA256: `997f88176635bfc46a834d1385f01d2ddeb074b4fafd638fde0bfbde8e472d65`
-- Compiled PDF SHA256: `0b2576c8251e4fcf2edf2adb565b8d5f7b2fa084fae1d0fc8ee36ac2df86212b`
-- LaTeX recorder SHA256: `0422a7a61d193c043c13462876219b7877c535e8aa339fd1f988561dece87e3b`
-- Build result: 178 pages; no undefined references, undefined citations,
+- LaTeX entry-point SHA256: `ee689b0fc43cb650f29efd5fc939efed4623473441f66e5079a490aa8756f21c`
+- Proof source tree SHA256: `a161ad8535ee421ad581046f170f513447aa2f10d6b431543868e55f20d47e6e`
+- Compiled PDF SHA256: `928ef6b3044cf83202c6d140ed91cd4975b824f02aba7b70e3640d3a569af7fe`
+- LaTeX recorder SHA256: `7ee4b7d64c6e53e86e02b47983d552df2a30db8c11b3c897289835b8366f3788`
+- Build result: modular 19-part source, 178 pages; no undefined references, undefined citations,
   multiply defined labels, LaTeX/package errors, fatal errors, or pending rerun
   warnings. Eighteen nonfatal overfull-box warnings remain.
 
