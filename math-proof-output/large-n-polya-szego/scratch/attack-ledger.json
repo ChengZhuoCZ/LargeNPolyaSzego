@@ -1,0 +1,249 @@
+{
+  "schema_version": 4,
+  "schema3_migration_count": 0,
+  "owner_id": "JC_PL",
+  "legacy_import": null,
+  "entries": [
+    {
+      "id": "A1",
+      "event_index": 1,
+      "route_id": "R-JC",
+      "family_id": "F-STEINER-EXACT-N",
+      "target_id": "T",
+      "author": "agent:portfolio_geometry_d",
+      "mechanism": "exact-N-side-preserving Steiner descent",
+      "obstruction_id": "OB-STEINER-SIDECOUNT",
+      "novelty_witness": "unknown exact-N closure => exhaustive 2N-4 side lower bound; novelty=construction",
+      "invalidated_inference": "some Steiner axis preserves exactly N genuine sides",
+      "reduction_witness": "T => exact-N class-preserving strict Steiner descent; axis=finiteness",
+      "next_decision_test": "if a class-preserving non-Steiner mechanism appears => route-expansion; else => switch-route",
+      "failure_type": "interface mismatch",
+      "route_effect": "route-expansion",
+      "summary": "Exact-N Steiner descent leaves the comparison class on a generic parabola polygon.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-steiner-exact-n.md",
+          "sha256": "cb22269a1a8a50ef81c7eb6baf90a725ed5b1da420677cfa2256f62a8b40b1e5"
+        }
+      ],
+      "promoted_to": "parts/10-jc-pl.md"
+    },
+    {
+      "id": "A2",
+      "event_index": 2,
+      "route_id": "R-JC",
+      "family_id": "F-CONFORMAL-LOEWNER",
+      "target_id": "T",
+      "author": "agent:portfolio_operator_e",
+      "mechanism": "conformal weighted-Green Loewner domination",
+      "obstruction_id": "OB-CONFORMAL-ORDER",
+      "novelty_witness": "unclear operator feasibility => localized order forces pointwise weight equality; novelty=invariant",
+      "invalidated_inference": "noncongruent equal-area conformal weights can satisfy full Loewner domination",
+      "reduction_witness": "T => conformal weighted-Green Loewner domination; axis=dependency",
+      "next_decision_test": "if a sign-changing norm mechanism is derived => route-expansion; else => switch-route",
+      "failure_type": "interface mismatch",
+      "route_effect": "route-expansion",
+      "summary": "Equal-area conformal Green-form order forces equality of weights and congruence.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-conformal-loewner.md",
+          "sha256": "98a83b92bcb5b861ee74ea782338673e59fb416d7343ab99d98d6094520434c0"
+        }
+      ],
+      "promoted_to": "parts/10-jc-pl.md"
+    },
+    {
+      "id": "A3",
+      "event_index": 3,
+      "route_id": "R-JC",
+      "family_id": "F-CELLWISE-SDP",
+      "target_id": "T",
+      "author": "agent:portfolio_discrete_f",
+      "mechanism": "radial piecewise-affine cellwise semidefinite domination",
+      "obstruction_id": "OB-CELLWISE-SATURATION",
+      "novelty_witness": "unclear local certificate feasibility => determinant-area identities force cell isometries; novelty=invariant",
+      "invalidated_inference": "purely cellwise domination can certify a nonregular equal-area polygon",
+      "reduction_witness": "T => cellwise pullback semidefinite domination; axis=certificate",
+      "next_decision_test": "if exact nonlocal cell coupling is produced => route-expansion; else => switch-route",
+      "failure_type": "interface mismatch",
+      "route_effect": "route-expansion",
+      "summary": "Cellwise pullback LMIs saturate determinant and area identities and force congruence.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-cellwise-sdp.md",
+          "sha256": "76035915e0561c4b7008548dfbd9a56dab1f4dfc59a90b5590bafa359bba0c0b"
+        }
+      ],
+      "promoted_to": "parts/10-jc-pl.md"
+    },
+    {
+      "id": "A4",
+      "event_index": 4,
+      "route_id": "R-JC",
+      "family_id": "F-QFK-LOCALIZATION",
+      "target_id": "T",
+      "author": "agent:portfolio_blind_b",
+      "mechanism": "quantitative Faber-Krahn disk localization",
+      "obstruction_id": "OB-QFK-FAN-RATIO",
+      "novelty_witness": "unverified stability modulus => primary theorem yields O(N^-1) Fraenkel entry; novelty=citation",
+      "invalidated_inference": "Fraenkel closeness alone supplies ratio-free support-chart controls",
+      "reduction_witness": "T => T on Fraenkel asymmetry at most C_FK/N; axis=locality",
+      "next_decision_test": "if a ratio-free local action closes => continue-attack; else => route-expansion",
+      "failure_type": "constant-estimate insufficient",
+      "route_effect": "continue-attack",
+      "summary": "Quantitative disk localization reduces the global class but does not control microscopic fan ratios.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-qfk-localization.md",
+          "sha256": "a459aa68391548ce2a4effa0d5c584b0c317a187ae927bd844ed3d501a1ef699"
+        }
+      ],
+      "promoted_to": "parts/10-jc-pl.md"
+    },
+    {
+      "id": "A5",
+      "event_index": 5,
+      "route_id": "R-JC",
+      "family_id": "F-COMPLETED-ACTION",
+      "target_id": "JC_PL",
+      "author": "agent:portfolio_discrete_f",
+      "mechanism": "completed-scalar energy-scale decomposition",
+      "obstruction_id": "OB-JC-TWO-REGIME",
+      "novelty_witness": "single all-chart obstruction => disjoint energy-localized branch split; novelty=reformulation",
+      "invalidated_inference": "JC_PL can be audited as one unsplit local mechanism",
+      "reduction_witness": "JC_PL => JC_SP and JC_CL; axis=locality",
+      "next_decision_test": "if independent split review passes => split-core; else => switch-route",
+      "failure_type": "proof too large",
+      "route_effect": "split-core",
+      "summary": "The all-chart completed action decomposes into super-near QRCI and coarse integrated-payment branches.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-completed-action-split.md",
+          "sha256": "b269bb7a5db8828cf7b8c2948a2dfe20cc3373c740f9fade9528a46cd05a09f8"
+        }
+      ],
+      "promoted_to": "parts/11-jc-sp.md"
+    },
+    {
+      "id": "A6",
+      "event_index": 6,
+      "route_id": "R-JC",
+      "family_id": "F-QRCI-IDENTITY",
+      "target_id": "JC_SP",
+      "author": "agent:jc_sp_stage4_probe",
+      "mechanism": "separate exact gauge-invariant full-cell third-derivative identity from the subsequent natural-energy estimate",
+      "obstruction_id": "OB-JC-SP-QRCI-ID",
+      "novelty_witness": "compound regularity and bound => exact scale probes isolate the missing C3 full-cell ledger; novelty=reformulation",
+      "invalidated_inference": "one may estimate D3 A_N before proving that every terminal complement endpoint ground-state metric gauge area base and lower-row descendant belongs to one common C3 scalar identity",
+      "reduction_witness": "compound JC_SP regularity-plus-bound => JC_SP_QRCI identity then JC_SP_EST bound; axis=regularity",
+      "next_decision_test": "if the exact QRCI identity survives Stage 4 => split-core; else => route-expansion",
+      "failure_type": "interface mismatch",
+      "route_effect": "split-core",
+      "summary": "The compound JC_SP row packages C3 full-cell QRCI existence with a separate uniform kernel estimate while its direct interface defines neither the complete material derivative ledger nor its regularity.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-qrci-identity-split.md",
+          "sha256": "1e14fa2322896741a0db8448a1550f2773f431a2a4d8f0dfc99603f67e9b2fca"
+        }
+      ],
+      "promoted_to": "parts/14-jc-sp-qrci.md"
+    },
+    {
+      "id": "A7",
+      "event_index": 7,
+      "route_id": "R-JC",
+      "family_id": "F-QRCI-BOUNDARY-REG",
+      "target_id": "JC_SP_QRCI",
+      "author": "agent:qrci_stage4_probe",
+      "mechanism": "separate weighted boundary and corner regularity from the finite atom-indexed QRCI ownership identity",
+      "obstruction_id": "OB-QRCI-BOUNDARY-C3",
+      "novelty_witness": "form-level C3 plausibility => boundary trace and corner coefficient differentiation remains a distinct unproved map; novelty=reformulation",
+      "invalidated_inference": "C3 dependence in H_0^1 automatically permits three termwise derivatives of reduced-DtN conormal trace corner coefficient and endpoint distribution expressions",
+      "reduction_witness": "compound QRCI regularity-and-ledger => JC_SP_REG boundary regularity then JC_SP_LEDGER ownership identity; axis=regularity",
+      "next_decision_test": "if JC_SP_REG survives Stage 4 in explicit spaces => split-core; else => route-expansion",
+      "failure_type": "interface mismatch",
+      "route_effect": "split-core",
+      "summary": "Form-level C3 eigenpair dependence does not justify third differentiation of the reduced-DtN corner trace and endpoint data needed by the QRCI ledger.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-qrci-boundary-regularity.md",
+          "sha256": "4d930f0c84d743bd6653402f68f3cef866647dfd5b251327821e5a7296ff3a37"
+        }
+      ],
+      "promoted_to": "parts/15-jc-sp-reg.md"
+    },
+    {
+      "id": "A8",
+      "event_index": 8,
+      "route_id": "R-JC",
+      "family_id": "F-QRCI-TRACE-SPACE",
+      "target_id": "JC_SP_REG",
+      "author": "agent:codex_stage5_strategy",
+      "mechanism": "replace the false product-edge and one-family boundary interface by compatible global trace spaces and the two completed-scalar polygon families",
+      "obstruction_id": "OB-QRCI-TRACE-TYPING",
+      "novelty_witness": "Stage 4 model integrability => exact Stage 5 type check refutes the lifting and coefficient conventions; novelty=invariant",
+      "invalidated_inference": "arbitrary product side H1/2 data admit a global H1 lifting and one polygon family canonically supplies common/jump corner channels",
+      "reduction_witness": "JC_SP_REG => typed two-family material regularity JC_SP_MATREG; axis=regularity",
+      "next_decision_test": "if JC_SP_MATREG passes typed trace and corner-map audit => continue-attack; else => route-expansion",
+      "failure_type": "interface mismatch",
+      "route_effect": "route-expansion",
+      "summary": "JC_SP_REG used a nonexistent right inverse on arbitrary product-edge H1/2 data, applied form operators outside their declared domain, and defined two common/jump channels from only one polygon family.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-qrci-trace-space.md",
+          "sha256": "f3fdd0668bc35b6bc732f3b3c25c68965102042b4d7f4e62986af3223a4a2ac7"
+        }
+      ],
+      "promoted_to": "parts/15-jc-sp-reg.md"
+    },
+    {
+      "id": "A9",
+      "event_index": 9,
+      "route_id": "R-JC",
+      "family_id": "F-QRCI-MATERIAL-FLUX",
+      "target_id": "JC_SP_MATREG",
+      "author": "agent:matreg_counterexample_scout",
+      "mechanism": "type scalar and weak material conormal pullbacks separately and index endpoint coefficients by vertex incidence and common/jump channel",
+      "obstruction_id": "OB-QRCI-MATERIAL-FLUX",
+      "novelty_witness": "compatible global trace repair => exact side-coordinate pullback exposes distinct rho^(beta-1) and rho^beta coefficients; novelty=invariant",
+      "invalidated_inference": "the physical coefficient beta*c is unchanged under fixed-side material pullback and one endpoint coefficient per vertex suffices",
+      "reduction_witness": "JC_SP_MATREG => typed incidence-level JC_SP_MATFLUX; axis=regularity",
+      "next_decision_test": "if the corrected scalar/flux convention passes Stage 4 => continue-attack; else => route-expansion",
+      "failure_type": "interface mismatch",
+      "route_effect": "continue-attack",
+      "summary": "JC_SP_MATREG omitted the side-length-ratio factors distinguishing scalar conormal pullback from weak flux-density pullback and allocated too few endpoint channels.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-qrci-material-flux.md",
+          "sha256": "fe64af658546b2ef8b630bf26a7cf929c44aa0a1d877fe5d2deeac95f23ce9b2"
+        }
+      ],
+      "promoted_to": "parts/17-jc-sp-matreg.md"
+    },
+    {
+      "id": "A10",
+      "event_index": 10,
+      "route_id": "R-JC",
+      "family_id": "F-QRCI-DUAL-SECTOR",
+      "target_id": "JC_SP_MATFLUX",
+      "author": "agent:matflux_proof_auditor_1",
+      "mechanism": "rerun the eigenpair IFT under a sector-compatible fixed-interface material map and use factored Bessel-ratio bounds for all modes",
+      "obstruction_id": "OB-QRCI-SECTOR-C3",
+      "novelty_witness": "failed moving-H1 composition and unsummed Parseval step => independent sector materialization plus exponential all-mode ratio estimate; novelty=construction",
+      "invalidated_inference": "C3 H1 dependence under one piecewise-affine materialization survives arbitrary moving-sector composition and Parseval alone controls three order derivatives",
+      "reduction_witness": "JC_SP_MATFLUX O5-O6 => analytic support path plus second material-map IFT plus factored Bessel ratio summation; axis=regularity",
+      "next_decision_test": "if repaired packet passes two independent line audits => continue-attack; else => route-expansion",
+      "failure_type": "interface mismatch",
+      "route_effect": "continue-attack",
+      "summary": "The first JC_SP_MATFLUX proof used a false H1 moving-composition inference, omitted analytic support-path dependence, and lacked differentiated all-mode Bessel H1/2 summation.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-qrci-dual-sector.md",
+          "sha256": "6793a0f8f96f2358cded514ba8c302c40358471920395b5f56927790d155727b"
+        }
+      ],
+      "promoted_to": "parts/18-jc-sp-matflux.md"
+    }
+  ],
+  "route_resets": []
+}

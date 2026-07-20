@@ -6,3 +6,4 @@
 *.synctex.gz
 _minted-*
 .math-proof-attack-ledger.lock
+math-proof-output/*/audits/audit-packet-*.txt

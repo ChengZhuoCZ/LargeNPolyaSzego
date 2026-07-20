@@ -20,7 +20,58 @@
 - $\mathcal G^{\mathrm{JP}}_\alpha$ is the retained positive normal-sine support metric.
 - $z_\alpha^D$ is the exact disk corrector defined by the Riesz completion of the disk forcing.
 - $\mathscr A_\alpha(z)$ is the completed pathwise action in the retained JC algebra.
+- $a=2\pi/N$ is the regular exterior-angle scale.
+- $E_\alpha(z)=\mathcal J_4(\alpha)+\mathcal G^{\mathrm{JP}}_\alpha(z-z_\alpha^D)$ is the branch energy used to split the completed action.
+- For completed coordinates $q=(d,w)$ at the regular fan,
+  \[
+  \mathcal N_N(q)=a^2\sum_i d_i^2+\mathcal G^{\mathrm{JP}}_{\alpha_*}(w),
+  \qquad
+  r_N(q)=\frac{\|d\|_\infty}{a}
+  +a^{-2}\mathcal G^{\mathrm{JP}}_{\alpha_*}(w)^{1/2}.
+  \]
+- The regular fan is \(\alpha_*=a\mathbf1\). On a completed ray set
+  \[
+  \alpha_t=\alpha_*+td,\qquad
+  Y_t=h_{\alpha_t}\mathbf1+
+      J_{\alpha_t}(c_{\alpha_t}+tw),\qquad
+  B_t=h_{\alpha_t}\mathbf1,
+  \]
+  where \(J_\alpha\) is the retained scale/translation quotient transport and
+  \(c_\alpha\) is the pulled-back exact disk corrector
+  \(z_\alpha^D=J_\alpha c_\alpha\).
+- The exact completed scalar is
+  \[
+  \begin{aligned}
+  \mathbf A_N(d,w)={}&
+  \Phi_\alpha\!\left(h_\alpha\mathbf1+
+        J_\alpha(c_\alpha+w)\right)
+  -\Phi_\alpha(h_\alpha\mathbf1)\\
+  &+\mathcal G^{\mathrm{JP}}_\alpha(J_\alpha c_\alpha)
+  -\frac12\mathcal G^{\mathrm{JP}}_\alpha(J_\alpha w)
+  +\frac\kappa2\mathcal J_4(\alpha),
+  \qquad \alpha=\alpha_*+d.
+  \end{aligned}
+  \]
+  This is the scalar to be differentiated; its summands may not be replaced by
+  a polygon-minus-disk ledger or estimated before exact completion.
+- The finite-bridge image at level \(K'\) is the set of completed coordinates
+  \(q=(d,w)\) assigned to active normalized support data on the super-near
+  branch for which the whole ray \(tq\), \(0\le t\le1\), stays in the retained
+  material chart and \(\mathcal N_N(q)\le K'a^5\). The retained bridge gives
+  \(r_N(q)\le C_{K'}a^{1/2}\) on this image.
 - `JC_PL` denotes the quantified assertion $\mathscr A_\alpha(z)\ge0$ on every active normalized no-ratio support chart covered by the frozen local interface.
+
+- JC_SP_MATFLUX denotes the typed two-family \(C^3\) material spectral,
+  compatible-trace, scalar-conormal, weak-flux, reduced-DtN, and
+  incidence-level leading-corner regularity package on the finite-bridge
+  image.
+- JC_SP_LEDGER denotes the exact atom-indexed full-cell completed
+  third-derivative identity constructed from that regularity package.
+- JC_SP_EST denotes the uniform estimate of that exact QRCI identity on the
+  branch reached from \(E_\alpha(z)\le Ka^5\).
+- JC_SP_MATREG, JC_SP_REG, JC_SP_QRCI, and JC_SP are superseded names
+  retained only as audit provenance.
+- JC_CL denotes the coarse-restricted lower bound for \(E_\alpha(z)>M_0a^5\); it is not the stronger whole-chart version appearing as a convenient target in some retained notes.
 
 ## Symbol Table
 
@@ -35,6 +86,18 @@
 | $z$ | normalized support perturbation | local | the full segment must remain active |
 | $\Phi_\alpha$ | scale-invariant spectral scalar | local | defined on the fixed-normal support chart |
 | $\mathscr A_\alpha$ | completed pathwise action | local core | contains forcing, integrated Hessian, metric, and fan defect in one budget |
+| $E_\alpha$ | completed branch energy | local core | defines the exhaustive super-near/coarse cutoff |
+| $\mathcal N_N$ | completed-coordinate natural energy | super-near child | controlled by \(E_\alpha\) through the retained finite bridge |
+| $r_N$ | dimensionless completed-coordinate radius | super-near child | must be \(O(a^{1/2})\) on bounded \(a^5\)-energy balls |
+| $\mathbf A_N$ | exact completed scalar in fixed completed coordinates | super-near subtree | includes the moving fan, corrector, quotient transport, metric, base subtraction, and fan defect |
+| $J_\alpha$ | retained scale/translation quotient transport | super-near subtree | \(J_{\alpha_*}=I\) |
+| $c_\alpha$ | pulled-back disk corrector | super-near subtree | \(z_\alpha^D=J_\alpha c_\alpha\) |
+| $\mathcal X_\varepsilon$ | compatible global trace space \(\operatorname{Tr}H^1(P_0^\varepsilon)\), \(\varepsilon\in\{Y,B\}\) | super-near regularity child | carries the quotient norm and has a bounded global lifting |
+| $\mathcal X_\varepsilon^*$ | Hilbert dual of the compatible trace space | super-near regularity child | codomain of weak conormal and reduced-DtN maps |
+| $\mathcal S_\varepsilon$ | strong open-side conormal space \(\prod_iH^{1/2}(0,1)\) | super-near regularity child | no global Dirichlet lifting is asserted from this product space |
+| $\mathcal C_N^{\mathrm{mat}}$ | \(\mathbb R_\beta^N\times\mathbb R_A^{2N}\times\mathbb R_E^{4N}\) | super-near regularity child | \(A^{\mathrm c},A^{\mathrm j}\) are the average/difference of the \(Y/B\) physical sector amplitudes; \(E_{i,\sigma}^{\mathrm c},E_{i,\sigma}^{\mathrm j}\) are the corresponding scalar material conormal coefficients for both vertex incidences \(\sigma\in\{-,+\}\) |
+| $\mathscr I_N$ | finite QRCI atom index set | super-near ledger child | carries a disjoint ownership map back to exact scalar source terms |
+| $\mathfrak Q_N$ | exact sum of the atom-indexed completed third-jet ledger | super-near ledger and estimate children | no quantitative bound is included in its definition |
 | $\mathcal J_4$ | fan defect | local | nonnegative and vanishes at the regular fan |
 | $\mathcal G^{\mathrm{JP}}_\alpha$ | support energy | local | quotient metric modulo scale and translations |
 | $z_\alpha^D$ | disk corrector | local | must not be separated from the completed action |
