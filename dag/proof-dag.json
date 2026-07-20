@@ -1,0 +1,73 @@
+{
+  "audit_revision": 24,
+  "nodes": [
+    {"id": "F51", "status": "closed", "depends_on": []},
+    {"id": "H0", "status": "closed", "depends_on": []},
+    {"id": "QI", "status": "closed", "depends_on": []},
+    {"id": "F65", "status": "closed", "depends_on": ["F51", "H0", "QI"]},
+    {"id": "F129", "status": "closed", "depends_on": ["F51"]},
+    {"id": "TR", "status": "closed", "depends_on": ["F51", "F65", "F129"]},
+    {"id": "CT_CORE", "status": "closed", "depends_on": ["F51"]},
+    {"id": "JP_EH", "status": "closed", "depends_on": ["CT_CORE"]},
+    {"id": "JP_NS", "status": "closed", "depends_on": ["CT_CORE"], "closed_rows": ["RADIAL_METRIC_PATH", "RADIAL_NOT_AFFINE"]},
+    {"id": "QB", "status": "closed", "depends_on": ["F51", "TR", "CT_CORE"]},
+    {"id": "F144", "status": "closed", "depends_on": []},
+    {"id": "F148", "status": "closed", "depends_on": ["F144"]},
+    {"id": "DF0A", "status": "retained", "depends_on": ["F144"]},
+    {"id": "DF0B", "status": "retained", "depends_on": ["F148"]},
+    {"id": "ZG", "status": "closed", "depends_on": ["F144", "DF0A", "DF0B"]},
+    {"id": "DF", "status": "closed", "depends_on": ["ZG"]},
+    {"id": "PT", "status": "closed", "depends_on": ["F51", "CT_CORE"]},
+    {"id": "DM", "status": "closed", "depends_on": ["PT"]},
+    {"id": "JP_DE", "status": "closed", "depends_on": ["JP_NS", "TR", "CT_CORE", "QB", "DF", "DM"], "closed_rows": ["D0_NS", "JE_P", "JE_V"]},
+    {"id": "JC_ALG", "status": "closed", "depends_on": ["JP_EH", "JP_NS", "JP_DE"], "closed_rows": ["COMPLETED_ACTION", "SUPPORT_TIME_LOG", "SHORTEST_SIDE_SWITCH", "REGULAR_DISK_JOINT_SYMBOL"]},
+    {"id": "JC_PL", "status": "open", "depends_on": ["JC_ALG"], "closed_subrows": ["REGULAR_ACTION_POLYGON_REDUCTION", "REGULAR_SUPPORT_CORNER_AREA_RENORMALIZED_DTN", "REGULAR_POLYGONAL_MIXED_SC_FIXED_RATIO", "REGULAR_LIMITING_SUPPORT_DOUBLE_DISK_GAP", "REGULAR_LIMITING_COMPLETED_COVECTOR_RATIO", "REGULAR_MIXED_REDUCED_RESOLVENT_ABSOLUTE", "REGULAR_MIXED_UNIFORM_FINITE_N_BRIDGE", "REGULAR_COMPLETED_ACTION_SCHUR", "SUPERNEAR_FINITE_ENERGY_BRIDGE", "SUPERNEAR_COMPLETED_PATH_ACTIVITY", "SUPERNEAR_COMPLEX_RAY_CAUCHY_REDUCTION", "SUPERNEAR_TERMINAL_ANNULAR_PURE_POWER_RESUMMATION", "COARSE_ACTION_CORRECTOR_NORMAL_FORM"], "retracted_subrows": ["REGULAR_PERIOD3_COMPLETED_SCHUR", "REGULAR_FAN_FIXED_RESERVE_RF_IM", "SUPERNEAR_AMPLITUDE_DAR"], "open_subcontracts": ["SUPERNEAR_COMPLETED_ACTION_NORMAL_HESSIAN_MODULUS", "COARSE_FAR_ACTION_LOCALIZATION"], "isolated_blockers": ["SUPERNEAR_GAUGE_INVARIANT_COMPLETED_THIRD_JET_QRCI", "REGULAR_MONOTONE_TRANSPORT_OBSTACLE_COERCIVITY", "NONREGULAR_COARSE_LOCALIZATION"]},
+    {"id": "JP_JC", "status": "dependent", "depends_on": ["JC_PL"]},
+    {"id": "NR", "status": "dependent", "depends_on": ["JP_DE", "JP_JC"]},
+    {"id": "J0", "status": "dependent", "depends_on": ["NR"]},
+    {"id": "C0", "status": "closed", "depends_on": []},
+    {"id": "F57", "status": "closed", "depends_on": []},
+    {"id": "A0", "status": "closed", "depends_on": ["F57"]},
+    {"id": "G0", "status": "dependent", "depends_on": ["C0", "A0", "J0"]},
+    {"id": "MAIN", "status": "dependent", "depends_on": ["G0"]}
+  ],
+  "assembly_modules": [
+    {"id": "F51", "depends_on": []},
+    {"id": "H0", "depends_on": []},
+    {"id": "F65", "depends_on": ["F51", "H0"]},
+    {"id": "F129", "depends_on": ["F51"]},
+    {"id": "TR", "depends_on": ["F51", "F65", "F129"]},
+    {"id": "CT", "depends_on": ["F51"]},
+    {"id": "QB", "depends_on": ["F51", "TR", "CT"]},
+    {"id": "F144", "depends_on": []},
+    {"id": "F148", "depends_on": ["F144"]},
+    {"id": "DF0A", "depends_on": ["F144"]},
+    {"id": "DF0B", "depends_on": ["F148"]},
+    {"id": "ZG", "depends_on": ["F144", "DF0A", "DF0B"]},
+    {"id": "PT", "depends_on": ["F51", "CT"]},
+    {"id": "JP", "depends_on": ["TR", "CT", "QB", "ZG", "PT"]},
+    {"id": "JC", "depends_on": ["JP"]},
+    {"id": "NR", "depends_on": ["JC"]},
+    {"id": "F57", "depends_on": []},
+    {"id": "A0", "depends_on": ["F57"]},
+    {"id": "G0", "depends_on": ["NR", "F57", "A0"]}
+  ],
+  "inactive_branches": [
+    {
+      "id": "PHYSICAL_TRACE_BYPASS",
+      "status": "rejected_as_closed_route",
+      "closed_rows": ["PH_DATA", "PH_ALG"],
+      "open_row_if_activated": "PH_PL",
+      "reason": "The exact physical disk square is cancelled at the same order by the nonlinear reparametrization remainder on the full radial chart; radial-near does not imply a uniform full-vector material chart."
+    },
+    {
+      "id": "STATIONARY_ENDPOINT_BYPASS",
+      "status": "rejected_as_closed_route",
+      "closed_rows": ["ST_ENDPOINT_OH", "ST_GRADIENT_CHORD_IDENTITY"],
+      "open_rows_if_activated": ["ST_COARSE_LOCALIZATION", "ST_REGULAR_RESIDUAL_SCHUR", "ST_SUPERNEAR_PATH_MODULUS"],
+      "alternative_open_row_if_mountain_pass": "ST_SIDE_BRANCH_BYPASS",
+      "alternative_open_rows_if_mountain_pass": ["ST_ARBITRARY_STATIONARY_FULL_HESSIAN", "ST_BOUNDARY_PS_PATH_CEILING"],
+      "reason": "The authoritative stationary O--H bound has a tangentially degenerate radial positive term and does not prove positivity of every stationary full Hessian.  The chord route still needs quantitative coarse localization to the a^5 scale, the regular full residual Schur complement, and super-near relative path stability.  A mountain-pass replacement additionally needs arbitrary-stationary full-Hessian positivity and boundary Palais--Smale exclusion: labelled activation does not join strict sublevels, and side-count induction has only an a^3 path ceiling against an a^4 adjacent-side gap."
+    }
+  ]
+}
