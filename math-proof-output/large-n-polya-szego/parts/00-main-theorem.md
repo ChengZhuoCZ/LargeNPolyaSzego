@@ -17,7 +17,7 @@ where $\lambda_1$ is the first Dirichlet eigenvalue and $R_N(A)$ is the regular 
 
 ## Dependencies
 
-- `JC_PL`: supplies uniform nonnegativity of the completed pathwise action on the full active no-ratio support chart. The retained conditional assembly in `source/conditional-assembly/` records the intended implication from this interface to the theorem, but it has not yet been promoted through current math-proof audits.
+- `JC_PL`: supplies uniform nonnegativity of the completed pathwise action on the full active no-ratio support chart. The repository-level legacy assembly in `legacy/revision-24/conditional-assembly/` records the intended implication from this interface to the theorem, but it has not been promoted through current math-proof audits.
 
 ## Proof Strategy
 Status: todo
@@ -41,7 +41,7 @@ Status: todo
 ## Proof
 Status: todo
 
-The existing conditional proof remains in `source/conditional-assembly/conditional-proof.tex`. It is not canonical Stage 5 proof text and is not a proof of the frozen theorem until JC_PL and all migrated interfaces pass the required audits.
+The existing conditional proof remains in `legacy/revision-24/conditional-assembly/conditional-proof.tex`. It is not canonical Stage 5 proof text and is not a proof of the frozen theorem until JC_PL and all migrated interfaces pass the required audits.
 
 ## Proof Attempt Log
 Active attempt: none

@@ -3,45 +3,46 @@
 ## Authoritative ownership
 
 - `math-proof-output/large-n-polya-szego/proof-blueprint.md` owns the frozen
-  theorem, current route screen, dependency edges, node risk/status/audit, and
-  certificate plan.
-- `definitions-and-notation.md` owns shared notation and the `PSF-*` failure
-  checklist.
-- Each current claim has one canonical Markdown file under `parts/`; its full
-  statement and proof text live there.
-- `literature-review.md` owns full citation records. The blueprint citation
-  table is only its route-active projection.
-- `source/conditional-assembly/` and `source/revision-24-proof-dag.json` are
-  retained migration evidence. They do not own current workflow status.
-- `scratch/route-history.md` records old failures. It cannot discharge a node.
+  theorem, Route Screen, dependency edges, risks, statuses, audits, and
+  Certificate Plan.
+- `definitions-and-notation.md` owns shared notation and the `PSF-*` checklist.
+- Every current or stale DAG row has one canonical Markdown file in `parts/`;
+  its full local statement and proof history live there.
+- `literature-review.md` owns full citation records. The blueprint Citation
+  Cache is only its route-active projection.
+- `scratch/route-history.md` is the human-readable rejected-route summary;
+  `scratch/attack-ledger.json` is the machine-readable attack history.
+- `legacy/revision-24/` is read-only migration evidence. It does not own
+  current workflow status and cannot discharge a current DAG node.
 
 ## Directory and naming rules
 
-- The proof workspace stays at `math-proof-output/large-n-polya-szego/`.
-- Canonical parts use `NN-short-name.md`; workflow IDs remain stable even when
-  prose labels improve.
+- Keep the active workspace at `math-proof-output/large-n-polya-szego/`.
+- Canonical parts use `NN-short-name.md`; workflow IDs remain stable even if a
+  prose title improves.
 - Do not create `proof.tex`, `proof.pdf`, `proof.fls`, or `proof-audit.md` before
-  the math-proof workflow reaches the corresponding final stages.
-- Exploratory calculations belong under `experiments/` or `scratch/` and must
-  remain labeled heuristic unless promoted through the Certificate Plan.
-- Do not add a second authoritative DAG. The JSON file under `source/` checks
-  only the retained revision-24 TeX assembly.
+  the workflow reaches Stage 7.
+- Put reproducible calculations in `experiments/`; keep exploratory material,
+  failed mechanisms, and route probes in `scratch/`.
+- Do not add a second authoritative DAG. `legacy/revision-24/proof-dag.json`
+  validates only the legacy conditional LaTeX assembly.
+- Do not move failed-route mathematics back into current parts unless a formal
+  route correction promotes it.
 
 ## Updating a current node
 
 1. Read the target part's `Local Summary` and `Local Context Packet` first.
-2. Change the full claim/proof in its Markdown part. Change an edge, status, or
-   route only through the matching blueprint transaction.
-3. Preserve the theorem freeze. A changed theorem requires an explicit
-   Statement Change Log entry and user permission.
-4. Run the math-proof checker after every structural edit. Use
-   `workflow_transition.py` for every transition it supports; do not hand-edit
+2. Edit the full claim or proof only in that part. Change edges, statuses, or
+   routes only through the applicable `math-proof` transaction.
+3. Preserve the theorem freeze. Any theorem change needs user permission and a
+   Statement Change Log entry.
+4. Use `workflow_transition.py` for every supported transition; do not hand-edit
    a persisted intermediate state.
-5. If retained TeX is edited, update its JSON projection and conditional audit
-   in the same change, compile it, and run the repository-level conditional
-   assembly checker.
-6. A node becomes proved only after the required local audit receipt(s) bind
-   the current checker-generated packet. Checker success alone is not proof.
+5. Regenerate the relevant semantic packet after any mathematical edit. A node
+   becomes proved only after the required independent audit receipt or exact
+   certificate binds that packet.
+6. If legacy LaTeX is intentionally edited, update its manifest and legacy
+   audit in the same change, compile it, and run the legacy assembly checker.
 
 ## Standard validation
 
@@ -51,14 +52,15 @@ $workspace = 'math-proof-output\large-n-polya-szego'
 python "$skillRoot\scripts\workspace_doctor.py" check $workspace
 python "$skillRoot\scripts\check_blueprint.py" --stage auto `
   "$workspace\proof-blueprint.md"
-python scripts\check_conditional_assembly.py
+python scripts\check_legacy_conditional_assembly.py
+git diff --check
 ```
 
-Inspect any workspace certificate script before adding `--run-certificates`.
+Inspect any certificate script before adding `--run-certificates`.
 
 ## Current status boundary
 
-`JC_PL` and `T` are `todo`. The revision-24 source proves only the conditional
-implication from `JC_PL` through the downstream assembly. Do not remove that
-assumption, mark a downstream theorem proved, or record a subagent PASS until
-the current semantic packets have received the required independent audits.
+The current stage is Stage 5 with active target `JC_CL_RL`. The locally audited
+nodes are `JC_SP_MATFLUX` and `JC_SP_COORD`; all other non-stale nodes remain
+open exactly as recorded in the blueprint. The legacy revision-24 assembly is
+conditional on `JC_PL` and must never be presented as an unconditional proof.

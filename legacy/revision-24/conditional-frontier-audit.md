@@ -4,7 +4,7 @@
 
 - Formalized theorem: conditional on the pathwise LCA payment `JC-PL`, stated
   explicitly in the first theorem of
-  `source/conditional-assembly/conditional-proof.tex`.
+  `legacy/revision-24/conditional-assembly/conditional-proof.tex`.
 - Blueprint/global audit: revision 24 retains 29 conceptual nodes and 19
   assembly modules; 21 nodes are closed, 2 retained, 1 open, and 5 dependent.
 - Local proof audits: the frozen revision-24 assembly records a positive audit

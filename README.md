@@ -1,47 +1,64 @@
-# Large-N polygonal Polya-Szego proof workspace
+# Large-N polygonal Pólya–Szegő proof DAG
 
-> **Status:** math-proof Stage 3 / unconditional theorem in progress. The
-> repository does **not** claim that the main theorem or `JC_PL` is proved.
+> **Status:** `math-proof` Stage 5 (Local Proof). The active target is
+> `JC_CL_RL`. The repository does **not** claim that the main theorem is proved.
 
-The maintained workspace is:
+The canonical proof workspace is
+`math-proof-output/large-n-polya-szego/`. Its state is owned by
+`proof-blueprint.md`; this README is only a navigation aid.
 
-`math-proof-output/large-n-polya-szego/`
+## Repository layout
 
-Its canonical dependency cut is currently:
-
-```mermaid
-flowchart TD
-  JC["JC_PL: completed pathwise action (todo)"] --> T["T: large-N theorem (todo)"]
-  SRC["retained revision-24 conditional assembly"] -. migration evidence .-> T
+```text
+.
+├── README.md
+├── MAINTENANCE.md
+├── math-proof-output/
+│   └── large-n-polya-szego/
+│       ├── proof-blueprint.md          # theorem freeze, route screen, DAG, status
+│       ├── definitions-and-notation.md # shared notation and failure checklist
+│       ├── literature-review.md        # authoritative citation records
+│       ├── parts/                      # one canonical Markdown file per DAG node
+│       ├── experiments/                # reproducible checks; heuristic unless promoted
+│       └── scratch/
+│           ├── attack-ledger.json      # machine-readable failed-attack ledger
+│           ├── route-history.md        # compact rejected-route summary
+│           ├── route-scouting.md       # route-selection evidence
+│           └── crux-dossiers/          # retained route probes and kill certificates
+├── legacy/
+│   └── revision-24/                    # noncanonical conditional assembly evidence
+│       ├── conditional-assembly/
+│       ├── conditional-frontier-audit.md
+│       └── proof-dag.json
+└── scripts/
+    └── check_legacy_conditional_assembly.py
 ```
 
-Only the two Crux-Gate rows `T` and `JC_PL` are current blueprint nodes. The
-19-module conditional assembly is retained intact as source evidence, but it
-is not silently promoted to a current math-proof audit state.
+The active workspace contains only current proof state, proof-node Markdown,
+reproducible checks, and the compact route-failure record required by the
+workflow. Revision-24 LaTeX is isolated under `legacy/`: it records the old
+conditional implication from `JC_PL` to the theorem, but owns no current status
+and is not an unconditional proof.
 
-## Canonical files
+## Current proof chain
 
-- `math-proof-output/large-n-polya-szego/proof-blueprint.md`: frozen theorem,
-  route screen, current DAG, status, audit, and certificate plan.
-- `math-proof-output/large-n-polya-szego/definitions-and-notation.md`: shared
-  objects, conventions, symbols, and problem-specific failure checklist.
-- `math-proof-output/large-n-polya-szego/literature-review.md`: citation cache
-  and source-verification state.
-- `math-proof-output/large-n-polya-szego/parts/`: canonical Markdown proof
-  parts admitted by the current Crux Gate.
-- `math-proof-output/large-n-polya-szego/scratch/route-history.md`: compact
-  history of disproved, retracted, and inactive routes.
+```text
+super-near:
+JC_SP_MATFLUX + JC_SP_COORD -> JC_SP_SRC -> JC_SP_EST
 
-## Retained conditional assembly
+coarse:
+JC_CL_RL -> JC_CL_CIRC_RES -> JC_CL_PROF -> JC_CL_RES
 
-- `math-proof-output/large-n-polya-szego/source/conditional-assembly/`: the
-  modular TeX source, PDF, recorder file, and 19 topologically ordered modules.
-- `math-proof-output/large-n-polya-szego/source/revision-24-proof-dag.json`:
-  legacy conceptual/assembly manifest used to check the retained source.
-- `math-proof-output/large-n-polya-szego/audits/conditional-frontier-audit.md`:
-  audit of conditional-frontier consistency only.
+assembly:
+JC_SP_EST + JC_CL_RES -> JC_PL -> T
+```
 
-## Validate
+Already audited locally: `JC_SP_MATFLUX`, `JC_SP_COORD`.
+
+Current bottleneck: `JC_CL_RL`, the real-line monotone-displacement coercivity
+estimate. All statuses and dependency edges must be read from the blueprint.
+
+## Validation
 
 From the repository root:
 
@@ -51,8 +68,9 @@ $workspace = 'math-proof-output\large-n-polya-szego'
 python "$skillRoot\scripts\workspace_doctor.py" check $workspace
 python "$skillRoot\scripts\check_blueprint.py" --stage auto `
   "$workspace\proof-blueprint.md"
-python scripts\check_conditional_assembly.py
+python scripts\check_legacy_conditional_assembly.py
 ```
 
-The checks validate structure and evidence consistency, not mathematical
-truth. See `MAINTENANCE.md` before changing a statement, route, edge, or status.
+These commands validate structure and evidence consistency, not mathematical
+truth. Read `MAINTENANCE.md` before changing a statement, route, edge, status,
+or audit receipt.

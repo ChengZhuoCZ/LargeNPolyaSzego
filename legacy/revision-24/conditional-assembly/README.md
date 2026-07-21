@@ -1,4 +1,8 @@
-# Proof module index
+# Legacy revision-24 proof module index
+
+This directory is retained migration evidence. It is conditional on `JC-PL`,
+is not part of the active `math-proof` workspace, and must not be cited as an
+unconditional proof.
 
 `conditional-proof.tex` is the only LaTeX entry point. It loads `preamble.tex`
 and the following modules in topological reading order.

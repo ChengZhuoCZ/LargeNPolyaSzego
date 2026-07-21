@@ -12,8 +12,9 @@ import sys
 
 REPOSITORY = Path(__file__).resolve().parents[1]
 ROOT = REPOSITORY / "math-proof-output" / "large-n-polya-szego"
-ASSEMBLY = ROOT / "source" / "conditional-assembly"
-MANIFEST = ROOT / "source" / "revision-24-proof-dag.json"
+LEGACY = REPOSITORY / "legacy" / "revision-24"
+ASSEMBLY = LEGACY / "conditional-assembly"
+MANIFEST = LEGACY / "proof-dag.json"
 MASTER = ASSEMBLY / "conditional-proof.tex"
 PARTS = ASSEMBLY / "parts"
 
@@ -66,7 +67,11 @@ def source_tree_sha256() -> str:
     paths = [MASTER, ASSEMBLY / "preamble.tex"]
     paths.extend(PARTS / f"{name}.tex" for _, name in MODULES)
     for path in paths:
-        relative = path.relative_to(ROOT).as_posix().encode("utf-8")
+        # Preserve the revision-24 logical path in the historical digest even
+        # though the frozen tree now lives under repository-level legacy/.
+        relative = (
+            Path("source") / path.relative_to(LEGACY)
+        ).as_posix().encode("utf-8")
         digest.update(relative)
         digest.update(b"\0")
         digest.update(path.read_bytes())
@@ -115,14 +120,21 @@ def main() -> None:
         ROOT / "proof-blueprint.md",
         ROOT / "definitions-and-notation.md",
         ROOT / "literature-review.md",
-        ROOT / "audits" / "conditional-frontier-audit.md",
+        LEGACY / "conditional-frontier-audit.md",
         ROOT / "scratch" / "route-history.md",
     )
     for path in required_docs:
-        require(path.exists(), f"missing maintenance document: {path.relative_to(ROOT)}")
+        require(
+            path.exists(),
+            f"missing maintenance document: {path.relative_to(REPOSITORY)}",
+        )
 
     forbidden = ("*.aux", "*.fdb_latexmk", "*.log", "*.out", "*.toc")
-    leftovers = [path.relative_to(ROOT) for pattern in forbidden for path in ROOT.rglob(pattern)]
+    leftovers = [
+        path.relative_to(REPOSITORY)
+        for pattern in forbidden
+        for path in ASSEMBLY.rglob(pattern)
+    ]
     require(not leftovers, f"tracked/build-cache candidates remain: {leftovers}")
 
     print("proof DAG structure: PASS")

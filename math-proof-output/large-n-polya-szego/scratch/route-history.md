@@ -22,7 +22,7 @@ None of the entries above is silently reused. The only open conceptual node in
 the retained DAG is JC-PL, split into the super-near
 JC-SP-REG to JC-SP-LEDGER to JC-SP-EST chain and the coarse JC-CL branch. The
 retained revision-24 statuses are recorded in
-`source/revision-24-proof-dag.json`; current workflow status is authoritative
+`legacy/revision-24/proof-dag.json`; current workflow status is authoritative
 only in `proof-blueprint.md`.
 
 ## Blind portfolio pilot: global localization family
