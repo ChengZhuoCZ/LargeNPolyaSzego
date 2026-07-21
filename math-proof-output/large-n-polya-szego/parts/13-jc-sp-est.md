@@ -2,11 +2,11 @@
 
 ## Local Summary
 - Statement: Uniform natural-energy bound for the exact completed QRCI third-jet identity
-- Dependencies: JC_SP_LEDGER
+- Dependencies: JC_SP_SRC
 - Current obstruction: no uniform source-by-source bound is known for the resummed polygonal spectral, endpoint, moving-ground-state, metric, gauge, base, and lower-row blocks.
 - Proof status: todo
-- Next action: wait for the exact JC_SP_LEDGER identity, then audit the residual estimate
-- Local Context Packet: the statement below + the proved JC_SP_MATFLUX and JC_SP_LEDGER packages when available + completed-coordinate definitions + PSF-01--PSF-05 and PSF-07; unrecombined radial or full-vector estimates are excluded.
+- Next action: after JC_SP_SRC closes, audit the residual full-cell resummation and uniform estimate
+- Local Context Packet: the statement below + the proved JC_SP_MATFLUX and JC_SP_SRC packages when available + completed-coordinate definitions + PSF-01--PSF-05 and PSF-07; unrecombined radial or full-vector estimates are excluded.
 
 ## Statement
 For every \(K'<\infty\), there exist \(C_{K'}<\infty\) and \(N_{K'}\)
@@ -15,10 +15,10 @@ the finite-bridge image and satisfy
 \[
 \mathcal N_N(q)\le K'a^5.
 \]
-Let \(\mathfrak Q_N(t;q)\) be the exact disjoint full-cell expression supplied
-by JC_SP_LEDGER, so that
+Let \(\mathfrak Q_N(t;q)\) be the exact five-source expression supplied
+by JC_SP_SRC, so that
 \[
-D^3\mathbf A_N(tq)[q,q,q]=\mathfrak Q_N(t;q),
+\partial_q^3\mathbf A_N(tq)=\mathfrak Q_N(t;q),
 \qquad 0\le t\le1.
 \]
 Then
@@ -32,8 +32,8 @@ ratios admitted by the finite-bridge image.
 
 ## Dependencies
 
-- JC_SP_LEDGER supplies the exact common completed scalar derivative and a
-  disjoint complete full-cell formula for \(\mathfrak Q_N(t;q)\).
+- JC_SP_SRC supplies the exact common completed scalar derivative as a
+  formula-defined five-source normal form for \(\mathfrak Q_N(t;q)\).
 - Definitions supplies \(a,\mathcal N_N,r_N,\mathbf A_N,J_\alpha,c_\alpha\)
   and the finite-bridge image.
 

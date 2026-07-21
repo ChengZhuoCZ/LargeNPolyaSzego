@@ -1,11 +1,11 @@
-# JC_SP_LEDGER: Atom-Indexed Full-Cell Identity
+# JC_SP_LEDGER: Atom-Indexed Full-Cell Identity (Stale)
 
 ## Local Summary
-- Statement: Exact atom-indexed QRCI full-cell identity with a disjoint complete ownership map
+- Statement: superseded by JC_SP_SRC and JC_SP_EST
 - Dependencies: JC_SP_MATFLUX
-- Current obstruction: no finite ownership map currently proves that every terminal, complement, endpoint, pair, metric, gauge, ground-state, area, base, and lower-row derivative occurs exactly once.
+- Current obstruction: the ownership categories were never defined as mathematical predicates.
 - Proof status: todo
-- Next action: wait for JC_SP_MATFLUX, then audit the finite atom partition
+- Next action: use the replacement five-source normal form JC_SP_SRC
 - Local Context Packet: this statement + proved JC_SP_MATFLUX material scalar/flux data + completed scalar + exact terminal/complement cancellation + PSF-04, PSF-05, and PSF-07; no uniform bound is part of this row.
 
 ## Statement
@@ -81,3 +81,21 @@ Superseded attempts: none
 
 ## Local Audit
 Status: todo
+
+## Route Correction
+
+Trigger: an independent Stage 4 claim audit returned split.
+
+Failure: Definitions and JC_SP_MATFLUX define the completed scalar and its
+typed material derivatives, but do not define the proposed terminal,
+complement, endpoint, pair, ground-state, metric, gauge, area, base, lower,
+and fan ownership predicates. The existential atom statement was therefore
+not falsifiable: one could always call the entire derivative one atom.
+
+Failure type: interface mismatch.
+
+Replacement: JC_SP_SRC gives a finite, formula-defined five-source normal
+form directly from the exact completed scalar. JC_SP_EST owns every later
+full-cell/endpoint resummation needed for the uniform estimate.
+
+Stale Scope: JC_SP_LEDGER only; JC_SP_EST is rewired to JC_SP_SRC.

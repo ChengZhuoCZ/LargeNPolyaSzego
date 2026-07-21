@@ -2,11 +2,11 @@
 
 ## Local Summary
 - Statement: Uniform nonnegativity of the completed pathwise action on every active no-ratio support chart
-- Dependencies: JC_SP_EST, JC_CL
-- Current obstruction: both direct branches remain open; JC_SP_EST depends on JC_SP_REG boundary regularity and the exact JC_SP_LEDGER identity before uniform QRCI bounds, while JC_CL requires an all-period integrated coarse certificate plus ratio-free transfer.
+- Dependencies: JC_SP_EST, JC_CL_RES
+- Current obstruction: both direct branches remain open; JC_SP_EST requires the exact JC_SP_SRC normal form and uniform QRCI bounds, while JC_CL_RES requires the all-period profile certificate plus finite-\(N\) and nonregular ratio-free transfer.
 - Proof status: todo
-- Next action: Stage 4 claim audit of JC_SP and JC_CL, then attack the highest-risk dependency-ready child
-- Local Context Packet: exact JC_PL statement + JC_SP_MATFLUX, JC_SP_LEDGER, JC_SP_EST, and JC_CL interfaces + completed-action definitions + PSF-01--PSF-08 + attack ledger A1--A10; retained conditional text is source evidence, not a proof receipt.
+- Next action: close the dependency-ready JC_CL_RL and JC_SP_SRC children, then continue their residual estimates
+- Local Context Packet: exact JC_PL statement + JC_SP_MATFLUX, JC_SP_SRC, JC_SP_EST, JC_CL_RL, and JC_CL_RES interfaces + completed-action definitions + PSF-01--PSF-08 + attack ledger A1--A10; retained conditional text is source evidence, not a proof receipt.
 
 ## Statement
 There are no-ratio fan and radial endpoint-chart thresholds, and constants
@@ -37,10 +37,10 @@ complete ledger.
 
 ## Dependencies
 
-- JC_SP_EST, after JC_SP_REG and JC_SP_LEDGER, imports nonnegativity on the branch
+- JC_SP_EST, after JC_SP_MATFLUX and JC_SP_SRC, imports nonnegativity on the branch
   \(E_\alpha(z)\le Ka^5\) after the retained finite bridge sends it to a
   completed-coordinate ball \(\mathcal N_N(q)\le K'(K)a^5\).
-- JC_CL imports the coarse-restricted estimate
+- JC_CL_RES imports the coarse-restricted estimate
   \[
   E_\alpha(z)>M_0a^5
   \Longrightarrow
@@ -54,7 +54,7 @@ complete ledger.
 Status: todo
 - Plan: Kind: mechanism — the conjecture portfolio compared quantitative disk localization, exact-\(N\) Steiner descent, conformal operator order, cellwise semidefinite pullback, and the completed-action route. Exact certificates killed the three one-step bypasses; quantitative disk localization remains a backup. The selected Route Screen row R-JC has verdict split because the energy cutoff gives the strict locality reduction JC_SP plus JC_CL implies JC_PL.
 - Key obstacle: the exact completed scalar must survive both the super-near moving completed Hessian and the coarse regime with collapsing sides; estimating its covector and Hessian separately destroys the cancellation.
-- Needed dependencies: JC_SP_REG, JC_SP_LEDGER, and JC_SP_EST with its bridge-dependent constant \(K'(K)\), plus the minimal coarse-restricted JC_CL with constants \(c_F,C_F,M_0\) uniform in all no-ratio limits.
+- Needed dependencies: JC_SP_MATFLUX, JC_SP_SRC, and JC_SP_EST with its bridge-dependent constant \(K'(K)\), plus JC_CL_PROF and the minimal coarse-restricted JC_CL_RES with constants \(c_F,C_F,M_0\) uniform in all no-ratio limits.
 - Failure trigger: interface mismatch if the finite bridge does not map the \(E_\alpha\) cutoff into the stated completed-coordinate ball; constant-estimate insufficient if either child loses powers of \(a\); route-level defect only if the exact action or active path is not common to both branches.
 
 Route probe: author:agent:portfolio_discrete_f | phase:pre-commit | outcome:split | evidence:the cutoff \(E_\alpha(z)=Ka^5\) gives disjoint exhaustive super-near and coarse branches, with Taylor absorption on the first and quantitative positivity on the second | artifact:check-2
@@ -78,7 +78,7 @@ Status: in-progress
 ### Check 2: exact energy-scale decomposition
 - Model: the full active no-ratio JC_PL chart with \(E_\alpha(z)=\mathcal J_4(\alpha)+\mathcal G_\alpha^{\mathrm{JP}}(z-z_\alpha^D)\).
 - Method: choose \(K>\max\{M_0,C_F/c_F\}\); on \(E_\alpha(z)\le Ka^5\) use the retained bridge to obtain \(\mathcal N_N(q)\le K'(K)a^5\) and completed-path activity, and on \(E_\alpha(z)>Ka^5\) apply the coarse-restricted lower bound without changing paths or covectors.
-- Result: JC_SP and JC_CL are disjoint, exhaustive, strictly more local obligations and, with the retained bridges, imply JC_PL. Neither child is proved by this check.
+- Result: JC_SP_EST and JC_CL_RES are disjoint, exhaustive, strictly more local obligations and, with the retained bridges, imply JC_PL. Neither child is proved by this check.
 - Interpretation: supports the independently reviewed branch split; next action create and audit both child rows.
 
 ## Counterexample Search
@@ -92,10 +92,10 @@ No exact counterexample to JC_PL is currently recorded.
 ## Proof
 Status: todo
 
-Assume JC_SP_REG, JC_SP_LEDGER, JC_SP_EST, and JC_CL. Fix
+Assume JC_SP_MATFLUX, JC_SP_SRC, JC_SP_EST, and JC_CL_RES. Fix
 \(K>\max\{M_0,C_F/c_F\}\). If
-\(E_\alpha(z)\le Ka^5\), the retained finite bridge, JC_SP_REG, JC_SP_LEDGER, and JC_SP_EST give
-\(\mathscr A_\alpha(z)\ge0\). If \(E_\alpha(z)>Ka^5\), then JC_CL gives
+\(E_\alpha(z)\le Ka^5\), the retained finite bridge, JC_SP_MATFLUX, JC_SP_SRC, and JC_SP_EST give
+\(\mathscr A_\alpha(z)\ge0\). If \(E_\alpha(z)>Ka^5\), then JC_CL_RES gives
 \[
 \mathscr A_\alpha(z)
 \ge c_FE_\alpha(z)-C_Fa^5

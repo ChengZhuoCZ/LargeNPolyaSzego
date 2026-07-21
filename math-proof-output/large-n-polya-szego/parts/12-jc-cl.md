@@ -1,11 +1,11 @@
 # JC_CL: Coarse and Collapsing-Side Payment
 
 ## Local Summary
-- Statement: Uniform completed-action lower bound on the coarse and collapsing-side branch
+- Statement: superseded by JC_CL_RES
 - Dependencies: Definitions
-- Current obstruction: the all-period gap-simplex inequality, its finite-\(N\) ratio-free transfer, and the genuinely nonregular original-path payment remain unproved.
+- Current obstruction: the Stage 4 audit exposed an objective singular-limit interface, now isolated as JC_CL_GAP before the replacement residual JC_CL_RES.
 - Proof status: todo
-- Next action: Stage 4 claim audit, then isolate the first exact all-period or nonregular transfer obligation
+- Next action: none; continue with JC_CL_GAP and JC_CL_RES
 - Local Context Packet: this statement + exact completed action + gap-simplex current identity + period-three collapse + PSF-01--PSF-08; numerical scans are calibration only.
 
 ## Statement
@@ -51,7 +51,7 @@ Status: todo
 - Failure trigger: statement likely false if an exact closed gap-simplex point has nonpositive integrated surplus; constant-estimate insufficient if transfer errors exceed \(O(a^5)\); interface mismatch if any intermediate path is not the original active support path.
 
 ## Experiments and Edge Cases
-Status: todo
+Status: done
 
 ### Check 1: exact period-three collapse
 - Model: \(p=3\), \(u=(1/3,-1/6,-1/6)\), and gap vector \(g=(0,3/2,3/2)\).
@@ -60,7 +60,7 @@ Status: todo
 - Interpretation: supports integrated coarse positivity at a genuine collapsing-side boundary point; next action audit the all-period statement.
 
 ## Counterexample Search
-Status: todo
+Status: done
 
 Search the entire closed gap simplex for small exact periods, growing-period
 low-frequency limits, colliding atoms, and nonregular fans with one short
@@ -81,8 +81,25 @@ proved, the finite-\(N\) and nonregular transfers remain required.
 
 ## Proof Attempt Log
 Active attempt: none
-Recent failed attempt: none
+Recent failed attempt: interface mismatch — the unsplit row mixed a period-uniform collision limit with finite-\(N\) and genuinely nonregular mechanisms that cannot be audited through one interface.
 Superseded attempts: none
 
 ## Local Audit
 Status: todo
+
+## Route Correction
+
+Trigger: the independent Stage 4 committed-route repair probe and the exact
+closed gap-simplex quantifier audit.
+
+Failure: the all-period collision compactification is an independently
+quantified singular-limit mechanism, while finite-\(N\) transfer and the
+nonregular original-path payment remain separate residual work.
+
+Failure type: interface mismatch.
+
+Replacement: JC_CL_GAP isolates the exact period-uniform pair inequality;
+JC_CL_RES retains the unchanged coarse conclusion and imports that child.
+
+Stale Scope: only the unsplit JC_CL row; JC_PL is rewired to JC_CL_RES and the
+selected completed-action route remains live.
