@@ -243,6 +243,30 @@
         }
       ],
       "promoted_to": "parts/18-jc-sp-matflux.md"
+    },
+    {
+      "id": "A11",
+      "event_index": 11,
+      "route_id": "R-JC",
+      "family_id": "F-RL-HARDY-CAYLEY",
+      "target_id": "JC_CL_RL",
+      "author": "agent:rl_convex_dual_attack",
+      "mechanism": "integrated Hardy-area identity followed by the Minty Cayley endpoint decomposition",
+      "obstruction_id": "OB-RL-POINTWISE-HARDY",
+      "novelty_witness": "pointwise strip budget unknown => exact interval-collapse refutation plus endpoint Cayley angle reduction; novelty=reformulation",
+      "invalidated_inference": "a pointwise-in-time Caratheodory lower curve integrates to the endpoint factor one half",
+      "reduction_witness": "JC_CL_RL => absolute Cayley cross-term gap under concentration dichotomy and periodic trains; axis=locality",
+      "next_decision_test": "if uniform angle gap below one sixth is proved => continue-attack; else => certified-counterexample-search",
+      "failure_type": "constant-estimate insufficient",
+      "route_effect": "continue-attack",
+      "summary": "The pointwise Hardy-strip lower curve fails on interval collapse; the endpoint problem reduces exactly to one Cayley cross-term angle estimate.",
+      "artifacts": [
+        {
+          "path": "scratch/crux-dossiers/f-rl-hardy-cayley.md",
+          "sha256": "e8be42581ddc493adb9676db4f5af8eb05dfe507d00dec927ce566ee17b65156"
+        }
+      ],
+      "promoted_to": "parts/10-jc-pl.md"
     }
   ],
   "route_resets": []

@@ -61,8 +61,8 @@ Route probe: author:agent:portfolio_discrete_f | phase:pre-commit | outcome:spli
 
 Interface patches: 1 (blocks JC_PL-JC-SP)
 Interface patches: 1 (blocks JC_SP_EST-JC_SP_QRCI)
-Attack attempts: 10
-Attack evidence: A1,A2,A3,A4,A5,A6,A7,A8,A9,A10
+Attack attempts: 11
+Attack evidence: A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11
 Committed route resets: 0
 
 
@@ -107,8 +107,8 @@ remains open until those children are closed.
 
 ## Proof Attempt Log
 Active attempt: none
-Recent failed attempt: A10 | author:agent:matflux_proof_auditor_1 | interface mismatch — the first local proof used a false moving-\(H^1\) composition inference and no differentiated all-mode Bessel \(H^{1/2}\) summation
-Superseded attempts: A1@agent:portfolio_geometry_d,A2@agent:portfolio_operator_e,A3@agent:portfolio_discrete_f,A4@agent:portfolio_blind_b,A5@agent:portfolio_discrete_f,A6@agent:jc_sp_stage4_probe,A7@agent:qrci_stage4_probe,A8@agent:codex_stage5_strategy,A9@agent:matreg_counterexample_scout | three bypasses were killed, QFK remained a reserve, the action was branched, and the super-near regularity interfaces were progressively typed
+Recent failed attempt: A11 | author:agent:rl_convex_dual_attack | constant-estimate insufficient — the pointwise Hardy-strip lower curve fails on interval collapse, while fixed-period equality exclusion omits coherent long-period trains
+Superseded attempts: A1@agent:portfolio_geometry_d,A2@agent:portfolio_operator_e,A3@agent:portfolio_discrete_f,A4@agent:portfolio_blind_b,A5@agent:portfolio_discrete_f,A6@agent:jc_sp_stage4_probe,A7@agent:qrci_stage4_probe,A8@agent:codex_stage5_strategy,A9@agent:matreg_counterexample_scout,A10@agent:matflux_proof_auditor_1 | three bypasses were killed, QFK remained a reserve, the action was branched, and the super-near regularity interfaces were progressively typed and audited
 
 ## Local Audit
 Status: todo
