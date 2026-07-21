@@ -58,6 +58,19 @@ git diff --check
 
 Inspect any certificate script before adding `--run-certificates`.
 
+### Workspace-doctor parser note
+
+The current `workspace_doctor.py` release reports `machine-specific absolute
+path` on several portable mathematical strings, including TeX maps such as
+`L:\mathcal T\to H`, ratios such as `C/N` and `R/2`, and canonical subagent
+identifiers beginning with `/root/`.  These are parser false positives, not
+filesystem dependencies.  Until the upstream detector distinguishes those
+tokens, preserve the hash-bound proof text and require all of the following on
+resume: inspect the doctor's complete file list, confirm that no real host or
+temporary path occurs, pass the plain blueprint checker, validate the attack
+ledger hashes, pass the legacy assembly checker, and pass `git diff --check`.
+Do not rewrite audited mathematics merely to suppress this diagnostic.
+
 ## Current status boundary
 
 The current stage is Stage 5 with active target `JC_CL_RL`. The locally audited
